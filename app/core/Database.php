@@ -4,7 +4,7 @@
         private $username = "nabilo";
         private $password = "123123";
 
-        protected function setConnection()
+        public function setConnection()
         {   
             $conn = null;
             try{
