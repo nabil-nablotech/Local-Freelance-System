@@ -90,7 +90,7 @@
             $this->country = $country;
         }
 
-        public function getCIty(){
+        public function getCity(){
             return $this->city; 
         }
 
