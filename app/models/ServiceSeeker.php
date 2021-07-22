@@ -5,6 +5,7 @@
         private $bankName;
         private $accountNumber;
         private $walletBalance;
+        private $profilePhoto;
 
 
 
@@ -34,5 +35,12 @@
             $this->walletBalance = $walletBalance;
         }
         
+        public function getProfilePhoto(){
+            return $this->profilePhoto; 
+        }
+
+        public function setProfilePhoto($profilePhoto){
+            $this->profilePhoto = $profilePhoto;
+        }
     }
 ?>

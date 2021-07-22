@@ -9,9 +9,9 @@
         private $portfolio;
         private $bankName;
         private $accountNumber;
-        private $summary;
         private $walletBalance;
-
+        private $summary;
+        private $profilePhoto;
 
 
         // --------Getter and Setters of the attributes-----------
@@ -63,14 +63,6 @@
             $this->bankName = $bankName;
         }
 
-        public function getSummary(){
-            return $this->summary; 
-        }
-
-        public function setSummary($summary){
-            $this->summary = $summary;
-        }
-
         public function getAccountNumber(){
             return $this->accountNumber; 
         }
@@ -79,12 +71,28 @@
             $this->accountNumber = $accountNumber;
         }
 
+        public function getSummary(){
+            return $this->summary; 
+        }
+
+        public function setSummary($summary){
+            $this->summary = $summary;
+        }
+
         public function getWalletBalance(){
             return $this->walletBalance; 
         }
 
         public function setWalletBalance($walletBalance){
             $this->walletBalance = $walletBalance;
+        }
+
+        public function getProfilePhoto(){
+            return $this->profilePhoto; 
+        }
+
+        public function setProfilePhoto($profilePhoto){
+            $this->profilePhoto = $profilePhoto;
         }
         
     }

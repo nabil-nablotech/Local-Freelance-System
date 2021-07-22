@@ -15,6 +15,7 @@
         private $address;
         private $joinDate;
         private $lastLogin;
+        private $status;
 
 
         // --------Getter and Setters of the attributes-----------
@@ -120,6 +121,14 @@
 
         public function setLastLogin($lastLogin){
             $this->lastLogin = $lastLogin;
+        }
+
+        public function getStatus(){
+            return $this->status; 
+        }
+
+        public function setStatus($status){
+            $this->status = $status;
         }
     }
 ?>

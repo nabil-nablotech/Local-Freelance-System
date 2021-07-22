@@ -6,7 +6,6 @@
         private $amount;
         private $issuedDate;
         private $paidDate;
-        private $detail;
         private $paymentMethod;
 
 
@@ -41,14 +40,6 @@
 
         public function setPaidDate($paidDate){
             $this->paidDate = $paidDate;
-        }
-
-        public function getDetail(){
-            return $this->detail; 
-        }
-
-        public function setDetail($detail){
-            $this->detail = $detail;
         }
 
         public function getPaymentMethod(){

@@ -7,7 +7,6 @@
         private $sender;
         private $receiver;
         private $dateTime;
-        private $openedBySender;
         private $openedByReceiver;
 
 
@@ -50,14 +49,6 @@
 
         public function setDateTime($dateTime){
             $this->dateTime = $dateTime;
-        }
-
-        public function getOpenedBySender(){
-            return $this->openedBySender; 
-        }
-
-        public function setOpenedBySender($openedBySender){
-            $this->openedBySender = $openedBySender;
         }
 
         public function getOpenedByReceiver(){
