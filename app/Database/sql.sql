@@ -6,7 +6,7 @@ ALTER DATABASE dbname CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 ---- Create the tables --------
 
-CREATE TABLE USER(
+CREATE TABLE `USER`(
 	username VARCHAR(30) PRIMARY KEY,
     password  VARCHAR(32) NOT NULL,
     email     VARCHAR(320) UNIQUE NOT NULL,
