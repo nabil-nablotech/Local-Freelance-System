@@ -43,7 +43,7 @@
 </style>
 <body>
    <!--  navigation bar -->
-   <?php include "navigationbar.php" ?>
+   <?php require "includes/main-navigation.php" ?>
    <a href="" id ="top"></a>
    <!--  -->
    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -54,13 +54,13 @@
       </ol>
       <div class="carousel-inner">
          <div class="carousel-item active">
-            <img class="d-block w-100" src="Image\unsplash2.jpg" alt="First slide">
+            <img class="d-block w-100" src="../assets/images/unsplash2.jpg" alt="First slide">
          </div>
          <div class="carousel-item">
-            <img class="d-block w-100" src="Image\unsplash 1.jpg" alt="Second slide">
+            <img class="d-block w-100" src="../assets/images/unsplash 1.jpg" alt="Second slide">
          </div>
          <div class="carousel-item">
-            <img class="d-block w-100" src="Image\unsplash4.jpg" alt="Third slide">
+            <img class="d-block w-100" src="../assets/images/unsplash4.jpg" alt="Third slide">
          </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -115,7 +115,7 @@
                         </p>
                      </div>
                      <div class="col-sm-6">
-                        <img src="Image\project.jpg" width="200px" height="150px">
+                        <img src="../assets/images/project.jpg" width="200px" height="150px">
                      </div>
                   </div>
                </div>
@@ -130,7 +130,7 @@
                      </p>
                   </div>
                   <div class="col-sm-6">
-                     <img src="Image\deposit.png" width="200px" height="150px">
+                     <img src="../assets/images/deposit.png" width="200px" height="150px">
                   </div>
                </div>
             </div>
@@ -141,7 +141,7 @@
                      <p>It is easier to talk with the freelancers here. So before you hire any freelancer feel free to talk with them. Tell them what you need and get the project done in the shortest possible time.</p>
                   </div>
                   <div class="col-lg-6">
-                     <img src="image/message.png" width="200px" height="150px">
+                     <img src="../assets/images/message.png" width="200px" height="150px">
                   </div>
                </div>
             </div>
@@ -152,7 +152,7 @@
                      <p>If you have a lot of works to be done or run a small business that needs some freelancers in a daily basis, this is the perfect place for you. Build your employer profile today and start hiring.</p>
                   </div>
                   <div class="col-lg-6">
-                     <img src="image/profile.jpg" width="200px" height="150px" >
+                     <img src="../assets/images/profile.jpg" width="200px" height="150px" >
                   </div>
                </div>
             </div>
@@ -168,7 +168,7 @@
                      </p>
                   </div>
                   <div class="col-sm-6">
-                     <img src="image/offer.jpg" width="200px" height="150px" >
+                     <img src="../assets/images/offer.jpg" width="200px" height="150px" >
                   </div>
                </div>
             </div>
@@ -183,7 +183,7 @@
                      </p>
                   </div>
                   <div class="col-sm-6">
-                     <img src="Image\Seralance logo.png">
+                     <img src="../assets/images/seralance-logo.png">
                   </div>
                </div>
             </div>

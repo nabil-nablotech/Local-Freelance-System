@@ -4,14 +4,13 @@
         
         protected $controller = "main"; // later on i will replace this part with session
         
-        protected $method = "index"; 
+        protected $method = "home"; 
 
         protected $params;
 
         public function __construct(){
 
             $url = $this->parseUrl();
-            print_r($url);
             if(file_exists('../app/Controllers/'. $url[0] .'.php')){
                 $this->controller = $url[0];
                 unset($url[0]);
@@ -32,7 +31,6 @@
             $this->params = $url ? array_values($url) : [];
             
             call_user_func_array([$this->controller,$this->method],$this->params);
-            print_r($url);
 
         }
 

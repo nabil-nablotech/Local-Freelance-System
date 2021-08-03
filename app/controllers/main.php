@@ -2,7 +2,20 @@
 
     class Main extends Controller{
         
-        public function index($some="sadf"){
+        public function home(){
+            $this->view('guest/index');
+        }
+
+        public function signup($userType){
+            if($userType==="serviceprovider"){
+                $this->view('guest/SPRegistration');
+            }
+            else if($userType==="serviceseeker"){
+                $this->view('guest/SSRegistration');
+            }            
+        }
+
+        public function indexd($some="sadf"){
             echo "I am index method in main";
             $class = $this->model($some);
             

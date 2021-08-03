@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php include "config.php" ?>
+<?php include "guest/config.php" ?>
 <html>
    <head>
       <title><?php echo $lang['title'] ?></title>
@@ -39,7 +39,7 @@
    <body>
       <!--  navigation bar -->
       <nav class="navbar navbar-expand-lg fixed-top " style="background-color: whitesmoke!important;">
-         <a class="navbar-brand" href="#"><img  ID="myImg" src="Image\Seralance logo.png"></a>
+         <a class="navbar-brand" href="#"><img  ID="myImg" src="../assets/images/seralance-logo.png"></a>
          <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-color:blue"> 
          <span class="dark-blue-text"><i
@@ -81,9 +81,9 @@
                   <?php echo $lang['join'] ?> 
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">|
-                     <a class="dropdown-item" href="registration/SPRegistration.php" style="margin-top:-30px;">
+                     <a class="dropdown-item" href="http://localhost/seralance/public/main/signup/serviceprovider" style="margin-top:-30px;">
                      <?php echo $lang['provider'] ?>  </a>
-                     <a class="dropdown-item" href="registration/SSRegistration.php"><?php echo $lang['seeker'] ?> </a>
+                     <a class="dropdown-item" href="http://localhost/seralance/public/main/signup/serviceseeker"><?php echo $lang['seeker'] ?> </a>
                   </div>
                </li>
                <li class="nav-item dropdown" style="list-style-type: none;">
