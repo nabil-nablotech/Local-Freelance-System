@@ -3,11 +3,19 @@
 <head>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet"  href="signup.css">
+    <link rel="stylesheet"  href="../../assets/css/guest/signup.css">
     <style>
     </style>
 </head>
 <body>
+  
+<?
+  if($_SERVER["REQUEST_METHOD"] === "POST"){
+    require_once('../app/controllers/main.php');
+    $mainController = new Main();
+    $mainController->validateSpSignup($_POST);
+  }
+?>
 <header class="header">
   <h4 class="header__title " > Register As service provider </h4>
 </header>
@@ -41,42 +49,42 @@
     <div class="form-group row">
     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">First Name</label>
     <div class="col-sm-7">
-      <input type="text" class="form-control form-control-sm" id="colFormLabelSm" placeholder="first name">
+      <input type="text" class="form-control form-control-sm" id="colFormLabelSm" placeholder="first name" name="firstname">
     </div>
   </div>
 
   <div class="form-group row">
     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Last Name</label>
     <div class="col-sm-7">
-      <input type="text" class="form-control form-control-sm" id="colFormLabelSm" placeholder="last name">
+      <input type="text" class="form-control form-control-sm" id="colFormLabelSm" placeholder="last name" name="lastname">
     </div>
   </div>
 
   <div class="form-group row">
     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
     <div class="col-sm-7">
-      <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Email">
+      <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Email" name="email">
     </div>
   </div>
 
   <div class="form-group row">
     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Username</label>
     <div class="col-sm-7">
-      <input type="text" class="form-control form-control-sm" id="colFormLabelSm" placeholder="username">
+      <input type="text" class="form-control form-control-sm" id="colFormLabelSm" placeholder="username" name="username">
     </div>
   </div>
 
   <div class="form-group row">
     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Password</label>
     <div class="col-sm-7">
-      <input type="password" class="form-control form-control-sm" id="colFormLabelSm" placeholder="password">
+      <input type="password" class="form-control form-control-sm" id="colFormLabelSm" placeholder="password" name="password">
     </div>
   </div>
 
   <div class="form-group row">
     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Mobile Number</label>
     <div class="col-sm-7">
-      <input type="text" class="form-control form-control-sm" id="colFormLabelSm" placeholder="phone No">
+      <input type="text" class="form-control form-control-sm" id="colFormLabelSm" placeholder="phone No" name="mobilenumber">
     </div>  
   </div>
 
@@ -84,7 +92,7 @@
     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Nationality</label>
     <div class="col-sm-7">
 <select name="nationality" style="width: 100%;">
-  <option value="">Ethiopian</option>
+  <option value="ethiopian">Ethiopian</option>
   <option value="afghan">Afghan</option>
   <option value="albanian">Albanian</option>
   <option value="algerian">Algerian</option>
@@ -286,11 +294,11 @@
     <!--  -->
     <div class="col-sm-7">
     <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="M" name="gender">
   <label class="form-check-label" for="inlineRadio1">Male</label>
 </div>
 <div class="form-check form-check-inline ml-5">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="F" name="gender">
   <label class="form-check-label" for="inlineRadio2">Female</label>
 </div>
     </div>
@@ -302,7 +310,7 @@
   <div class="form-group" style="margin-left: -100px;">
                             <label class="control-label">Photo Preview</label>
                             <div class="input-group">
-                                <img src="../Image/profile.jpg" id="output" class="img-rounded" alt="No photo to view" width="200" height="180">
+                                <img src="../../assets/images/profile.jpg" id="output" class="img-rounded" alt="No photo to view" width="200" height="180">
                             </div>
                         </div>
 
@@ -311,7 +319,7 @@
                                     <span style="font-weight: normal;"><em>Allowed Image Formats (JPEG,PNG,GIF,JPG) (Passport size)</em></span></label>
                                 <div class="input-group">
 
-                                    <input accept="image/*" class="input-large" id="StudentPhoto" name="StudentPhoto" onchange="checkFile" type="file" value="" />
+                                    <input class="input-large" id="StudentPhoto" name="StudentPhoto" onchange="checkFile" type="file" name="profilephoto"/>
                                 </div>
                             </div>  <!--  -->
     </div>
@@ -329,27 +337,19 @@
                 <div class="multisteps-form__content">
                   <div class="form-row mt-4">
                     <div class="col">
-                      <input class="multisteps-form__input form-control" type="text" placeholder="Country"/>
+                      <input class="multisteps-form__input form-control" type="text" placeholder="Country" name="country"/>
                     </div>
                   </div>
                   <div class="form-row mt-4">
                     <div class="col">
-                      <input class="multisteps-form__input form-control" type="text" placeholder="City"/>
+                      <input class="multisteps-form__input form-control" type="text" placeholder="City" name="city"/>
                     </div>
                   </div>
                   <div class="form-row mt-4">
-                    <div class="col-12 col-sm-6">
-                      <input class="multisteps-form__input form-control" type="text" placeholder="Address"/>
+                    <div class="col">
+                      <input class="multisteps-form__input form-control" type="text" placeholder="Address" name="address"/>
                     </div>
-                    <div class="col-6 col-sm-3 mt-4 mt-sm-0">
-                      <select class="multisteps-form__select form-control">
-                        <option selected="selected">State...</option>
-                        <option>...</option>
-                      </select>
-                    </div>
-                    <div class="col-6 col-sm-3 mt-4 mt-sm-0">
-                      <input class="multisteps-form__input form-control" type="text" placeholder="Zip"/>
-                    </div>
+
                   </div>
                   <div class="button-row d-flex mt-4">
                     <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
@@ -366,11 +366,14 @@
     <div class="form-group row">
     <label for="mob">Educational Level</label>
     <div class="col-sm-7">
-     <select class="form-control" id="sel1">
-        <option>primary school</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
+     <select class="form-control" id="sel1" name="education">
+        <option value="">Please select</option>
+        <option value="Primary school">Primary school</option>
+        <option value="High school">High school</option>
+        <option value="Diploma">Diploma</option>
+        <option value="Bachelor degree">Bachelor degree</option>
+        <option value="Masters degree">Masters degree</option>
+        <option value="Doctrate degree">Doctrate degree</option>
       </select>
     </div>
     </div>
@@ -378,11 +381,13 @@
     <div class="form-group row" >
     <label for="mob">Langauge</label>
     <div class="col-sm-7" style="margin-left: 60px;">
-     <select class="form-control" id="sel1">
-        <option>English</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
+     <select class="form-control" name="language">
+        <option value="">Please select</option>
+        <option value="English">English</option>
+        <option value="Amharic">Amharic</option>
+        <option value="Arabic">Arabic</option>
+        <option value="Spanish">Spanish</option>
+        <option value="French">French</option>
       </select>
     </div>
     </div>
@@ -391,11 +396,12 @@
     <div class="form-group row" >
     <label for="mob">Skill</label>
     <div class="col-sm-7" style="margin-left: 60px;">
-     <select class="form-control" id="sel1" style="margin-left: 50px;;">
-        <option>Programming</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
+     <select class="form-control" name="skill" style="margin-left: 50px;">
+        <option value="">Please select</option>
+        <option value="Programming">Programming</option>
+        <option value="Content writing">Content writing</option>
+        <option value="Graphic design">Graphic design</option>
+        <option value="Translation">Translation</option>
       </select>
     </div>
     </div>
@@ -405,15 +411,15 @@
     <!--  -->
     <div class="col-sm-9">
     <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+  <input class="form-check-input" type="radio" name="experience" id="inlineRadio1" value="Beginner">
   <label class="form-check-label" for="inlineRadio1">Biggner(< 1Yr) </label>
 </div>
 <div class="form-check form-check-inline ">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+  <input class="form-check-input" type="radio" name="experience" id="inlineRadio2" value="Medium">
   <label class="form-check-label" for="inlineRadio2">medium(3-5)yrs</label>
 </div>
 <div class="form-check form-check-inline ">
-  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+  <input class="form-check-input" type="radio" name="experience" id="inlineRadio2" value="Advanced">
   <label class="form-check-label" for="inlineRadio2">Advanced(>5)yrs</label>
 </div>
     </div>
@@ -423,7 +429,7 @@
   <div class="form-group row">
     <label for="address">Portfolio</label>
     <div class="col-sm-7 ml-5" style="margin-left: 240px;;">
-    <textarea  class="form-control ml-5" name="address" placeholder="portfolio"></textarea>
+    <textarea  class="form-control ml-5" name="address" placeholder="portfolio" name="portfolio"></textarea>
     </div>
     
  </div>
@@ -443,11 +449,12 @@
                 <div class="form-group row mt-5" >
     <label for="mob">Bank Name</label>
     <div class="col-sm-7" style="margin-left: 60px;">
-     <select class="form-control" id="sel1" style="margin-left: 50px;;">
-        <option>CBE</option>
-        <option>BOA</option>
-        <option>AWASh</option>
-        <option>4</option>
+     <select class="form-control" name="bankname" style="margin-left: 50px;">
+        <option value="">Please select</option>
+        <option value="CBE">CBE</option>
+        <option value="Abyssinia">Abyssinia</option>
+        <option value="Awash">Awash</option>
+        <option value="Dashen">Dashen</option>
       </select>
     </div>
     </div>
@@ -455,7 +462,7 @@
     <div class="form-group row">
     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Bank Account </label>
     <div class="col-sm-7" style="margin-left: 85px;">
-      <input type="text" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Account number">
+      <input type="text" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Account number" name="accountnumber"> 
     </div>
   </div>
 
@@ -463,7 +470,7 @@
     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm" style="margin-top: 30px;">Summary </label>
 
             <div class="form-row mt-4" style="margin-left: 95px;">
-                    <textarea class="multisteps-form__textarea form-control" rows="5" cols="45" placeholder="Summary"></textarea>
+                    <textarea class="multisteps-form__textarea form-control" rows="5" cols="45" placeholder="Summary" name="summary"></textarea>
             </div>
   </div>
  </div>
@@ -481,7 +488,7 @@
     </div>
   </div>
 </div>
-<script src="signup.js"></script>
+<script src="../../assets/js/guest/signup.js"></script>
 
 </body>
 

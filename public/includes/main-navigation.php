@@ -15,7 +15,7 @@
 	<body style="overflow-x: hidden;">
 		<!--  navigation bar -->
 		<nav class="navbar navbar-expand-lg fixed-top " style="background-color: whitesmoke!important;">
-			<a class="navbar-brand" href="#"> <img ID="myImg" class="img-fluid " alt="logo" src="Image\Seralance logo.png"> </a>
+			<a class="navbar-brand" href="#"> <img ID="myImg" class="img-fluid " alt="logo" src="../assets/images/seralance-logo.png"> </a>
 			<button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-color:blue"> <span class="dark-blue-text"><i
             class="fas fa-bars fa-1x"></i></span> </button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -62,10 +62,10 @@
 							<?php echo $lang['join'] ?>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="registration/SPRegistration.php">
+							<a class="dropdown-item" href="signup/serviceprovider">
 								<?php echo $lang['provider'] ?>
 							</a>
-							<a class="dropdown-item" href="registration/SSRegistration.php">
+							<a class="dropdown-item" href="signup/serviceseeker">
 								<?php echo $lang['seeker'] ?>
 							</a>
 						</div>

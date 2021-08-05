@@ -1,7 +1,7 @@
 <!--  navigation bar -->
 <?php
-   include "config.php";
-   include "navigationbar.php"
+   require "includes/config.php";
+   require "includes/main-navigation.php"
    ?>
 	<a href="" id="top"></a>
 	<!--  -->
@@ -12,9 +12,9 @@
 			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 		</ol>
 		<div class="carousel-inner">
-			<div class="carousel-item active"> <img class="d-block w-100" src="Image\unsplash2.jpg" alt="First slide"> </div>
-			<div class="carousel-item"> <img class="d-block w-100" src="Image\unsplash 1.jpg" alt="Second slide"> </div>
-			<div class="carousel-item"> <img class="d-block w-100" src="Image\unsplash4.jpg" alt="Third slide"> </div>
+			<div class="carousel-item active"> <img class="d-block w-100" src="../assets/images/unsplash2.jpg" alt="First slide"> </div>
+			<div class="carousel-item"> <img class="d-block w-100" src="../assets/images/unsplash 1.jpg" alt="Second slide"> </div>
+			<div class="carousel-item"> <img class="d-block w-100" src="../assets/images/unsplash4.jpg" alt="Third slide"> </div>
 		</div>
 		<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true" style="color: blue;"></span> <span class="sr-only">Previous</span> </a>
 		<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
@@ -54,7 +54,7 @@
 									<h3>Post Projects For Free</h3>
 									<p>It's always free to post your project. You’ll automatically begin to receive bids from our freelancers. Also, you can browse through the talent available on our site, and contact them by the contact information. </p>
 								</div>
-								<div class="col-sm-6"> <img src="Image\project.jpg" width="200px" height="150px"> </div>
+								<div class="col-sm-6"> <img src="../assets/images/project.jpg" width="200px" height="150px"> </div>
 							</div>
 						</div>
 					</div>
@@ -64,7 +64,7 @@
 								<h3>Deposit Money Safely</h3>
 								<p>We have a complete security to your valuable money. You have the rights to pay the deposited money after the project completed. We have a good refund policy to make sure of satisfaction of the project completed. </p>
 							</div>
-							<div class="col-sm-6"> <img src="Image\deposit.png" width="200px" height="150px"> </div>
+							<div class="col-sm-6"> <img src="../assets/images/deposit.png" width="200px" height="150px"> </div>
 						</div>
 					</div>
 					<div class="row card" style="padding:30px 60px 30px 60px;margin:30px;">
@@ -73,7 +73,7 @@
 								<h3>Feel Free To Talk</h3>
 								<p>It is easier to talk with the freelancers here. So before you hire any freelancer feel free to talk with them. Tell them what you need and get the project done in the shortest possible time.</p>
 							</div>
-							<div class="col-lg-6"> <img src="image/message.png" width="200px" height="150px"> </div>
+							<div class="col-lg-6"> <img src="../assets/images/message.png" width="200px" height="150px"> </div>
 						</div>
 					</div>
 					<div class="row card" style="padding:30px 60px 30px 60px;margin:30px;">
@@ -82,7 +82,7 @@
 								<h3>Build  Profile</h3>
 								<p>If you have a lot of works to be done or run a small business that needs some freelancers in a daily basis, this is the perfect place for you. Build your employer profile today and start hiring.</p>
 							</div>
-							<div class="col-lg-6"> <img src="image/profile.jpg" width="200px" height="150px"> </div>
+							<div class="col-lg-6"> <img src="../assets/images/profile.jpg" width="200px" height="150px"> </div>
 						</div>
 					</div>
 					<!--End How it works-->
@@ -93,7 +93,7 @@
 							<div class="col-lg-6">
 								<p>We have a complete security to your valuable money. You have the rights to pay the deposited money after the project completed. We have a good refund policy to make sure of satisfaction of the project completed. </p>
 							</div>
-							<div class="col-sm-6"> <img src="image/offer.jpg" width="200px" height="150px"> </div>
+							<div class="col-sm-6"> <img src="../assets/images/offer.jpg" width="200px" height="150px"> </div>
 						</div>
 					</div>
 					<!-- about us -->
@@ -103,7 +103,7 @@
 							<div class="col-lg-6">
 								<p>We have a complete security to your valuable money. You have the rights to pay the deposited money after the project completed. We have a good refund policy to make sure of satisfaction of the project completed. </p>
 							</div>
-							<div class="col-sm-6"> <img src="Image\Seralance logo.png"> </div>
+							<div class="col-sm-6"> <img src="../assets/images/seralance-logo.png"> </div>
 						</div>
 					</div>
 				</div>
@@ -111,7 +111,7 @@
 		</div>
 		<!--  -->
 		<p id="contact"></p>
-		<?php include "footer.php"; ?>
+		<?php require "includes/main-footer.php"; ?>
 			<!--Footer-->
 			<button onclick="GoTopFunction()" id="GoTopBtn" title="Go to top" data-toggle="tooltip" data-placement="top" title="Tooltip on top" scroll to top><i class="fa  fa-arrow-up" aria-hidden="true"></i></button>
 			<script>

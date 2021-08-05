@@ -8,7 +8,7 @@
         }
 
         protected function view($view,$data=[]){
-            require_once('../public/'. $view .'.php');
+            require_once($view .'.php');
         }
     }
     

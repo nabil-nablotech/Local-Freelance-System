@@ -15,6 +15,11 @@
             }            
         }
 
+        public function validateSpSignup($input){
+            $serviceProvider = $this->model('ServiceProvider');
+            //$serviceProvider->
+        }
+
         public function indexd($some="sadf"){
             echo "I am index method in main";
             $class = $this->model($some);

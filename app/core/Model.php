@@ -4,7 +4,14 @@
 
     class Model{
 
-        function insert($table,$data){
+        protected function cleanInput($data){
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;                    
+        }
+
+        protected function insert($table,$data){
 
             $connection = null;
             try{
@@ -31,7 +38,7 @@
         }
 
 
-        function update($table,$data,$condition=""){
+        protected function update($table,$data,$condition=""){
 
             $connection = null;
             try{
@@ -73,7 +80,7 @@
             
         }
 
-        function remove($table,$condition){
+        protected function remove($table,$condition){
 
             $connection = null;
             try{
