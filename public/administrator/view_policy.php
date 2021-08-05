@@ -5,12 +5,10 @@ require_once "../Database/db.php";
 
 <!--  -->
 
-<head>
-  <link rel="stylesheet" href="vendor/datatables/dataTables.bootstrap4.css">
   <script>
     document.title="Admin-view  policy";
 </script>
-</head>
+
 
  <!-- Container Fluid-->
  <div class="container-fluid" id="container-wrapper">
@@ -25,7 +23,6 @@ require_once "../Database/db.php";
             </ol>
           </div>
           <div class="row">
-            <!-- Alerts Basic -->
             <div class="col-lg-8 mx-auto">
               <div class="card shadow-sm mb-4 ">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -86,9 +83,7 @@ require_once "../Database/db.php";
               </div>
             </div>
           </div>
-
         </div>
-        <!---Container Fluid-->
       </div>
 
       <!-- Footer -->
@@ -107,7 +102,7 @@ require_once "footer.php";
   <script src="vendor/datatables/jquery.dataTables.min.js" ></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="js/ruang-admin.min.js"></script>
+  <script src="js/serelance-admin.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.js" ></script>
 

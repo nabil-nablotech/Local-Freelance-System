@@ -2,11 +2,12 @@
    require_once "nav.php";
    require_once "../Database/db.php";
    ?>
-<!--  -->
-<head>
-   <link rel="stylesheet" href="vendor/datatables/dataTables.bootstrap4.css">
-</head>
-<!-- Container Fluid-->
+
+<script>
+    document.title="Admin-list of system admins";
+</script>
+<!-- content begins -->
+
 <div class="container-fluid" id="container-wrapper">
    <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-0 text-gray-800">Admin users</h1>
@@ -19,15 +20,14 @@
       </ol>
    </div>
    <div class="row">
-      <!-- Alerts Basic -->
       <div class="col-lg-12">
          <div class="card shadow-sm mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                <h6 class="m-0 font-weight-bold text-primary">List of Admin Users</h6>
             </div>
             <div class="card-body">
-               <!--  -->
-               <!--  -->
+               
+               <!-- data to be fetched from the database  -->
                <div class="table table-responsive">
                   <table id = "table" class = "table table-bordered table-striped">
                      <a class = "btn btn-success mb-3" href = "create_new_admin.php"><i class = "fa  fa-plus-circle"></i> New Admin Account</a>
@@ -60,8 +60,8 @@
                            </td>
                            <td>
                         
-             <a class = "btn btn-success btn-sm" href = "edit_account.php?Username=<?php 
-				echo $fetch['Username']?>"><i class = "fa fa-edit">edit</i> </a>
+             <a class = "btn btn-success btn-sm" href = "edit_account.php?Username=<?php
+                echo $fetch['Username']?>"><i class = "fa fa-edit">edit</i> </a>
                            <td>
                               <a class = "btn btn-danger btn-sm" 
                               onclick = "confirmationDelete(this); return false;"
@@ -75,7 +75,10 @@
                      </tbody>
                   </table>
                </div>
-               <!--  -->
+               <!--  ends -->
+
+               <!-- modal to modify permissions begins  -->
+
                <div class="modal fade" id="modal" aria-hidden="true">
                   <div class="modal-dialog">
                      <div class="modal-content">
@@ -84,7 +87,7 @@
                               <h3 class="modal-title mx-auto">Modify permissions</h3>
                            </div>
                            <div class="modal-body">
-                              <!--  -->
+                              <!-- modal contents-->
                               <div class="card shadow-sm mb-4">
                                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary mx-auto">Permissions </h6>
@@ -146,19 +149,20 @@
                                  </div>
                         </form>
                         <?php
-	
-	
-	
-?>
+                        
+                        ?>
                         </div>
                         </div>
                      </div>
+
+                     <!-- modal ends -->
+
                   </div>
                </div>
             </div>
          </div>
       </div>
-      <!--  -->
+      <!-- content container ends -->
    </div>
 </div>
 </div>
@@ -174,7 +178,9 @@
 </div>
 </div>
 </div>
+
 <!-- Modal Logout -->
+
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
    aria-hidden="true">
    <div class="modal-dialog" role="document">
@@ -196,8 +202,8 @@
    </div>
 </div>
 </div>
-<!---Container Fluid-->
 </div>
+
 <!-- Footer -->
 <?php
    require_once "footer.php";
@@ -213,7 +219,7 @@
 <script src="vendor/datatables/jquery.dataTables.min.js" ></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="js/ruang-admin.min.js"></script>
+<script src="js/serelance-admin.min.js"></script>
 <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script src="vendor/datatables/dataTables.bootstrap4.js" ></script>
 <script type = "text/javascript">

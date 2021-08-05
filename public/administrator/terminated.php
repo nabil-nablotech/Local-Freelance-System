@@ -4,13 +4,11 @@ require_once "../Database/db.php";
 ?>
 
 <!--  -->
+ <script>
+      document.title="Admin-list of terminated projects";
+   </script>
 
-<head>
-  <link rel="stylesheet" href="vendor/datatables/dataTables.bootstrap4.css">
-  
-</head>
-
- <!-- Container Fluid-->
+ <!-- Contents-->
  <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Terminated Projects</h1>
@@ -23,7 +21,6 @@ require_once "../Database/db.php";
             </ol>
           </div>
           <div class="row">
-            <!-- Alerts Basic -->
             <div class="col-lg-12">
               <div class="card shadow-sm mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -53,8 +50,8 @@ require_once "../Database/db.php";
                   <tbody>
                      <?php
                         $query = $con->query("SELECT * FROM terminatedproject") or die(mysqli_error($con));
-                        while($fetch = $query->fetch_array()){
-                        ?>	
+                        while ($fetch = $query->fetch_array()) {
+                            ?>	
                      <tr>
 
                      <td><?php echo $fetch['No']?></td>

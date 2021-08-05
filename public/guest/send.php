@@ -2,18 +2,19 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
-$mail = new PHPMailer(true); // Passing `true` enables exceptions                             
+$mail = new PHPMailer(true); // Passing `true` enables exceptions
 try {
     //Server settings
-    $mail->SMTPDebug = 0; // Enable verbose debug output                                 
-    $mail->isSMTP(); //Set mailer to use SMTP                                      
+    $mail->SMTPDebug = 0; // Enable verbose debug output
+    $mail->isSMTP(); //Set mailer to use SMTP
     $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
     $mail->SMTPAuth = true; // Enable SMTP authentication
     $mail->Username = 'mulugeta.adamu97@gmail.com'; // SMTP username
-    $mail->Password = 'NSR/7036/10M'; // SMTP password
+    $mail->Password = '#'; // SMTP password
     $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587; // TCP port to connect to
 
@@ -31,7 +32,7 @@ try {
 
     //Content
     $rndno=rand(100000, 999999);
-    $mail->isHTML(true);// Set email format to HTML                                  
+    $mail->isHTML(true);// Set email format to HTML
     $mail->Subject = 'Here is the subject'; // Subject of the email
     $mail->Body    = 'this is your verification code '.$rndno;
 

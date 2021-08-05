@@ -2,15 +2,9 @@
 require_once "nav.php";
 require_once "../Database/db.php";
 ?>
-
-<!--  -->
-
-<head>
-  <link rel="stylesheet" href="vendor/datatables/dataTables.bootstrap4.css">
   <script>
     document.title="Admin-list of bids";
 </script>
-</head>
 
  <!-- Container Fluid-->
  <div class="container-fluid" id="container-wrapper">
@@ -53,8 +47,8 @@ require_once "../Database/db.php";
                   <tbody>
                      <?php
                         $query = $con->query("SELECT * FROM offeredproject") or die(mysqli_error($con));
-                        while($fetch = $query->fetch_array()){
-                        ?>	
+                        while ($fetch = $query->fetch_array()) {
+                            ?>	
                      <tr>
 
                      <td><?php echo $fetch['No']?></td>

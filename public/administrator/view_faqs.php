@@ -5,14 +5,13 @@ require_once "../Database/db.php";
 
 <!--  -->
 
-<head>
-  <link rel="stylesheet" href="vendor/datatables/dataTables.bootstrap4.css">
+
   <script>
     document.title="Admin-view  FAQs";
 </script>
-</head>
 
- <!-- Container Fluid-->
+
+ <!-- Contents-->
  <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Frequently Asked Questions </h1>
@@ -32,7 +31,6 @@ require_once "../Database/db.php";
                   <h6 class="m-0 font-weight-bold text-primary">List of of FAQs</h6>
                 </div>
                 <div class="card-body">
-<!--  -->
 
             <!--  -->
          </div>
@@ -99,7 +97,7 @@ require_once "footer.php";
   <script src="vendor/datatables/jquery.dataTables.min.js" ></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="js/ruang-admin.min.js"></script>
+  <script src="js/serelance-admin.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.js" ></script>
 

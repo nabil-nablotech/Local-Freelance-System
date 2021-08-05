@@ -5,12 +5,11 @@ require_once "../Database/db.php";
 
 <!--  -->
 
-<head>
-  <link rel="stylesheet" href="vendor/datatables/dataTables.bootstrap4.css">
-  
-</head>
+<script>
+    document.title="Admin-list of offered projects";
+</script>
 
- <!-- Container Fluid-->
+ <!-- Content-->
  <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Offered Projects</h1>
@@ -23,7 +22,7 @@ require_once "../Database/db.php";
             </ol>
           </div>
           <div class="row">
-            <!-- Alerts Basic -->
+           
             <div class="col-lg-12">
               <div class="card shadow-sm mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -48,8 +47,8 @@ require_once "../Database/db.php";
                   <tbody>
                      <?php
                         $query = $con->query("SELECT * FROM offeredproject") or die(mysqli_error($con));
-                        while($fetch = $query->fetch_array()){
-                        ?>	
+                        while ($fetch = $query->fetch_array()) {
+                            ?>	
                      <tr>
 
                      <td><?php echo $fetch['No']?></td>
@@ -135,7 +134,7 @@ require_once "footer.php";
   <script src="vendor/datatables/jquery.dataTables.min.js" ></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="js/ruang-admin.min.js"></script>
+  <script src="js/serelance-admin.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.js" ></script>
 

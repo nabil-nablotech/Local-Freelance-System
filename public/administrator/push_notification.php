@@ -5,14 +5,12 @@ require_once "../Database/db.php";
 
 <!--  -->
 
-<head>
-  <link rel="stylesheet" href="vendor/datatables/dataTables.bootstrap4.css">
   <script>
     document.title="Admin-Notifications";
 </script>
-</head>
 
- <!-- Container Fluid-->
+
+ <!-- Contents-->
  <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">List of Notification </h1>
@@ -36,32 +34,95 @@ require_once "../Database/db.php";
 
 <h2>  Post Notification</h2>
 <!--  -->
-<form action="#" method="post" id="add_form" >
+<form action="push.php"  method="post" id="comment_form" >
   <div class="form-group">
-    <label for="email">Title:</label>
-    <input type="text" class="form-control" name="title" placeholder="Enter title" id="title" required  >
+    <label for="email">subject</label>
+    <input type="text" class="form-control" name="title" id="subject" placeholder="Enter title" required  >
   </div>
   <div class="form-group">
     <label for="pwd">Message:</label>
-	<textArea input="text" class="form-control" name="message" placeholder="enter message" rows="4"  required> </textArea>
+	<textArea input="text" class="form-control" name="message" id="comment" placeholder="enter message" rows="4"
+    required> </textArea>
   </div>
-  <div class="form-group">
+ <!--  <div class="form-group">
    
   <select class="form-control">
   <option>users</option>
 </select>
-</div>
+</div> -->
   <div class="text-center">
-  <button type="submit" class="btn btn-sm btn-primary " name="send"><i class="fa fa-paper-plane" aria-hidden="true">
-</i>push</button>
+  <!-- <button type="submit" class="btn btn-sm btn-primary " id="post" name="send">
+    <i class="fa fa-paper-plane" aria-hidden="true">
+
+
+</i>push</button> -->
+<input type="submit" name="post" id="post" class="btn btn-info" value="Post" />
 </div>
 </form>
     <!--  -->
-              
+    
+    <script>
+$(document).ready(function(){
+ 
+ function load_unseen_notification(view = '')
+ {
+  $.ajax({
+   url:"../ServiceSeeker/Notification/fetch.php", 
+   method:"POST",
+   data:{view:view},
+   dataType:"json",
+   success:function(data)
+   {
+    $('.dropdown-menu').html(data.notification);
+    if(data.unseen_notification > 0)
+    {
+     $('.count').html(data.unseen_notification);
+    }
+   }
+  });
+ }
+ 
+ load_unseen_notification();
+ 
+ $('#comment_form').on('submit', function(event){
+  event.preventDefault();
+  if($('#subject').val() != '' && $('#comment').val() != '')
+  {
+   var form_data = $(this).serialize();
+   $.ajax({
+    url:"push.php",
+    method:"POST",
+    data:form_data,
+    success:function(data)
+    {
+     $('#comment_form')[0].reset();
+     load_unseen_notification();
+    }
+   });
+  }
+  else
+  {
+   alert("Both Fields are Required");
+  }
+ });
+ 
+ $(document).on('click', '.dropdown-toggle', function(){
+  $('.count').html('');
+  load_unseen_notification('yes');
+ });
+ 
+ setInterval(function(){ 
+  load_unseen_notification();; 
+ }, 5000);
+ 
+});
+</script>
 
-                </div>
-              </div>
-            </div>
+
+    <!--  -->
+    </div>
+      </div>
+        </div>
 
            
         
@@ -109,7 +170,7 @@ require_once "footer.php";
   <script src="vendor/datatables/jquery.dataTables.min.js" ></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="js/ruang-admin.min.js"></script>
+  <script src="js/serelance-admin.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.js" ></script>
 
