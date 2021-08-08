@@ -130,13 +130,14 @@
                 $error = array_merge($error,array('email' => 'This field is required.'));
             }
             else{
-                $data = "'".$this->cleanInput($input['email'])."'";
+                $cleanData = $this->cleanInput($input['email']);                
 
-                if (!filter_var($data, FILTER_VALIDATE_EMAIL)) {
+                if (!filter_var($cleanData, FILTER_VALIDATE_EMAIL)) {
                     $error = array_merge($error,array('email' => 'Invalid email format.'));
                   }
                 else{
-                   $userData = array_merge($userData,array('email' => $data)); 
+                    $data = "'".$cleanData."'";
+                    $userData = array_merge($userData,array('email' => $data)); 
                 }                
             }
 
@@ -144,12 +145,12 @@
                 $error = array_merge($error,array('username' => 'This field is required.'));
             }
             else{
-                $data = "'".$this->cleanInput($input['username'])."'";
+                $cleanData = $this->cleanInput($input['username']);
 
                 if ($this->checkUserExists($data)===false) {
+                    $data = "'".$cleanData."'";
                     $userData = array_merge($userData,array('username' => $data));
-                    $serviceProviderData = array_merge($serviceProviderData,array('username' => $data));
-                    
+                    $serviceProviderData = array_merge($serviceProviderData,array('username' => $data));                    
                   }
                 else{
                     $error = array_merge($error,array('username' => 'Username already taken.')); 
@@ -160,16 +161,17 @@
                 $error = array_merge($error,array('password' => 'This field is required.'));
             }
             else{
-                $data = "'".$this->cleanInput($input['password'])."'";
-                $uppercase = preg_match('@[A-Z]@', $data);
-                $lowercase = preg_match('@[a-z]@', $data);
-                $number    = preg_match('@[0-9]@', $data);
-                $specialChars = preg_match('@[^\w]@', $data);
+                $cleanData = $this->cleanInput($input['password']);                
+                $uppercase = preg_match('@[A-Z]@', $cleanData);
+                $lowercase = preg_match('@[a-z]@', $cleanData);
+                $number    = preg_match('@[0-9]@', $cleanData);
+                $specialChars = preg_match('@[^\w]@', $cleanData);
 
                 if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($data) < 8) {
                     $error = array_merge($error,array('password' => 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.'));
                   }
                 else{
+                    $data = "'".$cleanData."'";
                     $userData = array_merge($userData,array('password' => $data));
                 }                      
             }
@@ -200,7 +202,7 @@
                     $userData = array_merge($userData,array('nationality' => $data));
                 }
                 else{
-                    $error = array_merge($error,array('nationality' => 'Attempting to by pass security.'));
+                    $error = array_merge($error,array('nationality' => 'This field is required.'));
                 }
                 
             }
@@ -212,7 +214,7 @@
                 $cleanData = $this->cleanInput($input['gender']);
 
                 if($cleanData!=='M' || $cleanData!=='F'){
-                    $error = array_merge($error,array('gender' => 'Attempting to bypass security.'));
+                    $error = array_merge($error,array('gender' => 'This field is required.'));
                 }
                 else{
                     $data = "'".$cleanData."'";
@@ -242,7 +244,7 @@
                     $userData = array_merge($userData,array('country' => $data));
                 }
                 else{
-                    $error = array_merge($error,array('country' => 'Attempting to by pass security.'));
+                    $error = array_merge($error,array('country' => 'This field is required.'));
                 }
             }
 
@@ -266,14 +268,22 @@
                 $error = array_merge($error,array('education' => 'This field is required.'));
             }
             else{
-                $data = "'".$this->cleanInput($input['education'])."'";
-                $serviceProviderData = array_merge($serviceProviderData,array('education' => $data));
+                $cleanData = $this->cleanInput($input['education']);
+
+                if($cleanData !=='Primary school' && $cleanData !=='High school' && $cleanData !=='Diploma' && $cleanData !=='Bachelor degree' && $cleanData !=='Masters degree' && $cleanData !=='Doctrate degree'){
+                    $error = array_merge($error,array('education' => 'This field is required.'));
+                }
+                else{
+                    $data = "'".$cleanData."'";
+                    $serviceProviderData = array_merge($serviceProviderData,array('education' => $data));
+                }                
             }
 
             if(empty($input['language'])){
                 $error = array_merge($error,array('language' => 'This field is required.'));
             }
             else{
+                $cleanData =$this->cleanInput($input['language']); 
                 $data = "'".$this->cleanInput($input['language'])."'";
                 $serviceProviderData = array_merge($serviceProviderData,array('language_name' => $data));
             }
@@ -290,24 +300,43 @@
                 $error = array_merge($error,array('experience' => 'This field is required.'));
             }
             else{
-                $data = "'".$this->cleanInput($input['experience'])."'";
-                $serviceProviderData = array_merge($serviceProviderData,array('experience' => $data));
+                $cleanData = $this->cleanInput($input['experience']);
+                if($cleanData !=='Beginner' && $cleanData !=='Medium' && $cleanData !=='Advanced'){
+                    $error = array_merge($error,array('experience' => 'This field is required.'));
+                }
+                else{
+                    $data = "'".$cleanData."'";
+                    $serviceProviderData = array_merge($serviceProviderData,array('experience' => $data));
+                }                
             }
 
             if(empty($input['portfolio'])){
                 $error = array_merge($error,array('portfolio' => 'This field is required.'));
             }
             else{
-                $data = "'".$this->cleanInput($input['portfolio'])."'";
-                $serviceProviderData = array_merge($serviceProviderData,array('portfolio' => $data));
+                $cleanData = $this->cleanInput($input['portfolio']);
+                if(filter_var($cleanData, FILTER_VALIDATE_URL)===true){
+                    $data = "'".$this->cleanInput($input['portfolio'])."'";
+                    $serviceProviderData = array_merge($serviceProviderData,array('portfolio' => $data));
+                }
+                else{
+                    $error = array_merge($error,array('portfolio' => 'Invalid url inserted.'));
+                }                
             }
 
             if(empty($input['bankname'])){
                 $error = array_merge($error,array('bankname' => 'This field is required.'));
             }
             else{
-                $data = "'".$this->cleanInput($input['bankname'])."'";
-                $serviceProviderData = array_merge($serviceProviderData,array('bank_name' => $data));
+                $cleanData = $this->cleanInput($input['bankname']); 
+                if($cleanData !=='CBE' && $cleanData !=='Awash' && $cleanData !=='Dashen' && $cleanData !=='Abyssinia' && $cleanData !=='Nib' && $cleanData !=='Abay' && $cleanData !=='United'){
+                    $error = array_merge($error,array('bankname' => 'This field is required.'));
+                }
+                else{
+                    $data = "'".$cleanData."'";
+                    $serviceProviderData = array_merge($serviceProviderData,array('bank_name' => $data));
+                }
+                
             }
 
             if(empty($input['accountnumber'])){

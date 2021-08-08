@@ -412,11 +412,11 @@
     <div class="col-sm-9">
     <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="experience" id="inlineRadio1" value="Beginner">
-  <label class="form-check-label" for="inlineRadio1">Biggner(< 1Yr) </label>
+  <label class="form-check-label" for="inlineRadio1">Beginner(< 1Yr) </label>
 </div>
 <div class="form-check form-check-inline ">
   <input class="form-check-input" type="radio" name="experience" id="inlineRadio2" value="Medium">
-  <label class="form-check-label" for="inlineRadio2">medium(3-5)yrs</label>
+  <label class="form-check-label" for="inlineRadio2">Medium(3-5)yrs</label>
 </div>
 <div class="form-check form-check-inline ">
   <input class="form-check-input" type="radio" name="experience" id="inlineRadio2" value="Advanced">
@@ -455,6 +455,10 @@
         <option value="Abyssinia">Abyssinia</option>
         <option value="Awash">Awash</option>
         <option value="Dashen">Dashen</option>
+        <option value="Nib">Nib</option>
+        <option value="Abay">Abay</option>
+        <option value="United">United</option>
+
       </select>
     </div>
     </div>

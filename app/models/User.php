@@ -138,7 +138,7 @@
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("SELECT username FROM USER where username=\'".$username."\'");
+                $stmt = $conn->query("SELECT username FROM user where username=\'".$username."\'");
                 if($stmt->fetch(PDO::FETCH_ASSOC)===true){
                     return true;
                 }
