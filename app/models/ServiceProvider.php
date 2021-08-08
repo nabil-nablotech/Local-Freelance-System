@@ -131,7 +131,13 @@
             }
             else{
                 $data = "'".$this->cleanInput($input['email'])."'";
-                $userData = array_merge($userData,array('email' => $data));
+
+                if (!filter_var($data, FILTER_VALIDATE_EMAIL)) {
+                    $error = array_merge($error,array('email' => 'Invalid email format.'));
+                  }
+                else{
+                   $userData = array_merge($userData,array('email' => $data)); 
+                }                
             }
 
             if(empty($input['username'])){
@@ -139,8 +145,15 @@
             }
             else{
                 $data = "'".$this->cleanInput($input['username'])."'";
-                $userData = array_merge($userData,array('username' => $data));
-                $serviceProviderData = array_merge($serviceProviderData,array('username' => $data));
+
+                if ($this->checkUserExists($data)===false) {
+                    $userData = array_merge($userData,array('username' => $data));
+                    $serviceProviderData = array_merge($serviceProviderData,array('username' => $data));
+                    
+                  }
+                else{
+                    $error = array_merge($error,array('username' => 'Username already taken.')); 
+                }                 
             }
 
             if(empty($input['password'])){
@@ -148,7 +161,17 @@
             }
             else{
                 $data = "'".$this->cleanInput($input['password'])."'";
-                $userData = array_merge($userData,array('password' => $data));
+                $uppercase = preg_match('@[A-Z]@', $data);
+                $lowercase = preg_match('@[a-z]@', $data);
+                $number    = preg_match('@[0-9]@', $data);
+                $specialChars = preg_match('@[^\w]@', $data);
+
+                if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($data) < 8) {
+                    $error = array_merge($error,array('password' => 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.'));
+                  }
+                else{
+                    $userData = array_merge($userData,array('password' => $data));
+                }                      
             }
 
             if(empty($input['mobilenumber'])){
@@ -156,23 +179,46 @@
             }
             else{
                 $data = "'".$this->cleanInput($input['mobilenumber'])."'";
-                $userData = array_merge($userData,array('mobile_number' => $data));
+
+                if (preg_match('/^09[0-9]{8}+$/', $data)) {
+                    $userData = array_merge($userData,array('mobile_number' => $data));
+                  }
+                else{                    
+                    $error = array_merge($error,array('mobilenumber' => 'Invalid mobile number format. Mobile No. should be in this format (09xxxxxxxx).'));
+                }                   
             }
 
             if(empty($input['nationality'])){
                 $error = array_merge($error,array('nationality' => 'This field is required.'));
             }
             else{
-                $data = "'".$this->cleanInput($input['nationality'])."'";
-                $userData = array_merge($userData,array('nationality' => $data));
+                $cleanData = $this->cleanInput($input['nationality']);                
+                require_once '../Database/countries.php';
+                if(array_key_exists($cleanData,Countries::$countries))
+                {   
+                    $data = "'".Countries::$countries[$cleanData]."'";
+                    $userData = array_merge($userData,array('nationality' => $data));
+                }
+                else{
+                    $error = array_merge($error,array('nationality' => 'Attempting to by pass security.'));
+                }
+                
             }
 
             if(empty($input['gender'])){
                 $error = array_merge($error,array('gender' => 'This field is required.'));
             }
             else{
-                $data = "'".$this->cleanInput($input['gender'])."'";
-                $userData = array_merge($userData,array('gender' => $data));
+                $cleanData = $this->cleanInput($input['gender']);
+
+                if($cleanData!=='M' || $cleanData!=='F'){
+                    $error = array_merge($error,array('gender' => 'Attempting to bypass security.'));
+                }
+                else{
+                    $data = "'".$cleanData."'";
+                    $userData = array_merge($userData,array('gender' => $data));
+                }
+                
             }
 
             if(empty($input['profilephoto'])){
@@ -187,8 +233,17 @@
                 $error = array_merge($error,array('country' => 'This field is required.'));
             }
             else{
-                $data = "'".$this->cleanInput($input['country'])."'";
-                $userData = array_merge($userData,array('country' => $data));
+                
+                $cleanData = $this->cleanInput($input['country']);                
+                require_once '../Database/countries.php';
+                if(array_key_exists($cleanData,Countries::$countries))
+                {   
+                    $data = "'".Countries::$countries[$cleanData]."'";
+                    $userData = array_merge($userData,array('country' => $data));
+                }
+                else{
+                    $error = array_merge($error,array('country' => 'Attempting to by pass security.'));
+                }
             }
 
             if(empty($input['city'])){
@@ -272,6 +327,7 @@
             }
 
         }
-        
+
+                
     }
 ?>
