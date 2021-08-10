@@ -170,8 +170,8 @@
                 if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($data) < 8) {
                     $error = array_merge($error,array('password' => 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.'));
                   }
-                else{
-                    $data = "'".$cleanData."'";
+                else{                    
+                    $data = "'".password_hash($cleanData,PASSWORD_DEFAULT)."'";
                     $userData = array_merge($userData,array('password' => $data));
                 }                      
             }
@@ -180,9 +180,10 @@
                 $error = array_merge($error,array('mobilenumber' => 'This field is required.'));
             }
             else{
-                $data = "'".$this->cleanInput($input['mobilenumber'])."'";
+                $cleanData = $this->cleanInput($input['mobilenumber']);
 
-                if (preg_match('/^09[0-9]{8}+$/', $data)) {
+                if (preg_match('/^09[0-9]{8}+$/', $cleanData)) {
+                    $data = "'".$cleanData."'";
                     $userData = array_merge($userData,array('mobile_number' => $data));
                   }
                 else{                    

@@ -4,6 +4,9 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
     <link rel="stylesheet"  href="../../assets/css/guest/signup.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <style>
     </style>
 </head>
@@ -381,28 +384,18 @@
     <div class="form-group row" >
     <label for="mob">Langauge</label>
     <div class="col-sm-7" style="margin-left: 60px;">
-     <select class="form-control" name="language">
-        <option value="">Please select</option>
-        <option value="English">English</option>
-        <option value="Amharic">Amharic</option>
-        <option value="Arabic">Arabic</option>
-        <option value="Spanish">Spanish</option>
-        <option value="French">French</option>
-      </select>
+    <select class="form-control language-multiple" name="language[]" multiple="multiple">
+
+    </select> 
     </div>
     </div>
     <!--  -->
-
     <div class="form-group row" >
     <label for="mob">Skill</label>
-    <div class="col-sm-7" style="margin-left: 60px;">
-     <select class="form-control" name="skill" style="margin-left: 50px;">
-        <option value="">Please select</option>
-        <option value="Programming">Programming</option>
-        <option value="Content writing">Content writing</option>
-        <option value="Graphic design">Graphic design</option>
-        <option value="Translation">Translation</option>
-      </select>
+    <div class="col-sm-7" style="margin-left: 120px;">
+    <select class="form-control skill-multiple" name="skill[]" multiple="multiple">
+
+    </select> 
     </div>
     </div>
     <!-- experience -->
@@ -493,7 +486,36 @@
   </div>
 </div>
 <script src="../../assets/js/guest/signup.js"></script>
+<script>
+  var languages = ['English', 'Arabic', 'Amharic', 'French', 'Mandarin', 'Spanish', 'Hindi'];
+  var language_input = document.querySelector('.language-multiple');
+  for (const language of languages) {
+      let node = document.createElement('Option');
+      node.setAttribute('value', language);
+      node.innerText = language;
+      language_input.appendChild(node);
+  }
 
+  var skills = ['English', 'Arabic', 'Amharic', 'French', 'Mandarin', 'Spanish', 'Hindi'];
+  var skill_input = document.querySelector('.skill-multiple');
+  for (const skill of skills) {
+      let node = document.createElement('Option');
+      node.setAttribute('value', skill);
+      node.innerText = skill;
+      skill_input.appendChild(node);
+  }
+
+  $(document).ready(function() {
+        $('.language-multiple').select2({placeholder: 'Select language',
+          maximumSelectionLength: 5});
+    });
+
+    $(document).ready(function() {
+        $('.skill-multiple').select2({placeholder: 'Select skill',
+          maximumSelectionLength: 5});
+    });
+
+</script>
 </body>
 
 
