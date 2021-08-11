@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{HTTP_REFERER} !localhost [NC]
+RewriteRule \.(gif|jpg|jpeg|png)$ - [F,L]
