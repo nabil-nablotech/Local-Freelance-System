@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="local freelance system">
   <meta name="author" content="serelance develpers">
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link href="css/serelance-admin.min.css" rel="stylesheet">
-  <link href="css/serelance-admin.css" rel="stylesheet">
+  <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../assets/css/administrator/serelance-admin.min.css" rel="stylesheet">
+  <link href="../assets/css/administrator/serelance-admin.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="vendor/datatables/dataTables.bootstrap4.css">
+<link rel="stylesheet" href="../assets/vendor/datatables/dataTables.bootstrap4.css">
 </head>
 
 <body id="page-top">
@@ -20,7 +20,7 @@
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar" style="color:black !important;;">
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon">
-          <img src="img/logo/Seralance logo.png">
+          <img src="../assets/images/seralance-logo.png">
         </div>
         <div class="sidebar-brand-text mx-3"></div>
       </a>
@@ -289,7 +289,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
+                <img class="img-profile rounded-circle" src="../assets/images/administrator/boy.png" style="max-width: 60px">
                 <span class="ml-2 d-none d-lg-inline text-white small">Mulegeta Adamu</span>  <i class = "fas fa-2x fa-angle-down " 
                 ></i>
               </a>

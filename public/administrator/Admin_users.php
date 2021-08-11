@@ -1,6 +1,6 @@
 <?php
-   require_once "nav.php";
-   require_once "../Database/db.php";
+   require_once "../includes/admin-navigation.php";
+   require_once "../guest/connection.php";
    ?>
 
 <script>
