@@ -358,6 +358,21 @@
 
         }
 
+        public function retrieveLanguages(){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $stmt = $conn->query("SELECT * FROM language");
+                if($languages = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $languages;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
                 
     }
 ?>
