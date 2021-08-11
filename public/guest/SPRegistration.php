@@ -7,7 +7,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="http://localhost/seralance/app/vendor/tagger-master/tagger.css" rel="stylesheet">
+    <script src="http://localhost/seralance/app/vendor/tagger-master/tagger.js"></script>
+
     <style>
+
     </style>
 </head>
 <body>
@@ -421,8 +425,8 @@
 
   <div class="form-group row">
     <label for="address">Portfolio</label>
-    <div class="col-sm-7 ml-5" style="margin-left: 240px;;">
-    <textarea  class="form-control ml-5" name="address" placeholder="portfolio" name="portfolio"></textarea>
+    <div class="col-sm-7 ml-5" style="margin-left: 240px;">
+      <input class="form-control" name="portfolio" type="text">
     </div>
     
  </div>
@@ -514,6 +518,9 @@
         $('.skill-multiple').select2({placeholder: 'Select skill',
           maximumSelectionLength: 5});
     });
+
+    // Tagger for portfolio
+    tagger(document.querySelector('[name="portfolio"]'),{wrap: true ,allow_spaces: false, tag_limit: 10, link: function(name){return false}});
 
 </script>
 </body>
