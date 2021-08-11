@@ -12,6 +12,7 @@
   <link href="../assets/css/administrator/serelance-admin.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="../assets/vendor/datatables/dataTables.bootstrap4.css">
+
 </head>
 
 <body id="page-top">
@@ -26,7 +27,7 @@
       </a>
       <hr class="sidebar-divider my-0">
       <li class="nav-item active">
-        <a class="nav-link" href="index.php">
+        <a class="nav-link" href="Dashboard.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span style="font-weight: bolder;">Dashboard</span></a>
       </li>
