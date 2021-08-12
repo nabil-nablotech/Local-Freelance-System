@@ -96,7 +96,11 @@
     <div class="col-sm-7">
       <select name="nationality" style="width: 100%;">
         <option value="">Please select</option>
-        
+        <?php
+          foreach($mainController->getAllCountries() as $country){
+            echo '<option value="'.$country.'">'.$country.'</option>';
+          } 
+        ?>
       </select>     
     </div>  
   </div>
@@ -149,7 +153,14 @@
                 <div class="multisteps-form__content">
                   <div class="form-row mt-4">
                     <div class="col">
-                      <input class="multisteps-form__input form-control" type="text" placeholder="Country" name="country"/>
+                    <select name="country" style="width: 100%;">
+                      <option value="">Please select</option>
+                      <?php
+                        foreach($mainController->getAllCountries() as $country){
+                          echo '<option value="'.$country.'">'.$country.'</option>';
+                        } 
+                      ?>
+                    </select>  
                     </div>
                   </div>
                   <div class="form-row mt-4">
@@ -194,7 +205,11 @@
     <label for="mob">Langauge</label>
     <div class="col-sm-7" style="margin-left: 60px;">
     <select class="form-control language-multiple" name="language[]" multiple="multiple">
-
+      <?php
+          foreach($mainController->getAllLanguages() as $language){
+            echo '<option value="'.$language['language_id'].'">'.$language['language_name'].'</option>';
+          } 
+      ?>
     </select> 
     </div>
     </div>
@@ -203,7 +218,43 @@
     <label for="mob">Skill</label>
     <div class="col-sm-7" style="margin-left: 120px;">
     <select class="form-control skill-multiple" name="skill[]" multiple="multiple">
-
+      <?php $skills = $mainController->getAllSkills(); ?>
+      <optgroup label="Graphics and Design">
+        <?php
+              foreach($skills as $skill){
+                if($skill['skill_category'] === 'Graphics and Design'){
+                  echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
+                }                
+              } 
+        ?>
+      </optgroup>
+      <optgroup label="Writing & Translation">
+        <?php
+              foreach($skills as $skill){
+                if($skill['skill_category'] === 'Writing & Translation'){
+                  echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
+                }                
+              } 
+        ?>
+      </optgroup> 
+      <optgroup label="Video & Animation">
+        <?php
+              foreach($skills as $skill){
+                if($skill['skill_category'] === 'Video & Animation'){
+                  echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
+                }                
+              } 
+        ?>
+      </optgroup> 
+      <optgroup label="Programming & Tech">
+        <?php
+              foreach($skills as $skill){
+                if($skill['skill_category'] === 'Programming & Tech'){
+                  echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
+                }                
+              } 
+        ?>
+      </optgroup>       
     </select> 
     </div>
     </div>
@@ -296,24 +347,6 @@
 </div>
 <script src="../../assets/js/guest/signup.js"></script>
 <script>
-  var languages = <?php echo json_encode($mainController->getAllLanguages());?>;
-  var language_input = document.querySelector('.language-multiple');
-  for (const language of languages) {
-      let node = document.createElement('Option');
-      node.setAttribute('value', language.language_id);
-      node.innerText = language.language_name;
-      language_input.appendChild(node);
-  }
-
-  var skills = ['English', 'Arabic', 'Amharic', 'French', 'Mandarin', 'Spanish', 'Hindi'];
-  var skill_input = document.querySelector('.skill-multiple');
-  for (const skill of skills) {
-      let node = document.createElement('Option');
-      node.setAttribute('value', skill);
-      node.innerText = skill;
-      skill_input.appendChild(node);
-  }
-
   $(document).ready(function() {
         $('.language-multiple').select2({placeholder: 'Select language',
           maximumSelectionLength: 5});

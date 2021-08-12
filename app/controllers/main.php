@@ -22,9 +22,18 @@
 
         public function getAllLanguages(){
             $serviceProvider = $this->model('ServiceProvider');
-            return $serviceProvider->retrieveLanguages();
+            return $serviceProvider->retrieveAllLanguages();
         }
 
+        public function getAllCountries(){
+            require_once('../app/models/countries.php');
+            return Countries::$countries;
+        }
+        
+        public function getAllSkills(){
+            $serviceProvider = $this->model('ServiceProvider');
+            return $serviceProvider->retrieveAllSkills();
+        }
     }
     
 ?>

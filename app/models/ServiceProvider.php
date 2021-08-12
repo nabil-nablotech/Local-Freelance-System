@@ -358,7 +358,7 @@
 
         }
 
-        public function retrieveLanguages(){
+        public function retrieveAllLanguages(){
             require_once('../app/Core/Database.php');
             $db = new Database();
             $conn = $db->setConnection();
@@ -366,6 +366,21 @@
                 $stmt = $conn->query("SELECT * FROM language");
                 if($languages = $stmt->fetchAll(PDO::FETCH_ASSOC)){
                     return $languages;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        public function retrieveAllSkills(){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $stmt = $conn->query("SELECT * FROM skill");
+                if($skills = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $skills;
                 }
                 else{
                     return false;
