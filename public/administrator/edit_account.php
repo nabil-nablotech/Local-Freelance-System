@@ -1,7 +1,7 @@
 
 <?php
-require_once "nav.php";
-require_once "../Database/db.php";
+require_once "../includes/admin-navigation.php";
+require_once "../guest/connection.php";
 ?>
 
 <!--  -->
@@ -33,7 +33,8 @@ require_once "../Database/db.php";
 
 <!-- display form with current values -->
 <?php
-$query = $con->query("SELECT * FROM Account WHERE Username = '$_REQUEST[Username]'") or die(mysqli_error($con));
+$query = $con->query("SELECT * FROM Account WHERE No= '$_REQUEST[No]'")
+or die(mysqli_error($con));
                     $fetch = $query->fetch_array();
 
                 ?>
@@ -73,55 +74,13 @@ $query = $con->query("SELECT * FROM Account WHERE Username = '$_REQUEST[Username
             <!--  -->
          </div>
       </div>
-   </div>
 </div>
- <script type = "text/javascript">
-   function confirmationDelete(anchor){
-   	var conf = confirm("Are you sure you want to delete this record?");
-   	if(conf){
-   		window.location = anchor.attr("href");
-   	}
-   } 
-</script>
-   
+ 
 
-                </div>
-              </div>
-            </div>
-
-           
-        
-        
-
-          <!-- Modal Logout -->
-          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                  <a href="login.html" class="btn btn-primary">Logout</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-     
-      </div>
 
       <!-- Footer -->
      <?php
-require_once "footer.php";
+require_once "../includes/admin-footer.php";
      ?>
 
     </div>
@@ -130,14 +89,15 @@ require_once "footer.php";
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-  <script src="vendor/jquery/jquery.min.js"></script>  
-  <script src="vendor/datatables/jquery.dataTables.js" ></script>
-  <script src="vendor/datatables/jquery.dataTables.min.js" ></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="js/ruang-admin.min.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.js" ></script>
+ 
+ <script src="../assets/vendor/jquery/jquery.min.js"></script>  
+<script src="../assets/vendor/datatables/jquery.dataTables.js" ></script>
+<script src="../assets/vendor/datatables/jquery.dataTables.min.js" ></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="../assets/js/administrator/serelance-admin.js "></script>
+<script src="../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="../assets/vendor/datatables/dataTables.bootstrap4.js" ></script>
 
 
 
@@ -153,3 +113,11 @@ require_once "footer.php";
 </html>
 
 <!--  -->
+
+
+
+
+  
+  
+
+

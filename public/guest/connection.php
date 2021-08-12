@@ -1,3 +1,2 @@
-<?php 
-$con = mysqli_connect('localhost', 'root', '', 'serelance');
-?>
+<?php
+$con = mysqli_connect('localhost', 'root', '', 'LFS');

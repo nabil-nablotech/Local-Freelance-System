@@ -5,6 +5,10 @@
 <script>
     document.title="Admin-list of system admins";
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
+crossorigin="anonymous"></script>     
 <!-- content begins -->
 
 <div class="container-fluid" id="container-wrapper">
@@ -12,7 +16,7 @@
       <h1 class="h3 mb-0 text-gray-800">Admin users</h1>
       <ol class="breadcrumb">
          <li class="breadcrumb-item">
-            <a href="./">Home</a>
+            <a href="Dashboard.php">Home</a>
          </li>
          <li class="breadcrumb-item">Users</li>
          <li class="breadcrumb-item active" aria-current="page">Admin users</li>
@@ -30,7 +34,8 @@
                <!-- data to be fetched from the database  -->
                <div class="table table-responsive">
                   <table id = "table" class = "table table-bordered table-striped">
-                     <a class = "btn btn-success mb-3" href = "create_new_admin.php"><i class = "fa  fa-plus-circle"></i> New Admin Account</a>
+                     <a class = "btn btn-success mb-3" href = "create_new_admin.php">
+                       <i class = "fa  fa-plus-circle"></i> New Admin Account</a>
                      <thead>
                         <tr>
                            <th>No</th>
@@ -39,9 +44,7 @@
                            <th> Role</th>
                            <th>Created By</th>
                            <th>Details</th>
-                           <th>Permission</th>
-                           <th>Delete</th>
-     
+                           <th> Permission</th>
                         </tr>
                      </thead>
               
@@ -67,14 +70,13 @@
             echo "<td>".$createdby."</td>";
             echo "<td><button type='button' data-id='".$No."'
              class='btn btn-info btn-sm btn-popup'><i class='fa  fa-eye'>
-             </i>view</button></td>";
-            echo "<td><button data-id='".$No."'
-             class='btn btn-warning btn-sm btn-popup'><i class='fa fa-pencil'></i>edit</button></td>";
-            echo "<td><button href=''
-             class='btn btn-danger btn-sm btnDelete '>
-             <i class='fa fa-trash'></i>
-             </button></td>";
-            echo "</tr>";
+             </i>view </button></td>";
+            echo "<td><button type='button' data-id='".$No."'
+             class='btn btn-warning btn-sm btn-popup'><i class='fa  fa-eye'>
+             </i>edit </button></td>";
+
+            
+            echo "  </tr>";
         }
         ?>
       </tbody>
@@ -104,31 +106,7 @@
   </div>
 <!-- delte modal -->
 
-<!-- start: Delete Coupon Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                 <h3 class="modal-title" id="myModalLabel">Warning!</h3>
 
-            </div>
-            <div class="modal-body">
-               
-                 <h4> Are you sure you want to DELETE?</h4>
-
-            </div>
-            <!--/modal-body-collapse -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="btnDelteYes" href="#">Yes</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-            </div>
-            <!--/modal-footer-collapse -->
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
 <!-- /.modal -->
 <!--  -->
 
@@ -138,7 +116,7 @@
       $('.btn-popup').click(function () {
         var custId = $(this).data('id');
         $.ajax({
-          url: 'AdminDetails.php',
+          url: 'Admin_Details.php',
           type: 'post',
           data: { custId: custId },
           success: function (response) {
@@ -151,13 +129,33 @@
     });
   </script>
 
+    <!-- Modal -->
+    <div class="modal fade" id="custModal" role="dialog">
+      <div class="modal-dialog">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Admin Details</h4>
+            <button type="button" class="close" data-dismiss="modal">×</button>
+          </div>
+          <div class="modal-body">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 <!--  -->
                   </div>
                </div>
             </div>
          </div>
-      </div>
+
       <!-- content container ends -->
 
 <script type = "text/javascript">
@@ -175,28 +173,8 @@ $('#btnDelteYes').click(function () {
 </script>
 
 
-<!-- Modal Logout -->
 
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-   aria-hidden="true">
-   <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-         </div>
-         <div class="modal-body">
-            <p>Are you sure you want to logout?</p>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-            <a href="login.html" class="btn btn-primary">Logout</a>
-         </div>
-      </div>
-   </div>
-</div>
+
 </div>
 </div>
 

@@ -1,6 +1,7 @@
 <?php
-   require_once "nav.php";
-   require_once "../Database/db.php";
+   
+include "../includes/admin-navigation.php";
+require_once "../guest/connection.php";
    ?>
 <!--  -->
 
@@ -117,7 +118,32 @@
                </div>
             </div>
          </div>
+<!--  -->
+<div class="container-fluid">
+<div class="row">
+      <!--  -->
+          <div class="col-lg-12">
+         <div class="card shadow-sm mb-4 ">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+               <h6 class="m-0 font-weight-bold text-primary">upload profile</h6>
+            </div>
+            <div class="card-body mx-auto">
+            <img src="../assets/images/administrator/avatar2.jpg" id="profileDisplay" class="text-center"
+             style="width: 6vw;height:6vw;">
+            </span>
+            <input type="file" name="profileImage"  id="profileImage"
+             class="form-control" style="display: none;">
+
+            </div>
+         </div>
       </div>
+      <!--  -->
+   </div>
+</div>
+</div>
+      </div>
+
+      <!--  -->
    </div>
    <!-- button -->
    <div class="row">
@@ -136,7 +162,7 @@
    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
          <div class="modal-content">
-            <div class="modal-header mx-auto">
+            <div class="modal-header text-center">
                <h5 class="modal-title" id="exampleModalLabel ">Change password</h5>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
@@ -154,8 +180,9 @@
                      <input type="password" class="form-control" placeholder="confirm new password">
                   </div>
                </div>
-               <div class="form-group text-center">
-                  <button class="btn btn-primary btn-sm"><i class="fa fa-check-circle"></i>change</button>
+               <div class="form-group mx-auto">
+                  <button class="btn btn-primary btn-sm">
+                     <i class="fa fa-check-circle"></i>change</button>
                </div>
             </div>
             <div class="modal-footer">
@@ -192,7 +219,7 @@
          </div>
          <div class="modal-footer">
             <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-            <a href="login.html" class="btn btn-primary">Logout</a>
+            <a href="" class="btn btn-primary">Logout</a>
          </div>
       </div>
    </div>
@@ -201,7 +228,7 @@
 </div>
 <!-- Footer -->
 <?php
-   require_once "footer.php";
+   require_once "../includes/admin-footer.php";
         ?>
 </div>  
 </div>
@@ -209,14 +236,15 @@
 <a class="scroll-to-top rounded" href="#page-top">
 <i class="fas fa-angle-up"></i>
 </a>
-<script src="vendor/jquery/jquery.min.js"></script>  
-<script src="vendor/datatables/jquery.dataTables.js" ></script>
-<script src="vendor/datatables/jquery.dataTables.min.js" ></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="js/serelance-admin.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.js" ></script>
+<script src="../assets/vendor/jquery/jquery.min.js"></script>  
+<script src="../assets/vendor/datatables/jquery.dataTables.js" ></script>
+<script src="../assets/vendor/datatables/jquery.dataTables.min.js" ></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="../assets/js/administrator/serelance-admin.js "></script>
+<script src="../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="../assets/vendor/datatables/dataTables.bootstrap4.js" ></script>
+
 <script type = "text/javascript">
    $(document).ready(function(){
    	$("#table").DataTable();
