@@ -15,7 +15,7 @@
         private $address;
         private $joinDate;
         private $lastLogin;
-        private $status;
+        private $status; // unverified, active and suspended
 
 
         // --------Getter and Setters of the attributes-----------
@@ -139,6 +139,21 @@
             $conn = $db->setConnection();
             if($conn !== null){
                 $stmt = $conn->query("SELECT username FROM user where username=\'".$username."\'");
+                if($stmt->fetch(PDO::FETCH_ASSOC)===true){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        protected function checkEmailExists($email){
+            require_once('../Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $stmt = $conn->query("SELECT email FROM user where email=\'".$email."\'");
                 if($stmt->fetch(PDO::FETCH_ASSOC)===true){
                     return true;
                 }
