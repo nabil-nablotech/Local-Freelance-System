@@ -5,10 +5,10 @@
 <script>
     document.title="Admin-list of system admins";
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
-crossorigin="anonymous"></script>     
+crossorigin="anonymous"></script>    -->  
 <!-- content begins -->
 
 <div class="container-fluid" id="container-wrapper">

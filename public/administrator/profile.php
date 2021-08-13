@@ -128,8 +128,8 @@ require_once "../guest/connection.php";
                <h6 class="m-0 font-weight-bold text-primary">upload profile</h6>
             </div>
             <div class="card-body mx-auto">
-            <img src="../assets/images/administrator/avatar2.jpg" id="profileDisplay" class="text-center"
-             style="width: 6vw;height:6vw;">
+    <input type="file"   >
+        
             </span>
             <input type="file" name="profileImage"  id="profileImage"
              class="form-control" style="display: none;">
@@ -142,55 +142,19 @@ require_once "../guest/connection.php";
 </div>
 </div>
       </div>
-
+</div>
       <!--  -->
    </div>
    <!-- button -->
    <div class="row">
       <div class="col-sm-6 mx-auto">
          <div class="form-group">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-key">Change password</i>
-            </button>
             <button type="button" class="btn btn-primary btn-sm "><i class="fa fa-edit"></i>Update</button>
          </div>
       </div>
    </div>
    <!--  -->
-   <!-- Button trigger modal -->
-   <!-- Modal -->
-   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-         <div class="modal-content">
-            <div class="modal-header text-center">
-               <h5 class="modal-title" id="exampleModalLabel ">Change password</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-               </button>
-            </div>
-            <div class="modal-body">
-               <div class="col-sm-6 mx-auto">
-                  <div class="form-group">
-                     <input type="password" class="form-control" placeholder="old password">
-                  </div>
-                  <div class="form-group">
-                     <input type="password" class="form-control" placeholder="new password">
-                  </div>
-                  <div class="form-group">
-                     <input type="password" class="form-control" placeholder="confirm new password">
-                  </div>
-               </div>
-               <div class="form-group mx-auto">
-                  <button class="btn btn-primary btn-sm">
-                     <i class="fa fa-check-circle"></i>change</button>
-               </div>
-            </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-         </div>
-      </div>
-   </div>
+
    <!--  -->
    <script type = "text/javascript">
       function confirmationDelete(anchor){
@@ -202,31 +166,6 @@ require_once "../guest/connection.php";
    </script>
 </div>
 </div>
-</div>
-<!-- Modal Logout -->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-   aria-hidden="true">
-   <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-         </div>
-         <div class="modal-body">
-            <p>Are you sure you want to logout?</p>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-            <a href="" class="btn btn-primary">Logout</a>
-         </div>
-      </div>
-   </div>
-</div>
-</div>
-</div>
-<!-- Footer -->
 <?php
    require_once "../includes/admin-footer.php";
         ?>

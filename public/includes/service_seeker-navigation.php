@@ -1,6 +1,6 @@
 <?php
-   require_once "../config.php";
-   require_once "../Database/db.php";
+   require_once "../includes/config.php";
+   require_once "../guest/connection.php";
    ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -14,9 +14,9 @@
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-		<!-- jQuery Library -->
 		<link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
-		<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+		<link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+
 		<!--  -->
 		<style>
 		#notification.dropdown-toggle::after {
@@ -29,13 +29,16 @@
 		}
 		
 		.navbar-light .navbar-toggler {
-			color: black;
-			border-color: black;
+			color: whitesmoke;
+			border-color: whitesmoke;
 			font-weight: bolder;
+			border:whitesmoke 1;
+			border-style: solid;
+			border-width: 3px;
 		}
 		
 		.navbar-light .navbar-nav .nav-link {
-			color: #007bff!important;
+			color: whitesmoke!important;
 			text-decoration: none;
 			background-color: transparent;
 		}
@@ -71,8 +74,10 @@
 	</head>
 
 	<body>
-		<nav class="navbar navbar-expand-sm bg-dark navbar-light fixed-top" style="background-color:whitesmoke!important;">
-			<a class="navbar-brand" href="#"><img src="../Image/Seralance logo.png"></a>
+		<nav class="navbar navbar-expand-sm bg-dark navbar-light fixed-top" 
+		style="background-color:#6777ef
+!important;">
+			<a class="navbar-brand" href="#"><img src="../assets/images/seralance-logo.png"></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"> <span class="navbar-toggler-icon " style="color: black!important;"></span> </button>
 			<div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
 				<ul class="navbar-nav ">
@@ -97,11 +102,19 @@
 				<!-- drop down -->
 				<ul class="navbar-nav  ml-auto">
 					<li class="nav-item dropdown mr-4 " style="list-style-type: none;">
-						<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa  fa-x fa-tasks" aria-hidden="true">  </i> </a> <span>project</span>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#CCE5FF"> <a class="dropdown-item" href="completedProject.php">completed projects</a> <a class="dropdown-item" href="ongoingProject.php">Ongoing projects</a> <a class="dropdown-item" href="terminatedproject.php">Terminated Projects</a> <a class="dropdown-item" href="offeredproject.php">Offered Projects</a> <a class="dropdown-item" href="announcedproject.php">Announced Projects</a> </div>
+						<a class="nav-link dropdown-toggle " href="#" 
+						id="navbarDropdown" role="button" data-toggle="dropdown"
+						 aria-haspopup="true" aria-expanded="false">
+						  <i class="fa  fa-x fa-tasks" aria-hidden="true"> 
+							   </i> </a> <span style="color: whitesmoke;">project</span>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown" 
+						style="background-color:#CCE5FF"> 
+						<a class="dropdown-item" href="completedProject.php">completed projects</a> <a class="dropdown-item" href="ongoingProject.php">Ongoing projects</a> <a class="dropdown-item" href="terminatedproject.php">Terminated Projects</a> <a class="dropdown-item" href="offeredproject.php">Offered Projects</a> <a class="dropdown-item" href="announcedproject.php">Announced Projects</a> </div>
 					</li>
 					<li class="nav-item mr-4 ">
-						<a class="nav-link" href="message.php"> <i class="fa  fa-envelope" aria-hidden="true"></i> </a> <span>Message</span> </li>
+						<a class="nav-link" href="message.php"> 
+							<i class="fa  fa-envelope" aria-hidden="true"></i> </a> 
+							<span style="color: whitesmoke;">Message</span> </li>
 					<li class="nav-item dropdown mr-4 " style="list-style-type: none;margin-left:0px;">
 						<a class="nav-link dropdown-toggle" href="#" id="notification" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa   fa-bell" aria-hidden="true"></i> <span id="badge" class="badge badge-light badge-counter count" style=" position: absolute;
                      color:red;
@@ -115,13 +128,17 @@
                      justify-content: center;
                      align-items: center;
                      border-radius: 100%;">
-                  </span> </a> <span>Notification</span>
+                  </span> </a> <span style="color: whitesmoke;">Notification</span>
 						<div class="dropdown-menu " id="notify" style="overflow-y: scroll;"> </div>
 					</li>
 					<!--  -->
 					<form class="form-inline my-2   my-lg-0 mr-5 ">
 						<li class="nav-item dropdown" style="list-style-type: none;">
-							<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-user-circle"></i> </a> <span>MulugetaA</span>
+							<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown"
+							 role="button" data-toggle="dropdown" aria-haspopup="true"
+							  aria-expanded="false"> <i class="fas fa-user-circle">
+
+							  </i> </a> <span style="color: whitesmoke;">MulugetaA</span>
 							<ul class="dropdown-menu  dropleft " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="updateprofile.php">profile</a> <a class="dropdown-item" href="Dispute.php">Dispute</a> <a class="dropdown-item" href="ticket.php"> ticket</a> <a class="dropdown-item" href="faq.php">FAQ</a> <a class="dropdown-item" href="policy.php">Policy</a> <a class="dropdown-item" href="changepassword.php"> password</a> <a class="dropdown-item" href="logout.php">Logout</a> </ul>
 						</li>
 					</form>

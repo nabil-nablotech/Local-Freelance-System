@@ -163,7 +163,8 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="logout.php">
+        <a class="nav-link" href="javascript:void(0);"  
+        data-toggle="modal" data-target="#logoutModal">
           <i class="fas fa-sign-out-alt"></i>
           <span>Logout</span>
         </a>
@@ -192,15 +193,20 @@
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="setting.php">
                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                   Settings
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="activity_logs.php">
                   <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                   Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
+                 <a class="dropdown-item" href="javascript:void(0);"
+                 data-toggle="modal" data-target="#changepasswordmodal">
+                  <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
+                  change password
+                </a>
                 <a class="dropdown-item" href="javascript:void(0);"
                  data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -210,7 +216,7 @@
             </li>
           </ul>
         </nav>
-        
+     
       
           <!-- Modal Logout -->
           <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
@@ -234,8 +240,46 @@
             </div>
           </div>
           <!--  -->
+<!-- password change modal -->
 
+   <div class="modal fade" id="changepasswordmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header text-center">
+               <h5 class="modal-title" id="exampleModalLabel ">Change password</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true" style="color: red;">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <div class="col-sm-6 mx-auto">
+                  <div class="form-group">
+                     <input type="password" class="form-control" placeholder="old password">
+                  </div>
+                  <div class="form-group">
+                     <input type="password" class="form-control" placeholder="new password">
+                  </div>
+                  <div class="form-group">
+                     <input type="password" class="form-control" placeholder="confirm new password">
+                  </div>
+               </div>
+               <div class="form-group text-center">
+                  <button class="btn btn-primary btn-sm">
+                     <i class="fa fa-check-circle"></i>save</button>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+<!--  -->
         <!-- navigation ends -->
+
+
+        
 
 
         

@@ -1,4 +1,4 @@
-  <footer class="sticky-footer bg-white" style="background-color: #dddfeb!important;
+<footer class="sticky-footer bg-white" style="background-color: #dddfeb!important;
 ">
         <div class="container my-auto">
           <div class="copyright text-center my-auto" style="color:blue">
