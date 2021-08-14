@@ -134,11 +134,11 @@
         //---------End of getters and setters ---------///
 
         protected function checkUserExists($username){
-            require_once('../Core/Database.php');
+            require_once('../app/Core/Database.php');
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("SELECT username FROM user where username=\'".$username."\'");
+                $stmt = $conn->query("SELECT username FROM user where username='".$username."'");
                 if($stmt->fetch(PDO::FETCH_ASSOC)===true){
                     return true;
                 }
@@ -149,11 +149,11 @@
         }
 
         protected function checkEmailExists($email){
-            require_once('../Core/Database.php');
+            require_once('../app/Core/Database.php');
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("SELECT email FROM user where email=\'".$email."\'");
+                $stmt = $conn->query("SELECT email FROM user where email='".$email."'");
                 if($stmt->fetch(PDO::FETCH_ASSOC)===true){
                     return true;
                 }

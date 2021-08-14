@@ -2,8 +2,8 @@
 
     class Admin extends Controller{
         
-        public function index(){
-            echo "I am index method in admin";
+        public function home(){
+            $this->view('admin/index');
         }
 
 

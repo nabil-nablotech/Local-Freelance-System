@@ -127,7 +127,7 @@
             }
         }
 
-        public function validateSignup($input){
+        public function validateSignup($input,$files){
             
             // $serviceProviderData holds the data to be inserted to Service provider table
             $serviceProviderData = array();
@@ -233,8 +233,7 @@
             }
             else{
                 $cleanData = $this->cleanInput($input['gender']);
-
-                if($cleanData!=='M' || $cleanData!=='F'){
+                if($cleanData!=='M' && $cleanData!=='F'){
                     $error = array_merge($error,array('gender' => 'This field is required.'));
                 }
                 else{
@@ -243,12 +242,23 @@
                 
             }
 
-            if(empty($input['profilephoto'])){
-                $error = array_merge($error,array('profilephoto' => 'This field is required.'));
+            if(empty($files['profilephoto'])){
+                $error = array_merge($error,array('profilephoto' => 'This field is required.'));                
             }
             else{
-                $data = "'".$this->cleanInput($input['profilephoto'])."'";
-                $serviceProviderData = array_merge($serviceProviderData,array('profilephoto' => $data));
+                    $extension = explode('.',$files['profilephoto']['name']);
+                    $file_ext=strtolower(end($extension));
+                    if(!in_array($file_ext,array('jpeg','gif','png','jpg',))){
+                        $error = array_merge($error,array('profilephoto' => 'JPG, JPEG, PNG and GIF are only supported.'));
+                    }
+                    elseif($files['profilephoto']['size']>2097152){
+                        $error = array_merge($error,array('profilephoto' => 'File should not be more than 2MB.'));
+                    }
+                    elseif(empty($error)){
+                        $cleanData = 'app/upload/profile/serviceprovider/'.time().$files['profilephoto']['name'];
+                        move_uploaded_file($files['profilephoto']['tmp_name'],$cleanData);
+                        $serviceProviderData = array_merge($serviceProviderData,array('profilephoto' => $cleanData));
+                    }
             }
 
             if(empty($input['country'])){
@@ -306,11 +316,11 @@
                 }
                 for($i = 0; $i < count($input['language']);$i++){
                     $cleanData = $this->cleanInput($input['language'][$i]);
-                    if(in_array($cleanData,$language_ids) === false){
+                    if(in_array($cleanData,$language_ids) == false){
                         $error = array_merge($error,array('language' => 'Invalid Input.'));
                         break;
                     }                    
-                    $languageData = array_push($languageData,$cleanData);
+                    $languageData = array_merge($languageData,array($cleanData)); ;
                 }
                 if(empty($error)){
                     $serviceProviderData = array_merge($serviceProviderData,array('language' => $languageData));  
@@ -327,12 +337,12 @@
                 }
                 for($i = 0; $i < count($input['skill']);$i++){
                     $cleanData = $this->cleanInput($input['skill'][$i]);
-                
-                    if(in_array($cleanData,$skill_ids) === false){
+                    if(in_array($cleanData,$skill_ids) == false){
+                        echo '<script>window.alert(breaking)</script>';
                         $error = array_merge($error,array('skill' => 'Invalid Input.'));
                         break;
                     }
-                    $skillData = array_push($skillData,$cleanData);                   
+                    $skillData = array_merge($skillData,array($cleanData));                               
                 }
                 if(empty($error)){
                     $serviceProviderData = array_merge($serviceProviderData,array('skill' => $skillData));  
@@ -363,7 +373,7 @@
                         $error = array_merge($error,array('portfolio' => 'Invalid url inserted.'));
                         break;
                     }
-                    $portfolioData = array_push($portfolioData,$cleanData);                   
+                    $portfolioData = array_merge($portfolioData,array($cleanData));                  
                 }
                 if(empty($error)){
                     $serviceProviderData = array_merge($serviceProviderData,array('portfolio' => $portfolioData));  
@@ -399,16 +409,16 @@
             }
 
             if(empty($error)){
-                return array('valid'=>true,'data'=>$serviceProviderData);
+                return array('valid'=>1 ,'data'=>$serviceProviderData);
             }
             else{
-                return array('valid'=>false,'data'=>$serviceProviderData,'error'=>$error);
+                return array('valid'=>0,'data'=>$serviceProviderData,'error'=>$error);
             }
         }
 
-        public function createAccount($data){
-            $response = $this->validateSignup($data);
-            if($response['valid']===true){
+        public function createAccount($data, $files){
+            $response = $this->validateSignup($data, $files);
+            if($response['valid']==true){
                 $this->setUsername($response['data']['username']);
                 $this->setPassword($response['data']['password']);
                 $this->setEmail($response['data']['email']);
@@ -447,7 +457,7 @@
                     'address' => "'".$this->getAddress()."'",
                     'join_date' => "UTC_TIMESTAMP",
                     'last_login' => "UTC_TIMESTAMP",
-                    'user_type' => "\'serviceporvider\'",
+                    'type' => "\'serviceporvider\'",
                     'status' => "'".$this->getStatus()."'"
                 );
 
@@ -498,14 +508,12 @@
                 foreach($portfolioTb as $portfolio){
                     $this->insert('portfolio',$portfolio);
                 }
+                return array('valid'=>true,'username'=>$this->getUsername,'usertype'=>'serviceprovider');
             } 
             else{
                 return $response;
             }      
         }
-
-       
-
                 
     }
 ?>
