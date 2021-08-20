@@ -139,7 +139,7 @@
             $conn = $db->setConnection();
             if($conn !== null){
                 $stmt = $conn->query("SELECT username FROM user where username='".$username."'");
-                if($stmt->fetch(PDO::FETCH_ASSOC)===true){
+                if($stmt->fetch(PDO::FETCH_ASSOC)==true){
                     return true;
                 }
                 else{
@@ -154,7 +154,7 @@
             $conn = $db->setConnection();
             if($conn !== null){
                 $stmt = $conn->query("SELECT email FROM user where email='".$email."'");
-                if($stmt->fetch(PDO::FETCH_ASSOC)===true){
+                if($stmt->fetch(PDO::FETCH_ASSOC)==true){
                     return true;
                 }
                 else{

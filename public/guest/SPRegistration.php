@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
     <link rel="stylesheet"  href="../../assets/css/guest/signup.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -33,7 +33,6 @@
 
   if($_SERVER["REQUEST_METHOD"] === "POST"){     
     $feedback = $mainController->validateSpSignup($_POST,$_FILES);
-    //echo '<script>window.alert("'.print_r($feedback).'")</script>';
     if($feedback['valid'] == false){
       
       // setting inserted data
@@ -192,7 +191,7 @@
     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">First Name</label>
     <div class="col-sm-7">
       <input type="text" class="form-control form-control-sm" id="colFormLabelSm" placeholder="first name" name="firstname" value = "<?php echo $firstName;?>">
-      <p class="errormessage"> <?php echo $firstNameErr ;?> </p>
+      <p class="errormessage"> <?php echo $firstNameErr;?> </p>
     </div>
   </div>
 

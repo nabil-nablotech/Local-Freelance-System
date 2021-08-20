@@ -29,6 +29,20 @@
             }
         }
 
+        public function validateSsSignup($input,$files){
+            $serviceSeeker = $this->model('ServiceSeeker');
+            $reply = $serviceSeeker->createAccount($input, $files);
+            if($reply['valid']==true){
+                $_SESSION['username'] = $reply['username'];
+                $_SESSION['usertype'] = $reply['usertype'];
+                header("Location: http://localhost/seralance/public/");                
+                exit();
+            }
+            else{
+                return $reply;
+            }
+        }
+
         public function getAllLanguages(){
             $serviceProvider = $this->model('ServiceProvider');
             return $serviceProvider->retrieveAllLanguages();

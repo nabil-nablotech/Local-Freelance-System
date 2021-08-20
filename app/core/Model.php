@@ -17,13 +17,14 @@
             try{
                 $db = new Database();
                 $connection = $db->setConnection();
-                $sql = "INSERT INTO $table". implode(",",array_keys($data)) . "VALUES (" . implode (",",$data) . ")";
+                $sql = "INSERT INTO $table(". implode(",",array_keys($data)) . ") VALUES (" . implode (",",$data) . ")";
                 $connection->exec($sql);
-                
+                echo '<script>window.alert("success to db")</script>';
             }
 
             catch(Exception $e){
                 echo $e->getMessage();
+                echo '<script>window.alert("failed to insert to db")</script>';
 
             }
 

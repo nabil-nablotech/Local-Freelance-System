@@ -256,7 +256,7 @@
                     }
                     elseif(empty($error)){
                         $cleanData = 'app/upload/profile/serviceprovider/'.time().$files['profilephoto']['name'];
-                        move_uploaded_file($files['profilephoto']['tmp_name'],$cleanData);
+                        move_uploaded_file($files['profilephoto']['tmp_name'],"../".$cleanData);
                         $serviceProviderData = array_merge($serviceProviderData,array('profilephoto' => $cleanData));
                     }
             }
@@ -457,7 +457,7 @@
                     'address' => "'".$this->getAddress()."'",
                     'join_date' => "UTC_TIMESTAMP",
                     'last_login' => "UTC_TIMESTAMP",
-                    'type' => "\'serviceporvider\'",
+                    'user_type' => "'serviceporvider'",
                     'status' => "'".$this->getStatus()."'"
                 );
 
