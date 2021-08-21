@@ -40,7 +40,6 @@
 
 
         protected function update($table,$data,$condition=""){
-
             $connection = null;
             try{
                 $db = new Database();
@@ -60,7 +59,9 @@
                         $setStmt .= $key. " = ". $value. ","; 
                     }
                 }
-
+                $s = "UPDATE $table SET $setStmt $condition";
+                //$s = "UPDATE ".$table ." SET ". $setStmt ." ".$condition;
+                echo "<script> window.alert('".$s."')</script>";
                 $sql = "UPDATE $table SET ". $setStmt ." ".$condition;
                 $connection->exec($sql);
                 

@@ -1,6 +1,7 @@
 <?php
-   include "navigation.php";
-   ?>
+   require "includes/service_seeker-navigation.php";
+?>	
+
 	<style>
 	.col-form-label-sm {
 		padding-top: calc(.25rem + 1px);
@@ -29,18 +30,10 @@
 						<div class="col-sm-8">
 							<select class="custom-select" name="select1" id="" required>
 								<option value="">Please Select a Category</option>
-								<option value="Accounting & Consulting">Accounting & Consulting</option>
-								<option value="Admin Support">Admin Support</option>
-								<option value="Customer Service">Customer Service</option>
-								<option value="Data Science and Analytics">Data Science and Analytics</option>
-								<option value="Design & Creative">Design & Creative</option>
-								<option value="Engineering & Architecture">Engineering & Architecture</option>
-								<option value="IT & Networking">IT & Networking</option>
-								<option value="Legal">Legal</option>
-								<option value="Sales & Marketing">Sales & Marketing</option>
-								<option value="Transiation">Transiation</option>
-								<option value="Web & Mobile Development">Web & Mobile Development</option>
-								<option value="Writing">Writing</option>
+								<option value="Graphics and Design">Graphics and Design</option>
+								<option value="Writing & Translation">Writing & Translation</option>
+								<option value="Video & Animation">Video & Animation</option>
+								<option value="Data Science and Analytics">Programming & Tech</option>
 							</select>
 						</div>
 					</div>
@@ -55,40 +48,33 @@
 					<div class="form-group row">
 						<label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm"> File Attachment </label>
 						<div class="col-sm-8">
-                            <input type="file"  class="form-control btn btn-success" required  name="file[]" id="file" multiple>
-							</div>
+                            <input type="file"  class="form-control btn btn-success" required  name="projectfile" id="file">
+						</div>
 					</div>
 					<!--  -->
 					<div class="form-group row">
 						<label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm"> Skills </label>
 						<div class="col-sm-8">
-							<select class="custom-select" name="select1" id="" required>
-								<option value=""> Select skills needed</option>
-								<option value="Accounting & Consulting">Accounting & Consulting</option>
-								<option value="Admin Support">Admin Support</option>
-								<option value="Customer Service">Customer Service</option>
-								<option value="Data Science and Analytics">Data Science and Analytics</option>
-								<option value="Design & Creative">Design & Creative</option>
-								<option value="Engineering & Architecture">Engineering & Architecture</option>
-								<option value="IT & Networking">IT & Networking</option>
-								<option value="Legal">Legal</option>
-								<option value="Sales & Marketing">Sales & Marketing</option>
-								<option value="Transiation">Transiation</option>
-								<option value="Web & Mobile Development">Web & Mobile Development</option>
-								<option value="Writing">Writing</option>
-							</select>
+						<select class="form-control skill-multiple" name="skill[]" multiple="multiple">
+								<?php
+									$skills = $serviceSeekerController->getAllSkills();
+									foreach($skills as $skill){
+										echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';         
+									} 
+								?>    
+						</select>
 						</div>
 					</div>
 					<!--  -->
 					<div class="form-group row">
-						<label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm"> Budget </label>
+						<label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm"> Budget( in ETB) </label>
 						<label for="colFormLabelSm" class="col-sm-2
                   col-form-label col-form-label-sm">Minimum</label>
 						<div class="col-sm-2">
-							<input type="number" min=0 oninput="validity.valid||(value='')" class="form-control" name="minimum_budget" required> </div>
+							<input type="number" min=0 oninput="validity.valid||(value='')" class="form-control" name="minbudget" required> </div>
 						<label for="colFormLabelSm" class="col-sm-4-offset-4 col-form-label col-form-label-sm"> Maximum </label>
 						<div class="col-sm-2">
-							<input type="number" min=0 oninput="validity.valid||(value='')" class="form-control" name="minimum_budget" required> </div>
+							<input type="number" min=0 oninput="validity.valid||(value='')" class="form-control" name="maxbudget" required> </div>
 					</div>
 					<!--  -->
 				</div>
@@ -98,15 +84,13 @@
 			</div>
 		</div>
 	</div>
-	<!--  -->
-	<!-- included files -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	<!-- Popper JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
 	</body>
+	<script>
+			$(document).ready(function() {
+			$('.skill-multiple').select2({placeholder: 'Select skill',
+			maximumSelectionLength: 5});
+		});
+	</script>
 
 	</html>

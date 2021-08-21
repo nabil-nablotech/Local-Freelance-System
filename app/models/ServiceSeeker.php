@@ -45,6 +45,21 @@
 
         //---------- End of getters and setters--------------
 
+        public function retrieveAllSkills(){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $stmt = $conn->query("SELECT * FROM skill");
+                if($skills = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $skills;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        
         public function validateSignup($input,$files){
             
             // $serviceSeekerData holds the data to be inserted to Service provider table
@@ -271,7 +286,7 @@
                     'address' => "'".$this->getAddress()."'",
                     'join_date' => "UTC_TIMESTAMP",
                     'last_login' => "UTC_TIMESTAMP",
-                    'user_type' => "'serviceprovider'",
+                    'user_type' => "'serviceseeker'",
                     'status' => "'".$this->getStatus()."'"
                 );
 

@@ -19,7 +19,7 @@
 
 <?php  
   require_once('../app/controllers/main.php');
-  $mainController = new Main();
+  $mainController = new Controller\Main();
   $firstName = $lastName = $email = $username = $mobileNumber = $city = $address = $accountNumber = "";
   
   $firstNameErr = $lastNameErr = $emailErr = $usernameErr = $passwordErr = $mobileNumberErr = $nationalityErr = $genderErr = $profilePhotoErr 

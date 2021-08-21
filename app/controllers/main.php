@@ -1,5 +1,5 @@
 <?php
-
+    namespace Controller;
     class Main extends Controller{
         
         public function home(){
@@ -64,7 +64,7 @@
 
         public function getAllCountries(){
             require_once('../app/models/countries.php');
-            return Countries::$countries;
+            return \Countries::$countries;
         }
         
         public function getAllSkills(){

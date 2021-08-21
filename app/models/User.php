@@ -201,10 +201,10 @@
                 $this->setUsername($response['data']['username']);
 
                 //The variables below are arguments to be passed to insert data to their respective table 
-                $userTb = array('last_login' => "UTC_TIMESTAMP");                
-                $this->update('user',$userTb,"WHERE username ='". $this->getUsername . "'");
+                $userTb = array('last_login' => "UTC_TIMESTAMP()");                
+                $this->update('user',$userTb,"WHERE username ='". $this->getUsername() . "'");
 
-                return array('valid'=>1,'username'=>$this->getUsername,'usertype'=> $response['data']['usertype']);
+                return array('valid'=>1,'username'=>$this->getUsername(),'usertype'=> $response['data']['usertype']);
             } 
             else{
                 return $response;

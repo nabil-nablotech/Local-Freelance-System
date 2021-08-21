@@ -1,6 +1,7 @@
 <?php
-   require_once "../config.php";
-   require_once "../Database/db.php";
+   require_once "includes/config.php";
+   require_once('../app/controllers/serviceseeker.php');
+   $serviceSeekerController = new Controller\ServiceSeeker();
    ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -18,6 +19,9 @@
 		<link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
 		<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 		<!--  -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 		<style>
 		#notification.dropdown-toggle::after {
 			content: none;
@@ -72,7 +76,7 @@
 
 	<body>
 		<nav class="navbar navbar-expand-sm bg-dark navbar-light fixed-top" style="background-color:whitesmoke!important;">
-			<a class="navbar-brand" href="#"><img src="../Image/Seralance logo.png"></a>
+			<a class="navbar-brand" href="#"><img src="../assets/images/seralance-logo.png"></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"> <span class="navbar-toggler-icon " style="color: black!important;"></span> </button>
 			<div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
 				<ul class="navbar-nav ">
@@ -87,7 +91,7 @@
 						</a>
 					</li>
 					<li class="nav-item ">
-						<a class="nav-link" href="Announce_project.php">
+						<a class="nav-link" href="announce">
 							<?php echo $lang['Ap'];?>
 						</a>
 					</li>
@@ -122,7 +126,7 @@
 					<form class="form-inline my-2   my-lg-0 mr-5 ">
 						<li class="nav-item dropdown" style="list-style-type: none;">
 							<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-user-circle"></i> </a> <span>MulugetaA</span>
-							<ul class="dropdown-menu  dropleft " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="updateprofile.php">profile</a> <a class="dropdown-item" href="Dispute.php">Dispute</a> <a class="dropdown-item" href="ticket.php"> ticket</a> <a class="dropdown-item" href="faq.php">FAQ</a> <a class="dropdown-item" href="policy.php">Policy</a> <a class="dropdown-item" href="changepassword.php"> password</a> <a class="dropdown-item" href="logout.php">Logout</a> </ul>
+							<ul class="dropdown-menu  dropleft " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="updateprofile.php">profile</a> <a class="dropdown-item" href="Dispute.php">Dispute</a> <a class="dropdown-item" href="ticket.php"> ticket</a> <a class="dropdown-item" href="faq.php">FAQ</a> <a class="dropdown-item" href="policy.php">Policy</a> <a class="dropdown-item" href="changepassword.php"> password</a> <a class="dropdown-item" href="logout">Logout</a> </ul>
 						</li>
 					</form>
 				</ul>
@@ -156,7 +160,5 @@
 				load_unseen_notification();;
 			}, 5000);
 		});
-		/*  */
-		/*  */
+
 		</script>
-		<!--  -->

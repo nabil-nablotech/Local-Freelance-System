@@ -24,7 +24,7 @@
 	<body style="overflow-x: hidden;">
 	<?php  
 		require_once('../app/controllers/main.php');
-		$mainController = new Main();
+		$mainController = new Controller\Main();
 		
 		$loginErr = "";
 

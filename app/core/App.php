@@ -37,8 +37,8 @@
             **********************************/
 
             require_once('../app/Controllers/'. $this->controller .'.php');
-
-            $this->controller = new $this->controller;
+            $className = "Controller\\".$this->controller;
+            $this->controller = new $className;
 
             if(isset($url[1])){
                 

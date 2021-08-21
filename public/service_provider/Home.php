@@ -1,7 +1,7 @@
 <?php
-   include "navigation.php";
+   require "includes/service_provider-navigation.php"
    
-   ?>
+ ?>
 
 <link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
 	<!-- Bootstrap CSS -->
@@ -23,7 +23,7 @@
 			<!-- profile photo -->
 			<div class="col-xl-4 col-md-4 mb-4">
 				<div class="card h-100">
-					<div class="card-body text-center"> <img src="../Admin/img/boy.png" class="img-avater " style="border-radius: 50%;max-width:110px;">
+					<div class="card-body text-center"> <img src="../assets/images/administrator/boy.png" class="img-avater " style="border-radius: 50%;max-width:110px;">
 						<p> profile</p>
 					</div>
 				</div>
@@ -95,7 +95,7 @@
 	</div>
 	</div>
 	<?php
-   include "../ServiceSeeker/Footer.php";
+   		require "includes/service_seeker-footer.php";
    ?>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<!-- Bootstrap CSS -->
