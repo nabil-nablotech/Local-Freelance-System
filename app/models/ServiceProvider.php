@@ -457,7 +457,7 @@
                     'address' => "'".$this->getAddress()."'",
                     'join_date' => "UTC_TIMESTAMP",
                     'last_login' => "UTC_TIMESTAMP",
-                    'user_type' => "'serviceporvider'",
+                    'user_type' => "'serviceprovider'",
                     'status' => "'".$this->getStatus()."'"
                 );
 
@@ -508,7 +508,7 @@
                 foreach($portfolioTb as $portfolio){
                     $this->insert('portfolio',$portfolio);
                 }
-                return array('valid'=>true,'username'=>$this->getUsername,'usertype'=>'serviceprovider');
+                return array('valid'=>1,'username'=>$this->getUsername,'usertype'=>'serviceprovider');
             } 
             else{
                 return $response;

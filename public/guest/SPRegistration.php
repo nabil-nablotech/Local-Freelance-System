@@ -9,17 +9,18 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link href="http://localhost/seralance/app/vendor/tagger-master/tagger.css" rel="stylesheet">
     <script src="http://localhost/seralance/app/vendor/tagger-master/tagger.js"></script>
-</head>
-<style>
-  #profiledisplay{
-    border-radius: 50%;
-  }
+    <style>
+      #profiledisplay{
+        border-radius: 50%;
+      }
 
-  .errormessage {
-    color: red;
-    font-size: 10px;
-  }
-</style>
+      .errormessage {
+        color: red;
+        font-size: 10px;
+      }
+    </style>
+</head>
+
 <body>
   
 <?php  
@@ -31,7 +32,7 @@
   = $countryErr = $cityErr = $addressErr = $educationErr = $languageErr = $skillErr = $experienceErr = $portfolioErr 
   = $bankNameErr = $accountNumberErr = $summaryErr = "";
 
-  if($_SERVER["REQUEST_METHOD"] === "POST"){     
+  if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['signup_btn'])){     
     $feedback = $mainController->validateSpSignup($_POST,$_FILES);
     if($feedback['valid'] == false){
       
@@ -490,7 +491,7 @@
 
                    <div class="button-row d-flex mt-4">
                     <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
-                    <button class="btn btn-success ml-auto" type="submit" title="Send"  >Signup</button>
+                    <button class="btn btn-success ml-auto" type="submit" title="Send"  name="signup_btn">Signup</button>
                   </div>
                 </div>
               </div>

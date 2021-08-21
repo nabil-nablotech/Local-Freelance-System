@@ -271,7 +271,7 @@
                     'address' => "'".$this->getAddress()."'",
                     'join_date' => "UTC_TIMESTAMP",
                     'last_login' => "UTC_TIMESTAMP",
-                    'user_type' => "'serviceporvider'",
+                    'user_type' => "'serviceprovider'",
                     'status' => "'".$this->getStatus()."'"
                 );
 
@@ -287,7 +287,7 @@
                 $this->insert('user',$userTb);
                 $this->insert('service_seeker',$serviceSeekerTb);
 
-                return array('valid'=>true,'username'=>$this->getUsername,'usertype'=>'serviceseeker');
+                return array('valid'=>1,'username'=>$this->getUsername,'usertype'=>'serviceseeker');
             } 
             else{
                 return $response;

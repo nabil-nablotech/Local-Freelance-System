@@ -4,17 +4,17 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
     <link rel="stylesheet"  href="../../assets/css/guest/signup.css">
-</head>
-<style>
-  #profiledisplay{
-    border-radius: 50%;
-  }
+    <style>
+      #profiledisplay{
+        border-radius: 50%;
+      }
 
-  .errormessage {
-    color: red;
-    font-size: 10px;
-  }
-</style>
+      .errormessage {
+        color: red;
+        font-size: 10px;
+      }
+    </style>
+</head>
 <body>
 
 <?php  
@@ -26,7 +26,7 @@
   = $countryErr = $cityErr = $addressErr  
   = $bankNameErr = $accountNumberErr = "";
 
-  if($_SERVER["REQUEST_METHOD"] === "POST"){     
+  if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['signup_btn'])){     
     $feedback = $mainController->validateSsSignup($_POST,$_FILES);
     if($feedback['valid'] == false){
       
@@ -332,7 +332,7 @@
 
                    <div class="button-row d-flex mt-4">
                     <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
-                    <button class="btn btn-success ml-auto" type="submit" title="Send"  >Signup</button>
+                    <button class="btn btn-success ml-auto" type="submit" title="Send" name="signup_btn">Signup</button>
                   </div>
                 </div>
               </div>

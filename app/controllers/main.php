@@ -6,6 +6,20 @@
             $this->view('guest/index');
         }
 
+        public function validateLogin($input){
+            $user = $this->model('User');
+            $reply = $user->login($input);
+            if($reply['valid']==true){
+                $_SESSION['username'] = $reply['username'];
+                $_SESSION['usertype'] = $reply['usertype'];
+                header("Location: http://localhost/seralance/public/");                
+                exit();
+            }
+            else{
+                return $reply;
+            }
+        }
+
         public function signup($userType){
             if($userType==="serviceprovider"){
                 $this->view('guest/SPRegistration');
