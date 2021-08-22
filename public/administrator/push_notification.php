@@ -41,15 +41,27 @@ require_once "../guest/connection.php";
 	<textArea input="text" class="form-control" name="message" id="comment" placeholder="enter message" rows="4"
     required> </textArea>
   </div>
+
   <div class="form-group">
-   
-  <select class="form-control" id="selectnotif">
+<select id="test" class="form-control" name="form_select" onchange="showDiv(this)">
+        <option>Choose any recipient </option>
       <option value="1">All service providers</option>
       <option value="2">All Service Seekers</option>
       <option value="3">All service seekers and providers</option>
       <option value="4">specific users</option>
 </select>
+<div id="hidden_div" class="mt-3" style="display:none;">
+<input type="text" class="form-control" placeholder="please enter username"></div>
 
+<script type="text/javascript">
+function showDiv(select){
+   if(select.value==4){
+    document.getElementById('hidden_div').style.display = "block";
+   } else{
+    document.getElementById('hidden_div').style.display = "none";
+   }
+} 
+</script>
 </div> 
   <div class="text-center">
 <input type="submit" name="post" id="post" class="btn btn-info" value="Post" />
