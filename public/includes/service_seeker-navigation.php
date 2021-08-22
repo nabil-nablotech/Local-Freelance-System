@@ -71,6 +71,16 @@
 			width: 100%;
 			background-color: black;
 		}
+
+		#profiledisplay{
+        border-radius: 50%;
+      	}
+
+      .errormessage {
+        color: red;
+        font-size: 10px;
+     	}
+
 		</style>
 	</head>
 

@@ -21,6 +21,20 @@
             return $serviceSeeker->retrieveAllSkills();
         }
 
+        public function validateProjectAnnouncement($input,$files){
+            $serviceProvider = $this->model('ServiceProvider');
+            $reply = $serviceProvider->createAccount($input, $files);
+            if($reply['valid']==true){
+                $_SESSION['username'] = $reply['username'];
+                $_SESSION['usertype'] = $reply['usertype'];
+                header("Location: http://localhost/seralance/public/");                
+                exit();
+            }
+            else{
+                return $reply;
+            }
+        }
+
     }
     
 ?>
