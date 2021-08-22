@@ -18,8 +18,8 @@
                 $db = new Database();
                 $connection = $db->setConnection();
                 $sql = "INSERT INTO $table(". implode(",",array_keys($data)) . ") VALUES (" . implode (",",$data) . ")";
-                $connection->exec($sql);
-                echo '<script>window.alert("success to db")</script>';
+                //echo '<script>window.alert("'.$sql.'")</script>';
+                $connection->exec($sql);                
             }
 
             catch(Exception $e){

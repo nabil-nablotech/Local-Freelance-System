@@ -3,9 +3,8 @@
    $title = $description = $minBudget = $maxBudget = "";
   
   $titleErr = $categoryErr = $descriptionErr = $projectFileErr = $skillErr = $minMaxErr = "";
-
-  if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['announce_btn'])){     
-    $feedback = $serviceSeekerController->validateProjectAnnouncement($_POST,$_FILES);
+  if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['announce_btn'])){    
+	$feedback = $serviceSeekerController->validateProjectAnnouncement($_POST,$_FILES);
     if($feedback['valid'] == false){
       
       // setting inserted data
@@ -72,7 +71,7 @@
 					<h6 class="m-0 font-weight-bold text-primary mx-auto">Announce New Project</h6> 
 				</div>
 				<div class="card-body mx-auto">
-				<form method="POST">
+				<form method="POST" enctype="multipart/form-data">
 					<div class="form-group row">
 						<label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Project Title </label>
 						<div class="col-sm-8">
@@ -87,9 +86,9 @@
 							<select class="custom-select" name="category" id="" required>
 								<option value="">Please Select a Category</option>
 								<option value="Graphics and Design">Graphics and Design</option>
-								<option value="Writing & Translation">Writing & Translation</option>
-								<option value="Video & Animation">Video & Animation</option>
-								<option value="Data Science and Analytics">Programming & Tech</option>
+								<option value="Writing and Translation">Writing and Translation</option>
+								<option value="Video and Animation">Video and Animation</option>
+								<option value="Programming and Tech">Programming and Tech</option>
 							</select>
 							<p class="errormessage"> <?php echo $categoryErr;?> </p>
 						</div>
@@ -106,7 +105,7 @@
 					<div class="form-group row">
 						<label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm"> File Attachment </label>
 						<div class="col-sm-8">
-                            <input type="file"  class="form-control btn btn-success" required  name="projectfile" id="file">
+                            <input type="file"  class="form-control btn btn-success" name="projectfile" id="file">
 							<p class="errormessage"> <?php echo $projectFileErr;?> </p>
 						</div>
 					</div>
@@ -137,6 +136,7 @@
 							<input type="number" min=0 oninput="validity.valid||(value='')" class="form-control" name="maxbudget" required value = "<?php echo $maxBudget;?>"> </div>
 					</div>
 					<p class="errormessage"> <?php echo $minMaxErr;?> </p>
+					<input type="text" name="offertype" value = "Announcement" hidden> 
 					<div class="form-group mx-auto">
 					<button type="submit" class="btn btn-block btn-primary" name="announce_btn"><i class="fa fa-check-circle"></i>Submit</button>
 					</div>

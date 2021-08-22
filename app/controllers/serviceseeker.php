@@ -1,5 +1,6 @@
 <?php
     namespace Controller;
+    ob_start();// to avoid header() error. should be put at first
     class ServiceSeeker extends Controller{
         
         public function home(){
@@ -22,12 +23,11 @@
         }
 
         public function validateProjectAnnouncement($input,$files){
-            $serviceProvider = $this->model('ServiceProvider');
-            $reply = $serviceProvider->createAccount($input, $files);
-            if($reply['valid']==true){
-                $_SESSION['username'] = $reply['username'];
-                $_SESSION['usertype'] = $reply['usertype'];
-                header("Location: http://localhost/seralance/public/");                
+            $project = $this->model('Project');
+            $reply = $project->createProject($input, $files);
+
+            if($reply['valid']==true){  
+                header("Location: http://www.google.com/");              
                 exit();
             }
             else{

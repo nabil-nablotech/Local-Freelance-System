@@ -53,13 +53,8 @@ CREATE TABLE dispute(
     decision VARCHAR(1000),
     raised_by VARCHAR(60) NOT NULL,
     reviewed_by VARCHAR(60),
+    file VARCHAR(255) NOT NULL,
     project_id int NOT NULL
-);
-
-CREATE TABLE dispute_file_attachement(
-	file_url VARCHAR(255) PRIMARY KEY,
-    file_name VARCHAR(100) NOT NULL,
-    dispute_id int NOT NULL
 );
 
 CREATE TABLE ticket(
@@ -71,13 +66,8 @@ CREATE TABLE ticket(
     closed_date DATETIME,
     reply VARCHAR(1000),
     opened_by VARCHAR(60) NOT NULL,
+    file VARCHAR(255) NOT NULL,
     reviewed_by VARCHAR(60)
-);
-
-CREATE TABLE ticket_file_attachement(
-	file_url VARCHAR(255) PRIMARY KEY, 
-    file_name VARCHAR(100) NOT NULL,
-    ticket_id int NOT NULL
 );
 
 CREATE TABLE notification(
@@ -165,22 +155,19 @@ CREATE TABLE project(
 	project_id INT AUTO_INCREMENT PRIMARY KEY,
     announced_date DATETIME NOT NULL,
     title VARCHAR(255) NOT NULL,
+    category VARCHAR(255) NOT NULL,
     description VARCHAR(3000) NOT NULL,
     budget_min FLOAT NOT NULL,
     budget_max FLOAT NOT NULL,
     price FLOAT,
     offer_type VARCHAR(60) NOT NULL,
     status VARCHAR(60) NOT NULL,
-    start_date DATETIME NOT NULL,
+    start_date DATETIME,
     end_date DATETIME,
     announced_by VARCHAR(60) NOT NULL,
+    file VARCHAR(255),
+    delivered_file VARCHAR(255),
     assigned_to VARCHAR(60)
-);
-
-CREATE TABLE project_file_attachement(
-	file_url VARCHAR(255) PRIMARY KEY,
-    file_name VARCHAR(100) NOT NULL,
-    project_id int NOT NULL
 );
 
 CREATE TABLE project_skill(
@@ -207,12 +194,6 @@ CREATE TABLE bid(
     status VARCHAR(60) NOT NULL,
     made_by VARCHAR(60) NOT NULL,
     project_id INT NOT NULL
-);
-
-CREATE TABLE bid_file_attachement(
-	file_url VARCHAR(255) PRIMARY KEY,
-    file_name VARCHAR(100) NOT NULL,
-    bid_id int NOT NULL
 );
 
 CREATE TABLE faq(
@@ -401,24 +382,6 @@ FOREIGN KEY (username) REFERENCES user(username);
 ALTER TABLE rate
 ADD CONSTRAINT FK_RateService_seeker_rater
 FOREIGN KEY (rater) REFERENCES service_seeker(username);
-
-
-
-ALTER TABLE dispute_file_attachement
-ADD CONSTRAINT FK_Dispute_file_attachementDispute_dispute_id
-FOREIGN KEY (dispute_id) REFERENCES dispute(dispute_id);
-
-ALTER TABLE ticket_file_attachement
-ADD CONSTRAINT FK_Ticket_file_attachementTicket_ticket_id
-FOREIGN KEY (ticket_id) REFERENCES ticket(ticket_id);
-
-ALTER TABLE bid_file_attachement
-ADD CONSTRAINT FK_Bid_file_attachementBid_bid_id
-FOREIGN KEY (bid_id) REFERENCES bid(bid_id);
-
-ALTER TABLE project_file_attachement
-ADD CONSTRAINT FK_Project_file_attachementProject_project_id
-FOREIGN KEY (project_id) REFERENCES project(project_id);
 
 
 ---- Insert languages into the language table --------
@@ -1035,7 +998,7 @@ INSERT INTO language(language_name) VALUES ('Zuni');
 
 ------ Insert skills into the skill table -------
 INSERT INTO skill(skill_name,skill_category) VALUES ('Logo Desgin','Graphics and Design');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Business Cards & Stationery','Graphics and Design');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Business Cards and Stationery','Graphics and Design');
 INSERT INTO skill(skill_name,skill_category) VALUES ('Illustration','Graphics and Design');
 INSERT INTO skill(skill_name,skill_category) VALUES ('Brochure Design','Graphics and Design');
 INSERT INTO skill(skill_name,skill_category) VALUES ('Poster Design','Graphics and Design');
@@ -1045,37 +1008,37 @@ INSERT INTO skill(skill_name,skill_category) VALUES ('Website Design','Graphics 
 INSERT INTO skill(skill_name,skill_category) VALUES ('App Design','Graphics and Design');
 INSERT INTO skill(skill_name,skill_category) VALUES ('UX Design','Graphics and Design');
 INSERT INTO skill(skill_name,skill_category) VALUES ('Character Modeling','Graphics and Design');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Industrial & Product Design','Graphics and Design');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Industrial and Product Design','Graphics and Design');
 INSERT INTO skill(skill_name,skill_category) VALUES ('Fashion Design','Graphics and Design');
 INSERT INTO skill(skill_name,skill_category) VALUES ('Menu Design','Graphics and Design');
 INSERT INTO skill(skill_name,skill_category) VALUES ('Postcard Design','Graphics and Design');
 INSERT INTO skill(skill_name,skill_category) VALUES ('Icon Design','Graphics and Design');
 INSERT INTO skill(skill_name,skill_category) VALUES ('Infographic Design','Graphics and Design');
 
-INSERT INTO skill(skill_name,skill_category) VALUES ('Articles and Blog Posts','Writing & Translation');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Translation','Writing & Translation');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Proofreading & Editing','Writing & Translation');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Website Content','Writing & Translation');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Resume Writing','Writing & Translation');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Cover Letters','Writing & Translation');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Technical Writing','Writing & Translation');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Job Descriptions','Writing & Translation');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Legal Writing','Writing & Translation');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Research & Summaries','Writing & Translation');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Articles and Blog Posts','Writing and Translation');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Translation','Writing and Translation');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Proofreading and Editing','Writing and Translation');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Website Content','Writing and Translation');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Resume Writing','Writing and Translation');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Cover Letters','Writing and Translation');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Technical Writing','Writing and Translation');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Job Descriptions','Writing and Translation');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Legal Writing','Writing and Translation');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Research and Summaries','Writing and Translation');
 
-INSERT INTO skill(skill_name,skill_category) VALUES ('Whiteboard & Animated Explainers','Video & Animation');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Video Editing','Video & Animation');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Short Video Ads','Video & Animation');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Logo Animation','Video & Animation');
-INSERT INTO skill(skill_name,skill_category) VALUES ('3D Product Animation','Video & Animation');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Whiteboard and Animated Explainers','Video and Animation');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Video Editing','Video and Animation');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Short Video Ads','Video and Animation');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Logo Animation','Video and Animation');
+INSERT INTO skill(skill_name,skill_category) VALUES ('3D Product Animation','Video and Animation');
 
-INSERT INTO skill(skill_name,skill_category) VALUES ('WordPress','Programming & Tech');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Website Builders & CMS','Programming & Tech');
-INSERT INTO skill(skill_name,skill_category) VALUES ('E-Commerce Development','Programming & Tech');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Game Development','Programming & Tech');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Development for Streamers','Programming & Tech');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Mobile Apps','Programming & Tech');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Web Programming','Programming & Tech');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Desktop Applications','Programming & Tech');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Chatbots','Programming & Tech');
-INSERT INTO skill(skill_name,skill_category) VALUES ('Support & IT','Programming & Tech');
+INSERT INTO skill(skill_name,skill_category) VALUES ('WordPress','Programming and Tech');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Website Builders and CMS','Programming and Tech');
+INSERT INTO skill(skill_name,skill_category) VALUES ('E-Commerce Development','Programming and Tech');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Game Development','Programming and Tech');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Development for Streamers','Programming and Tech');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Mobile Apps','Programming and Tech');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Web Programming','Programming and Tech');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Desktop Applications','Programming and Tech');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Chatbots','Programming and Tech');
+INSERT INTO skill(skill_name,skill_category) VALUES ('Support and IT','Programming and Tech');
