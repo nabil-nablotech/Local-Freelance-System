@@ -1,6 +1,6 @@
 <?php
-   require_once "navigation.php";
-   require_once "../Database/db.php";
+   require_once "../includes/service_seeker-navigation.php";
+   require_once "../guest/connection.php";
      
      ?>
 	<link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
@@ -107,7 +107,7 @@
 	});
 	</script>
 	<?php
-   include "Footer.php";
+   include "../includes/service_seeker-footer.php";
    ?>
 		<!-- included files -->
 		<!-- Latest compiled JavaScript -->

@@ -1,6 +1,7 @@
 <?php
-   require_once "navigation.php";
-   require_once "../Database/db.php";
+   require_once "../includes/service_seeker-navigation.php";
+   require_once "../guest/connection.php";
+
      
      ?>
 
@@ -105,7 +106,7 @@
 	});
 	</script>
 	<?php
-   include "Footer.php";
+   include "../includes/service_seeker-footer.php";
    ?>
 		</body>
 

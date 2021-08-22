@@ -6,6 +6,7 @@ require_once "../guest/connection.php";
 <!--  -->
 
 
+
   <script>
     document.title="Admin-settings";
 </script>
@@ -27,11 +28,10 @@ require_once "../guest/connection.php";
             <!-- Alerts Basic -->
             <div class="col-lg-12 mx-auto">
               <div class="card shadow-sm mb-4 ">
-                <div class="card-body " style="background-color:#hhh" >
+                <div class="card-body" style="background-color:  #fff">
 <!--  -->
-<div class="wrap">
-<ul class="nav nav-tabs " id="myTab" role="tablist"
->
+<div class="wrap" >
+<ul class="nav nav-tabs " id="myTab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="logo-tab" data-toggle="tab" href="#logo"
      role="tab" aria-controls="logo" aria-selected="true">Logo Settings</a>
@@ -56,7 +56,35 @@ require_once "../guest/connection.php";
 </div>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="logo" role="tabpanel" aria-labelledby="logo-tab">
-      ...</div>
+<div class="col-lg-12 mx-auto" style="margin-top: 30px;;">
+              <div class="card shadow-sm mb-4 ">
+                <div class="card-body">      
+  <h3>change the logo of serelenace</h3>
+    <div class="form-group mt-4">
+    <form  method="post">
+    <input type="file" name="changelogo" class="form-control btn btn-success">
+    </form> 
+
+    </div>
+      <div class="form-group mx-auto">
+        <button type="button" onclick="changeLogo()"
+         class=" btn btn-sm  btn-primary" name="change">change logo</button>
+      </div>
+       </div>
+     </div>
+</div>
+
+<script>
+  
+    function changLogo() {
+        document.getElementById("logo").src=changelogo;
+        alert("changed")
+    }
+    
+  </script>
+
+
+</div>
   <div class="tab-pane fade" id="footer" role="tabpanel" aria-labelledby="footer-tab">
       ...</div>
   <div class="tab-pane fade" id="header" role="tabpanel" aria-labelledby="header-tab">

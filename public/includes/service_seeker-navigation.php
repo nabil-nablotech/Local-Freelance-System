@@ -16,6 +16,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		<link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
 		<link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
 
 		<!--  -->
 		<style>
@@ -62,11 +63,8 @@
 			transition: .5s;
 		}
 		
-		ul li .nav-item .nav-link a:hover {
-			color: green!important;
-		}
-		
-		ul li a:hover::before {
+	
+		ul li a.nav-link:hover::before {
 			width: 100%;
 			background-color: black;
 		}
@@ -82,8 +80,8 @@
 			<div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
 				<ul class="navbar-nav ">
 					<li class="nav-item">
-						<a class="nav-link" href="Home.php">
-							<?php  echo $lang['home'];?>
+						<a class="nav-link" href="SSdashboard.php">
+							 <i class="fas fa-fw fa-tachometer-alt"></i>Dashboard
 						</a>
 					</li>
 					<li class="nav-item">

@@ -4,11 +4,10 @@
    ?>
 <script>
     document.title="Admin-list of system admins";
-</script>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</script> <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
-crossorigin="anonymous"></script>    -->  
+crossorigin="anonymous"></script>   
 <!-- content begins -->
 
 <div class="container-fluid" id="container-wrapper">
@@ -72,7 +71,7 @@ crossorigin="anonymous"></script>    -->
              class='btn btn-info btn-sm btn-popup'><i class='fa  fa-eye'>
              </i>view </button></td>";
             echo "<td><button type='button' data-id='".$No."'
-             class='btn btn-warning btn-sm btn-popup'><i class='fa  fa-eye'>
+             class='btn btn-warning btn-sm edit'><i class='fa  fa-eye'>
              </i>edit </button></td>";
 
             
@@ -104,9 +103,27 @@ crossorigin="anonymous"></script>    -->
     </div>
 
   </div>
-<!-- delte modal -->
+<!-- editmodal -->
 
 
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      $('.edit').click(function () {
+        var editId = $(this).data('id');
+        $.ajax({
+          url: 'edit_permission.php',
+          type: 'post',
+          data: { editId: editId },
+          success: function (response) {
+            $('.modal-body').html(response);
+            $('#editModal').modal('show');
+          }
+        });
+      });
+
+    });
+  </script>
 <!-- /.modal -->
 <!--  -->
 
@@ -130,18 +147,21 @@ crossorigin="anonymous"></script>    -->
   </script>
 
     <!-- Modal -->
-    <div class="modal fade" id="custModal" role="dialog">
+    <div class="modal fade" id="editModal" role="dialog">
       <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Admin Details</h4>
+            <h4 class="modal-title">Edit Permission</h4>
             <button type="button" class="close" data-dismiss="modal">×</button>
           </div>
           <div class="modal-body">
 
+      
           </div>
+          
+
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
           </div>
@@ -156,21 +176,6 @@ crossorigin="anonymous"></script>    -->
             </div>
          </div>
 
-      <!-- content container ends -->
-
-<script type = "text/javascript">
-$('button.btnDelete').on('click', function (e) {
-    e.preventDefault();
-    var id = $(this).closest('tr').data('id');
-    $('#myModal').data('id', id).modal('show');
-});
-
-$('#btnDelteYes').click(function () {
-    var id = $('#myModal').data('id');
-    $('[data-id=' + id + ']').remove();
-    $('#myModal').modal('hide');
-});
-</script>
 
 
 

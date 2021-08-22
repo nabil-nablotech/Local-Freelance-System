@@ -1,6 +1,6 @@
 <?php
-include "navigation.php";
-require_once "../Database/db.php";
+include "../includes/service_seeker-navigation.php";
+require_once "../guest/connection.php";
 ?>
 	<script>
 	document.title = "Service seeker-Transaction history";
@@ -81,7 +81,7 @@ require_once "../Database/db.php";
 	}
 	</script>
 	<?php
-   include "Footer.php";
+   include "../includes/service_seeker-footer.php";
    ?>
 		<!--  -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -1,5 +1,6 @@
 <?php
-   include "navigation.php";
+   include "../includes/service_seeker-navigation.php";
+require_once "../guest/connection.php";
    
    ?>
 	<div class="container">
@@ -36,7 +37,7 @@
 		</div>
 	</div>
 	<?php
-   include "Footer.php";
+   include "../includes/service_seeker-footer.php";
    ?>
 		</body>
 

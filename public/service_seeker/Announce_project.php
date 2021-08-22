@@ -1,5 +1,5 @@
 <?php
-   include "navigation.php";
+   include "../includes/service_seeker-navigation.php";
    ?>
 	<style>
 	.col-form-label-sm {
@@ -13,7 +13,8 @@
 	</style>
 	<div class="container" style="margin-top: 100px;">
 		<div class="col-sm-12">
-			<div class="card shadow-sm mb-4">
+			<div class="card shadow-sm mb-4" style="background-color:#f4f2fa
+;">
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary mx-auto">Announce New Project</h6> </div>
 				<div class="card-body mx-auto">
@@ -99,6 +100,9 @@
 		</div>
 	</div>
 	<!--  -->
+	<?php
+    include "../includes/service_seeker-footer.php";
+    ?>
 	<!-- included files -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>

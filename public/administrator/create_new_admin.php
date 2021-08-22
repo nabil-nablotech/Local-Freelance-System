@@ -143,44 +143,44 @@ require_once "../guest/connection.php";
 <!--  -->
 <div class="form-group row mx-auto">
 <div class="form-check form-check-inline  col-sm-6">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+  <input class="form-check-input" name="permission[]" type="checkbox" id="inlineCheckbox1" value="option1">
   <label class="form-check-label" for="inlineCheckbox1">User Management</label>
 </div>
 <div class="form-check form-check-inline ">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+  <input class="form-check-input" name="permission[]"  type="checkbox" id="inlineCheckbox2" value="option2">
   <label class="form-check-label" for="inlineCheckbox2">Dispute Management</label>
 </div>
 </div>
 <!--  -->
 <div class="form-group row mx-auto">
 <div class="form-check form-check-inline  col-sm-6">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+  <input class="form-check-input" name="permission[]"  type="checkbox" id="inlineCheckbox1" value="option1">
   <label class="form-check-label" for="inlineCheckbox1">projects Management</label>
 </div>
 <div class="form-check form-check-inline ">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+  <input class="form-check-input" name="permission[]"  type="checkbox" id="inlineCheckbox2" value="option2">
   <label class="form-check-label" for="inlineCheckbox2">Tickets Management</label>
 </div>
 </div>
 <!--  -->
 <div class="form-group row mx-auto">
 <div class="form-check form-check-inline  col-sm-6">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+  <input class="form-check-input" name="permission[]"  type="checkbox" id="inlineCheckbox1" value="option1">
   <label class="form-check-label" for="inlineCheckbox1">Notification Management</label>
 </div>
 <div class="form-check form-check-inline ">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+  <input class="form-check-input" name="permission[]"  type="checkbox" id="inlineCheckbox2" value="option2">
   <label class="form-check-label" for="inlineCheckbox2">Policy Management</label>
 </div>
 </div>
 <!--  -->
 <div class="form-group row mx-auto">
 <div class="form-check form-check-inline  col-sm-6">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+  <input class="form-check-input" name="permission[]"  type="checkbox" id="inlineCheckbox1" value="option1">
   <label class="form-check-label" for="inlineCheckbox1">Transaction Management</label>
 </div>
 <div class="form-check form-check-inline ">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+  <input class="form-check-input" name="permission[]"  type="checkbox" id="inlineCheckbox2" value="option2">
   <label class="form-check-label" for="inlineCheckbox2">Faqs Drafting</label>
 </div>
 </div>

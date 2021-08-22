@@ -1,6 +1,7 @@
 <?php
-   include "navigation.php";
-   
+   require_once "../includes/service_seeker-navigation.php";
+   require_once "../guest/connection.php";
+
    ?>
 	<!doctype html>
 	<html>
@@ -71,7 +72,8 @@
 						<div class="col-sm-3 ">
 							<div class="form-group text-center mr-5">
 								<label class="control-label">Photo Preview</label>
-								<div class="input-group"> <img src="../Image/profile.jpg" id="output" class="img-rounded" alt="No photo to view" width="200" height="180"> </div>
+								<div class="input-group"> <img src="../assets//images/profile.jpg"
+								 id="output" class="img-rounded" alt="No photo to view" width="200" height="180"> </div>
 								<button class="btn btn-success">upload photo</button>
 							</div>
 						</div>
@@ -139,7 +141,7 @@
 		</div>
 		</div>
 		<?php
-include "Footer.php";
+include "../includes/service_seeker-footer.php";
 ?>
 			<!-- included files -->
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -1,5 +1,7 @@
 <?php
-include "navigation.php";
+include "../includes/service_seeker-navigation.php";
+require_once "../guest/connection.php";
+
 ?>
 	<div class="container">
 		<div class="row " style="margin-top: 100px;">
@@ -107,6 +109,9 @@ include "navigation.php";
 		</div>
 		<!--  -->
 	</div>
+	<?php
+include "../includes/service_seeker-footer.php";
+    ?>
 	<!-- included files -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!-- Popper JS -->

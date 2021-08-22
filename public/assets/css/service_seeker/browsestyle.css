@@ -1,3 +1,8 @@
+body{
+  overflow-x: hidden;
+}
+
+
 .candidate-list-layout,
 .newjob-list-layout {
   display: flex;
@@ -34,8 +39,8 @@
   color: whitesmoke;
   overflow: visible;
   position: relative;
-  border-bottom: 4px solid #11b719;
-  background-size: cover;
+/*   border-bottom: 4px solid #11b719;
+ */  background-size: cover;
   height: 210px;
   display: flex;
   align-items: center;
@@ -54,8 +59,8 @@ section {
 }
 
 ::selection {
-  background: #11b719;
-  color: #fff;
+/*   background: #11b719;
+ */  color: #fff;
 }
 
 form {

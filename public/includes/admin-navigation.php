@@ -21,7 +21,7 @@
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar" style="color:black !important;;">
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon">
-          <img src="../assets/images/seralance-logo.png">
+          <img src="../assets/images/seralance-logo.png" id="logo">
         </div>
         <div class="sidebar-brand-text mx-3"></div>
       </a>

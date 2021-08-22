@@ -119,27 +119,23 @@ require_once "../guest/connection.php";
             </div>
          </div>
 <!--  -->
-<div class="container-fluid">
-<div class="row">
+      
+   
+
       <!--  -->
-          <div class="col-lg-12">
+        <div class="col-lg-12">
          <div class="card shadow-sm mb-4 ">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-               <h6 class="m-0 font-weight-bold text-primary">upload profile</h6>
+               <h6 class="m-0 font-weight-bold text-primary">upload profile Image</h6>
             </div>
             <div class="card-body mx-auto">
-    <input type="file"   >
-        
-            </span>
-            <input type="file" name="profileImage"  id="profileImage"
-             class="form-control" style="display: none;">
+            <input type="file"  name="profileImage" 
+              class="form-control btn-success">
 
             </div>
          </div>
       </div>
       <!--  -->
-   </div>
-</div>
 </div>
       </div>
 </div>

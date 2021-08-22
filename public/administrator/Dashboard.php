@@ -1,12 +1,68 @@
+
 <?php
+
+  $dbHost = "localhost";
+    $dbDatabase = "multiplechart";
+    $dbPasswrod = "";
+    $dbUser = "root";
+    $mysqli = mysqli_connect($dbHost, $dbUser, $dbPasswrod, $dbDatabase);
+
 include "../includes/admin-navigation.php";
+
+   $sql = "SELECT SUM(numberofview) as count FROM demo_viewer 
+			GROUP BY YEAR(created_at) ORDER BY created_at";
+    $viewer = mysqli_query($mysqli, $sql);
+    $viewer = mysqli_fetch_all($viewer, MYSQLI_ASSOC);
+    $viewer = json_encode(array_column($viewer, 'count'), JSON_NUMERIC_CHECK);
+
+
+    /* Getting demo_click table data */
+    $sql = "SELECT SUM(numberofclick) as count FROM demo_click 
+			GROUP BY YEAR(created_at) ORDER BY created_at";
+    $click = mysqli_query($mysqli, $sql);
+    $click = mysqli_fetch_all($click, MYSQLI_ASSOC);
+    $click = json_encode(array_column($click, 'count'), JSON_NUMERIC_CHECK);
+ $sql = "SELECT SUM(numberofclick) as count FROM demo_click 
+			GROUP BY YEAR(created_at) ORDER BY created_at";
+    $project = mysqli_query($mysqli, $sql);
+    $project = mysqli_fetch_all($project, MYSQLI_ASSOC);
+    $project = json_encode(array_column($project, 'count'), JSON_NUMERIC_CHECK);
+
 ?>
- <script type="text/javascript" src="../assets/js/administrator/demo/jquery.min.js"></script>
-<script type="text/javascript" src="../assets/js/administrator/demo/Chart.min.js"></script>
+
+
+
+
 <script>
     document.title="Admin-Dashboard";
 </script>
+<head>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+ <script src="https://code.highcharts.com/highcharts.js"></script>
+<style>
+  @import 'https://code.highcharts.com/css/highcharts.css';
+ 
+.highcharts-color-0 {
+  fill: blue;
+  stroke: red;
+}
+ 
+/* Titles */
+.highcharts-title {
+  fill: black;
+  font-size: 26px;
+  font-weight: bold;
+}
+  .highcharts-credits {
+display: none !important;
+}
 
+  </style>
+</head>
+<!--  -->
+
+
+<!--  -->
         <!-- Container-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -187,90 +243,89 @@ include "../includes/admin-navigation.php";
            <div class="col-xl-12 col-lg-12">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary mx-auto ">
-                    Monthly Registered custmers </h6>
+                  
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                     </a>
                   </div>
                 </div>
-            <div class="card-body">
-    <div id="chart-container" >
-        <canvas id="graphCanvas" style="font-weight: bolder;font-size:x-large;color:crimson">
+       <!--  -->
 
-        </canvas>
-    </div>
-                 
-              </div>
-              </div>
-            </div> 
-            <!--  -->
-             <script>
-        $(document).ready(function () {
-            showGraph();
-        });
 
-        function showGraph()
-        {
-            {
-                $.post("../includes/data.php",
-                function (data)
-                {
-                    console.log(data);
-                     var name = [];
-                    var marks = [];
 
-                    for (var i in data) {
-                        name.push(data[i].student_name);
-                        marks.push(data[i].marks);
-                    }
 
-                    var chartdata = {
-                        labels: name,
-                        datasets: [
-                            {
-                                label: 'registered customers per month',
-                                backgroundColor: '#6777EF',
-                                borderColor: '#46d5f1',
-                                hoverBackgroundColor: '#CCCCCC',
-                                hoverBorderColor: '#666666',
-                                data: marks
-                            }
-                        ]
-                    };
 
-                    var graphTarget = $("#graphCanvas");
+<script type="text/javascript">
 
-                    var barGraph = new Chart(graphTarget, {
-                        type: 'bar',
-                        data: chartdata
-                    });
-                });
+
+$(function () { 
+
+
+    var data_click = <?php echo $click; ?>;
+    var data_viewer = <?php echo $viewer; ?>;
+    var project=<?php echo $project?>
+
+
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title:  {
+            text: 'Montly registered customers & posted project report '
+        },
+       
+        xAxis: {
+            categories: ['September','October','November', 'December','January','February','March','April','May','june','July','August']
+        },
+        yAxis:
+         {
+            title: {
+                text: 'Totals number of registered customers'
             }
-        }
-        </script>
-            <!--  -->
-            <!-- Pie Chart -->
-            <!-- Invoice Example -->
+        },
 
-            <div class="col-xl-12 col-lg-12 mb-4">
-              <div class="card">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary mx-auto">Recent Activities</h6>
-                </div>
-               
-                
-                <div class="card-footer">
+
+        series: [{
+            name: 'Service Provider',
+            data: data_click,
+        
+        }, 
+        {
+            name: 'Servie Seeker',
+            data: data_viewer
+        },
+        {
+            name: 'project',
+            data: project
+        } ]
+        
+    });
+});
+
+
+</script>
+
+
+
+
+    
+                    <div id="container">
 
                 </div>
+        
+  
+
+
+
+
+       <!--  -->
+                 
+          
               </div>
             </div> 
-            
-     
-          <!--Row-->
-
+            <!--  -->
+          
 
         </div>
         <!---Container Fluid-->
@@ -287,11 +342,9 @@ include "../includes/admin-navigation.php";
   <a class="scroll-to-top rounded" href="#page-top" >
     <i class="fas fa-angle-up"></i>
   </a>
-
-  <script src="../assets/vendor/jquery/jquery.min.js"></script>
-  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="../assets/js/administrator/serelance-admin.min.js"></script>
+  <script src="../assets/js/administrator/serelance-admin.min.js"></script> 
 
 
 

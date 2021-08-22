@@ -1,6 +1,7 @@
 <?php
-   require_once "navigation.php";
-   require_once "../Database/db.php";
+    require_once "../includes/service_seeker-navigation.php";
+   require_once "../guest/connection.php";
+
      
      ?>
 
@@ -92,6 +93,8 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	
 		<script type="text/javascript">
 		function confirmationDelete(anchor) {
 			var conf = confirm("Are you sure you want to delete this record?");
@@ -106,5 +109,5 @@
 		});
 		</script>
 		<?php
-   include "Footer.php";
+   include "../includes/service_seeker-footer.php";
    ?>
