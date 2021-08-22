@@ -1,8 +1,9 @@
 <?php
-   require_once "includes/config.php";
+   require_once("includes/config.php");
    require_once('../app/controllers/serviceseeker.php');
    $serviceSeekerController = new Controller\ServiceSeeker();
    $seekerDetail = $serviceSeekerController->getUserDetails($_SESSION['username']);
+   $base = "http://localhost/seralance/";
    ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -22,7 +23,7 @@
 		<!--  -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>	
 		<link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -101,12 +102,12 @@
 
 	<body>
 		<nav class="navbar navbar-expand-sm bg-dark navbar-light fixed-top" style="background-color:whitesmoke!important;">
-			<a class="navbar-brand" href="#"><img src="../assets/images/seralance-logo.png"></a>
+			<a class="navbar-brand" href="#"><img src="<?php echo $base;?>public/assets/images/seralance-logo.png"></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"> <span class="navbar-toggler-icon " style="color: black!important;"></span> </button>
 			<div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
 				<ul class="navbar-nav ">
 					<li class="nav-item">
-						<a class="nav-link" href="home">
+						<a class="nav-link" href="<?php echo $base;?>/public/serviceseeker/home">
 							<?php  echo $lang['home'];?>
 						</a>
 					</li>
@@ -116,7 +117,7 @@
 						</a>
 					</li>
 					<li class="nav-item ">
-						<a class="nav-link" href="announce">
+						<a class="nav-link" href="<?php echo $base;?>/public/serviceseeker/announce">
 							<?php echo $lang['Ap'];?>
 						</a>
 					</li>
@@ -151,7 +152,7 @@
 					<form class="form-inline my-2   my-lg-0 mr-5 ">
 						<li class="nav-item dropdown" style="list-style-type: none;">
 							<a class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="http://localhost/seralance/<?php echo $seekerDetail['profilephoto'];?>" alt="profile-img" class="nav-profile"> </a> <span><?php echo $seekerDetail['username'];?></span>
-							<ul class="dropdown-menu  dropleft " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="profile">profile</a> <a class="dropdown-item" href="Dispute.php">Dispute</a> <a class="dropdown-item" href="ticket.php"> ticket</a> <a class="dropdown-item" href="faq.php">FAQ</a> <a class="dropdown-item" href="policy.php">Policy</a> <a class="dropdown-item" href="changepassword.php"> password</a> <a class="dropdown-item" href="logout">Logout</a> </ul>
+							<ul class="dropdown-menu  dropleft " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="profile">profile</a> <a class="dropdown-item" href="Dispute.php">Dispute</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceseeker/ticket"> ticket</a> <a class="dropdown-item" href="faq.php">FAQ</a> <a class="dropdown-item" href="policy.php">Policy</a> <a class="dropdown-item" href="changepassword.php"> password</a> <a class="dropdown-item" href="<?php echo $base;?>/public/serviceseeker/logout">Logout</a> </ul>
 						</li>
 					</form>
 				</ul>

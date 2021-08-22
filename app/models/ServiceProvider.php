@@ -242,13 +242,13 @@
                 
             }
 
-            if(empty($files['profilephoto'])){
+            if(empty($files['profilephoto']['name'])){
                 $error = array_merge($error,array('profilephoto' => 'This field is required.'));                
             }
             else{
                     $extension = explode('.',$files['profilephoto']['name']);
                     $file_ext=strtolower(end($extension));
-                    if(!in_array($file_ext,array('jpeg','gif','png','jpg',))){
+                    if(!in_array($file_ext,array('jpeg','gif','png','jpg'))){
                         $error = array_merge($error,array('profilephoto' => 'JPG, JPEG, PNG and GIF are only supported.'));
                     }
                     elseif($files['profilephoto']['size']>2097152){

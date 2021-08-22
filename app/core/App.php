@@ -38,6 +38,7 @@
 
             require_once('../app/Controllers/'. $this->controller .'.php');
             $className = "Controller\\".$this->controller;
+            $tmpController = $this->controller;
             $this->controller = new $className;
 
             if(isset($url[1])){
@@ -45,12 +46,20 @@
                 if(method_exists($this->controller,$url[1])){
                     $this->method = $url[1];
                     unset($url[1]);
+
+                    $this->params = $url ? array_values($url) : [];
+            
+                    call_user_func_array([$this->controller,$this->method],$this->params);
+                }
+                else{
+                    header("Location: http://localhost/seralance/public/".$tmpController."/home");                
+                    exit();
                 }
             }
-
-            $this->params = $url ? array_values($url) : [];
-            
-            call_user_func_array([$this->controller,$this->method],$this->params);
+            else{
+                header("Location: http://localhost/seralance/public/".$tmpController."/home");                
+                exit();
+            }
 
         }
 
