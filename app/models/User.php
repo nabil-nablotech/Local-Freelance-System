@@ -15,7 +15,7 @@
         private $address;
         private $joinDate;
         private $lastLogin;
-        private $status;
+        private $status; // unverified, active and suspended
 
 
         // --------Getter and Setters of the attributes-----------
@@ -129,6 +129,86 @@
 
         public function setStatus($status){
             $this->status = $status;
+        }
+
+        //---------End of getters and setters ---------///
+
+        protected function checkUserExists($username){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $stmt = $conn->query("SELECT username FROM user where username='".$username."'");
+                if($stmt->fetch(PDO::FETCH_ASSOC)==true){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        protected function checkEmailExists($email){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $stmt = $conn->query("SELECT email FROM user where email='".$email."'");
+                if($stmt->fetch(PDO::FETCH_ASSOC)==true){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        public function validateLogin($input){
+            
+            $error=array();
+
+            if(empty($input['username']) || empty($input['password'])){
+                $error = array_merge($error,array('login' => 'All the fields are required.'));
+            }
+            else{
+                $cleanUsername = $this->cleanInput($input['username']);
+                $cleanPassword = $this->cleanInput($input['password']);
+                require_once('../app/Core/Database.php');
+                $db = new Database();
+                $conn = $db->setConnection();
+                if($conn !== null){
+                    $stmt = $conn->query("SELECT username,password,user_type FROM user where username='".$cleanUsername."'");
+                    if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                        if(password_verify($cleanPassword,$row['password']) ){
+                            return array('valid'=>1 ,'data'=>['username'=>$row['username'],'usertype'=>$row['user_type']]);
+                        }
+                        else{
+                            $error = array_merge($error,array('login' => 'Incorrect username or password.'));
+                        }
+                    }
+                    else{
+                        $error = array_merge($error,array('login' => 'Incorrect username or password.'));
+                    }
+                }               
+            }
+            return array('valid'=>0, 'error'=>$error);
+
+        }
+
+        public function login($data){
+            $response = $this->validateLogin($data);
+            if($response['valid']==true){
+                $this->setUsername($response['data']['username']);
+
+                //The variables below are arguments to be passed to insert data to their respective table 
+                $userTb = array('last_login' => "UTC_TIMESTAMP()");                
+                $this->update('user',$userTb,"WHERE username ='". $this->getUsername() . "'");
+
+                return array('valid'=>1,'username'=>$this->getUsername(),'usertype'=> $response['data']['usertype']);
+            } 
+            else{
+                return $response;
+            }      
         }
     }
 ?>

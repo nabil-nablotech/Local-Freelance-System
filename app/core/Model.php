@@ -4,19 +4,27 @@
 
     class Model{
 
-        function insert($table,$data){
+        protected function cleanInput($data){
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;                    
+        }
+
+        protected function insert($table,$data){
 
             $connection = null;
             try{
                 $db = new Database();
                 $connection = $db->setConnection();
-                $sql = "INSERT INTO $table". implode(",",array_keys($data)) . "VALUES (" . implode (",",$data) . ")";
-                $connection->exec($sql);
-                
+                $sql = "INSERT INTO $table(". implode(",",array_keys($data)) . ") VALUES (" . implode (",",$data) . ")";
+                //echo '<script>window.alert("'.$sql.'")</script>';
+                $connection->exec($sql);                
             }
 
             catch(Exception $e){
                 echo $e->getMessage();
+                echo '<script>window.alert("failed to insert to db")</script>';
 
             }
 
@@ -31,8 +39,7 @@
         }
 
 
-        function update($table,$data,$condition=""){
-
+        protected function update($table,$data,$condition=""){
             $connection = null;
             try{
                 $db = new Database();
@@ -52,7 +59,9 @@
                         $setStmt .= $key. " = ". $value. ","; 
                     }
                 }
-
+                $s = "UPDATE $table SET $setStmt $condition";
+                //$s = "UPDATE ".$table ." SET ". $setStmt ." ".$condition;
+                echo "<script> window.alert('".$s."')</script>";
                 $sql = "UPDATE $table SET ". $setStmt ." ".$condition;
                 $connection->exec($sql);
                 
@@ -73,7 +82,7 @@
             
         }
 
-        function remove($table,$condition){
+        protected function remove($table,$condition){
 
             $connection = null;
             try{

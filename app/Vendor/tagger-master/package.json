@@ -1,0 +1,29 @@
+{
+  "name": "@jcubic/tagger",
+  "version": "0.4.0",
+  "description": "Zero dependency, Vanilla JavaScript Tag Editor",
+  "typings": "tagger.d.ts",
+  "main": "tagger.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcubic/tagger.git"
+  },
+  "keywords": [
+    "tag",
+    "editor",
+    "inline",
+    "interfence",
+    "widget",
+    "component",
+    "widget",
+    "ui"
+  ],
+  "author": "Jakub T. Jankiewicz <jcubic@onet.pl> (https://jcubic.pl/me/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jcubic/tagger/issues"
+  },
+  "homepage": "https://github.com/jcubic/tagger#readme"
+}
