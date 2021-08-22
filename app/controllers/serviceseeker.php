@@ -11,6 +11,10 @@
             $this->view('service_seeker/announce_project');
         }
 
+        public function profile(){
+            $this->view('service_seeker/updateprofile');
+        }
+
         public function logout(){
             session_destroy();
             header("Location: http://localhost/seralance/public/");                
@@ -20,6 +24,11 @@
         public function getAllSkills(){
             $serviceSeeker = $this->model('ServiceSeeker');
             return $serviceSeeker->retrieveAllSkills();
+        }
+
+        public function getUserDetails($username){
+            $serviceSeeker = $this->model('ServiceSeeker');
+            return $serviceSeeker->retrieveUserDetails($username);
         }
 
         public function validateProjectAnnouncement($input,$files){

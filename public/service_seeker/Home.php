@@ -2,15 +2,7 @@
    include "includes/service_seeker-navigation.php";
    
    ?>
-<link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<!-- jQuery Library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<!-- Bootstrap CSS -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<!-- Datatable JS -->
-	<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
 	<head>
 		<script>
 		document.title = "Service seeker-Home";
@@ -22,8 +14,8 @@
 			<!-- profile photo -->
 			<div class="col-xl-4 col-md-4 mb-4">
 				<div class="card h-100">
-					<div class="card-body text-center"> <img src="../assets/images/administrator/boy.png" class="img-avater " style="border-radius: 50%;max-width:110px;">
-						<p> profile</p>
+					<div class="card-body text-center"> <img src="http://localhost/seralance/<?php echo $seekerDetail['profilephoto'];?>" class="img-avater " style="border:1px solid black; max-width:200px;">
+						<p> Welcome <?php echo ucfirst($seekerDetail['firstname'])." ".ucfirst($seekerDetail['lastname']);?></p>
 					</div>
 				</div>
 			</div>

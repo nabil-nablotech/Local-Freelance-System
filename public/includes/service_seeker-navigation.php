@@ -2,6 +2,7 @@
    require_once "includes/config.php";
    require_once('../app/controllers/serviceseeker.php');
    $serviceSeekerController = new Controller\ServiceSeeker();
+   $seekerDetail = $serviceSeekerController->getUserDetails($_SESSION['username']);
    ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -22,6 +23,15 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+		<link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<!-- jQuery Library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<!-- Datatable JS -->
+	<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 		<style>
 		#notification.dropdown-toggle::after {
 			content: none;
@@ -80,6 +90,11 @@
         color: red;
         font-size: 10px;
      	}
+		 .nav-profile{
+			 width: 40px;
+			 height: 40px;
+			 border-radius: 50%;
+		 }
 
 		</style>
 	</head>
@@ -91,7 +106,7 @@
 			<div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
 				<ul class="navbar-nav ">
 					<li class="nav-item">
-						<a class="nav-link" href="Home.php">
+						<a class="nav-link" href="home">
 							<?php  echo $lang['home'];?>
 						</a>
 					</li>
@@ -105,19 +120,19 @@
 							<?php echo $lang['Ap'];?>
 						</a>
 					</li>
-					<li class="nav-item   "> <a class="nav-link " href="Transaction.php">transaction
+					<li class="nav-item "> <a class="nav-link " href="Transaction.php">transaction
                   </a> </li>
 				</ul>
 				<!-- drop down -->
 				<ul class="navbar-nav  ml-auto">
 					<li class="nav-item dropdown mr-4 " style="list-style-type: none;">
-						<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa  fa-x fa-tasks" aria-hidden="true">  </i> </a> <span>project</span>
+						<a class="nav-link dropdown-toggle "  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa  fa-x fa-tasks" aria-hidden="true">  </i> </a> <span>project</span>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#CCE5FF"> <a class="dropdown-item" href="completedProject.php">completed projects</a> <a class="dropdown-item" href="ongoingProject.php">Ongoing projects</a> <a class="dropdown-item" href="terminatedproject.php">Terminated Projects</a> <a class="dropdown-item" href="offeredproject.php">Offered Projects</a> <a class="dropdown-item" href="announcedproject.php">Announced Projects</a> </div>
 					</li>
 					<li class="nav-item mr-4 ">
 						<a class="nav-link" href="message.php"> <i class="fa  fa-envelope" aria-hidden="true"></i> </a> <span>Message</span> </li>
 					<li class="nav-item dropdown mr-4 " style="list-style-type: none;margin-left:0px;">
-						<a class="nav-link dropdown-toggle" href="#" id="notification" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa   fa-bell" aria-hidden="true"></i> <span id="badge" class="badge badge-light badge-counter count" style=" position: absolute;
+						<a class="nav-link dropdown-toggle" id="notification" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa   fa-bell" aria-hidden="true"></i> <span id="badge" class="badge badge-light badge-counter count" style=" position: absolute;
                      color:red;
                      font-weight:bolder;
                      font-size:x-large;
@@ -135,8 +150,8 @@
 					<!--  -->
 					<form class="form-inline my-2   my-lg-0 mr-5 ">
 						<li class="nav-item dropdown" style="list-style-type: none;">
-							<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-user-circle"></i> </a> <span>MulugetaA</span>
-							<ul class="dropdown-menu  dropleft " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="updateprofile.php">profile</a> <a class="dropdown-item" href="Dispute.php">Dispute</a> <a class="dropdown-item" href="ticket.php"> ticket</a> <a class="dropdown-item" href="faq.php">FAQ</a> <a class="dropdown-item" href="policy.php">Policy</a> <a class="dropdown-item" href="changepassword.php"> password</a> <a class="dropdown-item" href="logout">Logout</a> </ul>
+							<a class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="http://localhost/seralance/<?php echo $seekerDetail['profilephoto'];?>" alt="profile-img" class="nav-profile"> </a> <span><?php echo $seekerDetail['username'];?></span>
+							<ul class="dropdown-menu  dropleft " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="profile">profile</a> <a class="dropdown-item" href="Dispute.php">Dispute</a> <a class="dropdown-item" href="ticket.php"> ticket</a> <a class="dropdown-item" href="faq.php">FAQ</a> <a class="dropdown-item" href="policy.php">Policy</a> <a class="dropdown-item" href="changepassword.php"> password</a> <a class="dropdown-item" href="logout">Logout</a> </ul>
 						</li>
 					</form>
 				</ul>
