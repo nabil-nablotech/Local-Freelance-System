@@ -334,11 +334,152 @@
                 $this->insert('user',$userTb);
                 $this->insert('service_seeker',$serviceSeekerTb);
 
-                return array('valid'=>1,'username'=>$this->getUsername,'usertype'=>'serviceseeker');
+                return array('valid'=>1,'username'=>$this->getUsername(),'usertype'=>'serviceseeker');
             } 
             else{
                 return $response;
             }      
+        }
+
+        public function validateUpdateProfile($input,$files){
+            
+            // $serviceSeekerData holds the data to be inserted to Service provider table
+            $serviceSeekerData = array();
+
+
+            if(!empty($input['firstname'])){
+                $serviceSeekerData = array_merge($serviceSeekerData,array('firstname' => $this->cleanInput($input['firstname'])));
+            }
+
+            if(!empty($input['lastname'])){
+                $serviceSeekerData = array_merge($serviceSeekerData,array('lastname' => $this->cleanInput($input['lastname'])));
+            }
+
+            
+            if(!empty($input['nationality'])){
+                $cleanData = $this->cleanInput($input['nationality']);                
+                require_once '../app/models/countries.php';
+                if(in_array($cleanData,Countries::$countries)){
+                    $serviceSeekerData = array_merge($serviceSeekerData,array('nationality' => $cleanData));
+                }                                
+            }
+
+            if(!empty($files['profilephoto']['name'])){
+                    $extension = explode('.',$files['profilephoto']['name']);
+                    $file_ext=strtolower(end($extension));
+                    if(!in_array($file_ext,array('jpeg','gif','png','jpg'))){
+                        echo "<script>alert('JPG, JPEG, PNG and GIF are only supported.');</script>";
+                    }
+                    elseif($files['profilephoto']['size']>2097152){
+                        echo "<script>alert('File should not be more than 2MB.');</script>";
+                    }
+                    else{
+                        $cleanData = 'app/upload/profile/serviceseeker/'.time().$files['profilephoto']['name'];
+                        move_uploaded_file($files['profilephoto']['tmp_name'],"../".$cleanData);
+                        $serviceSeekerData = array_merge($serviceSeekerData,array('profilephoto' => $cleanData));
+                    }
+            }
+
+            if(!empty($input['country'])){                
+                $cleanData = $this->cleanInput($input['country']);                
+                require_once '../app/models/countries.php';
+                if(in_array($cleanData,Countries::$countries)){
+                    $serviceSeekerData = array_merge($serviceSeekerData,array('country' => $cleanData));
+                }
+            }
+
+            if(!empty($input['city'])){
+                $serviceSeekerData = array_merge($serviceSeekerData,array('city' => $this->cleanInput($input['city'])));
+            }
+
+            if(!empty($input['address'])){
+                $serviceSeekerData = array_merge($serviceSeekerData,array('address' => $this->cleanInput($input['address'])));
+            }
+
+            if(!empty($input['bankname'])){
+                $cleanData = $this->cleanInput($input['bankname']); 
+                if($cleanData ==='CBE' || $cleanData ==='Awash' || $cleanData ==='Dashen' || $cleanData ==='Abyssinia' || $cleanData ==='Nib' || $cleanData ==='Abay' || $cleanData ==='United'){
+                    $serviceSeekerData = array_merge($serviceSeekerData,array('bankname' => $cleanData));
+                }                
+            }
+
+            if(!empty($input['accountnumber'])){
+                $serviceSeekerData = array_merge($serviceSeekerData,array('accountnumber' => $this->cleanInput($input['accountnumber'])));
+            }
+
+            return $serviceSeekerData;
+        }
+
+        public function updateProfile($data, $files){
+            $response = $this->validateUpdateProfile($data, $files);
+            
+            $this->setUsername($_SESSION['username']);
+            if(!empty($response['firstname'])){
+                $this->setFirstName($response['firstname']);
+            }
+            if(!empty($response['lastname'])){
+                $this->setLastName($response['lastname']);
+            }
+            if(!empty($response['nationality'])){
+                $this->setNationality($response['nationality']);
+            }
+            if(!empty($response['country'])){
+                $this->setCountry($response['country']);
+            }
+            if(!empty($response['city'])){
+                $this->setCity($response['city']);
+            }
+            if(!empty($response['address'])){
+                $this->setAddress($response['address']);
+            }
+            if(!empty($response['bankname'])){
+                $this->setBankName($response['bankname']);
+            }
+            if(!empty($response['accountnumber'])){
+                $this->setAccountNumber($response['accountnumber']);
+            }
+            if(!empty($response['profilephoto'])){
+                $this->setProfilePhoto($response['profilephoto']);
+            }
+        
+            //The variables below are arguments to be passed to insert data to their respective table
+            
+            $userTb = array();
+            if(!empty($this->getFirstName())){
+                $userTb = array_merge($userTb,array('firstname' => "'".$this->getFirstName()."'"));
+            }
+            if(!empty($this->getLastName())){
+                $userTb = array_merge($userTb,array('lastname' => "'".$this->getLastName()."'"));
+            }
+            if(!empty($this->getNationality())){
+                $userTb = array_merge($userTb,array('nationality' => "'".$this->getNationality()."'"));
+            }
+            if(!empty($this->getCountry())){
+                $userTb = array_merge($userTb,array('country' => "'".$this->getCountry()."'"));
+            }
+            if(!empty($this->getCity())){
+                $userTb = array_merge($userTb,array('city' => "'".$this->getCity()."'"));
+            }
+            if(!empty($this->getAddress())){
+                $userTb = array_merge($userTb,array('address' => "'".$this->getAddress()."'"));
+            }
+
+
+            $serviceSeekerTb = array();
+            if(!empty($this->getBankName())){
+                $serviceSeekerTb = array_merge($serviceSeekerTb,array('bank_name' => "'".$this->getBankName()."'"));
+            }
+            if(!empty($this->getAccountNumber())){
+                $serviceSeekerTb = array_merge($serviceSeekerTb,array('account_number' => "'".$this->getAccountNumber()."'"));
+            }
+            if(!empty($this->getProfilePhoto())){
+                $serviceSeekerTb = array_merge($serviceSeekerTb,array('profile_photo' => "'".$this->getProfilePhoto()."'"));
+            }
+
+
+            $this->update('user',$userTb,"WHERE username ='". $this->getUsername() . "'");
+            $this->update('service_seeker',$serviceSeekerTb,"WHERE username ='". $this->getUsername() . "'"); 
+              
         }
     }
 ?>

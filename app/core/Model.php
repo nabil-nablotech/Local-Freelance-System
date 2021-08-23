@@ -25,7 +25,6 @@
             catch(Exception $e){
                 echo $e->getMessage();
                 echo '<script>window.alert("failed to insert to db")</script>';
-
             }
 
             finally{
@@ -60,9 +59,8 @@
                     }
                 }
                 $s = "UPDATE $table SET $setStmt $condition";
-                //$s = "UPDATE ".$table ." SET ". $setStmt ." ".$condition;
-                echo "<script> window.alert('".$s."')</script>";
                 $sql = "UPDATE $table SET ". $setStmt ." ".$condition;
+                echo "<script> window.alert('".$sql."')</script>";
                 $connection->exec($sql);
                 
             }

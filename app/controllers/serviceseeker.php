@@ -26,6 +26,11 @@
         public function viewticket($ticketId){
             $ticket = $this->model('Ticket');
             $_SESSION['ticketDetails'] = $ticket->retrieveTicketDetails($ticketId);
+            if($_SESSION['ticketDetails']==false){
+                unset($_SESSION['ticketDetails']);
+                header("Location: http://localhost/seralance/public/serviceseeker/ticket");                
+                exit();
+            }
             if(empty($_SESSION['ticketDetails']['closed_date'])){
                 $_SESSION['ticketDetails'] = array_merge($_SESSION['ticketDetails'], array('closed_date'=>'---'));
             }
@@ -56,6 +61,18 @@
         public function getAllTickets($username){
             $ticket = $this->model('Ticket');
             return $ticket->retrieveAllTickets($username);
+        }
+
+        public function getAllCountries(){
+            require_once('../app/models/countries.php');
+            return \Countries::$countries;
+        }
+
+        public function validateUpdateProfile($input,$files){
+            $serviceSeeker = $this->model('ServiceSeeker');
+            $serviceSeeker->updateProfile($input, $files);
+            header("Location: http://localhost/seralance/public/serviceseeker/profile");                
+            exit();
         }
 
         public function validateProjectAnnouncement($input,$files){

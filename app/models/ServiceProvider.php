@@ -508,7 +508,7 @@
                 foreach($portfolioTb as $portfolio){
                     $this->insert('portfolio',$portfolio);
                 }
-                return array('valid'=>1,'username'=>$this->getUsername,'usertype'=>'serviceprovider');
+                return array('valid'=>1,'username'=>$this->getUsername(),'usertype'=>'serviceprovider');
             } 
             else{
                 return $response;

@@ -107,7 +107,7 @@
 			<div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
 				<ul class="navbar-nav ">
 					<li class="nav-item">
-						<a class="nav-link" href="<?php echo $base;?>/public/serviceseeker/home">
+						<a class="nav-link" href="<?php echo $base;?>public/serviceseeker/home">
 							<?php  echo $lang['home'];?>
 						</a>
 					</li>
@@ -117,7 +117,7 @@
 						</a>
 					</li>
 					<li class="nav-item ">
-						<a class="nav-link" href="<?php echo $base;?>/public/serviceseeker/announce">
+						<a class="nav-link" href="<?php echo $base;?>public/serviceseeker/announce">
 							<?php echo $lang['Ap'];?>
 						</a>
 					</li>

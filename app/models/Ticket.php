@@ -85,7 +85,11 @@
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("SELECT * FROM ticket where ticket_id='".$ticketId."'");
+                $sql = "";
+                if($_SESSION['usertype'] ==='serviceprovider' || $_SESSION['usertype'] ==='serviceseeker'){
+                    $sql = "SELECT * FROM ticket where ticket_id='".$ticketId."' and opened_by= '".$_SESSION['username']."'";
+                }
+                $stmt = $conn->query($sql);
                 if($ticket = $stmt->fetch(PDO::FETCH_ASSOC)){
                     return $ticket;
                 }

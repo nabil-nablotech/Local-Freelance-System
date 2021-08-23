@@ -19,7 +19,8 @@ $tickets = $serviceSeekerController->getAllTickets($_SESSION['username']);
 							<table id="table" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>ID No.</th>
+										<th>No.</th>
+										<th>Ticket ID</th>
 										<th>Opened Date</th>
 										<th>Subject</th>
 										<th>Closed Date</th>
@@ -28,33 +29,40 @@ $tickets = $serviceSeekerController->getAllTickets($_SESSION['username']);
 								</thead>
 								<tbody>
 										<?php 
-											foreach($tickets as $ticket){
-												if(empty($ticket['closed_date'])){
-													$ticket = array_merge($ticket,array('closed_date'=>'---'));
+											if(!empty($tickets)){
+												$count = 1;
+												foreach($tickets as $ticket){
+													if(empty($ticket['closed_date'])){
+														$ticket = array_merge($ticket,array('closed_date'=>'---'));
+													}
+													echo <<<EOT
+																<tr>
+																<td>
+																	{$count}
+																</td>
+																<td>
+																	{$ticket['ticket_id']}
+																</td>
+																<td>
+																	{$ticket['opened_date']}
+																</td>
+																<td>
+																	{$ticket['subject']}
+																</td>
+																<td>
+																	{$ticket['closed_date']}
+																</td>
+																<td>
+																	{$ticket['status']}
+																</td>
+																<!--  -->
+																	<td><a class="btn btn-info" href="viewticket/{$ticket['ticket_id']}"> View</a> </td>
+																<!--  -->
+																</tr>
+															EOT;
+														$count++ ;
+													}
 												}
-												echo <<<EOT
-															<tr>
-															<td>
-																{$ticket['ticket_id']}
-															</td>
-															<td>
-																{$ticket['opened_date']}
-															</td>
-															<td>
-																{$ticket['subject']}
-															</td>
-															<td>
-																{$ticket['closed_date']}
-															</td>
-															<td>
-																{$ticket['status']}
-															</td>
-															<!--  -->
-																<td><a class="btn btn-info" href="viewticket/{$ticket['ticket_id']}"> View</a> </td>
-															<!--  -->
-															</tr>
-														EOT;
-											}
 										?>
 										
 								</tbody>
