@@ -69,7 +69,7 @@
 		<div class="col-sm-12">
 			<div class="card shadow-sm mb-4">
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary mx-auto">Announce New Project</h6> 
+					<h6 class="m-0 font-weight-bold text-primary mx-auto">New Project</h6> 
 				</div>
 				<div class="card-body mx-auto">
 				<form method="POST" enctype="multipart/form-data">
@@ -137,7 +137,12 @@
 							<input type="number" min=0 oninput="validity.valid||(value='')" class="form-control" name="maxbudget" required value = "<?php echo $maxBudget;?>"> </div>
 					</div>
 					<p class="errormessage"> <?php echo $minMaxErr;?> </p>
-					<input type="text" name="offertype" value = "Announcement" hidden> 
+					<input type="text" name="offertype" value = "<?php if(!empty($_SESSION['assignto'])){echo "Offer";} else{ echo 'Announcement';}?>" hidden> 
+					<?php
+						if(!empty($_SESSION['assignto'])){
+							echo '<input type="text" name="assignto" value = "'.$_SESSION['assignto'].'" hidden>';
+						}
+					?>					
 					<div class="form-group mx-auto">
 					<button type="submit" class="btn btn-block btn-primary" name="announce_btn"><i class="fa fa-check-circle"></i>Submit</button>
 					</div>

@@ -112,7 +112,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="Browse_service_provider.php">
+						<a class="nav-link" href="<?php echo $base;?>public/serviceseeker/browse">
 							<?php  echo $lang['Hsp'];?>
 						</a>
 					</li>
@@ -128,10 +128,10 @@
 				<ul class="navbar-nav  ml-auto">
 					<li class="nav-item dropdown mr-4 " style="list-style-type: none;">
 						<a class="nav-link dropdown-toggle "  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa  fa-x fa-tasks" aria-hidden="true">  </i> </a> <span>project</span>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#CCE5FF"> <a class="dropdown-item" href="completedProject.php">completed projects</a> <a class="dropdown-item" href="ongoingProject.php">Ongoing projects</a> <a class="dropdown-item" href="terminatedproject.php">Terminated Projects</a> <a class="dropdown-item" href="offeredproject.php">Offered Projects</a> <a class="dropdown-item" href="announcedproject.php">Announced Projects</a> </div>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#CCE5FF"> <a class="dropdown-item" href="completedProject.php">Completed projects</a> <a class="dropdown-item" href="ongoingProject.php">Ongoing projects</a> <a class="dropdown-item" href="terminatedproject.php">Terminated Projects</a> <a class="dropdown-item" href="offeredproject.php">Offered Projects</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceseeker/announcedprojects">Announced Projects</a> </div>
 					</li>
 					<li class="nav-item mr-4 ">
-						<a class="nav-link" href="message.php"> <i class="fa  fa-envelope" aria-hidden="true"></i> </a> <span>Message</span> </li>
+						<a class="nav-link" href="<?php echo $base;?>public/serviceseeker/message"> <i class="fa  fa-envelope" aria-hidden="true"></i> </a> <span>Message</span> </li>
 					<li class="nav-item dropdown mr-4 " style="list-style-type: none;margin-left:0px;">
 						<a class="nav-link dropdown-toggle" id="notification" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa   fa-bell" aria-hidden="true"></i> <span id="badge" class="badge badge-light badge-counter count" style=" position: absolute;
                      color:red;
@@ -152,7 +152,7 @@
 					<form class="form-inline my-2   my-lg-0 mr-5 ">
 						<li class="nav-item dropdown" style="list-style-type: none;">
 							<a class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="http://localhost/seralance/<?php echo $seekerDetail['profilephoto'];?>" alt="profile-img" class="nav-profile"> </a> <span><?php echo $seekerDetail['username'];?></span>
-							<ul class="dropdown-menu  dropleft " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="profile">profile</a> <a class="dropdown-item" href="Dispute.php">Dispute</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceseeker/ticket"> ticket</a> <a class="dropdown-item" href="faq.php">FAQ</a> <a class="dropdown-item" href="policy.php">Policy</a> <a class="dropdown-item" href="changepassword.php"> password</a> <a class="dropdown-item" href="<?php echo $base;?>/public/serviceseeker/logout">Logout</a> </ul>
+							<ul class="dropdown-menu  dropleft " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="profile">My profile</a> <a class="dropdown-item" href="Dispute.php">Dispute</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceseeker/ticket"> Ticket</a> <a class="dropdown-item" href="faq.php">FAQ</a> <a class="dropdown-item" href="policy.php">Policy</a> <a class="dropdown-item" href="changepassword.php">Password</a> <a class="dropdown-item" href="<?php echo $base;?>/public/serviceseeker/logout">Logout</a> </ul>
 						</li>
 					</form>
 				</ul>

@@ -97,6 +97,76 @@
 
         //-------End of getters and setters---------
 
+        public function retrieveSkills($username){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $stmt = $conn->query("select skill_id,skill_name from skill WHERE skill_id in (SELECT provider_skill.skill_id FROM service_provider INNER JOIN provider_skill ON service_provider.username = provider_skill.username where service_provider.username='".$username."')");
+                if($skills = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $skills;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        
+        
+        public function retrieveLanguages($username){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $stmt = $conn->query("select language_id,language_name from language WHERE language_id in (SELECT provider_language.language_id FROM service_provider INNER JOIN provider_language ON service_provider.username = provider_language.username where service_provider.username='".$username."')");
+                if($languages = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $languages;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        public function retrievePortfolios($username){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $stmt = $conn->query("select portfolio_id,portfolio_url from portfolio WHERE username ='".$username."'");
+                if($portfolios = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $portfolios;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        public function retrieveServiceProviders($filter=""){
+            require_once('../app/Core/Database.php');
+            require_once('../app/models/Rate.php');
+            $db = new Database();
+            $rate = new Rate();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username");
+                if($providers = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    foreach($providers as $provider){
+                        $key = array_search($provider, $providers);
+                        $providers[$key] = array_merge($providers[$key], array('skill'=>$this->retrieveSkills($provider['username']))) ; 
+                        $providers[$key] = array_merge($providers[$key], array('language'=>$this->retrieveLanguages($provider['username']))) ; 
+                        $providers[$key] = array_merge($providers[$key], array('portfolio'=>$this->retrievePortfolios($provider['username']))) ; 
+                        $computedRate = $rate->computeRate($provider['username']);
+                        $providers[$key] = array_merge($providers[$key], array('rate'=>array('score'=>(empty($computedRate['computedrate']))? 0 : $computedRate['computedrate'],'totalreviews'=>$computedRate['totalreviews']))) ; 
+                    }
+                    return $providers;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
         public function retrieveAllLanguages(){
             require_once('../app/Core/Database.php');
             $db = new Database();

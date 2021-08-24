@@ -1,21 +1,11 @@
 <?php
-   require_once "navigation.php";
-   require_once "../Database/db.php";
+   require "includes/service_seeker-navigation.php";
+   $projects = $serviceSeekerController->getAllAnnouncedProjects($_SESSION['username']);
      
      ?>
 
 	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<!-- Datatable CSS -->
-		<link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-		<!-- jQuery Library -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<!-- Bootstrap CSS -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-		<!-- Datatable JS -->
-		<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
 		<script>
 		document.title = "Service seeker-Announced projects";
 		</script>
@@ -37,50 +27,56 @@
 										<th>Project Id</th>
 										<th>Project Title</th>
 										<th>Announced date</th>
-										<th>project budget </th>
 										<th>status</th>
-										<th>view project</th>
-										<th>service provider</th>
-										<th>View Bid</th>
-										<th>delete project</th>
+										<th>View project</th>
+										<th>View bids</th>
+										<th></th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
-									<?php
-                        $query = $con->query("SELECT * FROM announceproject") or die(mysqli_error($con));
-                        while ($fetch = $query->fetch_array()) {
-                            ?>
-										<tr>
-											<td>
-												<?php echo $fetch['No']?>
-											</td>
-											<td>
-												<?php echo $fetch['pid']?>
-											</td>
-											<td>
-												<?php echo $fetch['ptitle']?>
-											</td>
-											<td>
-												<?php echo $fetch['Adate']?>
-											</td>
-											<td>
-												<?php echo $fetch['pbudget']?>
-											</td>
-											<td>
-												<?php echo $fetch['status']?>
-											</td>
-											<td><a class="btn btn-primary" href="edit_room.php?room_id=<?php echo $fetch['room_id']?>">
-                           View</a> </td>
-											<td><a class="btn btn-primary" href="edit_room.php?room_id=<?php echo $fetch['room_id']?>">
-                           view</a> </td>
-											<td><a class="btn btn-success" href="edit_room.php?room_id=<?php echo $fetch['room_id']?>">
-                           view</a> </td>
-											<td><a class="btn btn-danger" href="edit_room.php?room_id=<?php echo $fetch['room_id']?>">
-                           delete</a> </td>
-										</tr>
-										<?php
-                        }
-                        ?>
+								<?php 
+											if(!empty($projects)){
+												$count = 1;
+												foreach($projects as $project){
+													$deleteBtn = "";
+													if($project['status'] == 'Pending Deposit'){
+														$deleteBtn = '<a class="btn btn-success" href="Change it">Deposit</a>'; 
+													}
+													echo <<<EOT
+																<tr>
+																<td>
+																	{$count}
+																</td>
+																<td>
+																	{$project['project_id']}
+																</td>
+																<td>
+																	{$project['title']}
+																</td>
+																<td>
+																	{$project['announced_date']}
+																</td>
+																<td>
+																	{$project['status']}
+																</td>
+																<!--  -->
+																<td><a class="btn btn-primary" href="Change it">
+																	View details</a> </td>
+																	<td><a class="btn btn-primary" href="Change it">
+																	View bids</a> </td>
+																<td>{$deleteBtn}</td>
+																<td><a class="btn btn-danger" href="Change it">
+																	Delete</a> </td>
+																<!--  -->
+																</tr>
+															EOT;
+														$count++ ;
+													}
+												}
+										?>
+										
+										
 								</tbody>
 							</table>
 						</div>
@@ -103,5 +99,5 @@
 		});
 		</script>
 		<?php
-   include "Footer.php";
+   		require "includes/service_seeker-footer.php";
    ?>

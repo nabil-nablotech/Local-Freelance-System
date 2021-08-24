@@ -7,6 +7,10 @@
             $this->view('service_seeker/home');
         }
 
+        public function browse(){
+            $this->view('service_seeker/browse_service_provider');
+        }
+
         public function announce(){
             $this->view('service_seeker/announce_project');
         }
@@ -21,6 +25,14 @@
 
         public function newticket(){
             $this->view('service_seeker/addticket');
+        }
+
+        public function message(){
+            $this->view('service_seeker/message');
+        }
+
+        public function announcedprojects(){
+            $this->view('service_seeker/announcedproject');
         }
         
         public function viewticket($ticketId){
@@ -42,6 +54,12 @@
             unset($_SESSION['ticketDetails']);
         }
 
+        public function hire($username){
+            $_SESSION['assignto'] = $username;
+            header("Location: http://localhost/seralance/public/serviceseeker/announce");                 
+            exit();
+        }
+
         public function logout(){
             session_destroy();
             header("Location: http://localhost/seralance/public/");                
@@ -61,6 +79,16 @@
         public function getAllTickets($username){
             $ticket = $this->model('Ticket');
             return $ticket->retrieveAllTickets($username);
+        } 
+
+        public function getAllAnnouncedProjects($username){
+            $project = $this->model('Project');
+            return $project->retrieveAllAnnouncedProjects($username);
+        }
+
+        public function getServiceProviders($filter=""){
+            $serviceProvider = $this->model('ServiceProvider');
+            return $serviceProvider->retrieveServiceProviders($filter);
         }
 
         public function getAllCountries(){
@@ -79,7 +107,10 @@
             $project = $this->model('Project');
             $reply = $project->createProject($input, $files);
 
-            if($reply['valid']==true){  
+            if($reply['valid']==true){
+                if(!empty($_SESSION['assignto'])){
+                    unset($_SESSION['assignto']); 
+                }  
                 header("Location: http://www.google.com/");              
                 exit();
             }

@@ -133,6 +133,21 @@
 
         //------------End of getters and setters --------//
 
+        public function retrieveAllAnnouncedProjects($username){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $stmt = $conn->query("SELECT * FROM project where offer_type ='Announcement' and announced_by='" . $username . "'");
+                if($announcedProjects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $announcedProjects;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
         public function validateProjectAnnouncment($input,$files){
             
             // $projectData holds the data to be inserted to Service provider table

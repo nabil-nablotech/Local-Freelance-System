@@ -380,28 +380,28 @@
               } 
         ?>
       </optgroup>
-      <optgroup label="Writing & Translation">
+      <optgroup label="Writing and Translation">
         <?php
               foreach($skills as $skill){
-                if($skill['skill_category'] === 'Writing & Translation'){
+                if($skill['skill_category'] === 'Writing and Translation'){
                   echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
                 }                
               } 
         ?>
       </optgroup> 
-      <optgroup label="Video & Animation">
+      <optgroup label="Video and Animation">
         <?php
               foreach($skills as $skill){
-                if($skill['skill_category'] === 'Video & Animation'){
+                if($skill['skill_category'] === 'Video and Animation'){
                   echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
                 }                
               } 
         ?>
       </optgroup> 
-      <optgroup label="Programming & Tech">
+      <optgroup label="Programming and Tech">
         <?php
               foreach($skills as $skill){
-                if($skill['skill_category'] === 'Programming & Tech'){
+                if($skill['skill_category'] === 'Programming and Tech'){
                   echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
                 }                
               } 

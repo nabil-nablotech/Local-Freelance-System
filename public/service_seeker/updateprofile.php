@@ -1,7 +1,7 @@
 <?php
    require "includes/service_seeker-navigation.php";
    if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['update_btn'])){     
-		$feedback = $serviceSeekerController->validateUpdateProfile($_POST,$_FILES);
+		$serviceSeekerController->validateUpdateProfile($_POST,$_FILES);
    }
    
    ?>
@@ -106,12 +106,12 @@
 								<div class="form-group row ">
 									<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">City</label>
 									<div class="col-sm-7">
-										<input type="text" class="form-control form-control-sm" id="colFormLabelSm" value="<?php echo $seekerDetail['city'];?>"> </div>
+										<input type="text" name="city" class="form-control form-control-sm" id="colFormLabelSm" value="<?php echo $seekerDetail['city'];?>"> </div>
 								</div>
 								<div class="form-group row ">
 									<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Address</label>
 									<div class="col-sm-7">
-										<input type="text" class="form-control form-control-sm" id="colFormLabelSm" value="<?php echo $seekerDetail['address'];?>"> </div>
+										<input type="text" name="address" class="form-control form-control-sm" id="colFormLabelSm" value="<?php echo $seekerDetail['address'];?>"> </div>
 								</div>
 							</div>
 						</div>
