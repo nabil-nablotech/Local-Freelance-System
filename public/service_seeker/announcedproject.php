@@ -63,11 +63,11 @@
 																<!--  -->
 																<td><a class="btn btn-primary" href="Change it">
 																	View details</a> </td>
-																	<td><a class="btn btn-primary" href="Change it">
+																	<td><a class="btn btn-primary" href="viewbids/{$project['project_id']}">
 																	View bids</a> </td>
 																<td>{$deleteBtn}</td>
-																<td><a class="btn btn-danger" href="deleteproject/announcedprojects/{$project['project_id']}">
-																	Delete</a> </td>
+																<td><button class="btn btn-danger" onclick ="confirmDelete('http://localhost/seralance/public/serviceseeker/deleteproject/announcedprojects/{$project['project_id']}');" >
+																	Delete</button> </td>
 																<!--  -->
 																</tr>
 															EOT;
@@ -86,14 +86,13 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-		function confirmationDelete(anchor) {
+		function confirmDelete(anchor) {
 			var conf = confirm("Are you sure you want to delete this record?");
 			if(conf) {
-				window.location = anchor.attr("href");
+				window.location = anchor;
 			}
 		}
-		</script>
-		<script type="text/javascript">
+
 		$(document).ready(function() {
 			$("#table").DataTable();
 		});

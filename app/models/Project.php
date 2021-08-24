@@ -133,6 +133,61 @@
 
         //------------End of getters and setters --------//
 
+        public function retrieveSkills($projectId){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $stmt = $conn->query("select skill_id,skill_name from skill WHERE skill_id in (SELECT project_skill.skill_id FROM project INNER JOIN project_skill ON project.project_id = project_skill.project_id where project.project_id='".$projectId."')");
+                if($skills = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $skills;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        public function retrieveProjectDetails($projectId){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $sql = "";
+                
+                $sql = "SELECT * FROM project where project_id='".$projectId."'";
+                
+                $stmt = $conn->query($sql);
+                if($project = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    $project = array_merge($project, array('skill'=>$this->retrieveSkills($project['project_id'])));
+                    return $project;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+
+        public function retrieveProjects($filter=""){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $stmt = $conn->query("SELECT * FROM project WHERE offer_type='Announcement' and assigned_to IS NULL");
+                if($projects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    foreach($projects as $project){
+                        $key = array_search($project, $projects);
+                        $projects[$key] = array_merge($projects[$key], array('skill'=>$this->retrieveSkills($project['project_id']))) ; 
+                    }
+                    return $projects;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
         public function retrieveAllAnnouncedProjects($username){
             require_once('../app/Core/Database.php');
             $db = new Database();

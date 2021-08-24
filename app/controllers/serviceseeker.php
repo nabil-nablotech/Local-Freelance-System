@@ -34,6 +34,10 @@
         public function announcedprojects(){
             $this->view('service_seeker/announcedproject');
         }
+
+        public function viewbids($projectID){
+            $this->view('service_seeker/viewbids');
+        }
         
         public function viewticket($ticketId){
             $ticket = $this->model('Ticket');
@@ -91,6 +95,11 @@
         public function getAllTickets($username){
             $ticket = $this->model('Ticket');
             return $ticket->retrieveAllTickets($username);
+        } 
+
+        public function getAllBids($projectId){
+            $bid = $this->model('Bid');
+            return $bid->retrieveAllBids($projectId);
         } 
 
         public function getAllAnnouncedProjects($username){

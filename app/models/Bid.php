@@ -59,5 +59,25 @@
             $this->status = $status;
         }
 
+        //--------End of getters and setters --------
+        public function retrieveAllBids($projectId){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $sql = "";
+                if($_SESSION['usertype'] ==='serviceseeker'){
+                    $sql = "SELECT * FROM bid where project_id='".$projectId."' and project_id IN (select project_id from project where announced_by = '".$_SESSION['username']."')";
+                }
+                $stmt = $conn->query($sql);
+                if($bids = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $bids;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
     }
 ?>

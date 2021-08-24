@@ -8,7 +8,7 @@
 		body{
 			overflow-x: hidden;
 		}
-		.card .container:hover {
+		.profile-item :hover {
 			background-color: #f7fafa;
 		}
 		
@@ -249,13 +249,18 @@
 														<div class="card" style="border: none;">
 															<ul class="container">
 															<?php
+
+															if(empty($serviceProviders)){
+																echo "<h2>No service providers found</h2>";
+															}
+															else{
 															 foreach($serviceProviders as $serviceProvider){
 																 $myskill = "";
 																 foreach($serviceProvider['skill'] as $skill){
 																	$myskill .= $skill['skill_name']." | ";
 																 }
 																echo <<<EOT
-																		<li class="profile-item">
+																		<li class="profile-item mb-3">
 																		<div class="profile-list-wrap">
 																			<a class="profile-list-avatar">
 																				<img alt='' src="http://localhost/seralance/{$serviceProvider['profile_photo']}" 
@@ -264,7 +269,7 @@
 																			<h2 class="profile-list-title">
 																			<a>{$serviceProvider['firstname']} {$serviceProvider['lastname']}</a>
 																			</h2>
-																			<div class="text-center"> <a href="http://localhost/seralance/public/serviceseeker/hire/{$serviceProvider['username']}" class="d-inline float-right btn-sm  btn btn-primary">Hire</a> </div>
+																			<div class="text-center"> <a href="http://localhost/seralance/public/serviceseeker/hire/{$serviceProvider['username']}" class="d-inline float-right btn-sm  btn btn-primary mr-5">Hire</a> </div>
 																			<p class="profile-list-subtitle">{$myskill}</p>
 																			<div class="profile-list-info">
 																				<div class="profile-list-detail"> 
@@ -284,6 +289,7 @@
 																EOT; 
 																
 															 }
+															}
 																?>
 															</ul>
 														</div>

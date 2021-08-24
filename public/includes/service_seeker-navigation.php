@@ -78,7 +78,7 @@
 			color: green!important;
 		}
 		
-		ul li a:hover::before {
+		ul li a.nav-link:hover::before {
 			width: 100%;
 			background-color: black;
 		}

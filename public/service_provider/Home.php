@@ -1,5 +1,5 @@
 <?php
-   require "includes/service_provider-navigation.php"
+   require "includes/service_provider-navigation.php";
    
  ?>
 
@@ -23,8 +23,8 @@
 			<!-- profile photo -->
 			<div class="col-xl-4 col-md-4 mb-4">
 				<div class="card h-100">
-					<div class="card-body text-center"> <img src="../assets/images/administrator/boy.png" class="img-avater " style="border-radius: 50%;max-width:110px;">
-						<p> profile</p>
+					<div class="card-body text-center"> <img src="http://localhost/seralance/<?php echo $providerDetail['profilephoto'];?>" class="img-avater " style="border:1px solid black; max-width:200px;">
+					<p> Welcome <?php echo ucfirst($providerDetail['firstname'])." ".ucfirst($providerDetail['lastname']);?></p>
 					</div>
 				</div>
 			</div>

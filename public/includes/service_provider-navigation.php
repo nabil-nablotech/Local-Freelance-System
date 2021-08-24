@@ -1,5 +1,9 @@
 <?php
    require_once "includes/config.php";
+   require_once('../app/controllers/serviceprovider.php');
+   $serviceProviderController = new Controller\ServiceProvider();
+   $providerDetail = $serviceProviderController->getUserDetails($_SESSION['username']);
+   $base = "http://localhost/seralance/";
    ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -57,31 +61,34 @@
 			left: 0;
 			transition: .5s;
 		}
+	
 		
-		ul li .nav-item .nav-link a:hover {
-			color: green!important;
-		}
-		
-		ul li a:hover::before {
+		ul li.nav-item a:hover::before {
 			width: 100%;
 			background-color: black;
 		}
+
+		.nav-profile{
+			 width: 40px;
+			 height: 40px;
+			 border-radius: 50%;
+		 }
 		</style>
 	</head>
 
 	<body>
 		<nav class="navbar navbar-expand-sm bg-dark navbar-light fixed-top" style="background-color:whitesmoke!important;">
-			<a class="navbar-brand" href="#"><img src="../assets/images/seralance-logo.png"></a>
+			<a class="navbar-brand" href="#"><img src="<?php echo $base;?>public/assets/images/seralance-logo.png"></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"> <span class="navbar-toggler-icon " style="color: black!important;"></span> </button>
 			<div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
 				<ul class="navbar-nav ">
 					<li class="nav-item">
-						<a class="nav-link" href="Home.php">
+						<a class="nav-link" href="<?php echo $base;?>public/serviceprovider/home">
 							<?php  echo $lang['home'];?>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="Find_project.php">
+						<a class="nav-link" href="<?php echo $base;?>public/serviceprovider/findproject">
 						Find  project
 						</a>
 					</li>
@@ -129,8 +136,8 @@
 					<!--  -->
 					<form class="form-inline my-2   my-lg-0 mr-5 ">
 						<li class="nav-item dropdown" style="list-style-type: none;">
-							<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-user-circle"></i> </a> <span>MulugetaA</span>
-							<ul class="dropdown-menu  dropleft " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="updateprofile.php">profile</a> <a class="dropdown-item" href="Dispute.php">Dispute</a> <a class="dropdown-item" href="ticket.php"> ticket</a> <a class="dropdown-item" href="faq.php">FAQ</a> <a class="dropdown-item" href="policy.php">Policy</a> <a class="dropdown-item" href="changepassword.php"> password</a> <a class="dropdown-item" href="logout">Logout</a> </ul>
+							<a class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="http://localhost/seralance/<?php echo $providerDetail['profilephoto'];?>" alt="profile-img" class="nav-profile"> </a> <span><?php echo $providerDetail['username'];?></span>
+							<ul class="dropdown-menu  dropleft " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="profile">My profile</a> <a class="dropdown-item" href="Dispute.php">Dispute</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/ticket"> Ticket</a> <a class="dropdown-item" href="faq.php">FAQ</a> <a class="dropdown-item" href="policy.php">Policy</a> <a class="dropdown-item" href="changepassword.php">Password</a> <a class="dropdown-item" href="<?php echo $base;?>/public/serviceprovider/logout">Logout</a> </ul>
 						</li>
 					</form>
 				</ul>

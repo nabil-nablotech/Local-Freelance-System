@@ -97,6 +97,45 @@
 
         //-------End of getters and setters---------
 
+        public function retrieveUserDetails($username){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,status,education,experience,bank_name,account_number,wallet_balance,profile_photo,summary FROM user INNER JOIN service_provider ON user.username = service_provider.username where user.username='".$username."'");
+                if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    $data = array(
+                        'username'=>$row['username'],
+                        'email'=>$row['email'],
+                        'firstname'=>$row['firstname'],
+                        'lastname'=>$row['lastname'],
+                        'gender'=>$row['gender'],
+                        'mobilenumber'=>$row['mobile_number'],
+                        'nationality'=>$row['nationality'],
+                        'country'=>$row['country'],
+                        'city'=>$row['city'],
+                        'address'=>$row['address'],
+                        'status'=>$row['status'],
+                        'education'=>$row['education'],
+                        'experience'=>$row['experience'],
+                        'bankname'=>$row['bank_name'],
+                        'accountnumber'=>$row['account_number'],
+                        'walletbalance'=>$row['wallet_balance'],
+                        'summary'=>$row['summary'],
+                        'profilephoto'=>$row['profile_photo']                           
+                    );
+
+                    $data = array_merge($data,array('skill'=>$this->retrieveSkills($username)));
+                    $data = array_merge($data,array('language'=>$this->retrieveLanguages($username)));
+                    $data = array_merge($data,array('portfolio'=>$this->retrievePortfolios($username)));
+                    return $data;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
         public function retrieveSkills($username){
             require_once('../app/Core/Database.php');
             $db = new Database();
