@@ -54,6 +54,18 @@
             unset($_SESSION['ticketDetails']);
         }
 
+        public function deleteproject($offertype,$projectId){
+            $project = $this->model('project');
+            $sucess = $project->deleteProject($projectId);
+            if($sucess==false){
+                header("Location: http://localhost/seralance/public/serviceseeker/{$offertype}");                
+                exit();
+            }
+
+            header("Location: http://localhost/seralance/public/serviceseeker/{$offertype}");                
+            exit();
+        }
+
         public function hire($username){
             $_SESSION['assignto'] = $username;
             header("Location: http://localhost/seralance/public/serviceseeker/announce");                 
@@ -111,8 +123,16 @@
                 if(!empty($_SESSION['assignto'])){
                     unset($_SESSION['assignto']); 
                 }  
-                header("Location: http://www.google.com/");              
-                exit();
+
+                if($input['offertype']==='Announcement'){
+                    header("Location: http://localhost/seralance/public/serviceseeker/announcedprojects");              
+                    exit();
+                }
+                if($input['offertype']==='Offer'){
+                    header("Location: http://localhost/seralance/public/serviceseeker/offeredprojects");              
+                    exit();
+                }
+                
             }
             else{
                 return $reply;

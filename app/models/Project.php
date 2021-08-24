@@ -148,6 +148,17 @@
             }
         }
 
+        public function deleteProject($projectId){
+                
+            $condition = "";              
+            $condition= "WHERE project_id ='". $projectId ."' and project_id IN (select project_id from project where announced_by = '".$_SESSION['username']."')" ;
+            if($this->remove('project_skill',$condition) && $this->remove('project',$condition)){
+                return 1;
+            }             
+            
+            return 0;
+        }
+
         public function validateProjectAnnouncment($input,$files){
             
             // $projectData holds the data to be inserted to Service provider table

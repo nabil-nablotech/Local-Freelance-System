@@ -83,13 +83,15 @@
         protected function remove($table,$condition){
 
             $connection = null;
+            $sucess = 0;
             try{
                 $db = new Database();
                 $connection = $db->setConnection();
                 
                 $sql = "DELETE FROM $table " . $condition;
+                echo "<script> window.alert('".$sql."')</script>";
                 $connection->exec($sql);
-                
+                $sucess = 1;
             }
 
             catch(Exception $e){
@@ -101,6 +103,7 @@
 
                 if($connection!==null){
                     $connection = null;
+                    return $sucess;
                 }
             }
 

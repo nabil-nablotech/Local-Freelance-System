@@ -66,7 +66,7 @@
 																	<td><a class="btn btn-primary" href="Change it">
 																	View bids</a> </td>
 																<td>{$deleteBtn}</td>
-																<td><a class="btn btn-danger" href="Change it">
+																<td><a class="btn btn-danger" href="deleteproject/announcedprojects/{$project['project_id']}">
 																	Delete</a> </td>
 																<!--  -->
 																</tr>
