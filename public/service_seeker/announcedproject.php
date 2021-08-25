@@ -41,7 +41,7 @@
 												foreach($projects as $project){
 													$deleteBtn = "";
 													if($project['status'] == 'Pending Deposit'){
-														$deleteBtn = '<a class="btn btn-success" href="Change it">Deposit</a>'; 
+														$depositBtn = '<a class="btn btn-success" href="Change it">Deposit</a>'; 
 													}
 													echo <<<EOT
 																<tr>
@@ -65,8 +65,8 @@
 																	View details</a> </td>
 																	<td><a class="btn btn-primary" href="viewbids/{$project['project_id']}">
 																	View bids</a> </td>
-																<td>{$deleteBtn}</td>
-																<td><button class="btn btn-danger" onclick ="confirmDelete('http://localhost/seralance/public/serviceseeker/deleteproject/announcedprojects/{$project['project_id']}');" >
+																<td>{$depositBtn}</td>
+																<td><button class="btn btn-danger" onclick ="confirmAction('http://localhost/seralance/public/serviceseeker/deleteproject/announcedprojects/{$project['project_id']}');" >
 																	Delete</button> </td>
 																<!--  -->
 																</tr>
@@ -86,7 +86,7 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-		function confirmDelete(anchor) {
+		function confirmAction(anchor) {
 			var conf = confirm("Are you sure you want to delete this record?");
 			if(conf) {
 				window.location = anchor;

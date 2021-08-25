@@ -40,6 +40,7 @@
 
         protected function update($table,$data,$condition=""){
             $connection = null;
+            $sucess = 0;
             try{
                 $db = new Database();
                 $connection = $db->setConnection();
@@ -60,9 +61,10 @@
                 }
                 $s = "UPDATE $table SET $setStmt $condition";
                 $sql = "UPDATE $table SET ". $setStmt ." ".$condition;
-                echo "<script> window.alert('".$sql."')</script>";
+                //echo "<h1> $sql</h1>";
+                //exit();
                 $connection->exec($sql);
-                
+                $sucess = 1;
             }
 
             catch(Exception $e){
@@ -74,6 +76,7 @@
 
                 if($connection!==null){
                     $connection = null;
+                    return $sucess;
                 }
             }
 

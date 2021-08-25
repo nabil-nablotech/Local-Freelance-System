@@ -10,7 +10,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1 ">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="landing.css"> </head>
+		<link rel="stylesheet" href="../assets/css/guest/landing.css"> </head>
 		<style>
 			#profiledisplay{
 				border-radius: 50%;
@@ -22,6 +22,9 @@
 			}
 		</style>
 	<body style="overflow-x: hidden;">
+	<div class="spinner-wrapper">
+<div class="spinner"></div>
+</div>
 	<?php  
 		require_once('../app/controllers/main.php');
 		$mainController = new Controller\Main();

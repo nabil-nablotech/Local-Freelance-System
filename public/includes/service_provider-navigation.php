@@ -21,6 +21,18 @@
 		<link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
 		<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 		<!--  -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>	
+		<link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<!-- jQuery Library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<!-- Datatable JS -->
+	<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 		<style>
 		#notification.dropdown-toggle::after {
 			content: none;
@@ -93,7 +105,7 @@
 						</a>
 					</li>
 					<li class="nav-item ">
-						<a class="nav-link" href="Mybids.php">
+						<a class="nav-link" href="<?php echo $base;?>public/serviceprovider/mybids">
 					My Bids
 						</a>
 					</li>
@@ -108,12 +120,12 @@
             <i class="fa  fa-x fa-tasks" aria-hidden="true">  </i> </a> <span>My project</span>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown"
              style="background-color:#CCE5FF"> <a class="dropdown-item" 
-             href="completed.php">completed projects</a> 
+             href="completed.php">Completed projects</a> 
              <a class="dropdown-item" href="ongoing.php">
                Ongoing projects</a> <a class="dropdown-item" 
                href="terminated.php">Terminated Projects</a>
-                <a class="dropdown-item" href="offered.php">Offered Projects</a>
-                 <a class="dropdown-item" href="announced.php">Announced Projects</a> </div>
+                <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/offeredprojects">Offered Projects</a>
+                 <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/announcedprojects">Announced Projects</a> </div>
 					</li>
 					<li class="nav-item mr-4 ">
 						<a class="nav-link" href="message.php"> <i class="fa  fa-envelope" aria-hidden="true"></i> </a> <span>Message</span> </li>

@@ -13,7 +13,7 @@
         private $budget;
         private $price;
         private $offerType;
-        private $status; //Pending, Pending Deposit, Ongoing, Terminated, Completed
+        private $status; //Pending, Pending Deposit, {Ongoing,Submitted,Improvement}, Terminated, Completed, Cancelled
         private $startDate;
         private $endDate;
 
@@ -153,8 +153,7 @@
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $sql = "";
-                
+
                 $sql = "SELECT * FROM project where project_id='".$projectId."'";
                 
                 $stmt = $conn->query($sql);
@@ -174,7 +173,7 @@
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("SELECT * FROM project WHERE offer_type='Announcement' and assigned_to IS NULL");
+                $stmt = $conn->query("SELECT * FROM project WHERE offer_type='Announcement' and assigned_to IS NULL AND project_id NOT IN (select project_id FROM bid WHERE made_by = '".$_SESSION['username']."' )");
                 if($projects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
                     foreach($projects as $project){
                         $key = array_search($project, $projects);
@@ -193,7 +192,17 @@
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("SELECT * FROM project where offer_type ='Announcement' and announced_by='" . $username . "'");
+                $sql = "";
+                
+                if($_SESSION['usertype']==='serviceseeker'){
+                    $sql = "SELECT * FROM project where offer_type ='Announcement' and announced_by='" . $username . "'";
+                }
+
+                elseif($_SESSION['usertype']==='serviceprovider'){
+                    $sql = "SELECT * FROM project where (status='Pending' OR status='Pending Deposit') AND offer_type ='Announcement' and assigned_to='" . $username . "'";
+                }
+
+                $stmt = $conn->query($sql);
                 if($announcedProjects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
                     return $announcedProjects;
                 }
@@ -203,11 +212,45 @@
             }
         }
 
-        public function deleteProject($projectId){
+        public function retrieveAllOfferedProjects($username){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $sql = "";
                 
+                if($_SESSION['usertype']==='serviceseeker'){
+                    $sql = "SELECT * FROM project where offer_type ='Offer' and announced_by='" . $username . "'";
+                }
+                
+                elseif($_SESSION['usertype']==='serviceprovider'){
+                    $sql = "SELECT * FROM project where (status='Pending' OR status='Pending Deposit' OR status='Cancelled') AND offer_type ='Offer' and assigned_to='" . $username . "'";
+                }
+
+                $stmt = $conn->query($sql);
+                if($offeredProjects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $offeredProjects;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        public function deleteProject($projectId){                
             $condition = "";              
             $condition= "WHERE project_id ='". $projectId ."' and project_id IN (select project_id from project where announced_by = '".$_SESSION['username']."')" ;
             if($this->remove('project_skill',$condition) && $this->remove('project',$condition)){
+                return 1;
+            }             
+            
+            return 0;
+        }
+
+        public function rejectProject($projectId){                
+            $data = array('status'=>'\'Cancelled\'');             
+            $condition= "WHERE project_id ='". $projectId ."' and project_id IN (select project_id from project where assigned_to = '".$_SESSION['username']."')" ;
+            if($this->update('project',$data,$condition)){
                 return 1;
             }             
             
@@ -368,6 +411,58 @@
                 }
 
                 return array('valid'=>1);
+            } 
+            else{
+                return $response;
+            }      
+        }
+
+        public function validateAcceptOffer($input){
+            
+            // $acceptOfferData holds the data to be inserted to Service provider table
+            $acceptOfferData = array();
+            $error=array();
+
+
+            if(empty($input['price'])){
+                $error = array_merge($error,array('accept' => 'This field is required.'));
+            }
+            else{
+                $acceptOfferData = array_merge($acceptOfferData,array('price' => $this->cleanInput($input['price'])));
+            }
+
+            $acceptOfferData = array_merge($acceptOfferData,array('projectid' => $this->cleanInput($input['projectid'])));
+
+
+            if(empty($error)){
+                return array('valid'=>1 ,'data'=>$acceptOfferData);
+            }
+            else{
+                return array('valid'=>0,'data'=>$acceptOfferData,'error'=>$error);
+            }
+        }
+
+        public function acceptOffer($data){
+            $response = $this->validateAcceptOffer($data);
+            if($response['valid']==true){
+                $this->setProjectId($response['data']['projectid']);
+                $this->setPrice($response['data']['price']);
+                $this->setStartDate("UTC_TIMESTAMP");
+                $this->setStatus('Pending Deposit');
+
+                //The variables below are arguments to be passed to insert data to their respective table 
+
+                $projectTb = array(
+                    'project_id' => "'".$this->getProjectId()."'",
+                    'price' => $this->getPrice(),
+                    'start_date' => $this->getStartDate(),
+                    'status' => "'".$this->getStatus()."'"
+                );
+
+                $condition = "WHERE project_id = '".$this->getProjectId()."'";              
+                if($this->update('project',$projectTb,$condition)){
+                    return array('valid'=>1);
+                }                
             } 
             else{
                 return $response;

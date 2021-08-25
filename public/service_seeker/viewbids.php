@@ -45,7 +45,7 @@ $bids = $serviceSeekerController->getAllBids($_SESSION['username']);
                   <tbody>
 
                     <?php 
-                        if(!empty($tickets)){
+                        if(!empty($bid)){
                             $count = 1;
                             foreach($bids as $bid){
                                 

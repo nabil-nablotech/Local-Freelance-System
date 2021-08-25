@@ -1,14 +1,30 @@
 <?php
-include "navigation.php";
+require "includes/service_provider-navigation.php";
+$bids = $serviceProviderController->getAllBids($_SESSION['username']);
 ?>
-				<!--  -->
-	<div class="container-fluid" style="margin-top: 100px;">
-		<div class="row">
-			<div class="col-sm-10 mx-auto">
-				<!--  -->
-                              <div class="card shadow-sm mb-4">
+  <script>
+    document.title="Admin-list of bids";
+</script>
+
+
+ <!-- Container Fluid-->
+ <div class="container-fluid" id="container-wrapper">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">My bids </h1>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="./">Home</a>
+              </li>
+              <li class="breadcrumb-item">Bids</li>
+              <li class="breadcrumb-item active" aria-current="page">My bids</li>
+            </ol>
+          </div>
+          <div class="row">
+            <!-- Alerts Basic -->
+            <div class="col-lg-12">
+              <div class="card shadow-sm mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary mx-auto">List of bids</h6>
+                  <h6 class="m-0 font-weight-bold text-primary mx-auto">My bids</h6>
                 </div>
                 <div class="card-body">
 <!--  -->
@@ -17,46 +33,62 @@ include "navigation.php";
                <table id = "table" class = "table table-bordered table-striped">
                   <thead>
                      <tr>
-                       <th>No</th>
-                       <th>Bid Id</th>
-                        <th>Project Id</th>
-                        <th>Project Title</th>
-                        <th>service provider</th>
-                        <th>service seeker </th>
+                        <th>No</th>
+                        <th>Bid Id</th>
                         <th>Bid price</th>
                         <th>Bid date</th>
-                        <th>Bid description</th>
-                        <th>View project</th>
+                        <th>Project Id</th>
+                        <th>Project title </th>
+                        <th>Status</th>
+                        <th> </th>
+                        <th> </th>
                      </tr>
                   </thead>
                   <tbody>
-                     <?php
-                        $query = $con->query("SELECT * FROM offeredproject") or die(mysqli_error($con));
-                        while ($fetch = $query->fetch_array()) {
-                            ?>	
-                     <tr>
 
-                     <td><?php echo $fetch['No']?></td>
-                        <td><?php echo $fetch['pid']?></td>
-                        <td><?php echo $fetch['ptitle']?></td>
-                        <td><?php echo $fetch['odate']?></td>
-                        <td><?php echo $fetch['pbudget']?></td>
-                        <td><?php echo $fetch['status']?></td>   
-                        <td><?php echo $fetch['status']?></td>          
-                        <td><?php echo $fetch['status']?></td>                 
-                        <td><a class = "btn btn-primary btn-sm" href = "bid_detail.php?pid=<?php echo $fetch['pid']?>">
-                           <i class="fa fa-eye">view</i></a> 
-                        </td>
-                        <td><a class = "btn btn-primary btn-sm"
-                         href = "project_detail.php?pid=<?php echo $fetch['pid']?>">
-                           <i class="fa fa-eye">view</i></a> 
-                        </td>
-                       
-                       
-                     </tr>
-                     <?php
-                        }
-                        ?>	
+                    <?php 
+                        if(!empty($bids)){
+                            $count = 1;
+                            foreach($bids as $bid){
+                              $deleteBtn = "";
+                              if($bid['status'] == 'open'){
+                                 $deleteBtn = '<button class="btn btn-danger" onclick ="confirmAction(\'http://localhost/seralance/public/serviceprovider/deletebid/'.$bid['bid_id'].'\');" > Delete</button>'; 
+                              }
+                                echo <<<EOT
+                                            <tr>
+                                            <td>
+                                                {$count}
+                                            </td>
+                                            <td>
+                                                {$bid['bid_id']}
+                                            </td>
+                                            <td>
+                                                {$bid['price']}
+                                            </td>
+                                            <td>
+                                                {$bid['bid_date']}
+                                            </td>
+                                            <td>
+                                                {$bid['project_id']}
+                                            </td>
+                                            <td>
+                                                {$bid['title']}
+                                            </td>
+                                            <td>
+                                                {$bid['status']}
+                                            </td>
+                                            <!--  -->
+                                                <td><a class="btn btn-info" href="viewbiddescription/{$bid['bid_id']}">Bid description</a> </td>
+                                                <td>$deleteBtn</td>
+                                            <!--  -->
+                                            </tr>
+                                        EOT;
+                                    $count++ ;
+                                }
+                            }
+                    ?>
+	
+	
                   </tbody>
                </table>
             </div>
@@ -65,53 +97,42 @@ include "navigation.php";
       </div>
    </div>
 </div>
- <script type = "text/javascript">
-   function confirmationDelete(anchor){
-   	var conf = confirm("Are you sure you want to delete this record?");
-   	if(conf){
-   		window.location = anchor.attr("href");
-   	}
-   } 
-</script>
+
    
 
                 </div>
               </div>
             </div>
 
-           
-        
-        
-				<!--  -->
-			</div>
-		</div>
-		<!--  -->
-	</div>
-	</div>
-	</div>
 
-				<!--  -->
-			</div>
-		</div>
-		<!--  -->
-	</div>
-	</div>
-	</div>
-	<!-- included files -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<!-- Popper JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-	<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+          </div>
 
-    	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#table").DataTable();
-		});
-		</script>
-	</body>
+        </div>
+        <!---Container Fluid-->
+      </div>
 
-	</html>
+      <!-- Footer -->
+      <script type = "text/javascript">
+     function confirmAction(anchor){
+   	var conf = confirm("Are you sure you want to delete this record?");
+   	if(conf){
+   		window.location = anchor;
+   	}
+   } 
+   $(document).ready(function(){
+   	$("#table").DataTable();
+   });
+</script> 
 
+    </div>
+  </div>
+
+
+
+</body>
+
+
+
+</html>
+
+<!--  -->

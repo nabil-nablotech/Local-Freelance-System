@@ -186,11 +186,12 @@ CREATE TABLE payment(
     project_id INT NOT NULL
 );
 
+
 CREATE TABLE bid(
 	bid_id INT AUTO_INCREMENT PRIMARY KEY,
     bid_date DATETIME NOT NULL,
     price FLOAT NOT NULL,
-    cover_letter VARCHAR(1000),
+    cover_letter VARCHAR(1000) NOT NULL,
     status VARCHAR(60) NOT NULL,
     made_by VARCHAR(60) NOT NULL,
     project_id INT NOT NULL
