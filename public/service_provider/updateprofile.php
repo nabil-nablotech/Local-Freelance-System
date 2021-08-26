@@ -8,7 +8,11 @@
 	<!doctype html>
 	<html>
 
-	<head> </head>
+	<head>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="http://localhost/seralance/app/vendor/tagger-master/tagger.css" rel="stylesheet">
+    <script src="http://localhost/seralance/app/vendor/tagger-master/tagger.js"></script> </head>
 
 	<body>
 		<div class="container  " style="margin-top: 100px;">
@@ -89,7 +93,7 @@
 				<div class="container mt-3">
 					<div class="card text-center">
 						<div class="row mt-3">
-							<div class="col-sm-6 mx-auto">
+							<div class="col-sm-6 col-sm-10 mx-auto">
 								<div class="form-group row ">
 									<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Country</label>
 									<div class="col-sm-7">
@@ -124,30 +128,102 @@
 				<div class="container mt-3">
 					<div class="card text-center">
 						<div class="row mt-3">
-							<div class="col-sm-6 mx-auto">
+							<div class="col-sm-10 mx-auto">
 								<div class="form-group row ">
-									<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Country</label>
+									<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Educational level</label>
 									<div class="col-sm-7">
-									<select name="country" style="width: 100%;">
-										<option value="">Please select</option>
-											<?php
-											foreach($serviceProviderController->getAllCountries() as $country){
-												echo '<option value="'.$country.'">'.$country.'</option>';
-											} 
-											?>
-      								</select>
+                                    <select class="form-control"  name="education">
+                                        <option value="">Please select</option>
+                                        <option value="Primary school">Primary school</option>
+                                        <option value="High school">High school</option>
+                                        <option value="Diploma">Diploma</option>
+                                        <option value="Bachelor degree">Bachelor degree</option>
+                                        <option value="Masters degree">Masters degree</option>
+                                        <option value="Doctrate degree">Doctrate degree</option>
+                                    </select>
 									</div>
 								</div>
 								<div class="form-group row ">
-									<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">City</label>
+									<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Language</label>
 									<div class="col-sm-7">
-										<input type="text" name="city" class="form-control form-control-sm" id="colFormLabelSm" value="<?php echo $providerDetail['city'];?>"> </div>
-								</div>
+                                    <select class="form-control language-multiple" name="language[]" multiple="multiple">
+                                        <?php
+                                            foreach($serviceProviderController->getAllLanguages() as $language){
+                                                echo '<option value="'.$language['language_id'].'">'.$language['language_name'].'</option>';
+                                            } 
+                                        ?>
+                                    </select>
+								    </div>
+                                </div>
 								<div class="form-group row ">
-									<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Address</label>
+									<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Skill</label>
 									<div class="col-sm-7">
-										<input type="text" name="address" class="form-control form-control-sm" id="colFormLabelSm" value="<?php echo $providerDetail['address'];?>"> </div>
+                                    <select class="form-control skill-multiple" name="skill[]" multiple="multiple">
+                                        <?php $skills = $serviceProviderController->getAllSkills(); ?>
+                                        <optgroup label="Graphics and Design">
+                                            <?php
+                                                foreach($skills as $skill){
+                                                    if($skill['skill_category'] === 'Graphics and Design'){
+                                                    echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
+                                                    }                
+                                                } 
+                                            ?>
+                                        </optgroup>
+                                        <optgroup label="Writing and Translation">
+                                            <?php
+                                                foreach($skills as $skill){
+                                                    if($skill['skill_category'] === 'Writing and Translation'){
+                                                    echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
+                                                    }                
+                                                } 
+                                            ?>
+                                        </optgroup> 
+                                        <optgroup label="Video and Animation">
+                                            <?php
+                                                foreach($skills as $skill){
+                                                    if($skill['skill_category'] === 'Video and Animation'){
+                                                    echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
+                                                    }                
+                                                } 
+                                            ?>
+                                        </optgroup> 
+                                        <optgroup label="Programming and Tech">
+                                            <?php
+                                                foreach($skills as $skill){
+                                                    if($skill['skill_category'] === 'Programming and Tech'){
+                                                    echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
+                                                    }                
+                                                } 
+                                            ?>
+                                        </optgroup>       
+                                    </select> 
+                                    </div>
 								</div>
+                                <div class="form-group row ">
+									<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Experience</label>
+									<div class="col-sm-7">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="experience" id="inlineRadio1" value="Beginner" <?php if($providerDetail['experience']=='Beginner'){echo 'checked';}?>>
+                                            <label class="form-check-label" for="inlineRadio1">Beginner(< 1Yr) </label>
+                                        </div>
+                                        <div class="form-check form-check-inline ">
+                                            <input class="form-check-input" type="radio" name="experience" id="inlineRadio2" value="Medium" <?php if($providerDetail['experience']=='Medium'){echo 'checked';}?>>
+                                            <label class="form-check-label" for="inlineRadio2">Medium(3-5)yrs</label>
+                                        </div>
+                                        <div class="form-check form-check-inline ">
+                                            <input class="form-check-input" type="radio" name="experience" id="inlineRadio2" value="Advanced" <?php if($providerDetail['experience']=='Advanced'){echo 'checked';}?>>
+                                            <label class="form-check-label" for="inlineRadio2">Advanced(>5)yrs</label>
+                                        </div>
+                                    </div>
+								</div>
+
+                                <div class="form-group row ">
+									<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Portfolio</label>
+									<div class="col-sm-7">
+                                    <input class="form-control" name="portfolio" type="text">
+                                    </div>
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -158,7 +234,7 @@
 				<div class="container mt-3">
 					<div class="card text-center">
 						<div class="row mt-3">
-							<div class="col-sm-7 mx-auto">
+							<div class="col-sm-10 mx-auto">
 								<div class="form-group row ">
 									<label for="mob">Bank Name</label>
 									<div class="col-sm-7">
@@ -175,9 +251,16 @@
 									</div>
 								</div>
 								<div class="form-group row">
-									<label for="colFormLabelSm " class=" col-form-label col-form-label-sm">Account Number</label>
+									<label for="colFormLabelSm " class="col-form-label col-form-label-sm">Account Number</label>
 									<div class="col-sm-7">
-										<input type="text" class="form-control form-control-sm ml-5" id="colFormLabelSm" value="<?php echo $providerDetail['accountnumber'];?>"> </div>
+										<input type="text" class="form-control form-control-sm " id="colFormLabelSm" value="<?php echo $providerDetail['accountnumber'];?>"> 
+                                    </div>
+								</div>
+                                <div class="form-group row">
+									<label for="colFormLabelSm " class=" col-form-label col-form-label-sm">Summary</label>
+                                        <div class="col-sm-7">
+                                            <textarea class="multisteps-form__textarea form-control" rows="5" cols="45" placeholder="Summary" name="summary"> <?php echo $providerDetail['summary'];?> </textarea>
+                                        </div>
 								</div>
 							</div>
 						</div>
@@ -198,11 +281,50 @@
 			require "includes/service_seeker-footer.php";
 		?>
 		<script>
-			document.querySelector("[name ='nationality']").value = '<?php echo $providerDetail['nationality'];?>';
-			document.querySelector("[name ='country']").value = '<?php echo $providerDetail['country'];?>';
-			document.querySelector("[name ='bankname']").value = '<?php echo $providerDetail['bankname'];?>';			
 
-			function displayPhoto(event){
+            $(document).ready(function() {
+            $('.language-multiple').select2({placeholder: 'Select language',
+            maximumSelectionLength: 5});
+            });
+
+            $(document).ready(function() {
+                $('.skill-multiple').select2({placeholder: 'Select skill',
+                maximumSelectionLength: 5});
+            });
+
+            document.querySelector("[name ='nationality']").value = '<?php echo $providerDetail['nationality'];?>';
+			document.querySelector("[name ='country']").value = '<?php echo $providerDetail['country'];?>';
+			document.querySelector("[name ='bankname']").value = '<?php echo $providerDetail['bankname'];?>';
+			document.querySelector("[name ='education']").value = '<?php echo $providerDetail['education'];?>';
+
+            var element = document.querySelector("[name ='language[]']");
+            <?php foreach($providerDetail['language'] as $language){ ?>
+            for (var i = 0; i < element.options.length; i++) {
+                if(element.options[i].value == <?php echo $language['language_id']?>){
+                    element.options[i].selected = true;
+                }
+            }
+            <?php } ?>// This is a closing for the previously declared foreach loop
+
+            element = document.querySelector("[name ='skill[]']");
+            <?php  foreach($providerDetail['skill'] as $skill){ ?>
+            for (var i = 0; i < element.options.length; i++) {
+                if(element.options[i].value == <?php echo $skill['skill_id']?>){
+                    element.options[i].selected = true;
+                }
+            }
+            <?php } ?>// This is a closing for the previously declared foreach loop
+
+            element = document.querySelector("[name ='portfolio']");
+            <?php  foreach($providerDetail['portfolio'] as $portfolio){ ?>
+            element.value += '<?php echo $portfolio['portfolio_url']?>,';                    
+            <?php } ?>// This is a closing for the previously declared foreach loop
+            element.value = element.value.substr(0,(element.value.length-1));
+                
+            // Tagger for portfolio
+            tagger(document.querySelector('[name="portfolio"]'),{wrap: true ,allow_spaces: false, tag_limit: 10, link: function(name){return false}});
+			
+            function displayPhoto(event){
 					profileDisplay = document.getElementById('profiledisplay');
 					profileDisplay.setAttribute('src', URL.createObjectURL(event.files[0]));
 					profileDisplay.onload = function() {

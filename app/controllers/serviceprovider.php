@@ -114,7 +114,17 @@
             require_once('../app/models/countries.php');
             return \Countries::$countries;
         }
-        
+
+        public function getAllLanguages(){
+            $serviceProvider = $this->model('ServiceProvider');
+            return $serviceProvider->retrieveAllLanguages();
+        }
+
+        public function getAllSkills(){
+            $serviceProvider = $this->model('ServiceProvider');
+            return $serviceProvider->retrieveAllSkills();
+        }
+
         public function getUserDetails($username){
             $serviceProvider = $this->model('ServiceProvider');
             return $serviceProvider->retrieveUserDetails($username);
@@ -138,6 +148,13 @@
         public function getAllOfferedProjects($username){
             $project = $this->model('Project');
             return $project->retrieveAllOfferedProjects($username);
+        }
+
+        public function validateUpdateProfile($input,$files){
+            $serviceProvider = $this->model('ServiceProvider');
+            $serviceProvider->updateProfile($input, $files);
+            header("Location: http://localhost/seralance/public/serviceprovider/profile");                
+            exit();
         }
 
         public function validateNewBid($input,$projectId){

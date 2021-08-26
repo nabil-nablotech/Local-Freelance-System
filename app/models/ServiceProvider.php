@@ -623,6 +623,293 @@
                 return $response;
             }      
         }
+
+        public function validateUpdateProfile($input,$files){
+            
+            // $serviceProviderData holds the data to be inserted to Service provider table
+            $serviceProviderData = array();
+            $languageData = array();
+            $skillData = array();
+            $portfolioData = array();
+
+            if(!empty($input['firstname'])){
+                $serviceProviderData = array_merge($serviceProviderData,array('firstname' => $this->cleanInput($input['firstname'])));
+            }
+
+            if(!empty($input['lastname'])){
+                $serviceProviderData = array_merge($serviceProviderData,array('lastname' => $this->cleanInput($input['lastname'])));
+            }
+
+            
+            if(!empty($input['nationality'])){
+                $cleanData = $this->cleanInput($input['nationality']);                
+                require_once '../app/models/countries.php';
+                if(in_array($cleanData,Countries::$countries)){
+                    $serviceProviderData = array_merge($serviceProviderData,array('nationality' => $cleanData));
+                }                                
+            }
+
+            if(!empty($files['profilephoto']['name'])){
+                    $extension = explode('.',$files['profilephoto']['name']);
+                    $file_ext=strtolower(end($extension));
+                    if(!in_array($file_ext,array('jpeg','gif','png','jpg'))){
+                        echo "<script>alert('JPG, JPEG, PNG and GIF are only supported.');</script>";
+                    }
+                    elseif($files['profilephoto']['size']>2097152){
+                        echo "<script>alert('File should not be more than 2MB.');</script>";
+                    }
+                    else{
+                        $cleanData = 'app/upload/profile/serviceprovider/'.time().$files['profilephoto']['name'];
+                        move_uploaded_file($files['profilephoto']['tmp_name'],"../".$cleanData);
+                        $serviceProviderData = array_merge($serviceProviderData,array('profilephoto' => $cleanData));
+                    }
+            }
+
+            if(!empty($input['country'])){                
+                $cleanData = $this->cleanInput($input['country']);                
+                require_once '../app/models/countries.php';
+                if(in_array($cleanData,Countries::$countries)){
+                    $serviceProviderData = array_merge($serviceProviderData,array('country' => $cleanData));
+                }
+            }
+
+            if(!empty($input['city'])){
+                $serviceProviderData = array_merge($serviceProviderData,array('city' => $this->cleanInput($input['city'])));
+            }
+
+            if(!empty($input['address'])){
+                $serviceProviderData = array_merge($serviceProviderData,array('address' => $this->cleanInput($input['address'])));
+            }
+
+            if(!empty($input['education'])){
+                $cleanData = $this->cleanInput($input['education']);
+                
+                if($cleanData ==='Primary school' || $cleanData ==='High school' || $cleanData ==='Diploma' || $cleanData ==='Bachelor degree' || $cleanData ==='Masters degree' || $cleanData ==='Doctrate degree'){
+                    $serviceProviderData = array_merge($serviceProviderData,array('education' => $cleanData));
+                }              
+            }
+
+            if(!empty($input['language'])){
+                
+                $language_ids = [];
+                foreach($this->retrieveAllLanguages() as $language){
+                    array_push($language_ids,$language['language_id']);
+                }
+                for($i = 0; $i < count($input['language']);$i++){
+                    $cleanData = $this->cleanInput($input['language'][$i]);
+                    if(in_array($cleanData,$language_ids) == true){
+                        $languageData = array_merge($languageData,array($cleanData)); 
+                    }                    
+                    
+                }
+                if(!empty($languageData)){
+                    $serviceProviderData = array_merge($serviceProviderData,array('language' => $languageData));  
+                }
+            }
+
+            if(!empty($input['skill'])){
+                $skill_ids = [];
+                foreach($this->retrieveAllSkills() as $skill){
+                    array_push($skill_ids,$skill['skill_id']);
+                }
+                for($i = 0; $i < count($input['skill']);$i++){
+                    $cleanData = $this->cleanInput($input['skill'][$i]);
+                    if(in_array($cleanData,$skill_ids) == true){
+                        $skillData = array_merge($skillData,array($cleanData)); 
+                    }                                                  
+                }
+                if(!empty($skillData)){
+                    $serviceProviderData = array_merge($serviceProviderData,array('skill' => $skillData));  
+                }                
+            }
+
+            if(!empty($input['experience'])){
+                $cleanData = $this->cleanInput($input['experience']);
+                if($cleanData ==='Beginner' || $cleanData ==='Medium' || $cleanData ==='Advanced'){
+                    $serviceProviderData = array_merge($serviceProviderData,array('experience' => $cleanData));
+                }               
+            }
+
+            if(!empty($input['portfolio'])){              
+                $portfolios = explode(",",$input['portfolio']);                
+                for($i = 0; $i < count($portfolios);$i++){
+                    $cleanData = $this->cleanInput($portfolios[$i]);                
+                    if(filter_var($cleanData, FILTER_VALIDATE_URL)){
+                        $portfolioData = array_merge($portfolioData,array($cleanData)); 
+                    }
+                                     
+                }
+                if(!empty($portfolioData)){
+                    $serviceProviderData = array_merge($serviceProviderData,array('portfolio' => $portfolioData));  
+                }          
+            }
+
+
+            if(!empty($input['bankname'])){
+                $cleanData = $this->cleanInput($input['bankname']); 
+                if($cleanData ==='CBE' || $cleanData ==='Awash' || $cleanData ==='Dashen' || $cleanData ==='Abyssinia' || $cleanData ==='Nib' || $cleanData ==='Abay' || $cleanData ==='United'){
+                    $serviceProviderData = array_merge($serviceProviderData,array('bankname' => $cleanData));
+                }                
+            }
+
+            if(!empty($input['accountnumber'])){
+                $serviceProviderData = array_merge($serviceProviderData,array('accountnumber' => $this->cleanInput($input['accountnumber'])));
+            }
+
+            if(!empty($input['summary'])){
+                $serviceProviderData = array_merge($serviceProviderData,array('summary' => $this->cleanInput($input['summary'])));
+            }
+
+            return $serviceProviderData;
+        }
+
+
+        public function updateProfile($data, $files){
+            $response = $this->validateUpdateProfile($data, $files);
+            
+            $this->setUsername($_SESSION['username']);
+            if(!empty($response['firstname'])){
+                $this->setFirstName($response['firstname']);
+            }
+            if(!empty($response['lastname'])){
+                $this->setLastName($response['lastname']);
+            }
+            if(!empty($response['nationality'])){
+                $this->setNationality($response['nationality']);
+            }
+            if(!empty($response['country'])){
+                $this->setCountry($response['country']);
+            }
+            if(!empty($response['city'])){
+                $this->setCity($response['city']);
+            }
+            if(!empty($response['address'])){
+                $this->setAddress($response['address']);
+            }
+            if(!empty($response['education'])){
+                $this->setEducation($response['education']);
+            }
+            if(!empty($response['language'])){
+                $this->setLanguage($response['language']);
+            }
+            if(!empty($response['skill'])){
+                $this->setSkill($response['skill']);
+            }
+            if(!empty($response['experience'])){
+                $this->setExperience($response['experience']);
+            }
+            if(!empty($response['portfolio'])){
+                $this->setPortfolio($response['portfolio']);
+            }
+            if(!empty($response['bankname'])){
+                $this->setBankName($response['bankname']);
+            }
+            if(!empty($response['accountnumber'])){
+                $this->setAccountNumber($response['accountnumber']);
+            }
+            if(!empty($response['profilephoto'])){
+                $this->setProfilePhoto($response['profilephoto']);
+            }
+            if(!empty($response['summary'])){
+                $this->setSummary($response['summary']);
+            }
+        
+            //The variables below are arguments to be passed to insert data to their respective table
+            
+            $userTb = array();
+            if(!empty($this->getFirstName())){
+                $userTb = array_merge($userTb,array('firstname' => "'".$this->getFirstName()."'"));
+            }
+            if(!empty($this->getLastName())){
+                $userTb = array_merge($userTb,array('lastname' => "'".$this->getLastName()."'"));
+            }
+            if(!empty($this->getNationality())){
+                $userTb = array_merge($userTb,array('nationality' => "'".$this->getNationality()."'"));
+            }
+            if(!empty($this->getCountry())){
+                $userTb = array_merge($userTb,array('country' => "'".$this->getCountry()."'"));
+            }
+            if(!empty($this->getCity())){
+                $userTb = array_merge($userTb,array('city' => "'".$this->getCity()."'"));
+            }
+            if(!empty($this->getAddress())){
+                $userTb = array_merge($userTb,array('address' => "'".$this->getAddress()."'"));
+            }
+
+
+            $serviceProviderTb = array();
+            if(!empty($this->getBankName())){
+                $serviceProviderTb = array_merge($serviceProviderTb,array('bank_name' => "'".$this->getBankName()."'"));
+            }
+            if(!empty($this->getEducation())){
+                $serviceProviderTb = array_merge($serviceProviderTb,array('education' => "'".$this->getEducation()."'"));
+            }
+            if(!empty($this->getExperience())){
+                $serviceProviderTb = array_merge($serviceProviderTb,array('experience' => "'".$this->getExperience()."'"));
+            }
+            if(!empty($this->getAccountNumber())){
+                $serviceProviderTb = array_merge($serviceProviderTb,array('account_number' => "'".$this->getAccountNumber()."'"));
+            }
+            if(!empty($this->getProfilePhoto())){
+                $serviceProviderTb = array_merge($serviceProviderTb,array('profile_photo' => "'".$this->getProfilePhoto()."'"));
+            }
+            if(!empty($this->getSummary())){
+                $serviceProviderTb = array_merge($serviceProviderTb,array('summary' => "'".$this->getSummary()."'"));
+            }
+
+
+            $providerSkillTb = [];
+            if(!empty($this->getSkill())){
+                foreach($this->getSkill() as $skill){
+
+                    array_push($providerSkillTb,array('username' => "'".$this->getUsername()."'",'skill_id' => $skill));
+                
+                }
+            }
+
+            $providerLanguageTb = [];
+            if(!empty($this->getLanguage())){
+                foreach($this->getLanguage() as $language){
+
+                    array_push($providerLanguageTb,array('username' => "'".$this->getUsername()."'",'language_id' => $language));
+                
+                }
+            }
+
+            $portfolioTb = [];
+            if(!empty($this->getPortfolio())){
+                foreach($this->getPortfolio() as $portfolio){
+
+                    array_push($portfolioTb,array('username' => "'".$this->getUsername()."'",'portfolio_url' => "'". $portfolio."'"));
+                
+                }
+            }
+
+            if(!empty($providerSkillTb)){
+                $this->remove('provider_skill',"WHERE username='".$this->getUsername()."'");
+                foreach($providerSkillTb as $skill){
+                    $this->insert('provider_skill',$skill);
+                }
+            }
+
+            if(!empty($providerLanguageTb)){
+                $this->remove('provider_language',"WHERE username='".$this->getUsername()."'");
+                foreach($providerLanguageTb as $language){
+                    $this->insert('provider_language',$language);
+                }
+            }
+
+            if(!empty($portfolioTb)){
+                $this->remove('portfolio',"WHERE username='".$this->getUsername()."'");
+                foreach($portfolioTb as $portfolio){
+                    $this->insert('portfolio',$portfolio);
+                }
+            }
+
+            $this->update('user',$userTb,"WHERE username ='". $this->getUsername() . "'");
+            $this->update('service_provider',$serviceProviderTb,"WHERE username ='". $this->getUsername() . "'"); 
+              
+        }
                 
     }
 ?>
