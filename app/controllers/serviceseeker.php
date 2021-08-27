@@ -35,8 +35,67 @@
             $this->view('service_seeker/announcedproject');
         }
 
-        public function viewbids($projectID){
+        public function viewbids($projectId){
+            $_SESSION['projectid'] = $projectId;
             $this->view('service_seeker/viewbids');
+            unset($_SESSION['projectid'] );
+        }
+
+        public function viewbiddescription($bidId){
+            $bid = $this->model('Bid');
+            $_SESSION['bidDetails'] = $bid->retrieveBidDetails($bidId);
+            if($_SESSION['bidDetails']==false){
+                unset($_SESSION['bidDetails']);
+                header("Location: http://localhost/seralance/public/serviceseeker/");                
+                exit();
+            }
+
+            $this->view('service_seeker/biddescription');
+            unset($_SESSION['bidDetails']);
+            
+        }
+
+        public function approvebid($bidId,$projectId){
+            $bid = $this->model('Bid');            
+            $bid->approveBid($bidId,$projectId);
+            $details = $bid->retrieveBidDetails($bidId);
+            $project = $this->model('Project'); 
+            $project->approveBid($details['project_id'],$details['price'],$details['made_by']);
+            header("Location: http://localhost/seralance/public/serviceseeker/announcedprojects");                
+            exit();
+        }
+
+        public function viewproject($projectId){
+            $project = $this->model('Project');
+            $_SESSION['projectDetails'] = $project->retrieveProjectDetails($projectId);
+            if($_SESSION['projectDetails']==false){
+                unset($_SESSION['projectDetails']);
+                header("Location: http://localhost/seralance/public/serviceseeker/");                
+                exit();
+            }
+
+            if(empty($_SESSION['projectDetails']['price'])){
+                $_SESSION['projectDetails'] = array_merge($_SESSION['projectDetails'], array('price'=>'---'));
+            }
+            if(empty($_SESSION['projectDetails']['start_date'])){
+                $_SESSION['projectDetails'] = array_merge($_SESSION['projectDetails'], array('start_date'=>'---'));
+            }
+            if(empty($_SESSION['projectDetails']['end_date'])){
+                $_SESSION['projectDetails'] = array_merge($_SESSION['projectDetails'], array('end_date'=>'---'));
+            }
+            if(empty($_SESSION['projectDetails']['file'])){
+                $_SESSION['projectDetails'] = array_merge($_SESSION['projectDetails'], array('file'=>'---'));
+            }
+            if(empty($_SESSION['projectDetails']['delivered_file'])){
+                $_SESSION['projectDetails'] = array_merge($_SESSION['projectDetails'], array('delivered_file'=>'---'));
+            }
+            if(empty($_SESSION['projectDetails']['assigned_to'])){
+                $_SESSION['projectDetails'] = array_merge($_SESSION['projectDetails'], array('assigned_to'=>'---'));
+            }
+
+            $this->view('service_seeker/projectdetails');
+            unset($_SESSION['projectDetails']);
+            
         }
         
         public function viewticket($ticketId){

@@ -57,8 +57,12 @@
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $sql = "SELECT bid_id, bid_date, bid.price, cover_letter, bid.status,made_by, project.project_id, project.title,project.announced_by FROM bid INNER JOIN project ON bid.project_id = project.project_id where bid_id ='".$bidId."' AND made_by='".$_SESSION['username']."'";
-                
+                if($_SESSION['usertype']==='serviceprovider'){
+                    $sql = "SELECT bid_id, bid_date, bid.price, cover_letter, bid.status,made_by, project.project_id, project.title,project.announced_by FROM bid INNER JOIN project ON bid.project_id = project.project_id where bid_id ='".$bidId."' AND made_by='".$_SESSION['username']."'";
+                }
+                if($_SESSION['usertype']==='serviceseeker'){
+                    $sql = "SELECT bid_id, bid_date, bid.price, cover_letter, bid.status,made_by, project.project_id, project.title,project.announced_by FROM bid INNER JOIN project ON bid.project_id = project.project_id where bid_id ='".$bidId."' AND project.announced_by='".$_SESSION['username']."'";
+                }
                 $stmt = $conn->query($sql);
                 if($bid = $stmt->fetch(PDO::FETCH_ASSOC)){
                     return $bid;
@@ -76,7 +80,7 @@
             if($conn !== null){
                 $sql = "";
                 if($_SESSION['usertype'] ==='serviceseeker'){
-                    $sql = "SELECT * FROM bid where project_id='".$id."' and project_id IN (select project_id from project where announced_by = '".$_SESSION['username']."')";
+                    $sql = "SELECT bid_id,bid_date, bid.price, cover_letter, bid.status,made_by, project.project_id, project.title FROM bid INNER JOIN project ON bid.project_id = project.project_id where bid.project_id = ".$id." AND project.announced_by='".$_SESSION['username']."'";
                 }
                 
                 if($_SESSION['usertype'] ==='serviceprovider'){
@@ -101,6 +105,15 @@
             }             
             
             return 0;
+        }
+        
+        public function approveBid($bidId,$projectId){                       
+            
+            $condition= "WHERE bid_id !=". $bidId ." and project_id ='".$projectId."' AND status = 'open'" ;
+            $this->update('bid', array('status'=>"'Rejected'"),$condition);
+            $condition= "WHERE bid_id =". $bidId ."  AND status = 'open'" ;
+            $this->update('bid', array('status'=>"'Approved'"),$condition);
+            
         }
 
         public function validateNewBid($input){

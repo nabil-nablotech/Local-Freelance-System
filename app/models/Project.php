@@ -195,7 +195,7 @@
                 $sql = "";
                 
                 if($_SESSION['usertype']==='serviceseeker'){
-                    $sql = "SELECT * FROM project where offer_type ='Announcement' and announced_by='" . $username . "'";
+                    $sql = "SELECT * FROM project where (status='Pending' OR status='Pending Deposit') AND offer_type ='Announcement' and announced_by='" . $username . "'";
                 }
 
                 elseif($_SESSION['usertype']==='serviceprovider'){
@@ -238,9 +238,9 @@
         }
 
         public function deleteProject($projectId){                
-            $condition = "";              
+            $data = array('status'=>'\'Cancelled\'');            
             $condition= "WHERE project_id ='". $projectId ."' and project_id IN (select project_id from project where announced_by = '".$_SESSION['username']."')" ;
-            if($this->remove('project_skill',$condition) && $this->remove('project',$condition)){
+            if($this->update('project',$data,$condition)){
                 return 1;
             }             
             
@@ -453,7 +453,6 @@
                 //The variables below are arguments to be passed to insert data to their respective table 
 
                 $projectTb = array(
-                    'project_id' => "'".$this->getProjectId()."'",
                     'price' => $this->getPrice(),
                     'start_date' => $this->getStartDate(),
                     'status' => "'".$this->getStatus()."'"
@@ -468,6 +467,26 @@
                 return $response;
             }      
         }
+
+        public function approveBid($projectId,$price,$serviceprovider){
+                $this->setProjectId($projectId);
+                $this->setPrice($price);
+                $this->setStartDate("UTC_TIMESTAMP");
+                $this->setStatus('Pending Deposit');
+
+                //The variables below are arguments to be passed to insert data to their respective table 
+
+                $projectTb = array(
+                    'price' => $this->getPrice(),
+                    'start_date' => $this->getStartDate(),
+                    'assigned_to' => "'".$serviceprovider."'",
+                    'status' => "'".$this->getStatus()."'"
+                );
+
+                $condition = "WHERE project_id = '".$this->getProjectId()."'";              
+                $this->update('project',$projectTb,$condition);             
+        }       
+        
 
         public function getLatestInserted(){
             require_once('../app/Core/Database.php');

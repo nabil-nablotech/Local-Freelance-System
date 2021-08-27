@@ -1,21 +1,22 @@
 <?php
 require "includes/service_seeker-navigation.php";
-$bids = $serviceSeekerController->getAllBids($_SESSION['username']);
+$bids = $serviceSeekerController->getAllBids($_SESSION['projectid']);
 ?>
   <script>
     document.title="Admin-list of bids";
 </script>
 
+
  <!-- Container Fluid-->
  <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">List of bids </h1>
+            <h1 class="h3 mb-0 text-gray-800">My bids </h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
                 <a href="./">Home</a>
               </li>
               <li class="breadcrumb-item">Bids</li>
-              <li class="breadcrumb-item active" aria-current="page">List of Bids</li>
+              <li class="breadcrumb-item active" aria-current="page">My bids</li>
             </ol>
           </div>
           <div class="row">
@@ -23,7 +24,7 @@ $bids = $serviceSeekerController->getAllBids($_SESSION['username']);
             <div class="col-lg-12">
               <div class="card shadow-sm mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary mx-auto">List of bids</h6>
+                  <h6 class="m-0 font-weight-bold text-primary mx-auto">My bids</h6>
                 </div>
                 <div class="card-body">
 <!--  -->
@@ -36,8 +37,9 @@ $bids = $serviceSeekerController->getAllBids($_SESSION['username']);
                         <th>Bid Id</th>
                         <th>Bid price</th>
                         <th>Bid date</th>
+                        <th>Project Id</th>
+                        <th>Project title </th>
                         <th>Service provider</th>
-                        <th> </th>
                         <th> </th>
                         <th> </th>
                      </tr>
@@ -45,10 +47,13 @@ $bids = $serviceSeekerController->getAllBids($_SESSION['username']);
                   <tbody>
 
                     <?php 
-                        if(!empty($bid)){
+                        if(!empty($bids)){
                             $count = 1;
                             foreach($bids as $bid){
-                                
+                              $approveBtn = "";
+                              if($bid['status'] == 'open'){
+                                 $approveBtn = '<button class="btn btn-success" onclick ="confirmAction(\'http://localhost/seralance/public/serviceseeker/approvebid/'.$bid['bid_id'].'/'.$bid['project_id'].'\');" > Approve</button>'; 
+                              }
                                 echo <<<EOT
                                             <tr>
                                             <td>
@@ -58,21 +63,23 @@ $bids = $serviceSeekerController->getAllBids($_SESSION['username']);
                                                 {$bid['bid_id']}
                                             </td>
                                             <td>
-                                                {$bid['opened_date']}
-                                            </td>
-                                            <td>
                                                 {$bid['price']}
                                             </td>
                                             <td>
                                                 {$bid['bid_date']}
                                             </td>
                                             <td>
+                                                {$bid['project_id']}
+                                            </td>
+                                            <td>
+                                                {$bid['title']}
+                                            </td>
+                                            <td>
                                                 {$bid['made_by']}
                                             </td>
                                             <!--  -->
-                                                <td><a class="btn btn-info" href="viewbiddescription/{$bid['bid_id']}"> View</a> </td>
-                                                <td><a class="btn btn-info" href="viewbiddescription/{$bid['bid_id']}"> View service provider</a> </td>
-                                                <td><a class="btn btn-info" href="viewbiddescription/{$bid['bid_id']}"> View</a> </td>
+                                                <td><a class="btn btn-info" href="http://localhost/seralance/public/serviceseeker/viewbiddescription/{$bid['bid_id']}">Bid description</a> </td>
+                                                <td>$approveBtn</td>
                                             <!--  -->
                                             </tr>
                                         EOT;
@@ -90,14 +97,7 @@ $bids = $serviceSeekerController->getAllBids($_SESSION['username']);
       </div>
    </div>
 </div>
- <script type = "text/javascript">
-   function confirmationDelete(anchor){
-   	var conf = confirm("Are you sure you want to delete this record?");
-   	if(conf){
-   		window.location = anchor.attr("href");
-   	}
-   } 
-</script>
+
    
 
                 </div>
@@ -112,24 +112,26 @@ $bids = $serviceSeekerController->getAllBids($_SESSION['username']);
       </div>
 
       <!-- Footer -->
-     <?php
-        require "includes/service_seeker-footer.php";
-     ?>
+      <script type = "text/javascript">
+     function confirmAction(anchor){
+   	var conf = confirm("Are you sure you want to delete this record?");
+   	if(conf){
+   		window.location = anchor;
+   	}
+   } 
+   $(document).ready(function(){
+   	$("#table").DataTable();
+   });
+</script> 
 
     </div>
   </div>
 
 
 
-
-  <script type = "text/javascript">
-   $(document).ready(function(){
-   	$("#table").DataTable();
-   });
-</script> 
-  
-
 </body>
+
+
 
 </html>
 

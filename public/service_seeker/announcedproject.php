@@ -28,8 +28,8 @@
 										<th>Project Title</th>
 										<th>Announced date</th>
 										<th>status</th>
-										<th>View project</th>
-										<th>View bids</th>
+										<th></th>
+										<th></th>
 										<th></th>
 										<th></th>
 									</tr>
@@ -39,7 +39,12 @@
 											if(!empty($projects)){
 												$count = 1;
 												foreach($projects as $project){
-													$deleteBtn = "";
+													$depositBtn = "";
+													$viewBidBtn = "";
+
+													if($project['status'] == 'Pending'){
+														$viewBidBtn = "<a class=\"btn btn-primary\" href=\"viewbids/{$project['project_id']}\">	View bids</a>"; 
+													}
 													if($project['status'] == 'Pending Deposit'){
 														$depositBtn = '<a class="btn btn-success" href="Change it">Deposit</a>'; 
 													}
@@ -61,10 +66,9 @@
 																	{$project['status']}
 																</td>
 																<!--  -->
-																<td><a class="btn btn-primary" href="Change it">
+																<td><a class="btn btn-primary" href="http://localhost/seralance/public/serviceseeker/viewproject/{$project['project_id']}">
 																	View details</a> </td>
-																	<td><a class="btn btn-primary" href="viewbids/{$project['project_id']}">
-																	View bids</a> </td>
+																	<td>$viewBidBtn </td>
 																<td>{$depositBtn}</td>
 																<td><button class="btn btn-danger" onclick ="confirmAction('http://localhost/seralance/public/serviceseeker/deleteproject/announcedprojects/{$project['project_id']}');" >
 																	Delete</button> </td>
@@ -87,7 +91,7 @@
 		</div>
 		<script type="text/javascript">
 		function confirmAction(anchor) {
-			var conf = confirm("Are you sure you want to delete this record?");
+			var conf = confirm("Are you sure you want to perform this action?");
 			if(conf) {
 				window.location = anchor;
 			}
