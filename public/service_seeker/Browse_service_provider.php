@@ -269,7 +269,7 @@
 																			<h2 class="profile-list-title">
 																			<a>{$serviceProvider['firstname']} {$serviceProvider['lastname']}</a>
 																			</h2>
-																			<div class="text-center"> <a href="http://localhost/seralance/public/serviceseeker/hire/{$serviceProvider['username']}" class="d-inline float-right btn-sm  btn btn-primary mr-5">Hire</a> </div>
+																			<div class="text-center"> <a href="http://localhost/seralance/public/serviceseeker/hire/{$serviceProvider['username']}" class="d-inline float-right btn-sm  btn btn-primary mr-5">Hire</a>  <a href="http://localhost/seralance/public/serviceseeker/viewproviderprofile/{$serviceProvider['username']}" class="d-inline float-right btn-sm  btn btn-primary mr-5">View profile</a> </div>
 																			<p class="profile-list-subtitle">{$myskill}</p>
 																			<div class="profile-list-info">
 																				<div class="profile-list-detail"> 

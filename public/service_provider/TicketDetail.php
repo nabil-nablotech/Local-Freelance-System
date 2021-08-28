@@ -1,5 +1,5 @@
 <?php
-include "navigation.php";
+require "includes/service_provider-navigation.php";
 
 ?>
 	<div class="container">
@@ -8,22 +8,79 @@ include "navigation.php";
 				<div class="card shadow-sm mb-4">
 					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 						<h6 class="m-0 font-weight-bold text-primary mx-auto"> Tickets Details</h6> </div>
-					<div class="card-body mx-auto"> </div>
+					<div class="card-body mx-auto">
+					<form>
+						<div class="form-group row">
+								<label for="colFormLabelSm" class="col-sm-4 
+						col-form-label col-form-label-sm">Ticket ID</label>
+								<div class="col-sm-8">
+									<input type="text" class="col" value="<?php echo $_SESSION['ticketDetails']['ticket_id'];?>" disabled>
+								</div>
+						</div>
+						<div class="form-group row">
+								<label for="colFormLabelSm" class="col-sm-4 
+						col-form-label col-form-label-sm">Opened date</label>
+								<div class="col-sm-8">
+									<input type="text" class="col" value="<?php echo $_SESSION['ticketDetails']['opened_date'];?>" disabled>
+								</div>
+						</div>
+						<div class="form-group row">
+								<label for="colFormLabelSm" class="col-sm-4 
+						col-form-label col-form-label-sm">Status</label>
+								<div class="col-sm-8">
+									<input type="text" class="col" value="<?php echo $_SESSION['ticketDetails']['status'];?>" disabled>
+								</div>
+						</div>
+
+						<div class="form-group row">
+								<label for="colFormLabelSm" class="col-sm-4 
+						col-form-label col-form-label-sm">Subject</label>
+								<div class="col-sm-8">
+									<input type="text" class="col" value="<?php echo $_SESSION['ticketDetails']['subject'];?>" disabled>
+								</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="colFormLabelSm" class="col-sm-4 
+                     col-form-label col-form-label-sm">Message</label>
+							<div class="col-sm-8">
+							<textarea class="textarea form-control" rows="5" cols="45" disabled><?php echo $_SESSION['ticketDetails']['message'];?></textarea>
+							</div>
+						</div>
+						
+						<div class="form-group row">
+								<label for="colFormLabelSm" class="col-sm-4 
+						col-form-label col-form-label-sm">File</label>
+								<div class="col-sm-8">
+									<a href="<?php echo $base.$_SESSION['ticketDetails']['file'];?>">Download</a>
+								</div>
+						</div>
+
+						<div class="form-group row">
+								<label for="colFormLabelSm" class="col-sm-4 
+						col-form-label col-form-label-sm">Closed date</label>
+								<div class="col-sm-8">
+									<input type="text" class="col" value="<?php echo $_SESSION['ticketDetails']['closed_date'];?>" disabled>
+								</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="colFormLabelSm" class="col-sm-4 
+                     		col-form-label col-form-label-sm">Reply</label>
+							<div class="col-sm-8">
+							<textarea class="textarea form-control" rows="5" cols="45" disabled><?php echo $_SESSION['ticketDetails']['reply'];?></textarea>
+							</div>
+						</div>
+					 </form>
+					 </div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<?php
-include "../ServiceSeeker/Footer.php";
+require "includes/service_seeker-footer.php";
 ?>
-		<!-- included files -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<!-- Popper JS -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-		<!-- Latest compiled JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-		<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
 		</body>
 
 		</html>

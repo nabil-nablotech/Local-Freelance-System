@@ -1,6 +1,7 @@
 <?php
-   require_once "nav.php";
-   require_once "../Database/db.php";
+   
+include "../includes/admin-navigation.php";
+require_once "../guest/connection.php";
    ?>
 <!--  -->
 
@@ -117,53 +118,39 @@
                </div>
             </div>
          </div>
+<!--  -->
+      
+   
+
+      <!--  -->
+        <div class="col-lg-12">
+         <div class="card shadow-sm mb-4 ">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+               <h6 class="m-0 font-weight-bold text-primary">upload profile Image</h6>
+            </div>
+            <div class="card-body mx-auto">
+            <input type="file"  name="profileImage" 
+              class="form-control btn-success">
+
+            </div>
+         </div>
       </div>
+      <!--  -->
+</div>
+      </div>
+</div>
+      <!--  -->
    </div>
    <!-- button -->
    <div class="row">
       <div class="col-sm-6 mx-auto">
          <div class="form-group">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-key">Change password</i>
-            </button>
             <button type="button" class="btn btn-primary btn-sm "><i class="fa fa-edit"></i>Update</button>
          </div>
       </div>
    </div>
    <!--  -->
-   <!-- Button trigger modal -->
-   <!-- Modal -->
-   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-         <div class="modal-content">
-            <div class="modal-header mx-auto">
-               <h5 class="modal-title" id="exampleModalLabel ">Change password</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-               </button>
-            </div>
-            <div class="modal-body">
-               <div class="col-sm-6 mx-auto">
-                  <div class="form-group">
-                     <input type="password" class="form-control" placeholder="old password">
-                  </div>
-                  <div class="form-group">
-                     <input type="password" class="form-control" placeholder="new password">
-                  </div>
-                  <div class="form-group">
-                     <input type="password" class="form-control" placeholder="confirm new password">
-                  </div>
-               </div>
-               <div class="form-group text-center">
-                  <button class="btn btn-primary btn-sm"><i class="fa fa-check-circle"></i>change</button>
-               </div>
-            </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-         </div>
-      </div>
-   </div>
+
    <!--  -->
    <script type = "text/javascript">
       function confirmationDelete(anchor){
@@ -175,33 +162,8 @@
    </script>
 </div>
 </div>
-</div>
-<!-- Modal Logout -->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-   aria-hidden="true">
-   <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-         </div>
-         <div class="modal-body">
-            <p>Are you sure you want to logout?</p>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-            <a href="login.html" class="btn btn-primary">Logout</a>
-         </div>
-      </div>
-   </div>
-</div>
-</div>
-</div>
-<!-- Footer -->
 <?php
-   require_once "footer.php";
+   require_once "../includes/admin-footer.php";
         ?>
 </div>  
 </div>
@@ -209,14 +171,15 @@
 <a class="scroll-to-top rounded" href="#page-top">
 <i class="fas fa-angle-up"></i>
 </a>
-<script src="vendor/jquery/jquery.min.js"></script>  
-<script src="vendor/datatables/jquery.dataTables.js" ></script>
-<script src="vendor/datatables/jquery.dataTables.min.js" ></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="js/serelance-admin.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.js" ></script>
+<script src="../assets/vendor/jquery/jquery.min.js"></script>  
+<script src="../assets/vendor/datatables/jquery.dataTables.js" ></script>
+<script src="../assets/vendor/datatables/jquery.dataTables.min.js" ></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="../assets/js/administrator/serelance-admin.js "></script>
+<script src="../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="../assets/vendor/datatables/dataTables.bootstrap4.js" ></script>
+
 <script type = "text/javascript">
    $(document).ready(function(){
    	$("#table").DataTable();

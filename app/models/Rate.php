@@ -76,5 +76,20 @@
             }
         }
 
+        public function retrieveRate($username){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $stmt = $conn->query("select * from rate where ratee='".$username."'");
+                if($rate = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    return $rate;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
     }
 ?>

@@ -173,7 +173,7 @@
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("SELECT * FROM project WHERE offer_type='Announcement' and assigned_to IS NULL AND project_id NOT IN (select project_id FROM bid WHERE made_by = '".$_SESSION['username']."' )");
+                $stmt = $conn->query("SELECT * FROM project WHERE offer_type='Announcement' and status='Pending' and assigned_to IS NULL AND project_id NOT IN (select project_id FROM bid WHERE made_by = '".$_SESSION['username']."' )");
                 if($projects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
                     foreach($projects as $project){
                         $key = array_search($project, $projects);
@@ -199,7 +199,7 @@
                 }
 
                 elseif($_SESSION['usertype']==='serviceprovider'){
-                    $sql = "SELECT * FROM project where (status='Pending' OR status='Pending Deposit') AND offer_type ='Announcement' and assigned_to='" . $username . "'";
+                    $sql = "SELECT * FROM project where (status='Cancelled' OR status='Pending Deposit') AND offer_type ='Announcement' and assigned_to='" . $username . "'";
                 }
 
                 $stmt = $conn->query($sql);
@@ -220,7 +220,7 @@
                 $sql = "";
                 
                 if($_SESSION['usertype']==='serviceseeker'){
-                    $sql = "SELECT * FROM project where offer_type ='Offer' and announced_by='" . $username . "'";
+                    $sql = "SELECT * FROM project where offer_type ='Offer' AND (status='Pending' OR status='Pending Deposit' OR status='Cancelled') and announced_by='" . $username . "'";
                 }
                 
                 elseif($_SESSION['usertype']==='serviceprovider'){

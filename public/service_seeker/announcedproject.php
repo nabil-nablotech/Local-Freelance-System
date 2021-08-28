@@ -31,7 +31,6 @@
 										<th></th>
 										<th></th>
 										<th></th>
-										<th></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -39,14 +38,13 @@
 											if(!empty($projects)){
 												$count = 1;
 												foreach($projects as $project){
-													$depositBtn = "";
-													$viewBidBtn = "";
+													$secondColBtn = "";
 
 													if($project['status'] == 'Pending'){
-														$viewBidBtn = "<a class=\"btn btn-primary\" href=\"viewbids/{$project['project_id']}\">	View bids</a>"; 
+														$secondColBtn = "<a class=\"btn btn-primary\" href=\"viewbids/{$project['project_id']}\">	View bids</a>"; 
 													}
 													if($project['status'] == 'Pending Deposit'){
-														$depositBtn = '<a class="btn btn-success" href="Change it">Deposit</a>'; 
+														$secondColBtn = '<a class="btn btn-success" href="Change it">Deposit</a>'; 
 													}
 													echo <<<EOT
 																<tr>
@@ -68,8 +66,7 @@
 																<!--  -->
 																<td><a class="btn btn-primary" href="http://localhost/seralance/public/serviceseeker/viewproject/{$project['project_id']}">
 																	View details</a> </td>
-																	<td>$viewBidBtn </td>
-																<td>{$depositBtn}</td>
+																<td>$secondColBtn </td>
 																<td><button class="btn btn-danger" onclick ="confirmAction('http://localhost/seralance/public/serviceseeker/deleteproject/announcedprojects/{$project['project_id']}');" >
 																	Delete</button> </td>
 																<!--  -->

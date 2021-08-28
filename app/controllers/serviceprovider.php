@@ -32,6 +32,33 @@
             $this->view('service_provider/updateprofile');
         }
 
+        public function ticket(){
+            $this->view('service_provider/ticket');
+        }
+
+        public function newticket(){
+            $this->view('service_provider/addticket');
+        }
+
+        public function viewticket($ticketId){
+            $ticket = $this->model('Ticket');
+            $_SESSION['ticketDetails'] = $ticket->retrieveTicketDetails($ticketId);
+            if($_SESSION['ticketDetails']==false){
+                unset($_SESSION['ticketDetails']);
+                header("Location: http://localhost/seralance/public/serviceprovider/ticket");                
+                exit();
+            }
+            if(empty($_SESSION['ticketDetails']['closed_date'])){
+                $_SESSION['ticketDetails'] = array_merge($_SESSION['ticketDetails'], array('closed_date'=>'---'));
+            }
+            if(empty($_SESSION['ticketDetails']['reply'])){
+                $_SESSION['ticketDetails'] = array_merge($_SESSION['ticketDetails'], array('reply'=>'---'));
+            }
+
+            $this->view('service_provider/ticketdetail');
+            unset($_SESSION['ticketDetails']);
+        }
+
         public function viewproject($projectId){
             $project = $this->model('Project');
             $_SESSION['projectDetails'] = $project->retrieveProjectDetails($projectId);
@@ -125,6 +152,11 @@
             return $serviceProvider->retrieveAllSkills();
         }
 
+        public function getAllTickets($username){
+            $ticket = $this->model('Ticket');
+            return $ticket->retrieveAllTickets($username);
+        } 
+
         public function getUserDetails($username){
             $serviceProvider = $this->model('ServiceProvider');
             return $serviceProvider->retrieveUserDetails($username);
@@ -155,6 +187,19 @@
             $serviceProvider->updateProfile($input, $files);
             header("Location: http://localhost/seralance/public/serviceprovider/profile");                
             exit();
+        }
+
+        public function validateNewTicket($input,$files){
+            $ticket = $this->model('Ticket');
+            $reply = $ticket->createTicket($input, $files);
+
+            if($reply['valid']==true){  
+                header("Location: http://localhost/seralance/public/serviceprovider/ticket");              
+                exit();
+            }
+            else{
+                return $reply;
+            }
         }
 
         public function validateNewBid($input,$projectId){

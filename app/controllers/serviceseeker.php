@@ -35,6 +35,19 @@
             $this->view('service_seeker/announcedproject');
         }
 
+        public function viewproviderprofile($username){                 
+            $serviceProvider = $this->model('ServiceProvider');
+            
+            $_SESSION['serviceProviderDetails'] = $serviceProvider->retrieveServiceProviderDetails($username);
+            if($_SESSION['serviceProviderDetails']==false){
+                unset($_SESSION['serviceProviderDetails']);
+                header("Location: http://localhost/seralance/public/serviceseeker/browse");                
+                exit();
+            }
+            $this->view('service_seeker/provider_profile');
+            unset($_SESSION['serviceProviderDetails']);
+        }
+
         public function viewbids($projectId){
             $_SESSION['projectid'] = $projectId;
             $this->view('service_seeker/viewbids');
