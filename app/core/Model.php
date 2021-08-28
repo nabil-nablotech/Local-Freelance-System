@@ -59,7 +59,7 @@
                         $setStmt .= $key. " = ". $value. ","; 
                     }
                 }
-                $s = "UPDATE $table SET $setStmt $condition";
+                
                 $sql = "UPDATE $table SET ". $setStmt ." ".$condition;
                 //echo "<h1> $sql</h1>";
                 //exit();
