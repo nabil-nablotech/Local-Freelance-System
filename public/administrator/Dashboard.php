@@ -1,14 +1,6 @@
-
 <?php
-
-  $dbHost = "localhost";
-    $dbDatabase = "multiplechart";
-    $dbPasswrod = "";
-    $dbUser = "root";
-    $mysqli = mysqli_connect($dbHost, $dbUser, $dbPasswrod, $dbDatabase);
-
-include "../includes/admin-navigation.php";
-
+require "includes/admin-navigation.php";
+/* 
    $sql = "SELECT SUM(numberofview) as count FROM demo_viewer 
 			GROUP BY YEAR(created_at) ORDER BY created_at";
     $viewer = mysqli_query($mysqli, $sql);
@@ -16,7 +8,7 @@ include "../includes/admin-navigation.php";
     $viewer = json_encode(array_column($viewer, 'count'), JSON_NUMERIC_CHECK);
 
 
-    /* Getting demo_click table data */
+    /--* Getting demo_click table data 
     $sql = "SELECT SUM(numberofclick) as count FROM demo_click 
 			GROUP BY YEAR(created_at) ORDER BY created_at";
     $click = mysqli_query($mysqli, $sql);
@@ -26,7 +18,7 @@ include "../includes/admin-navigation.php";
 			GROUP BY YEAR(created_at) ORDER BY created_at";
     $project = mysqli_query($mysqli, $sql);
     $project = mysqli_fetch_all($project, MYSQLI_ASSOC);
-    $project = json_encode(array_column($project, 'count'), JSON_NUMERIC_CHECK);
+    $project = json_encode(array_column($project, 'count'), JSON_NUMERIC_CHECK); */
 
 ?>
 
@@ -37,8 +29,7 @@ include "../includes/admin-navigation.php";
     document.title="Admin-Dashboard";
 </script>
 <head>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
- <script src="https://code.highcharts.com/highcharts.js"></script>
+
 <style>
   @import 'https://code.highcharts.com/css/highcharts.css';
  
@@ -332,7 +323,7 @@ $(function () {
       </div>
       <!-- Footer -->
      <?php
-     include "../includes/admin-footer.php";
+     include "includes/admin-footer.php";
      ?>
       <!-- Footer -->
     </div>
@@ -342,13 +333,10 @@ $(function () {
   <a class="scroll-to-top rounded" href="#page-top" >
     <i class="fas fa-angle-up"></i>
   </a>
-   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="../assets/js/administrator/serelance-admin.min.js"></script> 
-  
+  <script src="http://localhost/seralance/app/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-
-
+  <script src="http://localhost/seralance/public/assets/js/administrator/seralance-admin.min.js"></script> 
 </body>
 
 </html>
