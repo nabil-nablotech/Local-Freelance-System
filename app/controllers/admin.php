@@ -1,5 +1,6 @@
 <?php
     namespace Controller;
+    ob_start();// to avoid header() error. should be put at first
     class Admin extends Controller{
         
         public function home(){
@@ -10,6 +11,10 @@
             session_destroy();
             header("Location: http://localhost/seralance/public/");                
             exit();
+        }
+
+        public function profile(){
+            $this->view('administrator/updateprofile');
         }
 
         public function adminusers(){
@@ -36,6 +41,20 @@
             $this->view('administrator/offered');
         }
 
+        public function opentickets(){
+            $this->view('administrator/open_tickets');
+        }
+
+        public function closedtickets(){
+            $this->view('administrator/closed_tickets');
+        }
+
+        public function reply($ticketId){
+            $_SESSION['ticketid'] = $ticketId;
+            $this->view('administrator/replyticket');
+            unset($_SESSION['ticketid']);
+        }
+
         public function viewadmin($username){
             $admin = $this->model('Admin');
             $_SESSION['adminDetails'] = $admin->retrieveUserDetails($username);
@@ -47,6 +66,25 @@
 
             $this->view('administrator/admindetails');
             unset($_SESSION['adminDetails']);
+        }
+
+        public function viewticket($ticketId){
+            $ticket = $this->model('Ticket');
+            $_SESSION['ticketDetails'] = $ticket->retrieveTicketDetails($ticketId);
+            if($_SESSION['ticketDetails']==false){
+                unset($_SESSION['ticketDetails']);
+                header("Location: http://localhost/seralance/public/admin/home");                
+                exit();
+            }
+            if(empty($_SESSION['ticketDetails']['closed_date'])){
+                $_SESSION['ticketDetails'] = array_merge($_SESSION['ticketDetails'], array('closed_date'=>'---'));
+            }
+            if(empty($_SESSION['ticketDetails']['reply'])){
+                $_SESSION['ticketDetails'] = array_merge($_SESSION['ticketDetails'], array('reply'=>'---'));
+            }
+
+            $this->view('administrator/ticketdetails');
+            unset($_SESSION['ticketDetails']);
         }
 
         public function newadmin(){
@@ -86,6 +124,21 @@
         public function getAllOfferedProjects(){
             $project = $this->model('Project');
             return $project->retrieveAllOfferedProjects();
+        }
+
+        public function getAllOpenTickets(){
+            $ticket = $this->model('Ticket');
+            return $ticket->retrieveAllOpenTickets();
+        } 
+
+        public function getAllClosedTickets(){
+            $ticket = $this->model('Ticket');
+            return $ticket->retrieveAllClosedTickets();
+        } 
+
+        public function getAllCountries(){
+            require_once('../app/models/countries.php');
+            return \Countries::$countries;
         }
 
         public function viewserviceprovider($username){                 
@@ -184,6 +237,21 @@
                 header("Location: http://localhost/seralance/public/admin/serviceseekers");  
             }                          
             exit();
+        }
+
+        public function validateTicketReply($input){
+            $project = $this->model('Ticket');
+            $reply = $project->reviewTicket($input);
+
+            if($reply['valid']==true){
+
+                header("Location: http://localhost/seralance/public/admin/closedtickets");              
+                exit();
+                
+            }
+            else{
+                return $reply;
+            }
         }
 
 

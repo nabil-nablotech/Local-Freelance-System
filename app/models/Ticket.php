@@ -89,6 +89,10 @@
                 if($_SESSION['usertype'] ==='serviceprovider' || $_SESSION['usertype'] ==='serviceseeker'){
                     $sql = "SELECT * FROM ticket where ticket_id='".$ticketId."' and opened_by= '".$_SESSION['username']."'";
                 }
+
+                elseif($_SESSION['usertype'] ==='admin'){
+                    $sql = "SELECT * FROM ticket where ticket_id='".$ticketId."'";
+                }
                 $stmt = $conn->query($sql);
                 if($ticket = $stmt->fetch(PDO::FETCH_ASSOC)){
                     return $ticket;
@@ -99,7 +103,7 @@
             }
         }
 
-        public function retrieveAllTickets($username){
+        public function retrieveAllTickets($username=""){
             require_once('../app/Core/Database.php');
             $db = new Database();
             $conn = $db->setConnection();
@@ -107,6 +111,44 @@
                 $sql = "";
                 if($_SESSION['usertype']==='serviceseeker' || $_SESSION['usertype']==='serviceprovider'){
                     $sql = "SELECT * FROM ticket where opened_by='".$username."'";
+                }
+                $stmt = $conn->query($sql);
+                if($tickets = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $tickets;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        public function retrieveAllOpenTickets(){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $sql = "";
+                if($_SESSION['usertype']==='admin'){
+                    $sql = "SELECT * FROM ticket where status='open'";
+                }
+                $stmt = $conn->query($sql);
+                if($tickets = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $tickets;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        public function retrieveAllClosedTickets(){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $sql = "";
+                if($_SESSION['usertype']==='admin'){
+                    $sql = "SELECT * FROM ticket where status='closed'";
                 }
                 $stmt = $conn->query($sql);
                 if($tickets = $stmt->fetchAll(PDO::FETCH_ASSOC)){
@@ -186,6 +228,55 @@
                 );
 
                 $this->insert('ticket',$ticketTb);
+                return array('valid'=>1);
+            } 
+            else{
+                return $response;
+            }      
+        }
+
+        public function validateTicketReply($input){
+            
+            // $ticketData holds the data to be inserted to Service provider table
+            $ticketData = array();
+            $error=array();
+
+
+            if(empty($input['reply'])){
+                $error = array_merge($error,array('reply' => 'This field is required.'));
+            }
+            else{
+                $ticketData = array_merge($ticketData,array('reply' => $this->cleanInput($input['reply'])));
+                $ticketData = array_merge($ticketData,array('ticketid' => $this->cleanInput($input['ticketid'])));
+            }
+
+            if(empty($error)){
+                return array('valid'=>1 ,'data'=>$ticketData);
+            }
+            else{
+                return array('valid'=>0,'data'=>$ticketData,'error'=>$error);
+            }
+        }
+
+        public function reviewTicket($data){
+            $response = $this->validateTicketReply($data);
+            if($response['valid']==true){
+
+                $this->setTicketId($response['data']['ticketid']);
+                $this->setReply($response['data']['reply']);
+                $this->setStatus('closed') ;
+    
+                //The variables below are arguments to be passed to insert data to their respective table 
+                
+                $ticketTb = array(
+                    'ticket_id' => $this->getTicketId(),
+                    'closed_date' => "UTC_TIMESTAMP",
+                    'reply' => "'".$this->getReply()."'",
+                    'reviewed_by' => "'".$_SESSION['username']."'",
+                    'status' => "'".$this->getStatus()."'"
+                );
+                $condition = "WHERE ticket_id = '". $this->getTicketId() ."'"; 
+                $this->update('ticket',$ticketTb,$condition);
                 return array('valid'=>1);
             } 
             else{

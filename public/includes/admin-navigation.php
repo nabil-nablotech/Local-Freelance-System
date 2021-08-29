@@ -122,8 +122,8 @@
         <div id="collapseTicket" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
           
-            <a class="collapse-item" href="open_tickets.php">Open Ticket</a>
-            <a class="collapse-item" href="closed_tickets.php">Closed Ticket</a>
+            <a class="collapse-item" href="http://localhost/seralance/public/admin/opentickets">Open Ticket</a>
+            <a class="collapse-item" href="http://localhost/seralance/public/admin/closedtickets">Closed Ticket</a>
           </div>
         </div>
       </li>
@@ -160,7 +160,7 @@
       </li>
    
       <li class="nav-item">
-        <a class="nav-link" href="profile.php">
+        <a class="nav-link" href="http://localhost/seralance/public/admin/profile">
         <i class="fa fa-user-circle" aria-hidden="true"></i>
           <span>profile</span>
         </a>
