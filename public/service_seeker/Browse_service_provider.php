@@ -8,6 +8,9 @@
 		body{
 			overflow-x: hidden;
 		}
+		.text-center a:hover{
+			background-color: blue;
+		}
 		.profile-item :hover {
 			background-color: #f7fafa;
 		}

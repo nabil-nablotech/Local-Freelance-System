@@ -1,6 +1,107 @@
 <?php
-require_once "../includes/admin-navigation.php";
-require_once "../guest/connection.php";
+require "includes/admin-navigation.php";
+$firstName = $lastName = $email = $username = $mobileNumber = $city = $address = $accountNumber = "";
+  
+  $firstNameErr = $lastNameErr = $emailErr = $usernameErr = $passwordErr = $mobileNumberErr = $nationalityErr = $genderErr = $profilePhotoErr 
+  = $countryErr = $cityErr = $addressErr  
+  = $bankNameErr = $accountNumberErr = "";
+
+  if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['signup_btn'])){     
+    $feedback = $mainController->validateSsSignup($_POST,$_FILES);
+    if($feedback['valid'] == false){
+      
+      // setting inserted data
+      if(!empty($feedback['data']['firstname'])){
+        $firstName = $feedback['data']['firstname'];
+      }
+      
+      if(!empty($feedback['data']['lastname'])){
+        $lastName = $feedback['data']['lastname'];
+      }
+
+      if(!empty($feedback['data']['email'])){
+        $email = $feedback['data']['email'];
+      }
+
+      if(!empty($feedback['data']['username'])){
+        $username = $feedback['data']['username'];
+      }
+
+      if(!empty($feedback['data']['mobilenumber'])){
+        $mobileNumber = $feedback['data']['mobilenumber'];
+      }
+
+      if(!empty($feedback['data']['city'])){
+        $city = $feedback['data']['city'];
+      }
+
+      if(!empty($feedback['data']['address'])){
+        $address = $feedback['data']['address'];
+      }
+
+      if(!empty($feedback['data']['accountnumber'])){
+        $accountNumber = $feedback['data']['accountnumber'];
+      }
+
+      // Setting error values
+      if(!empty($feedback['error']['firstname'])){
+        $firstNameErr = $feedback['error']['firstname'];
+      }
+      
+      if(!empty($feedback['error']['lastname'])){
+        $lastNameErr = $feedback['error']['lastname'];
+      }
+
+      if(!empty($feedback['error']['email'])){
+        $emailErr = $feedback['error']['email'];
+      }
+
+      if(!empty($feedback['error']['username'])){
+        $usernameErr = $feedback['error']['username'];
+      }
+
+      if(!empty($feedback['error']['password'])){
+        $passwordErr = $feedback['error']['password'];
+      }
+
+      if(!empty($feedback['error']['mobilenumber'])){
+        $mobileNumberErr = $feedback['error']['mobilenumber'];
+      }
+
+      if(!empty($feedback['error']['nationality'])){
+        $nationalityErr = $feedback['error']['nationality'];
+      }
+
+      if(!empty($feedback['error']['gender'])){
+        $genderErr = $feedback['error']['gender'];
+      }
+
+      if(!empty($feedback['error']['profilephoto'])){
+        $profilePhotoErr = $feedback['error']['profilephoto'];
+      }
+
+      if(!empty($feedback['error']['country'])){
+        $countryErr = $feedback['error']['country'];
+      }
+
+      if(!empty($feedback['error']['city'])){
+        $cityErr = $feedback['error']['city'];
+      }
+
+      if(!empty($feedback['error']['address'])){
+        $addressErr = $feedback['error']['address'];
+      }
+
+      if(!empty($feedback['error']['bankname'])){
+        $bankNameErr = $feedback['error']['bankname'];
+      }
+
+      if(!empty($feedback['error']['accountnumber'])){
+        $accountNumberErr = $feedback['error']['accountnumber'];
+      }
+
+    }
+  }
 ?>
 
 <!--  -->
@@ -217,7 +318,7 @@ require_once "../guest/connection.php";
 
       <!-- Footer -->
      <?php
-require_once "../includes/admin-footer.php";
+require_once "includes/admin-footer.php";
      ?>
 
     </div>
@@ -226,15 +327,7 @@ require_once "../includes/admin-footer.php";
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
- <script src="../assets/vendor/jquery/jquery.min.js"></script>  
-<script src="../assets/vendor/datatables/jquery.dataTables.js" ></script>
-<script src="../assets/vendor/datatables/jquery.dataTables.min.js" ></script>
-<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="../assets/js/administrator/serelance-admin.js "></script>
-<script src="../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="../assets/vendor/datatables/dataTables.bootstrap4.js" ></script>
-
+  <script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
   <script type = "text/javascript">

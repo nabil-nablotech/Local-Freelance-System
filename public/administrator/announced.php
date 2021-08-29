@@ -1,139 +1,104 @@
 <?php
-require_once "../includes/admin-navigation.php";
-require_once "../guest/connection.php";
-?>
-<script>
-    document.title="Admin-list of announced projects";
-</script>
- <!-- Content begins-->
- <div class="container-fluid" id="container-wrapper">
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Announced Projects</h1>
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item">
-                <a href="./">Home</a>
-              </li>
-              <li class="breadcrumb-item">Projects</li>
-              <li class="breadcrumb-item active" aria-current="page">Announced projects</li>
-            </ol>
-          </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="card shadow-sm mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">List of Announced Projects</h6>
-                </div>
-                <div class="card-body">
-
-                <!-- data to be fetched from the databse -->
-
-                <div class="table table-responsive mt-5">
-               <table id = "table" class = "table table-bordered table-striped">
-                  <thead>
-                     <tr>
-                     <th>No</th>
-                        <th>Project Id</th>
-                        <th>Project Title</th>
-                        <th> Service provider</th>
-                        <th>Start Date</th>
-                        <th>Price </th>
-                        <th>Status</th>
-                        <th>view datails</th>
-                        <th>view Bids</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <?php
-                        $query = $con->query("SELECT * FROM ongoingproject") or die(mysqli_error($con));
-                        while ($fetch = $query->fetch_array()) {
-                            ?>	
-                     <tr>
-
-                     <td><?php echo $fetch['No']?></td>
-                        <td><?php echo $fetch['pid']?></td>
-                        <td><?php echo $fetch['ptitle']?></td>
-                        <td><?php echo $fetch['sp']?></td>
-                        <td><?php echo $fetch['sdate']?></td>
-                        <td><?php echo $fetch['price']?></td>
-                        <td><?php echo $fetch['status']?></td>
-                
-                        <td>
-                        <a class = "btn btn-primary btn-sm" 
-                        href = "edit_room.php?room_id=<?php echo $fetch['room_id']?>">
-                           <i class="fa fa-eye"></i>view</a> 
-                        </td>
-                          
-                        <td><a class = "btn btn-primary btn-sm" href = "edit_room.php?room_id=<?php echo $fetch['room_id']?>">
-                           <i class="fa fa-eye">view</i></a> 
-                        </td>
-                     </tr>
-                     <?php
-                        }
-                        ?>	
-                  </tbody>
-               </table>
-            </div>
-
-            <!-- data ends -->
-
-         </div>
-      </div>
-   </div>
-</div>
- <script type = "text/javascript">
-   function confirmationDelete(anchor){
-   	var conf = confirm("Are you sure you want to delete this record?");
-   	if(conf){
-   		window.location = anchor.attr("href");
-   	}
-   } 
-</script>
-     </div>
-   
-      </div>
-
-          
-      <!-- Footer -->
-     <?php
-require_once "../includes/admin-footer.php";
+   require "includes/admin-navigation.php";
+   $projects = $adminController->getAllAnnouncedProjects();
+     
      ?>
 
-    </div>
-  </div>
-  <!-- Scrollto to top -->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-<!--  -->
-    
-<!--  -->
-<script src="../assets/vendor/jquery/jquery.min.js"></script>  
-<script src="../assets/vendor/datatables/jquery.dataTables.js" ></script>
-<script src="../assets/vendor/datatables/jquery.dataTables.min.js" ></script>
-<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="../assets/js/administrator/serelance-admin.js "></script>
-<script src="../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="../assets/vendor/datatables/dataTables.bootstrap4.js" ></script>
-  <!--  -->
-  <script type = "text/javascript">
-   $(document).ready(function(){
-   	$("#table").DataTable();
-   });
-</script> 
-</body>
+	<head>
 
-</html>
+		<script>
+		document.title = "Service seeker-Announced projects";
+		</script>
+	</head>
+	<div class="container " style="margin-top: 100px;">
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12 ">
+				<div class="card shadow-sm mb-4">
+					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 font-weight-bold text-primary mx-auto">Announced Project</h6> </div>
+					<div class="card-body mx-auto">
+						<!-- claim fund -->
+						<!--  -->
+						<div class="table table-responsive mt-5">
+							<table id="table" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>No</th>
+										<th>Project Id</th>
+										<th>Project Title</th>
+										<th>Announced date</th>
+										<th>Offer type</th>
+										<th>status</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+								<?php 
+											if(!empty($projects)){
+												$count = 1;
+												foreach($projects as $project){
+                                                echo <<<EOT
+                                                    <tr>
+                                                    <td>
+                                                    {$count}
+                                                    </td>
+                                                    <td>
+                                                    {$project['project_id']}
+                                                    </td>
+                                                    <td>
+                                                    {$project['title']}
+                                                    </td>
+                                                    <td>
+                                                    {$project['announced_date']}
+                                                    </td>
+                                                    <td>
+                                                    {$project['offer_type']}
+                                                    </td>
+                                                    <td>
+                                                    {$project['status']}
+                                                    </td>
+                                                    <!--  -->
+                                                    <td>
+                                                      <a href="http://localhost/seralance/public/admin/viewproject/{$project['project_id']}" class="btn btn-sm btn-primary mr-5">View details</a> 
+                                                    </td>
 
-<!--  -->
-  <!--  -->
-  <script type = "text/javascript">
-   $(document).ready(function(){
-   	$("#table").DataTable();
-   });
-</script> 
-</body>
+                                                    <!--  -->
+                                                    </tr>
+                                                EOT;
+														$count++ ;
+													}
+												}
+										?>
+										
+										
+								</tbody>
+							</table>
+						</div>
+						<!--  -->
+					</div>
+				</div>
+			</div>
+		</div>
+      <script src="http://localhost/seralance/app/vendor/jquery/jquery.min.js"></script>  
+<script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.js" ></script>
+<script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.min.js" ></script>
+<script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="http://localhost/seralance/app/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="http://localhost/seralance/public/assets/js/administrator/seralance-admin.js "></script>
+<script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.js" ></script>
+		<script type="text/javascript">
+		function confirmAction(anchor) {
+			var conf = confirm("Are you sure you want to do this action?");
+			if(conf) {
+				window.location = anchor;
+			}
+		}
 
-</html>
-
-<!--  -->
+		$(document).ready(function() {
+			$("#table").DataTable();
+		});
+		</script>
+		<?php
+   		require "includes/service_seeker-footer.php";
+   ?>

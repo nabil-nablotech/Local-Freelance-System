@@ -30,7 +30,7 @@
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar" style="color:black !important;;">
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon">
-          <img src="../assets/images/seralance-logo.png" id="logo">
+          <img src="<?php echo $base;?>public/assets/images/seralance-logo.png" id="logo">
         </div>
         <div class="sidebar-brand-text mx-3"></div>
       </a>
@@ -53,9 +53,9 @@
         <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
            
-            <a class="collapse-item" href="admin_users.php">Admin Users</a>
-            <a class="collapse-item" href="service_providers.php">Service providers</a>
-            <a class="collapse-item" href="service_seekers.php">Service seekers</a>
+            <a class="collapse-item" href="http://localhost/seralance/public/admin/adminusers">Admin Users</a>
+            <a class="collapse-item" href="http://localhost/seralance/public/admin/serviceproviders">Service providers</a>
+            <a class="collapse-item" href="http://localhost/seralance/public/admin/serviceseekers">Service seekers</a>
           </div>
         </div>
       </li>
@@ -69,9 +69,10 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="completed.php">Completed projects</a>
             <a class="collapse-item" href="ongoing.php">Ongoing Projects</a>
-            <a class="collapse-item" href="announced.php">Announced  Projects</a>
-            <a class="collapse-item" href="offered.php">Offered Projects</a>
+            <a class="collapse-item" href="http://localhost/seralance/public/admin/announcedprojects">Announced  Projects</a>
+            <a class="collapse-item" href="http://localhost/seralance/public/admin/offeredprojects">Offered Projects</a>
             <a class="collapse-item" href="terminated.php">Terminated Projects</a>
+            <a class="collapse-item" href="http://localhost/seralance/public/admin/bids">Bids</a>
           </div>
         </div>
       </li>
@@ -89,12 +90,6 @@
             <a class="collapse-item" href="fund_transfer_request.php">Fund Transfer requests</a>
           </div>
         </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="bids.php">
-          <i class="fa fa-gavel"></i>
-          <span>Bids</span>
-        </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="notification.php">
@@ -193,8 +188,8 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <img class="img-profile rounded-circle" src="../assets/images/administrator/boy.png" style="max-width: 60px">
-                <span class="ml-2 d-none d-lg-inline text-white small">Mulegeta Adamu</span>  <i class = "fas fa-2x fa-angle-down " 
+                <img class="img-profile rounded-circle" src="<?php echo $base;?>public/assets/images/administrator/boy.png" style="max-width: 60px">
+                <span class="ml-2 d-none d-lg-inline text-white small"><?php echo $adminDetail['firstname']." ".$adminDetail['lastname']?></span>  <i class = "fas fa-2x fa-angle-down " 
                 ></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -243,7 +238,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                  <a href="../index.php" class="btn btn-primary">Logout</a>
+                  <a href="http://localhost/seralance/public/admin/logout" class="btn btn-primary">Logout</a>
                 </div>
               </div>
             </div>

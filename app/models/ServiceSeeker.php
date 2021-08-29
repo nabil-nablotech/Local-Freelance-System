@@ -65,7 +65,7 @@
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,status,bank_name,account_number,wallet_balance,profile_photo FROM user INNER JOIN service_seeker ON user.username = service_seeker.username where user.username='".$username."'");
+                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,bank_name,account_number,wallet_balance,profile_photo FROM user INNER JOIN service_seeker ON user.username = service_seeker.username where user.username='".$username."'");
                 if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                     $data = array(
                         'username'=>$row['username'],
@@ -78,6 +78,8 @@
                         'country'=>$row['country'],
                         'city'=>$row['city'],
                         'address'=>$row['address'],
+                        'joindate'=>$row['join_date'],
+                        'lastlogin'=>$row['last_login'],
                         'status'=>$row['status'],
                         'bankname'=>$row['bank_name'],
                         'accountnumber'=>$row['account_number'],
@@ -85,6 +87,21 @@
                         'profilephoto'=>$row['profile_photo']                        
                     );
                     return $data;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        public function retrieveServiceSeekers($filter=""){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,bank_name,account_number,wallet_balance,profile_photo FROM user INNER JOIN service_seeker ON user.username = service_seeker.username");
+                if($seekers = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $seekers;
                 }
                 else{
                     return false;

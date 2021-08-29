@@ -187,7 +187,7 @@
             }
         }
 
-        public function retrieveAllAnnouncedProjects($username){
+        public function retrieveAllAnnouncedProjects($username=""){
             require_once('../app/Core/Database.php');
             $db = new Database();
             $conn = $db->setConnection();
@@ -202,6 +202,10 @@
                     $sql = "SELECT * FROM project where (status='Cancelled' OR status='Pending Deposit') AND offer_type ='Announcement' and assigned_to='" . $username . "'";
                 }
 
+                elseif($_SESSION['usertype']==='admin'){
+                    $sql = "SELECT * FROM project where (status='Cancelled' OR status='Pending Deposit') AND offer_type ='Announcement'  ORDER BY announced_date DESC";
+                }
+
                 $stmt = $conn->query($sql);
                 if($announcedProjects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
                     return $announcedProjects;
@@ -212,7 +216,7 @@
             }
         }
 
-        public function retrieveAllOfferedProjects($username){
+        public function retrieveAllOfferedProjects($username=""){
             require_once('../app/Core/Database.php');
             $db = new Database();
             $conn = $db->setConnection();
@@ -226,6 +230,10 @@
                 elseif($_SESSION['usertype']==='serviceprovider'){
                     $sql = "SELECT * FROM project where (status='Pending' OR status='Pending Deposit' OR status='Cancelled') AND offer_type ='Offer' and assigned_to='" . $username . "'";
                 }
+
+                elseif($_SESSION['usertype']==='admin'){
+                    $sql = "SELECT * FROM project where (status='Pending' OR status='Pending Deposit' OR status='Cancelled') AND offer_type ='Offer' ORDER BY announced_date DESC";
+                }                
 
                 $stmt = $conn->query($sql);
                 if($offeredProjects = $stmt->fetchAll(PDO::FETCH_ASSOC)){

@@ -189,7 +189,7 @@
             $rate = new Rate();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username and user.username = '".$username."'");
+                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username and user.username = '".$username."'");
                 if($provider = $stmt->fetch(PDO::FETCH_ASSOC)){
                     $provider = array_merge($provider, array('skill'=>$this->retrieveSkills($provider['username']))) ; 
                     $provider = array_merge($provider, array('language'=>$this->retrieveLanguages($provider['username']))) ; 
@@ -211,7 +211,7 @@
             $rate = new Rate();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username");
+                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username");
                 if($providers = $stmt->fetchAll(PDO::FETCH_ASSOC)){
                     foreach($providers as $provider){
                         $key = array_search($provider, $providers);

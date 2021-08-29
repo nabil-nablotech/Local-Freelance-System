@@ -1,9 +1,9 @@
 <?php
    require "includes/admin-navigation.php";
-   $admins= $adminController->getAdmins();
+   $serviceSeekers= $adminController->getServiceSeekers();
    ?>
 <script>
-    document.title="Admin-list of system admins";
+    document.title="Admin-list of service seekers";
 </script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 
@@ -11,13 +11,13 @@
 
 <div class="container-fluid" id="container-wrapper">
    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">Admin users</h1>
+      <h1 class="h3 mb-0 text-gray-800">Service seekers</h1>
       <ol class="breadcrumb">
          <li class="breadcrumb-item">
             <a href="Dashboard.php">Home</a>
          </li>
          <li class="breadcrumb-item">Users</li>
-         <li class="breadcrumb-item active" aria-current="page">Service providers</li>
+         <li class="breadcrumb-item active" aria-current="page">Service seekers</li>
       </ol>
    </div>
    <div class="row">
@@ -25,10 +25,9 @@
          <div class="card shadow-sm mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center
              justify-content-between">
-               <h6 class="m-0 font-weight-bold text-primary">List of Admin Users</h6>
+               <h6 class="m-0 font-weight-bold text-primary">List of Service Seekers</h6>
             </div>
             <div class="card-body">
-            <a class="btn btn-success" href="http://localhost/seralance/public/admin/newadmin"> <i class="fa fa-plus-circle"></i> New Admin User</a>
                <!-- data to be fetched from the database  -->
                <div class="table table-responsive mt-5">
 							<table id="table" class="table table-bordered table-striped">
@@ -37,38 +36,47 @@
 										<th>No</th>
 										<th>Username</th>
 										<th>Full name</th>
-										<th>Role</th>
+										<th>Date joined</th>
+										<th></th>
 										<th></th>
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
 								<?php 
-											if(!empty($admins)){
-												$count = 1;
-												foreach($admins as $admin){
-													echo <<<EOT
-																<tr>
-																<td>
-																	{$count}
-																</td>
-																<td>
-																	{$admin['username']}
-																</td>
-																<td>
-																	{$admin['firstname']} {$admin['lastname']}
-																</td>
-																<td>
-																	{$admin['role']}
-																</td>
-																<!--  -->
-																<td><a class="btn btn-primary" href="http://localhost/seralance/public/admin/viewadmin/{$admin['username']}">
-																	View details</a> </td>
-																<td><button class="btn btn-primary" onclick ="confirmAction('http://localhost/seralance/public/serviceseeker/deleteproject/announcedprojects');" >
-																	Modify permission</button> </td>
-																<!--  -->
-																</tr>
-															EOT;
+											if(!empty($serviceSeekers)){
+												  $count = 1;
+		                  	  foreach($serviceSeekers as $serviceSeeker){
+                              $thirdRow = "";
+                              if($serviceSeeker['status']=='Suspended'){
+                                  $thirdRow = '<button class="btn btn-success" onclick ="confirmAction(\'http://localhost/seralance/public/admin/activate/serviceseeker/'.$serviceSeeker['username'].'\');" >Activate</button>';
+                              }
+                              else{
+                                  $thirdRow = '<button class="btn btn-danger" onclick ="confirmAction(\'http://localhost/seralance/public/admin/suspend/serviceseeker/'.$serviceSeeker['username'].'\');" >Suspend</button>';
+                              }
+                              echo <<<EOT
+                                  <tr>
+                                      <td>
+                                          {$count}
+                                      </td>
+                                      <td>
+                                          {$serviceSeeker['username']}
+                                      </td>
+                                      <td>
+                                          {$serviceSeeker['firstname']} {$serviceSeeker['lastname']}
+                                      </td>
+                                      <td>
+                                          {$serviceSeeker['join_date']}
+                                      </td>
+                                  <!--  -->
+                                      <td><a class="btn btn-sm btn-primary" href="http://localhost/seralance/public/admin/viewserviceseeker/{$serviceSeeker['username']}">
+                                      View details</a </td>
+                                      <td><a class="btn btn-primary" href="http://localhost/seralance/public/admin/transctions/{$serviceSeeker['username']}">
+                                      Transactions</a> </td>
+                                      <td>{$thirdRow}</td>
+                                  <!--  -->
+                                  </tr>
+                              EOT;
 														$count++ ;
 													}
 												}
@@ -200,6 +208,13 @@
 <script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.js" ></script>
 
 <script type = "text/javascript">
+    function confirmAction(anchor) {
+        var conf = confirm("Are you sure you want to perform this action?");
+        if(conf) {
+            window.location = anchor;
+        }
+    }
+
    $(document).ready(function(){
    	$("#table").DataTable();
    });

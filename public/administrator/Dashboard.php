@@ -199,8 +199,8 @@ display: none !important;
                      
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-3x  mb-3 text-primary">
-                        <img class="img-responsive" src="../assets/Icon/transaction.png" style="width:4vw;height:4vw;">
+                      <i class="fas fa-tasks fa-3x  mb-3 text-primary">
+                        
                       </i>
                       
                     </div>

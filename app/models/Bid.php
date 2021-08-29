@@ -63,6 +63,9 @@
                 if($_SESSION['usertype']==='serviceseeker'){
                     $sql = "SELECT bid_id, bid_date, bid.price, cover_letter, bid.status,made_by, project.project_id, project.title,project.announced_by FROM bid INNER JOIN project ON bid.project_id = project.project_id where bid_id ='".$bidId."' AND project.announced_by='".$_SESSION['username']."'";
                 }
+                if($_SESSION['usertype']==='admin'){
+                    $sql = "SELECT bid_id, bid_date, bid.price, cover_letter, bid.status,made_by, project.project_id, project.title,project.announced_by FROM bid INNER JOIN project ON bid.project_id = project.project_id where bid_id ='".$bidId."'";
+                }
                 $stmt = $conn->query($sql);
                 if($bid = $stmt->fetch(PDO::FETCH_ASSOC)){
                     return $bid;
@@ -73,18 +76,22 @@
             }
         }
 
-        public function retrieveAllBids($id){
+        public function retrieveAllBids($id=""){
             require_once('../app/Core/Database.php');
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
                 $sql = "";
                 if($_SESSION['usertype'] ==='serviceseeker'){
-                    $sql = "SELECT bid_id,bid_date, bid.price, cover_letter, bid.status,made_by, project.project_id, project.title FROM bid INNER JOIN project ON bid.project_id = project.project_id where bid.project_id = ".$id." AND project.announced_by='".$_SESSION['username']."'";
+                    $sql = "SELECT bid_id,bid_date, bid.price, cover_letter, bid.status,made_by, project.project_id, project.title FROM bid INNER JOIN project ON bid.project_id = project.project_id where bid.project_id = ".$id." AND project.announced_by='".$_SESSION['username']."' ORDER BY bid_date DESC";
                 }
                 
                 if($_SESSION['usertype'] ==='serviceprovider'){
-                    $sql = "SELECT bid_id,bid_date, bid.price, cover_letter, bid.status,made_by, project.project_id, project.title FROM bid INNER JOIN project ON bid.project_id = project.project_id where made_by='".$id."'";
+                    $sql = "SELECT bid_id,bid_date, bid.price, cover_letter, bid.status,made_by, project.project_id, project.title FROM bid INNER JOIN project ON bid.project_id = project.project_id where made_by='".$id."' ORDER BY bid_date DESC";
+                }
+
+                if($_SESSION['usertype'] ==='admin'){
+                    $sql = "SELECT bid_id,bid_date, bid.price, cover_letter, bid.status,made_by, project.project_id, project.title FROM bid INNER JOIN project ON bid.project_id = project.project_id ORDER BY bid_date DESC";
                 }
                 $stmt = $conn->query($sql);
                 if($bids = $stmt->fetchAll(PDO::FETCH_ASSOC)){

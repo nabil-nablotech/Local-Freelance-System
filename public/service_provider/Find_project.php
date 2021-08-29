@@ -9,6 +9,9 @@
 			overflow-x: hidden;
 		}
 		
+		.profile-list-info a:hover{
+			background-color: blue;
+		}
 		
 		.fre-profile-list {
 			margin: 0;

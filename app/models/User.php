@@ -177,10 +177,13 @@
                 $db = new Database();
                 $conn = $db->setConnection();
                 if($conn !== null){
-                    $stmt = $conn->query("SELECT username,password,user_type FROM user where username='".$cleanUsername."'");
+                    $stmt = $conn->query("SELECT username,password,user_type,status FROM user where username='".$cleanUsername."'");
                     if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                         if(password_verify($cleanPassword,$row['password']) ){
-                            return array('valid'=>1 ,'data'=>['username'=>$row['username'],'usertype'=>$row['user_type']]);
+                            if($row['status']!=='Suspended'){
+                                return array('valid'=>1 ,'data'=>['username'=>$row['username'],'usertype'=>$row['user_type']]);
+                            }
+                            $error = array_merge($error,array('login' => 'Your account is currently suspended. Please contact the support center for further details.'));
                         }
                         else{
                             $error = array_merge($error,array('login' => 'Incorrect username or password.'));
@@ -209,6 +212,17 @@
             else{
                 return $response;
             }      
+        }
+
+        public function suspend($username){
+            $userTb = array('status' => "'Suspended'"); 
+            return $this->update('user',$userTb,"WHERE username='".$username."'");
+        }
+
+        public function activate($username){
+            $userTb = array('status' => "'verified'"); 
+            return $this->update('user',$userTb,"WHERE username='".$username."'");
+
         }
     }
 ?>
