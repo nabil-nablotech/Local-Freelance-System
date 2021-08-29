@@ -131,20 +131,8 @@
 		?>
 		<script>
 			document.querySelector("[name ='nationality']").value = '<?php echo $adminDetail['nationality'];?>';
-			document.querySelector("[name ='country']").value = '<?php echo $adminDetail['country'];?>';
-			document.querySelector("[name ='bankname']").value = '<?php echo $adminDetail['bankname'];?>';			
+			document.querySelector("[name ='country']").value = '<?php echo $adminDetail['country'];?>';		
 
-			function displayPhoto(event){
-					profileDisplay = document.getElementById('profiledisplay');
-					profileDisplay.setAttribute('src', URL.createObjectURL(event.files[0]));
-					profileDisplay.onload = function() {
-					URL.revokeObjectURL(profileDisplay.src); // free memory
-				} 
-			}
-
-			function uploadPhoto(){
-				document.getElementById('profilephoto').click();
-			} 
 			
 		</script>
 
