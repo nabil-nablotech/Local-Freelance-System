@@ -1,4 +1,13 @@
 <?php
+    use YenePay\Models\CheckoutOptions;
+    use YenePay\Models\CheckoutItem;
+    use YenePay\Models\CheckoutType;
+    use YenePay\CheckoutHelper;
+
+    require_once('../vendor/yenepay/php-sdk/src/CheckoutHelper.php');
+    require_once('../vendor/yenepay/php-sdk/src/Models/CheckoutOptions.php');
+    require_once('../vendor/yenepay/php-sdk/src/Models/CheckoutItem.php');
+    require_once('../vendor/yenepay/php-sdk/src/Models/CheckoutType.php');
 
     class Payment extends Model{
         
@@ -51,4 +60,9 @@
         }
 
     }
+
+    $sellerCode = "10152";
+    $useSandbox = true;
+
+    $checkoutOptions = new CheckoutOptions($sellerCode, $useSandbox);
 ?>
