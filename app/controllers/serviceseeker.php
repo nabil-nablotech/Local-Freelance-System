@@ -32,7 +32,28 @@
         }
 
         public function announcedprojects(){
+            $_SESSION['projectlist'] = 'announcedprojects';
             $this->view('service_seeker/announcedproject');
+            unset($_SESSION['projectlist']);
+        }
+
+        public function paymentsuccess(){
+            $serviceSeeker = $this->model('ServiceSeeker');
+            $serviceSeeker->updateWallet($_SESSION['username'],$_GET['TotalAmount'],'increase');
+
+            $payment = $this->model('Payment');
+            $payment->insertPayment($_GET['TotalAmount'], 'YENEPAY', $_GET['MerchantOrderId']);
+
+            $transaction = $this->model('Transaction');
+            $transaction->insertTransaction("Deposit", 'Deposit for project ID: '.$_GET['MerchantOrderId'], $_GET['TotalAmount'],$_SESSION['username']);
+
+            $project = $this->model('Project');
+            $project->updateStatus($_GET['MerchantOrderId'],"Ongoing");
+
+            header("Location: http://localhost/seralance/public/serviceseeker/ongoingprojects");                
+            exit();
+
+            
         }
 
         public function viewproviderprofile($username){                 
@@ -187,6 +208,11 @@
         public function getAllCountries(){
             require_once('../app/models/countries.php');
             return \Countries::$countries;
+        }
+
+        public function getPaymentUrl($projectId,$price){
+            $payment = $this->model('Payment');
+            return $payment->generatePaymentUrl($projectId,$price);
         }
 
         public function validateUpdateProfile($input,$files){

@@ -239,6 +239,13 @@
             exit();
         }
 
+        public function validateUpdateProfile($input){
+            $admin = $this->model('Admin');
+            $admin->updateProfile($input);
+            header("Location: http://localhost/seralance/public/admin/profile");                
+            exit();
+        }
+
         public function validateTicketReply($input){
             $project = $this->model('Ticket');
             $reply = $project->reviewTicket($input);

@@ -44,7 +44,7 @@
 														$secondColBtn = "<a class=\"btn btn-primary\" href=\"viewbids/{$project['project_id']}\">	View bids</a>"; 
 													}
 													if($project['status'] == 'Pending Deposit'){
-														$secondColBtn = '<a class="btn btn-success" href="Change it">Deposit</a>'; 
+														$secondColBtn = '<a class="btn btn-success" href="'.$serviceSeekerController->getPaymentUrl($project['project_id'],$project['price']).'">Deposit</a>'; 
 													}
 													echo <<<EOT
 																<tr>

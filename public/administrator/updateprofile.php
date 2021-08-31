@@ -135,7 +135,7 @@
 
 			
 		</script>
-
+	<script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	</body>
 
 	</html>

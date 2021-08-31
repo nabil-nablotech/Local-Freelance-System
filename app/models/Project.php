@@ -245,6 +245,20 @@
             }
         }
 
+        public function updateStatus($projectId,$status){                
+            $data = array('status'=>"'".$status."'");
+            if($_SESSION['usertype']=='serviceseeker'){
+                $condition= "WHERE project_id ='". $projectId ."' and project_id IN (select project_id from project where announced_by = '".$_SESSION['username']."')" ;
+
+            }       
+
+            if($this->update('project',$data,$condition)){
+                return 1;
+            }             
+            
+            return 0;
+        }
+
         public function deleteProject($projectId){                
             $data = array('status'=>'\'Cancelled\'');            
             $condition= "WHERE project_id ='". $projectId ."' and project_id IN (select project_id from project where announced_by = '".$_SESSION['username']."')" ;

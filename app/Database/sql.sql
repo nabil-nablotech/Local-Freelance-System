@@ -179,9 +179,8 @@ CREATE TABLE project_skill(
 CREATE TABLE payment(
 	payment_id INT AUTO_INCREMENT PRIMARY KEY,
     amount FLOAT NOT NULL,
-    issued_date DATETIME NOT NULL,
-    paid_date DATETIME,
-    payment_method VARCHAR(60),
+    paid_date DATETIME NOT NULL,
+    payment_method VARCHAR(60) NOT NULL,
     paid_by VARCHAR(60) NOT NULL,
     project_id INT NOT NULL
 );
