@@ -121,7 +121,7 @@
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown"
              style="background-color:#CCE5FF"> <a class="dropdown-item" 
              href="completed.php">Completed projects</a> 
-             <a class="dropdown-item" href="ongoing.php">
+             <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/ongoingprojects">
                Ongoing projects</a> <a class="dropdown-item" 
                href="terminated.php">Terminated Projects</a>
                 <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/offeredprojects">Offered Projects</a>

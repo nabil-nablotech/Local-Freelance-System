@@ -37,6 +37,20 @@
             unset($_SESSION['projectlist']);
         }
 
+        public function offeredprojects(){
+            $_SESSION['projectlist'] = 'offeredprojects';
+            $this->view('service_seeker/offeredproject');
+            unset($_SESSION['projectlist']);
+        }
+
+        public function ongoingprojects(){
+            $this->view('service_seeker/ongoingproject');
+        }
+
+        public function completedprojects(){
+            $this->view('service_seeker/completedproject');
+        }
+
         public function paymentsuccess(){
             $serviceSeeker = $this->model('ServiceSeeker');
             $serviceSeeker->updateWallet($_SESSION['username'],$_GET['TotalAmount'],'increase');
@@ -53,6 +67,40 @@
             header("Location: http://localhost/seralance/public/serviceseeker/ongoingprojects");                
             exit();
 
+            
+        }
+
+        public function approveproject($projectId){
+
+            $project = $this->model('Project');
+            $projectDetails = $project->retrieveProjectDetails($projectId);
+            $project->endProject($projectDetails['project_id'],"Completed");
+
+            $transaction = $this->model('Transaction');
+
+            $serviceSeeker = $this->model('ServiceSeeker');
+            $serviceSeeker->updateWallet($_SESSION['username'],$projectDetails['price'],'decrease');
+            $transaction->insertTransaction("Settle", 'Payment for project ID: '.$projectDetails['project_id'], $projectDetails['price'],$_SESSION['username']);
+
+            $revenue = $projectDetails['price'] * 0.10;
+            $payment = $projectDetails['price'] - $revenue;
+
+            $serviceProvider = $this->model('ServiceProvider');
+            $serviceProvider->updateWallet($projectDetails['assigned_to'],$payment,'increase');
+            $transaction->insertTransaction("Income", 'Payment for project ID: '.$projectDetails['project_id'], $payment, $projectDetails['assigned_to']);
+
+            $transaction->insertTransaction("Revenue", 'Revenue for project ID: '.$projectDetails['project_id'], $revenue,'admin');
+
+            header("Location: http://localhost/seralance/public/serviceseeker/completedprojects");                
+            exit();
+
+            
+        }
+
+        public function checkRating($projectId){
+            $rate = $this->model('Rate');
+
+            return $rate->checkRatingExists($projectId);
             
         }
 
@@ -200,6 +248,21 @@
             return $project->retrieveAllAnnouncedProjects($username);
         }
 
+        public function getAllOfferedProjects($username){
+            $project = $this->model('Project');
+            return $project->retrieveAllOfferedProjects($username);
+        }
+
+        public function getAllOngoingProjects($username){
+            $project = $this->model('Project');
+            return $project->retrieveAllOngoingProjects($username);
+        }
+
+        public function getAllCompletedProjects($username){
+            $project = $this->model('Project');
+            return $project->retrieveAllCompletedProjects($username);
+        }
+
         public function getServiceProviders($filter=""){
             $serviceProvider = $this->model('ServiceProvider');
             return $serviceProvider->retrieveServiceProviders($filter);
@@ -252,6 +315,19 @@
 
             if($reply['valid']==true){  
                 header("Location: http://localhost/seralance/public/serviceseeker/ticket");              
+                exit();
+            }
+            else{
+                return $reply;
+            }
+        }
+
+        public function validateRateProvider($input){
+            $rate = $this->model('Rate');
+            $reply = $rate->rateProvider($input);
+
+            if($reply['valid']==true){  
+                header("Location: http://localhost/seralance/public/serviceseeker/completedprojects");              
                 exit();
             }
             else{

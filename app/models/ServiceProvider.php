@@ -932,6 +932,23 @@
             $this->update('service_provider',$serviceProviderTb,"WHERE username ='". $this->getUsername() . "'"); 
               
         }
+
+        public function updateWallet($username, $amount, $action){            
+        
+            //The variables below are arguments to be passed to insert data to their respective table
+            $serviceProviderTb = array();
+            if($action==='increase'){
+                $serviceProviderTb = array('wallet_balance'=>"wallet_balance + ".$amount);
+                
+            }
+            elseif($action==='decrease'){
+                $serviceProviderTb = array('wallet_balance'=>"wallet_balance - ".$amount);
+                
+            }
+            
+            $this->update('service_provider',$serviceProviderTb,"WHERE username ='". $username . "'");
+              
+        }
                 
     }
 ?>

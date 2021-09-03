@@ -183,7 +183,7 @@ require "includes/service_seeker-navigation.php";
                     <div class="comment">
                         <div class="left-section">                                        
                             <img class="img-fluid" src="http://localhost/seralance/public/assets/images/profile.jpg" style="width:80px; height:80px; border:1px solid black;">
-                            <p>{$rating['rater']}</p>
+                            <p class="ml-4">{$rating['rater']}</p>
                         </div>
                         <div class="right-section">
                             <p>

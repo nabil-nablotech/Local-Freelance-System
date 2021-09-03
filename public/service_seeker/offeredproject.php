@@ -1,23 +1,13 @@
 <?php
-   require_once "navigation.php";
-   require_once "../Database/db.php";
+   require "includes/service_seeker-navigation.php";
+   $projects = $serviceSeekerController->getAllOfferedProjects($_SESSION['username']);
      
      ?>
 
 	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<!-- Datatable CSS -->
-		<link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-		<!-- jQuery Library -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<!-- Bootstrap CSS -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-		<!-- Datatable JS -->
-		<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
 		<script>
-		document.title = "Service seeker-offered projects";
+		document.title = "Service seeker-Announced projects";
 		</script>
 	</head>
 	<div class="container " style="margin-top: 100px;">
@@ -25,8 +15,9 @@
 			<div class="col-sm-12 col-md-12 col-lg-12 ">
 				<div class="card shadow-sm mb-4">
 					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-						<h6 class="m-0 font-weight-bold text-primary mx-auto">Offered Project</h6> </div>
+						<h6 class="m-0 font-weight-bold text-primary mx-auto">Offered Projects</h6> </div>
 					<div class="card-body mx-auto">
+						<!-- claim fund -->
 						<!--  -->
 						<div class="table table-responsive mt-5">
 							<table id="table" class="table table-bordered table-striped">
@@ -35,51 +26,59 @@
 										<th>No</th>
 										<th>Project Id</th>
 										<th>Project Title</th>
-										<th>Offer date</th>
-										<th>project budget </th>
+										<th>Announced date</th>
 										<th>status</th>
-										<th>view project</th>
-										<th>view service provider</th>
-										<th>Deposite payment</th>
-										<th>delete project</th>
+										<th></th>
+										<th></th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
-									<?php
-                        $query = $con->query("SELECT * FROM offeredproject") or die(mysqli_error($con));
-                        while ($fetch = $query->fetch_array()) {
-                            ?>
-										<tr>
-											<td>
-												<?php echo $fetch['No']?>
-											</td>
-											<td>
-												<?php echo $fetch['pid']?>
-											</td>
-											<td>
-												<?php echo $fetch['ptitle']?>
-											</td>
-											<td>
-												<?php echo $fetch['odate']?>
-											</td>
-											<td>
-												<?php echo $fetch['pbudget']?>
-											</td>
-											<td>
-												<?php echo $fetch['status']?>
-											</td>
-											<td><a class="btn btn-primary" href="edit_room.php?room_id=<?php echo $fetch['room_id']?>">
-                           View</a> </td>
-											<td><a class="btn btn-primary" href="edit_room.php?room_id=<?php echo $fetch['room_id']?>">
-                           view</a> </td>
-											<td><a class="btn btn-success" href="edit_room.php?room_id=<?php echo $fetch['room_id']?>">
-                           deposite</a> </td>
-											<td><a class="btn btn-danger" href="edit_room.php?room_id=<?php echo $fetch['room_id']?>">
-                           delete</a> </td>
-										</tr>
-										<?php
-                        }
-                        ?>
+								<?php 
+											if(!empty($projects)){
+												$count = 1;
+												foreach($projects as $project){
+													$secondColBtn = "";
+													$deleteBtn = "";
+
+													if($project['status'] == 'Pending Deposit'){
+														$secondColBtn = '<a class="btn btn-success" href="'.$serviceSeekerController->getPaymentUrl($project['project_id'],$project['price']).'">Deposit</a>'; 
+													}
+
+													if($project['status'] === 'Cancelled'){
+														$deleteBtn = '<button class="btn btn-danger" onclick ="confirmAction(\'http://localhost/seralance/public/serviceseeker/deleteproject/offeredprojects/'.$project['project_id'].'\');" >Delete</button>'; 
+													}
+													echo <<<EOT
+																<tr>
+																<td>
+																	{$count}
+																</td>
+																<td>
+																	{$project['project_id']}
+																</td>
+																<td>
+																	{$project['title']}
+																</td>
+																<td>
+																	{$project['announced_date']}
+																</td>
+																<td>
+																	{$project['status']}
+																</td>
+																<!--  -->
+																<td><a class="btn btn-primary" href="http://localhost/seralance/public/serviceseeker/viewproject/{$project['project_id']}">
+																	View details</a> </td>
+																<td>$secondColBtn </td>
+																<td> {$deleteBtn} </td>
+																<!--  -->
+																</tr>
+															EOT;
+														$count++ ;
+													}
+												}
+										?>
+										
+										
 								</tbody>
 							</table>
 						</div>
@@ -89,18 +88,17 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-		function confirmationDelete(anchor) {
-			var conf = confirm("Are you sure you want to delete this record?");
+		function confirmAction(anchor) {
+			var conf = confirm("Are you sure you want to perform this action?");
 			if(conf) {
-				window.location = anchor.attr("href");
+				window.location = anchor;
 			}
 		}
-		</script>
-		<script type="text/javascript">
+
 		$(document).ready(function() {
 			$("#table").DataTable();
 		});
 		</script>
 		<?php
-   include "Footer.php";
+   		require "includes/service_seeker-footer.php";
    ?>

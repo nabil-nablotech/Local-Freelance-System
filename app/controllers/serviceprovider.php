@@ -28,6 +28,10 @@
             $this->view('service_provider/offeredproject');
         }
 
+        public function ongoingprojects(){
+            $this->view('service_provider/ongoingproject');
+        }
+
         public function profile(){
             $this->view('service_provider/updateprofile');
         }
@@ -182,6 +186,11 @@
             return $project->retrieveAllOfferedProjects($username);
         }
 
+        public function getAllOngoingProjects($username){
+            $project = $this->model('Project');
+            return $project->retrieveAllOngoingProjects($username);
+        }
+
         public function validateUpdateProfile($input,$files){
             $serviceProvider = $this->model('ServiceProvider');
             $serviceProvider->updateProfile($input, $files);
@@ -226,6 +235,18 @@
             $reply = $project->acceptOffer($input);
             if($reply['valid']==true){
                 header("Location: http://localhost/seralance/public/serviceprovider/offeredprojects");                
+                exit();
+            }
+            else{
+                return $reply;
+            }
+        }
+
+        public function validateDeliverProject($input,$files){
+            $project = $this->model('Project');
+            $reply = $project->deliverProject($input,$files);
+            if($reply['valid']==true){
+                header("Location: http://localhost/seralance/public/serviceprovider/ongoingprojects");                
                 exit();
             }
             else{

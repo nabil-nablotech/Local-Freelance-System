@@ -19,6 +19,7 @@
                 $connection = $db->setConnection();
                 $sql = "INSERT INTO $table(". implode(",",array_keys($data)) . ") VALUES (" . implode (",",$data) . ")";
                 //echo '<script>window.alert("'.$sql.'")</script>';
+                
                 $connection->exec($sql);                
             }
 

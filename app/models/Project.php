@@ -13,7 +13,7 @@
         private $budget;
         private $price;
         private $offerType;
-        private $status; //Pending, Pending Deposit, {Ongoing,Submitted,Improvement}, Terminated, Completed, Cancelled
+        private $status; //Pending, Pending Deposit, {Ongoing,Submitted}, Terminated, Completed, Cancelled
         private $startDate;
         private $endDate;
 
@@ -245,11 +245,69 @@
             }
         }
 
+        public function retrieveAllOngoingProjects($username=""){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $sql = "";
+                
+                if($_SESSION['usertype']==='serviceseeker'){
+                    $sql = "SELECT * FROM project where (status='Ongoing' OR status='Submitted') and announced_by='" . $username . "'";
+                }
+                
+                elseif($_SESSION['usertype']==='serviceprovider'){
+                    $sql = "SELECT * FROM project where (status='Ongoing' OR status='Submitted') and assigned_to='" . $username . "'";
+                }
+
+                elseif($_SESSION['usertype']==='admin'){
+                    $sql = "SELECT * FROM project where (status='Pending' OR status='Pending Deposit' OR status='Cancelled') AND offer_type ='Offer' ORDER BY announced_date DESC";
+                }                
+
+                $stmt = $conn->query($sql);
+                if($offeredProjects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $offeredProjects;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        public function retrieveAllCompletedProjects($username=""){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $sql = "";
+                
+                if($_SESSION['usertype']==='serviceseeker'){
+                    $sql = "SELECT * FROM project where status='Completed' and announced_by='" . $username . "'";
+                }
+                
+                elseif($_SESSION['usertype']==='serviceprovider'){
+                    $sql = "SELECT * FROM project where (status='Ongoing' OR status='Submitted') and assigned_to='" . $username . "'";
+                }
+
+                elseif($_SESSION['usertype']==='admin'){
+                    $sql = "SELECT * FROM project where (status='Pending' OR status='Pending Deposit' OR status='Cancelled') AND offer_type ='Offer' ORDER BY announced_date DESC";
+                }                
+
+                $stmt = $conn->query($sql);
+                if($offeredProjects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $offeredProjects;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
         public function updateStatus($projectId,$status){                
             $data = array('status'=>"'".$status."'");
             if($_SESSION['usertype']=='serviceseeker'){
                 $condition= "WHERE project_id ='". $projectId ."' and project_id IN (select project_id from project where announced_by = '".$_SESSION['username']."')" ;
-
+                
             }       
 
             if($this->update('project',$data,$condition)){
@@ -258,6 +316,19 @@
             
             return 0;
         }
+
+        public function endProject($projectId,$status){                
+            $data = array('end_date'=>"UTC_TIMESTAMP");
+            $condition= "WHERE project_id ='". $projectId ."' and project_id IN (select project_id from project where announced_by = '".$_SESSION['username']."')" ;
+            $this->updateStatus($projectId,$status);
+
+            if($this->update('project',$data,$condition)){
+                return 1;
+            }             
+            
+            return 0;
+        }
+
 
         public function deleteProject($projectId){                
             $data = array('status'=>'\'Cancelled\'');            
@@ -477,6 +548,60 @@
                 $projectTb = array(
                     'price' => $this->getPrice(),
                     'start_date' => $this->getStartDate(),
+                    'status' => "'".$this->getStatus()."'"
+                );
+
+                $condition = "WHERE project_id = '".$this->getProjectId()."'";              
+                if($this->update('project',$projectTb,$condition)){
+                    return array('valid'=>1);
+                }                
+            } 
+            else{
+                return $response;
+            }      
+        }
+
+        public function validateDeliverProject($input,$files){
+           
+            $deliverProjectData = array();
+            $error=array();
+
+
+            if(!empty($files['deliveredfile']['name'])){         
+                $extension = explode('.',$files['deliveredfile']['name']);
+                $file_ext=strtolower(end($extension));
+                if(!in_array($file_ext,array('jpeg','gif','png','jpg','zip', 'pdf'))){
+                    $error = array_merge($error,array('deliveredfile' => 'JPG, JPEG, PNG, GIF, ZIP and PDF are only supported.'));
+                }
+
+                elseif(empty($error)){
+                    $cleanData = 'app/upload/projects/delivered/'.time().$files['deliveredfile']['name'];
+                    move_uploaded_file($files['deliveredfile']['tmp_name'],"../".$cleanData);
+                    $deliverProjectData = array_merge($deliverProjectData,array('deliveredfile' => $cleanData));
+                }
+            }
+
+            $deliverProjectData = array_merge($deliverProjectData,array('projectid' => $this->cleanInput($input['projectid'])));
+
+            if(empty($error)){
+                return array('valid'=>1 ,'data'=>$deliverProjectData);
+            }
+            else{
+                return array('valid'=>0,'data'=>$deliverProjectData,'error'=>$error);
+            }
+        }
+
+        public function deliverProject($data,$files){
+            $response = $this->validateDeliverProject($data,$files);
+            if($response['valid']==true){
+                $this->setProjectId($response['data']['projectid']);
+                $this->setDeliveredFile($response['data']['deliveredfile']);
+                $this->setStatus('Submitted');
+
+                //The variables below are arguments to be passed to insert data to their respective table 
+
+                $projectTb = array(
+                    'delivered_file' => "'".$this->getDeliveredFile()."'",
                     'status' => "'".$this->getStatus()."'"
                 );
 

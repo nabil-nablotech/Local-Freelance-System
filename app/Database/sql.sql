@@ -138,6 +138,7 @@ CREATE TABLE rate(
 	rate_id INT AUTO_INCREMENT PRIMARY KEY,
     rater VARCHAR(60) NOT NULL,
     ratee VARCHAR(60) NOT NULL,
+    project_id INT NOT NULL,
     score INT NOT NULL,
     comment VARCHAR(255) NOT NULL,
     date DATETIME NOT NULL
@@ -382,6 +383,14 @@ FOREIGN KEY (username) REFERENCES user(username);
 ALTER TABLE rate
 ADD CONSTRAINT FK_RateService_seeker_rater
 FOREIGN KEY (rater) REFERENCES service_seeker(username);
+
+ALTER TABLE rate
+ADD CONSTRAINT FK_RateService_provider_ratee
+FOREIGN KEY (ratee) REFERENCES service_provider(username);
+
+ALTER TABLE rate
+ADD CONSTRAINT FK_RateProject_project_id
+FOREIGN KEY (project_id) REFERENCES project(project_id);
 
 
 ---- Insert languages into the language table --------

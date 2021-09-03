@@ -280,7 +280,7 @@
 																					<i class="fa fa-star text-warning" data-score="4"></i>
 																					{$serviceProvider['rate']['score']}
 																					</span> 
-																					<a href="" class="mr-4">{$serviceProvider['rate']['score']} reviews</a> 
+																					<a href="" class="mr-4">{$serviceProvider['rate']['totalreviews']} reviews</a> 
 																					<span>XXX projects worked</span>
 																				</div>
 																				<div>

@@ -499,13 +499,16 @@
               
         }
 
-        public function updateWallet($username, $amount, $action){
-            
+        public function updateWallet($username, $amount, $action){            
         
             //The variables below are arguments to be passed to insert data to their respective table
             $serviceSeekerTb = array();
             if($action==='increase'){
                 $serviceSeekerTb = array('wallet_balance'=>"wallet_balance + ".$amount);
+                
+            }
+            elseif($action==='decrease'){
+                $serviceSeekerTb = array('wallet_balance'=>"wallet_balance - ".$amount);
                 
             }
             
