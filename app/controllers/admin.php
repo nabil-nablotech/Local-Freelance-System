@@ -53,6 +53,10 @@
             $this->view('administrator/completed');
         }
 
+        public function notification(){
+            $this->view('administrator/notification');
+        }
+
         public function opentickets(){
             $this->view('administrator/open_tickets');
         }

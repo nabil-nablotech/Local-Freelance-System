@@ -92,7 +92,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="notification.php">
+        <a class="nav-link" href="http://localhost/seralance/public/admin/notification">
           <i class="fa fa-bell"></i>
           <span>Notification</span>
         </a>
