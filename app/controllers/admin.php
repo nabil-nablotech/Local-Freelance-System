@@ -41,6 +41,18 @@
             $this->view('administrator/offered');
         }
 
+        public function ongoingprojects(){
+            $this->view('administrator/ongoing');
+        }
+
+        public function terminatedprojects(){
+            $this->view('administrator/terminated');
+        }
+
+        public function completedprojects(){
+            $this->view('administrator/completed');
+        }
+
         public function opentickets(){
             $this->view('administrator/open_tickets');
         }
@@ -49,10 +61,24 @@
             $this->view('administrator/closed_tickets');
         }
 
+        public function opendisputes(){
+            $this->view('administrator/open_disputes');
+        }
+
+        public function closeddisputes(){
+            $this->view('administrator/closed_disputes');
+        }
+
         public function reply($ticketId){
             $_SESSION['ticketid'] = $ticketId;
             $this->view('administrator/replyticket');
             unset($_SESSION['ticketid']);
+        }
+
+        public function review($projectId){
+            $_SESSION['projectid'] = $projectId;
+            $this->view('administrator/reviewdispute');
+            unset($_SESSION['projectid']);
         }
 
         public function viewadmin($username){
@@ -85,6 +111,26 @@
 
             $this->view('administrator/ticketdetails');
             unset($_SESSION['ticketDetails']);
+        }
+
+
+        public function viewdispute($disputeId){
+            $dispute = $this->model('Dispute');
+            $_SESSION['disputeDetails'] = $dispute->retrieveDisputeDetails($disputeId);
+            if($_SESSION['disputeDetails']==false){
+                unset($_SESSION['disputeDetails']);
+                header("Location: http://localhost/seralance/public/serviceprovider/dispute");                
+                exit();
+            }
+            if(empty($_SESSION['disputeDetails']['review_date'])){
+                $_SESSION['disputeDetails'] = array_merge($_SESSION['disputeDetails'], array('review_date'=>'---'));
+            }
+            if(empty($_SESSION['disputeDetails']['decision'])){
+                $_SESSION['disputeDetails'] = array_merge($_SESSION['disputeDetails'], array('decision'=>'---'));
+            }
+
+            $this->view('administrator/disputedetail');
+            unset($_SESSION['disputeDetails']);
         }
 
         public function newadmin(){
@@ -126,6 +172,21 @@
             return $project->retrieveAllOfferedProjects();
         }
 
+        public function getAllOngoingProjects(){
+            $project = $this->model('Project');
+            return $project->retrieveAllOngoingProjects();
+        }
+
+        public function getAllTerminatedProjects(){
+            $project = $this->model('Project');
+            return $project->retrieveAllTerminatedProjects();
+        }
+
+        public function getAllCompletedProjects(){
+            $project = $this->model('Project');
+            return $project->retrieveAllCompletedProjects();
+        }
+
         public function getAllOpenTickets(){
             $ticket = $this->model('Ticket');
             return $ticket->retrieveAllOpenTickets();
@@ -134,7 +195,17 @@
         public function getAllClosedTickets(){
             $ticket = $this->model('Ticket');
             return $ticket->retrieveAllClosedTickets();
-        } 
+        }
+        
+        public function getAllOpenDisputes(){
+            $dispute = $this->model('Dispute');
+            return $dispute->retrieveAllOpenDisputes();
+        }
+
+        public function getAllClosedDisputes(){
+            $dispute = $this->model('Dispute');
+            return $dispute->retrieveAllClosedDisputes();
+        }
 
         public function getAllCountries(){
             require_once('../app/models/countries.php');
@@ -253,6 +324,51 @@
             if($reply['valid']==true){
 
                 header("Location: http://localhost/seralance/public/admin/closedtickets");              
+                exit();
+                
+            }
+            else{
+                return $reply;
+            }
+        }
+
+        public function validateDisputeReview($input){
+            $dispute = $this->model('Dispute');
+            $reply = $dispute->reviewDispute($input);
+
+            if($reply['valid']==true){
+                $project = $this->model('Project');
+                $projectDetails = $project->retrieveProjectDetails($reply['projectid']);
+                $project->endProject($projectDetails['project_id'],"Terminated");
+
+                $transaction = $this->model('Transaction');
+
+                if($reply['action']==0){
+                    $terminationFee = $projectDetails['price'] * 0.04;
+                    $serviceSeeker = $this->model('ServiceSeeker');
+                    $serviceSeeker->updateWallet($projectDetails['announced_by'],$terminationFee,'decrease');
+                    $transaction->insertTransaction("ٌRefund", 'Termination fee of project ID: '.$projectDetails['project_id'], $terminationFee, $projectDetails['announced_by']);
+                    $transaction->insertTransaction("Fee", 'Termination fee of project ID: '.$projectDetails['project_id'], $terminationFee,'admin');
+                }
+
+                elseif($reply['action']==1){
+
+                    $serviceSeeker = $this->model('ServiceSeeker');
+                    $serviceSeeker->updateWallet($projectDetails['announced_by'],$projectDetails['price'],'decrease');
+                    $transaction->insertTransaction("Termination", 'Termination and payment for project ID: '.$projectDetails['project_id'], $projectDetails['price'],$projectDetails['announced_by']);
+                    
+                    $revenue = $projectDetails['price'] * 0.10;
+                    $payment = $projectDetails['price'] - $revenue;
+
+                    $serviceProvider = $this->model('ServiceProvider');
+                    $serviceProvider->updateWallet($projectDetails['assigned_to'],$payment,'increase');
+                    $transaction->insertTransaction("Compensation", 'Termination and payment for project ID: '.$projectDetails['project_id'], $payment, $projectDetails['assigned_to']);
+
+                    $transaction->insertTransaction("Return", 'Termination and revenue for project ID: '.$projectDetails['project_id'], $revenue,'admin');
+                }
+                
+
+                header("Location: http://localhost/seralance/public/admin/closeddisputes");              
                 exit();
                 
             }

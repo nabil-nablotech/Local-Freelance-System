@@ -67,11 +67,11 @@
         </a>
         <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="completed.php">Completed projects</a>
-            <a class="collapse-item" href="ongoing.php">Ongoing Projects</a>
+            <a class="collapse-item" href="http://localhost/seralance/public/admin/completedprojects">Completed projects</a>
+            <a class="collapse-item" href="http://localhost/seralance/public/admin/ongoingprojects">Ongoing Projects</a>
             <a class="collapse-item" href="http://localhost/seralance/public/admin/announcedprojects">Announced  Projects</a>
             <a class="collapse-item" href="http://localhost/seralance/public/admin/offeredprojects">Offered Projects</a>
-            <a class="collapse-item" href="terminated.php">Terminated Projects</a>
+            <a class="collapse-item" href="http://localhost/seralance/public/admin/terminatedprojects">Terminated Projects</a>
             <a class="collapse-item" href="http://localhost/seralance/public/admin/bids">Bids</a>
           </div>
         </div>
@@ -107,8 +107,8 @@
         <div id="collapsedispute" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
           
-            <a class="collapse-item" href="open_disputes.php">Open Disputes</a>
-            <a class="collapse-item" href="closed_dispute.php">Closed Dsputes</a>
+            <a class="collapse-item" href="http://localhost/seralance/public/admin/opendisputes">Open Disputes</a>
+            <a class="collapse-item" href="http://localhost/seralance/public/admin/closeddisputes">Closed Dsputes</a>
           </div>
         </div>
       </li>

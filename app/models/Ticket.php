@@ -269,7 +269,6 @@
                 //The variables below are arguments to be passed to insert data to their respective table 
                 
                 $ticketTb = array(
-                    'ticket_id' => $this->getTicketId(),
                     'closed_date' => "UTC_TIMESTAMP",
                     'reply' => "'".$this->getReply()."'",
                     'reviewed_by' => "'".$_SESSION['username']."'",

@@ -32,6 +32,10 @@
             $this->view('service_provider/ongoingproject');
         }
 
+        public function terminatedprojects(){
+            $this->view('service_provider/terminatedproject');
+        }
+
         public function completedprojects(){
             $this->view('service_provider/completedproject');
         }
@@ -44,8 +48,16 @@
             $this->view('service_provider/ticket');
         }
 
+        public function dispute(){
+            $this->view('service_provider/dispute');
+        }
+
         public function newticket(){
             $this->view('service_provider/addticket');
+        }
+
+        public function newdispute(){
+            $this->view('service_provider/adddispute');
         }
 
         public function viewticket($ticketId){
@@ -65,6 +77,25 @@
 
             $this->view('service_provider/ticketdetail');
             unset($_SESSION['ticketDetails']);
+        }
+
+        public function viewdispute($disputeId){
+            $dispute = $this->model('Dispute');
+            $_SESSION['disputeDetails'] = $dispute->retrieveDisputeDetails($disputeId);
+            if($_SESSION['disputeDetails']==false){
+                unset($_SESSION['disputeDetails']);
+                header("Location: http://localhost/seralance/public/serviceprovider/dispute");                
+                exit();
+            }
+            if(empty($_SESSION['disputeDetails']['review_date'])){
+                $_SESSION['disputeDetails'] = array_merge($_SESSION['disputeDetails'], array('review_date'=>'---'));
+            }
+            if(empty($_SESSION['disputeDetails']['decision'])){
+                $_SESSION['disputeDetails'] = array_merge($_SESSION['disputeDetails'], array('decision'=>'---'));
+            }
+
+            $this->view('service_provider/disputedetail');
+            unset($_SESSION['disputeDetails']);
         }
 
         public function viewproject($projectId){
@@ -163,6 +194,11 @@
         public function getAllTickets($username){
             $ticket = $this->model('Ticket');
             return $ticket->retrieveAllTickets($username);
+        }
+        
+        public function getAllDisputes($username){
+            $dispute = $this->model('Dispute');
+            return $dispute->retrieveAllDisputes($username);
         } 
 
         public function getUserDetails($username){
@@ -195,6 +231,11 @@
             return $project->retrieveAllOngoingProjects($username);
         }
 
+        public function getAllTerminatedProjects($username){
+            $project = $this->model('Project');
+            return $project->retrieveAllTerminatedProjects($username);
+        }
+
         public function getAllCompletedProjects($username){
             $project = $this->model('Project');
             return $project->retrieveAllCompletedProjects($username);
@@ -213,6 +254,19 @@
 
             if($reply['valid']==true){  
                 header("Location: http://localhost/seralance/public/serviceprovider/ticket");              
+                exit();
+            }
+            else{
+                return $reply;
+            }
+        }
+
+        public function validateNewDispute($input,$files){
+            $dispute = $this->model('Dispute');
+            $reply = $dispute->createDispute($input, $files);
+
+            if($reply['valid']==true){  
+                header("Location: http://localhost/seralance/public/serviceprovider/dispute");              
                 exit();
             }
             else{

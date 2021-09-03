@@ -70,6 +70,29 @@
 
         // end of getters and setters
 
+        public function retrieveDisputeDetails($disputeId){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $sql = "";
+                if($_SESSION['usertype'] ==='serviceprovider' || $_SESSION['usertype'] ==='serviceseeker'){
+                    $sql = "SELECT * FROM dispute where dispute_id='".$disputeId."' and raised_by= '".$_SESSION['username']."'";
+                }
+
+                elseif($_SESSION['usertype'] ==='admin'){
+                    $sql = "SELECT * FROM dispute where dispute_id='".$disputeId."'";
+                }
+                $stmt = $conn->query($sql);
+                if($dispute = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    return $dispute;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
         public function retrieveAllDisputes($username=""){
             require_once('../app/Core/Database.php');
             $db = new Database();
@@ -78,6 +101,44 @@
                 $sql = "";
                 if($_SESSION['usertype']==='serviceseeker' || $_SESSION['usertype']==='serviceprovider'){
                     $sql = "SELECT * FROM dispute where raised_by='".$username."'";
+                }
+                $stmt = $conn->query($sql);
+                if($disputes = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $disputes;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        public function retrieveAllOpenDisputes(){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $sql = "";
+                if($_SESSION['usertype']==='admin'){
+                    $sql = "SELECT * FROM dispute where status='open'";
+                }
+                $stmt = $conn->query($sql);
+                if($disputes = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $disputes;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        public function retrieveAllClosedDisputes(){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $sql = "";
+                if($_SESSION['usertype']==='admin'){
+                    $sql = "SELECT * FROM dispute where status='closed'";
                 }
                 $stmt = $conn->query($sql);
                 if($disputes = $stmt->fetchAll(PDO::FETCH_ASSOC)){
@@ -167,6 +228,61 @@
 
                 $this->insert('dispute',$disputeTb);
                 return array('valid'=>1);
+            } 
+            else{
+                return $response;
+            }      
+        }
+
+        public function validateDisputeReview($input){
+            
+            // $disputeData holds the data to be inserted to Service provider table
+            $disputeData = array();
+            $error=array();
+
+
+            if(empty($input['decision'])){
+                $error = array_merge($error,array('decision' => 'This field is required.'));
+            }
+            else{
+                $disputeData = array_merge($disputeData,array('decision' => $this->cleanInput($input['decision'])));
+                $disputeData = array_merge($disputeData,array('projectid' => $this->cleanInput($input['projectid'])));
+            }
+
+            if($input['action']!=0 && $input['action']!=1){
+                $error = array_merge($error,array('action' => 'This field is required.'));
+            }
+            else{
+                $disputeData = array_merge($disputeData,array('action' => $this->cleanInput($input['action'])));
+            }
+
+            if(empty($error)){
+                return array('valid'=>1 ,'data'=>$disputeData);
+            }
+            else{
+                return array('valid'=>0,'data'=>$disputeData,'error'=>$error);
+            }
+        }
+
+        public function reviewDispute($data){
+            $response = $this->validateDisputeReview($data);
+            if($response['valid']==true){
+
+                
+                $this->setDecision($response['data']['decision']);
+                $this->setStatus('closed') ;
+    
+                //The variables below are arguments to be passed to insert data to their respective table 
+                
+                $disputeTb = array(
+                    'review_date' => "UTC_TIMESTAMP",
+                    'decision' => "'".$this->getDecision()."'",
+                    'reviewed_by' => "'".$_SESSION['username']."'",
+                    'status' => "'".$this->getStatus()."'"
+                );
+                $condition = "WHERE project_id = '". $response['data']['projectid'] ."'"; 
+                $this->update('dispute',$disputeTb,$condition);
+                return array('valid'=>1,'action'=>$response['data']['action'],'projectid'=>$response['data']['projectid']);
             } 
             else{
                 return $response;

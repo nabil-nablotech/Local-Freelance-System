@@ -1,6 +1,6 @@
 <?php
 require "includes/admin-navigation.php";
-$disputes = $adminController->getAllOpenDisputes();
+$disputes = $adminController->getAllClosedDisputes();
 ?>
 	<script>
 	document.title = "Service seeker-Transaction history";
@@ -11,21 +11,20 @@ $disputes = $adminController->getAllOpenDisputes();
 			<div class="col-sm-12 col-md-12 col-lg-12 ">
 				<div class="card shadow-sm mb-4">
 					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-						<h6 class="m-0 font-weight-bold text-primary mx-auto">List of open disputes</h6> </div>
+						<h6 class="m-0 font-weight-bold text-primary mx-auto">List of closed disputes</h6> </div>
 					<div class="card-body">
 						<!--  -->
 						<div class="table table-responsive mt-5">
 							<table id="table" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-                    <th>No.</th>
+                              <th>No.</th>
 										<th>Dispute ID</th>
 										<th>Dispute Date</th>
 										<th>Project id</th>
 										<th>Review date</th>
 										<th>Status</th>
 										<th> </th>
-                    <th></th>
                               
 									</tr>
 								</thead>
@@ -34,9 +33,6 @@ $disputes = $adminController->getAllOpenDisputes();
 											if(!empty($disputes)){
 												$count = 1;
 												foreach($disputes as $dispute){
-													if(empty($dispute['review_date'])){
-														$dispute = array_merge($dispute,array('review_date'=>'---'));
-													}
                                        echo <<<EOT
                                                 <tr>
                                                 <td>
@@ -59,7 +55,6 @@ $disputes = $adminController->getAllOpenDisputes();
                                                 </td>
                                                 <!--  -->
                                                    <td><a class="btn btn-info" href="http://localhost/seralance/public/admin/viewdispute/{$dispute['dispute_id']}">View</a> </td>
-                                                   <td><a class="btn btn-success" href="http://localhost/seralance/public/admin/review/{$dispute['project_id']}">Review</a> </td>
                                                 <!--  -->
                                                 </tr>
                                              EOT;

@@ -1,10 +1,9 @@
 <?php
    require "includes/service_provider-navigation.php";
-   $projects = $serviceProviderController->getAllCompletedProjects($_SESSION['username']);
-
+   $projects = $serviceProviderController->getAllTerminatedProjects($_SESSION['username']);
 
      
-?>
+     ?>
 
 	<head>
 
@@ -19,7 +18,7 @@
 			<div class="col-sm-12 col-md-12 col-lg-12 ">
 				<div class="card shadow-sm mb-4">
 					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-						<h6 class="m-0 font-weight-bold text-primary mx-auto">Completed projects</h6> </div>
+						<h6 class="m-0 font-weight-bold text-primary mx-auto">Terminated projects</h6> </div>
 					<div class="card-body mx-auto">
 						<!-- claim fund -->
 						<!--  -->
@@ -42,7 +41,7 @@
 
 												$count = 1;
 												foreach($projects as $project){
-												
+
 
 												echo <<<EOT
 													<tr>
@@ -66,7 +65,7 @@
 													</td>
 													<!--  -->
 													<td><a href="http://localhost/seralance/public/serviceprovider/viewproject/{$project['project_id']}" class="d-inline btn-sm  btn btn-primary mr-5">View details</a> </td>
-													
+
 													<!--  -->
 													</tr>
 												EOT;
@@ -85,9 +84,9 @@
 			</div>
 		</div>
 
-	
-       
+	      
 		<script type="text/javascript">
+
 
 			$(document).ready(function() {
 				$("#table").DataTable();

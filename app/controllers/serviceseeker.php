@@ -55,6 +55,10 @@
             $this->view('service_seeker/ongoingproject');
         }
 
+        public function terminatedprojects(){
+            $this->view('service_seeker/terminatedproject');
+        }
+
         public function completedprojects(){
             $this->view('service_seeker/completedproject');
         }
@@ -207,6 +211,25 @@
             unset($_SESSION['ticketDetails']);
         }
 
+        public function viewdispute($disputeId){
+            $dispute = $this->model('Dispute');
+            $_SESSION['disputeDetails'] = $dispute->retrieveDisputeDetails($disputeId);
+            if($_SESSION['disputeDetails']==false){
+                unset($_SESSION['disputeDetails']);
+                header("Location: http://localhost/seralance/public/serviceseeker/dispute");                
+                exit();
+            }
+            if(empty($_SESSION['disputeDetails']['review_date'])){
+                $_SESSION['disputeDetails'] = array_merge($_SESSION['disputeDetails'], array('review_date'=>'---'));
+            }
+            if(empty($_SESSION['disputeDetails']['decision'])){
+                $_SESSION['disputeDetails'] = array_merge($_SESSION['disputeDetails'], array('decision'=>'---'));
+            }
+
+            $this->view('service_seeker/disputedetail');
+            unset($_SESSION['disputeDetails']);
+        }
+
         public function deleteproject($offertype,$projectId){
             $project = $this->model('project');
             $sucess = $project->deleteProject($projectId);
@@ -269,6 +292,11 @@
         public function getAllOngoingProjects($username){
             $project = $this->model('Project');
             return $project->retrieveAllOngoingProjects($username);
+        }
+
+        public function getAllTerminatedProjects($username){
+            $project = $this->model('Project');
+            return $project->retrieveAllTerminatedProjects($username);
         }
 
         public function getAllCompletedProjects($username){

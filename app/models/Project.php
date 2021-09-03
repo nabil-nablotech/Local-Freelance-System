@@ -261,7 +261,36 @@
                 }
 
                 elseif($_SESSION['usertype']==='admin'){
-                    $sql = "SELECT * FROM project where (status='Pending' OR status='Pending Deposit' OR status='Cancelled') AND offer_type ='Offer' ORDER BY announced_date DESC";
+                    $sql = "SELECT * FROM project where (status='Ongoing' OR status='Submitted')";
+                }                
+
+                $stmt = $conn->query($sql);
+                if($offeredProjects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $offeredProjects;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        public function retrieveAllTerminatedProjects($username=""){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $sql = "";
+                
+                if($_SESSION['usertype']==='serviceseeker'){
+                    $sql = "SELECT * FROM project where status='Terminated' and announced_by='" . $username . "'";
+                }
+                
+                elseif($_SESSION['usertype']==='serviceprovider'){
+                    $sql = "SELECT * FROM project where status='Terminated' and assigned_to='" . $username . "'";
+                }
+
+                elseif($_SESSION['usertype']==='admin'){
+                    $sql = "SELECT * FROM project where status='Terminated'";
                 }                
 
                 $stmt = $conn->query($sql);
@@ -290,7 +319,7 @@
                 }
 
                 elseif($_SESSION['usertype']==='admin'){
-                    $sql = "SELECT * FROM project where (status='Pending' OR status='Pending Deposit' OR status='Cancelled') AND offer_type ='Offer' ORDER BY announced_date DESC";
+                    $sql = "SELECT * FROM project where status='Completed'";
                 }                
 
                 $stmt = $conn->query($sql);
@@ -305,8 +334,13 @@
 
         public function updateStatus($projectId,$status){                
             $data = array('status'=>"'".$status."'");
+            $condition = "";
             if($_SESSION['usertype']=='serviceseeker'){
                 $condition= "WHERE project_id ='". $projectId ."' and project_id IN (select project_id from project where announced_by = '".$_SESSION['username']."')" ;
+                
+            } 
+            elseif($_SESSION['usertype']=='admin'){
+                $condition= "WHERE project_id ='". $projectId ."'" ;
                 
             }       
 
@@ -319,7 +353,16 @@
 
         public function endProject($projectId,$status){                
             $data = array('end_date'=>"UTC_TIMESTAMP");
-            $condition= "WHERE project_id ='". $projectId ."' and project_id IN (select project_id from project where announced_by = '".$_SESSION['username']."')" ;
+            $condition= "" ;
+            
+            if($_SESSION['usertype']=='serviceseeker'){
+                $condition= "WHERE project_id ='". $projectId ."' and project_id IN (select project_id from project where announced_by = '".$_SESSION['username']."')" ;
+  
+            } 
+            elseif($_SESSION['usertype']=='admin'){
+                $condition= "WHERE project_id ='". $projectId ."'" ;
+                
+            } 
             $this->updateStatus($projectId,$status);
 
             if($this->update('project',$data,$condition)){
