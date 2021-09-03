@@ -222,7 +222,7 @@
                     'opened_date' => "UTC_TIMESTAMP",
                     'subject' => "'".$this->getSubject()."'",
                     'message' => "'".$this->getMessage()."'",
-                    'file' => "'".$this->getFileattachment()."'",
+                    'file' => "'".$this->getFileAttachment()."'",
                     'opened_by' => "'".$_SESSION['username']."'",
                     'status' => "'".$this->getStatus()."'"
                 );

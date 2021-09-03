@@ -45,7 +45,7 @@
 														$secondColBtn = '<a class="btn btn-success" href="'.$serviceSeekerController->getPaymentUrl($project['project_id'],$project['price']).'">Deposit</a>'; 
 													}
 
-													if($project['status'] === 'Cancelled'){
+													if($project['status'] === 'Pending' || $project['status'] === 'Pending Deposit'){
 														$deleteBtn = '<button class="btn btn-danger" onclick ="confirmAction(\'http://localhost/seralance/public/serviceseeker/deleteproject/offeredprojects/'.$project['project_id'].'\');" >Delete</button>'; 
 													}
 													echo <<<EOT

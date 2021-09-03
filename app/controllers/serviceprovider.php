@@ -32,6 +32,10 @@
             $this->view('service_provider/ongoingproject');
         }
 
+        public function completedprojects(){
+            $this->view('service_provider/completedproject');
+        }
+
         public function profile(){
             $this->view('service_provider/updateprofile');
         }
@@ -189,6 +193,11 @@
         public function getAllOngoingProjects($username){
             $project = $this->model('Project');
             return $project->retrieveAllOngoingProjects($username);
+        }
+
+        public function getAllCompletedProjects($username){
+            $project = $this->model('Project');
+            return $project->retrieveAllCompletedProjects($username);
         }
 
         public function validateUpdateProfile($input,$files){

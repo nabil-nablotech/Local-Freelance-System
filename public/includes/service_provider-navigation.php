@@ -120,7 +120,7 @@
             <i class="fa  fa-x fa-tasks" aria-hidden="true">  </i> </a> <span>My project</span>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown"
              style="background-color:#CCE5FF"> <a class="dropdown-item" 
-             href="completed.php">Completed projects</a> 
+             href="<?php echo $base;?>public/serviceprovider/completedprojects">Completed projects</a> 
              <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/ongoingprojects">
                Ongoing projects</a> <a class="dropdown-item" 
                href="terminated.php">Terminated Projects</a>

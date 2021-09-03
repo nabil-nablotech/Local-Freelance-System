@@ -286,7 +286,7 @@
                 }
                 
                 elseif($_SESSION['usertype']==='serviceprovider'){
-                    $sql = "SELECT * FROM project where (status='Ongoing' OR status='Submitted') and assigned_to='" . $username . "'";
+                    $sql = "SELECT * FROM project where status='Completed' and assigned_to='" . $username . "'";
                 }
 
                 elseif($_SESSION['usertype']==='admin'){
@@ -604,7 +604,7 @@
                     'delivered_file' => "'".$this->getDeliveredFile()."'",
                     'status' => "'".$this->getStatus()."'"
                 );
-
+                
                 $condition = "WHERE project_id = '".$this->getProjectId()."'";              
                 if($this->update('project',$projectTb,$condition)){
                     return array('valid'=>1);

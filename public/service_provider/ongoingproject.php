@@ -76,7 +76,7 @@
 													<!--  -->
 													<td><a href="http://localhost/seralance/public/serviceprovider/viewproject/{$project['project_id']}" class="d-inline btn-sm  btn btn-primary mr-5">View details</a> </td>
 													<td>
-														<button class="btn btn-success" data-project=".{$project['project_id']}."data-toggle="modal" data-target="#deliverModal" onclick ="setDeliverModal(this);" > Deliver work</button>
+														<button class="btn btn-success" data-project="{$project['project_id']}" data-toggle="modal" data-target="#deliverModal" onclick ="setDeliverModal(this);" > Deliver work</button>
 													</td>
 													<!--  -->
 													</tr>

@@ -23,8 +23,16 @@
             $this->view('service_seeker/ticket');
         }
 
+        public function dispute(){
+            $this->view('service_seeker/dispute');
+        }
+
         public function newticket(){
             $this->view('service_seeker/addticket');
+        }
+        
+        public function newdispute(){
+            $this->view('service_seeker/adddispute');
         }
 
         public function message(){
@@ -236,6 +244,11 @@
         public function getAllTickets($username){
             $ticket = $this->model('Ticket');
             return $ticket->retrieveAllTickets($username);
+        }
+        
+        public function getAllDisputes($username){
+            $dispute = $this->model('Dispute');
+            return $dispute->retrieveAllDisputes($username);
         } 
 
         public function getAllBids($projectId){
@@ -315,6 +328,19 @@
 
             if($reply['valid']==true){  
                 header("Location: http://localhost/seralance/public/serviceseeker/ticket");              
+                exit();
+            }
+            else{
+                return $reply;
+            }
+        }
+
+        public function validateNewDispute($input,$files){
+            $dispute = $this->model('Dispute');
+            $reply = $dispute->createDispute($input, $files);
+
+            if($reply['valid']==true){  
+                header("Location: http://localhost/seralance/public/serviceseeker/dispute");              
                 exit();
             }
             else{

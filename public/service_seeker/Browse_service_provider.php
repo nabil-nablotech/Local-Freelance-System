@@ -262,6 +262,9 @@
 																 foreach($serviceProvider['skill'] as $skill){
 																	$myskill .= $skill['skill_name']." | ";
 																 }
+
+																$score = number_format($serviceProvider['rate']['score'],2);
+
 																echo <<<EOT
 																		<li class="profile-item mb-3">
 																		<div class="profile-list-wrap">
@@ -278,7 +281,7 @@
 																				<div class="profile-list-detail"> 
 																					<span>
 																					<i class="fa fa-star text-warning" data-score="4"></i>
-																					{$serviceProvider['rate']['score']}
+																 						{$score}
 																					</span> 
 																					<a href="" class="mr-4">{$serviceProvider['rate']['totalreviews']} reviews</a> 
 																					<span>XXX projects worked</span>
