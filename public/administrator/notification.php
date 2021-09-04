@@ -1,6 +1,6 @@
 <?php
 require_once "includes/admin-navigation.php";
-$notifications = $adminController->getAllNotification();
+$notifications = $adminController->getAllNotifications();
 ?>
 
 <!--  -->
@@ -31,7 +31,7 @@ $notifications = $adminController->getAllNotification();
 <!--  -->
                 <!--  -->
                 <div class="table table-responsive mt-3">
-                <a class = "btn btn-success btn-sm mb-3" href = "push_notification.php">
+                <a class = "btn btn-success btn-sm mb-3" href = "pushnotification">
                   <i class = "fa  fa-plus-circle"></i> Push new notification</a>
 
                   <table id = "table" class = "table table-bordered table-striped">
@@ -42,17 +42,16 @@ $notifications = $adminController->getAllNotification();
                         <th>Title</th>
                         <th>Content</th>
                         <th>Recipient</th>
-                        <th>Project title </th>
+                        <th>Date </th>
                         <th>Status</th>
-                        <th> </th>
                      </tr>
                   </thead>
                   <tbody>
 
                     <?php 
-                        if(!empty($bids)){
+                        if(!empty($notifications)){
                             $count = 1;
-                            foreach($bids as $bid){
+                            foreach($notifications as $notification){
 
                                 echo <<<EOT
                                             <tr>
@@ -60,25 +59,24 @@ $notifications = $adminController->getAllNotification();
                                                 {$count}
                                             </td>
                                             <td>
-                                                {$bid['bid_id']}
+                                                {$notification['notification_id']}
                                             </td>
                                             <td>
-                                                {$bid['price']}
+                                                {$notification['title']}
                                             </td>
                                             <td>
-                                                {$bid['bid_date']}
+                                                {$notification['content']}
                                             </td>
                                             <td>
-                                                {$bid['project_id']}
+                                                {$notification['recipient']}
                                             </td>
                                             <td>
-                                                {$bid['title']}
+                                                {$notification['datetime']}
                                             </td>
                                             <td>
-                                                {$bid['status']}
+                                                {$notification['status']}
                                             </td>
                                             <!--  -->
-                                                <td><a class="btn btn-info" href="http://localhost/seralance/public/admin/viewbiddescription/{$bid['bid_id']}">Bid description</a> </td>
                                             <!--  -->
                                             </tr>
                                         EOT;

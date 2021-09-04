@@ -1,6 +1,39 @@
 <?php
-require_once "../includes/admin-navigation.php";
-require_once "../guest/connection.php";
+require_once "includes/admin-navigation.php";
+
+$title = $content = "";
+
+
+$titleErr = $contentErr = $recipientErr  = "";
+if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['push_btn'])){    
+$feedback =  $adminController->validatePushNotification($_POST);
+  if($feedback['valid'] == false){
+    
+    // setting inserted data
+    if(!empty($feedback['data']['title'])){
+      $title = $feedback['data']['title'];
+    }
+
+    if(!empty($feedback['data']['content'])){
+      $content = $feedback['data']['content'];
+  }
+  
+
+    // Setting error values
+    if(!empty($feedback['error']['title'])){
+      $titleErr = $feedback['error']['title'];
+    }
+    
+    if(!empty($feedback['error']['content'])){
+      $contentErr = $feedback['error']['content'];
+    }
+
+    if(!empty($feedback['error']['recipient'])){
+      $recipientErr = $feedback['error']['recipient'];
+    }
+
+  }
+}
 ?>
 
 <!--  -->
@@ -13,7 +46,6 @@ require_once "../guest/connection.php";
  <!-- Contents-->
  <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">List of Notification </h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
                 <a href="./">Home</a>
@@ -31,27 +63,30 @@ require_once "../guest/connection.php";
                 </div>
                 <div class="card-body ">
 <!--  -->
-<form action="push.php"  method="post" id="comment_form" >
+<form  method="post" id="comment_form" >
   <div class="form-group">
-    <label for="email">subject</label>
-    <input type="text" class="form-control" name="title" id="subject" placeholder="Enter title" required  >
+    <label for="email">Title</label>
+    <input type="text" class="form-control" name="title" id="subject" placeholder="Enter title" value = "<?php echo $title;?>" required  >
+    <p class="errormessage"> <?php echo $titleErr;?> </p>
   </div>
   <div class="form-group">
-    <label for="pwd">Message:</label>
-	<textArea input="text" class="form-control" name="message" id="comment" placeholder="enter message" rows="4"
-    required> </textArea>
+    <label for="pwd">Content</label>
+	<textArea input="text" class="form-control" name="content" id="comment" placeholder="Enter message" rows="4"
+    required> <?php echo $content;?> </textArea>
   </div>
+  <p class="errormessage"> <?php echo $contentErr;?> </p>
 
   <div class="form-group">
-<select id="test" class="form-control" name="form_select" onchange="showDiv(this)">
+<select id="test" class="form-control" name="recipientselect" onchange="showDiv(this)">
         <option>Choose any recipient </option>
       <option value="1">All service providers</option>
-      <option value="2">All Service Seekers</option>
+      <option value="2">All service seekers</option>
       <option value="3">All service seekers and providers</option>
-      <option value="4">specific users</option>
+      <option value="4">Specific user</option>
 </select>
+<p class="errormessage"> <?php echo $recipientErr;?> </p>
 <div id="hidden_div" class="mt-3" style="display:none;">
-<input type="text" class="form-control" placeholder="please enter username"></div>
+<input type="text" class="form-control" name="recipient" placeholder="Please enter username"></div>
 
 <script type="text/javascript">
 function showDiv(select){
@@ -64,67 +99,11 @@ function showDiv(select){
 </script>
 </div> 
   <div class="text-center">
-<input type="submit" name="post" id="post" class="btn btn-info" value="Post" />
+<input type="submit" name="push_btn" id="post" class="btn btn-info" value="Push"/>
 </div>
 </form>
     <!--  -->
     
-    <script>
-$(document).ready(function(){
- 
- function load_unseen_notification(view = '')
- {
-  $.ajax({
-   url:"../ServiceSeeker/Notification/fetch.php", 
-   method:"POST",
-   data:{view:view},
-   dataType:"json",
-   success:function(data)
-   {
-    $('.dropdown-menu').html(data.notification);
-    if(data.unseen_notification > 0)
-    {
-     $('.count').html(data.unseen_notification);
-    }
-   }
-  });
- }
- 
- load_unseen_notification();
- 
- $('#comment_form').on('submit', function(event){
-  event.preventDefault();
-  if($('#subject').val() != '' && $('#comment').val() != '')
-  {
-   var form_data = $(this).serialize();
-   $.ajax({
-    url:"push.php",
-    method:"POST",
-    data:form_data,
-    success:function(data)
-    {
-     $('#comment_form')[0].reset();
-     load_unseen_notification();
-    }
-   });
-  }
-  else
-  {
-   alert("Both Fields are Required");
-  }
- });
- 
- $(document).on('click', '.dropdown-toggle', function(){
-  $('.count').html('');
-  load_unseen_notification('yes');
- });
- 
- setInterval(function(){ 
-  load_unseen_notification();; 
- }, 5000);
- 
-});
-</script>
 
 
     <!--  -->
@@ -140,7 +119,7 @@ $(document).ready(function(){
 
       <!-- Footer -->
      <?php
-require_once "../includes/admin-footer.php";
+require_once "includes/admin-footer.php";
      ?>
 
     </div>
@@ -149,14 +128,14 @@ require_once "../includes/admin-footer.php";
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-  <script src="../assets/vendor/jquery/jquery.min.js"></script>  
-<script src="../assets/vendor/datatables/jquery.dataTables.js" ></script>
-<script src="../assets/vendor/datatables/jquery.dataTables.min.js" ></script>
-<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="../assets/js/administrator/serelance-admin.js "></script>
-<script src="../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="../assets/vendor/datatables/dataTables.bootstrap4.js" ></script>
+  <script src="http://localhost/seralance/app/vendor/jquery/jquery.min.js"></script>  
+  <script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.js" ></script>
+  <script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.min.js" ></script>
+  <script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="http://localhost/seralance/app/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="http://localhost/seralance/public/assets/js/administrator/serelance-admin.js "></script>
+  <script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.js" ></script>
 
 
 

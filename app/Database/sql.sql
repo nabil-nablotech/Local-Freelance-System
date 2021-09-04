@@ -75,10 +75,9 @@ CREATE TABLE notification(
     title VARCHAR(60) NOT NULL,
     content VARCHAR(240) NOT NULL,
     datetime DATETIME NOT NULL,
-    status VARCHAR(60) NOT NULL,
+    status VARCHAR(60) NOT NULL, 
     recipient VARCHAR(60) NOT NULL,
     url VARCHAR(255),
-    opened_by_recipient BOOLEAN NOT NULL,
     admin_id VARCHAR(60)
 );
 

@@ -133,7 +133,7 @@
 
         //---------End of getters and setters ---------///
 
-        protected function checkUserExists($username){
+        public function checkUserExists($username){
             require_once('../app/Core/Database.php');
             $db = new Database();
             $conn = $db->setConnection();

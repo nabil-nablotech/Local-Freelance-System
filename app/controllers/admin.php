@@ -57,6 +57,10 @@
             $this->view('administrator/notification');
         }
 
+        public function pushnotification(){
+            $this->view('administrator/push_notification');
+        }
+
         public function opentickets(){
             $this->view('administrator/open_tickets');
         }
@@ -164,6 +168,11 @@
         public function getAllBids(){
             $bid = $this->model('Bid');
             return $bid->retrieveAllBids();
+        }
+
+        public function getAllNotifications(){
+            $notification = $this->model('Notification');
+            return $notification->retrieveAllNotifications();
         }
 
         public function getAllAnnouncedProjects(){
@@ -375,6 +384,19 @@
                 header("Location: http://localhost/seralance/public/admin/closeddisputes");              
                 exit();
                 
+            }
+            else{
+                return $reply;
+            }
+        }
+
+        public function validatePushNotification($input){
+            $notification = $this->model('Notification');
+            $reply = $notification->pushNotification($input);
+
+            if($reply['valid']==true){  
+                header("Location: http://localhost/seralance/public/admin/notification");              
+                exit();
             }
             else{
                 return $reply;
