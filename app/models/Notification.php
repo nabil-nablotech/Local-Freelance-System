@@ -78,10 +78,10 @@
                 $sql = "";
                 
                 if($_SESSION['usertype'] ==='serviceseeker' || $_SESSION['usertype'] ==='serviceprovider'){
-                    $sql = "SELECT * FROM notification  where recipient = '".$id."'";
+                    $sql = "SELECT * FROM notification  where recipient = '".$id."' ORDER BY datetime DESC";
                 }                
                 elseif($_SESSION['usertype'] ==='admin'){
-                    $sql = "SELECT * FROM notification";
+                    $sql = "SELECT * FROM notification ORDER BY datetime DESC";
                 }
 
                 $stmt = $conn->query($sql);
@@ -91,6 +91,29 @@
                 else{
                     return false;
                 }
+            }
+        }
+
+        public function openNotifications($id){
+            $data = array("status"=>"'open'");
+            $this->update('notification',$data,"WHERE recipient = '".$id."'");
+        }
+        
+        public function countClosedNotifications($id){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $sql = "";
+                
+                if($_SESSION['usertype'] ==='serviceseeker' || $_SESSION['usertype'] ==='serviceprovider'){
+                    $sql = "SELECT count(*) as number FROM notification  where recipient = '".$id."' and status = 'closed' ORDER BY datetime DESC";
+                }                
+
+
+                $stmt = $conn->query($sql);
+                    return $stmt->fetch(PDO::FETCH_ASSOC);
+                
             }
         }
 

@@ -168,31 +168,42 @@
 		</nav>
 		<!--  -->
 		<script>
-		$(document).ready(function() {
-			function load_unseen_notification(view = '') {
-				$.ajax({
-					url: "http://localhost/seralance/public/serviceseeker/fetch.php",
-					method: "POST",
+
+		 function updateCount(){
+			$.ajax({
+					type: "POST",
+					url: "http://localhost/seralance/public/serviceseeker/fetchnotification",		
 					data: {
-						view: view
+						id: "<?php echo $_SESSION['username'];?>",
+						count: true
 					},
-					dataType: "json",
 					success: function(data) {
-						$('#notify').html(data.notification);
-						if(data.unseen_notification > 0) {
-							$('.count').html(data.unseen_notification);
+						if(data>0){
+							$('.count').html(data);
 						}
+						else{
+							$('.count').html('');
+						}
+												
 					}
 				});
-			}
-			load_unseen_notification();
-			$(document).on('click', '.dropdown-toggle', function() {
-				$('.count').html('');
-				load_unseen_notification('yes');
-			});
-			setInterval(function() {
-				load_unseen_notification();;
-			}, 5000);
+		 }
+		 $(window).on('load',updateCount);
+
+		setInterval(updateCount,5000); 
+		$('#notification').click(function(){
+			$.ajax({
+					type: "POST",
+					url: "http://localhost/seralance/public/serviceseeker/fetchnotification",		
+					data: {
+						id: "<?php echo $_SESSION['username'];?>",
+						open: true
+					},
+					success: function(data) {
+						$('#notify').html(data);						
+					}
+				});
 		});
+
 
 		</script>

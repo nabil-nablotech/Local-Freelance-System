@@ -63,6 +63,10 @@
             $this->view('service_seeker/completedproject');
         }
 
+        public function fetchnotification(){
+            $this->view('service_seeker/fetchnotification');
+        }
+
         public function paymentsuccess(){
             $serviceSeeker = $this->model('ServiceSeeker');
             $serviceSeeker->updateWallet($_SESSION['username'],$_GET['TotalAmount'],'increase');
@@ -267,6 +271,21 @@
         public function getAllTickets($username){
             $ticket = $this->model('Ticket');
             return $ticket->retrieveAllTickets($username);
+        }
+
+        public function getAllNotifications($username){
+            $notification = $this->model('Notification');
+            return $notification->retrieveAllNotifications($username);
+        }
+
+        public function updateNotificationStatus($username){
+            $notification = $this->model('Notification');
+            return $notification->openNotifications($username);
+        }
+
+        public function countNotifications($username){
+            $notification = $this->model('Notification');
+            return $notification->countClosedNotifications($username);
         }
         
         public function getAllDisputes($username){
