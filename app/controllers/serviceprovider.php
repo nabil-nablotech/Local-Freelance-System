@@ -15,6 +15,10 @@
             $this->view('service_provider/mybids');
         }
 
+        public function transaction(){
+            $this->view('service_provider/transaction');
+        }
+
         public function bid($projectId){
             $_SESSION['projectId'] = $projectId;
             $this->view('service_provider/bid');
@@ -38,6 +42,10 @@
 
         public function completedprojects(){
             $this->view('service_provider/completedproject');
+        }
+
+        public function fetchnotification(){
+            $this->view('service_provider/fetchnotification');
         }
 
         public function profile(){
@@ -195,6 +203,21 @@
             $ticket = $this->model('Ticket');
             return $ticket->retrieveAllTickets($username);
         }
+
+        public function getAllNotifications($username){
+            $notification = $this->model('Notification');
+            return $notification->retrieveAllNotifications($username);
+        }
+
+        public function updateNotificationStatus($username){
+            $notification = $this->model('Notification');
+            return $notification->openNotifications($username);
+        }
+
+        public function countNotifications($username){
+            $notification = $this->model('Notification');
+            return $notification->countClosedNotifications($username);
+        }
         
         public function getAllDisputes($username){
             $dispute = $this->model('Dispute');
@@ -204,6 +227,11 @@
         public function getUserDetails($username){
             $serviceProvider = $this->model('ServiceProvider');
             return $serviceProvider->retrieveUserDetails($username);
+        }
+
+        public function getAllTransactions($username){
+            $transaction = $this->model('Transaction');
+            return $transaction->retrieveAllTransactions($username);
         }
 
         public function getProjects($filter=""){
@@ -315,6 +343,19 @@
             else{
                 return $reply;
             }
+        }
+
+        public function checkRequestExists($username){
+            $request = $this->model('TransferRequest');
+            return $request->checkExists($username);
+        }
+
+        public function requesttransfer(){
+            $request= $this->model('TransferRequest');
+            $request->sendRequest($_SESSION['username'],$this->getUserDetails($_SESSION['username'])['walletbalance']);
+            header("Location: http://localhost/seralance/public/serviceprovider/transaction");              
+            exit();           
+            
         }
 
 

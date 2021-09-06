@@ -87,7 +87,6 @@ CREATE TABLE transfer_request(
     datetime DATETIME NOT NULL,
     amount FLOAT NOT NULL,
     status VARCHAR(60) NOT NULL,
-    type VARCHAR(60) NOT NULL,
     processed_date DATETIME,
     processed_by VARCHAR(60)
 );

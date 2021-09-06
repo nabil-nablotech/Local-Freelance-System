@@ -15,6 +15,10 @@
             $this->view('service_seeker/announce_project');
         }
 
+        public function transaction(){
+            $this->view('service_seeker/transaction');
+        }
+
         public function profile(){
             $this->view('service_seeker/updateprofile');
         }
@@ -112,6 +116,7 @@
 
             
         }
+        
 
         public function checkRating($projectId){
             $rate = $this->model('Rate');
@@ -268,9 +273,23 @@
             return $serviceSeeker->retrieveUserDetails($username);
         }
 
+        public function getAllTransactions($username){
+            $transaction = $this->model('Transaction');
+            return $transaction->retrieveAllTransactions($username);
+        }
+        
         public function getAllTickets($username){
             $ticket = $this->model('Ticket');
             return $ticket->retrieveAllTickets($username);
+        }
+
+        public function getTransferableAmount($username){
+            $serviceSeeker = $this->model('ServiceSeeker');
+            $seeker = $serviceSeeker->retrieveUserDetails($username);
+            $project = $this->model('Project');
+            $ongoingCost = $project->retrieveOngoingPrice($username);
+            
+            return $seeker['walletbalance'] - $ongoingCost['totalprice'];
         }
 
         public function getAllNotifications($username){
@@ -406,6 +425,20 @@
             else{
                 return $reply;
             }
+        }
+
+        public function checkRequestExists($username){
+            $request = $this->model('TransferRequest');
+            return $request->checkExists($username);
+        }
+
+        public function requesttransfer(){
+            $request= $this->model('TransferRequest');
+            $amount = $this->getTransferableAmount($_SESSION['username']);
+            $request->sendRequest($_SESSION['username'],$amount);
+            header("Location: http://localhost/seralance/public/serviceseeker/transaction");              
+            exit();           
+            
         }
         
 

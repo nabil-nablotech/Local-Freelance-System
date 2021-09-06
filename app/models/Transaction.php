@@ -67,6 +67,40 @@
 
         }
 
+        public function retrieveAllTransactions($username=""){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $sql = "";
+                if($_SESSION['usertype']==='serviceseeker' || $_SESSION['usertype']==='serviceprovider'){
+                    $sql = "SELECT * FROM transaction where username='".$username."' ORDER BY date DESC";
+                }
+                if($_SESSION['usertype']==='admin'){
+                    $sql = "SELECT * FROM transaction ORDER BY date DESC";
+                }
+                $stmt = $conn->query($sql);
+                if($transactions = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $transactions;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        public function computeRevenue(){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+
+                $sql = "SELECT sum(amount) as totalrevenue FROM transaction where type='Revenue' OR type='Fee' OR type='Return' ";
+                $stmt = $conn->query($sql);
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+        }
+
     }
 
     

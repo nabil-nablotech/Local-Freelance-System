@@ -1,66 +1,84 @@
 <?php
-require_once "../includes/admin-navigation.php";
-require_once "../guest/connection.php";
+require "includes/admin-navigation.php";
+$requests = $adminController->getAllOpenRequests();
 ?>
-
-<!--  -->
-
-<script>
-    document.title="Admin-fund transfer requests";
+  <script>
+    document.title="Admin-list of bids";
 </script>
 
- <!-- Contents-->
+
+
+ <!-- Container Fluid-->
  <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">fund transfer request </h1>
+            <h1 class="h3 mb-0 text-gray-800">Fund transfer requests </h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
                 <a href="./">Home</a>
               </li>
-              <li class="breadcrumb-item">Transaction</li>
-              <li class="breadcrumb-item active" aria-current="page">fund transfer request</li>
+              <li class="breadcrumb-item">Fund transfer requests</li>
+              <li class="breadcrumb-item active" aria-current="page">Fund transfer requests</li>
             </ol>
           </div>
           <div class="row">
+            <!-- Alerts Basic -->
             <div class="col-lg-12">
               <div class="card shadow-sm mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Fund Transfer request</h6>
+                  <h6 class="m-0 font-weight-bold text-primary mx-auto">Fund transfer requests</h6>
                 </div>
                 <div class="card-body">
 <!--  -->
-                <!--  -->
+				<!--  -->
+								
                 <div class="table table-responsive mt-5">
                <table id = "table" class = "table table-bordered table-striped">
                   <thead>
                      <tr>
-                       <th>No</th>
+                        <th>No</th>
                         <th>Request Id</th>
-                        <th>Username</th>
+                        <th>Requester</th>
+                        <th>Amount</th>
                         <th>Request date</th>
-                        <th>Balance </th>
-                        <th>status</th>
+                        <th> </th>
                      </tr>
                   </thead>
                   <tbody>
-                     <?php
-                        $query = $con->query("SELECT * FROM offeredproject") or die(mysqli_error($con));
-                        while ($fetch = $query->fetch_array()) {
-                            ?>	
-                     <tr>
 
-                        <td><?php echo $fetch['No']?></td>
-                        <td><?php echo $fetch['pid']?></td>
-                        <td><?php echo $fetch['ptitle']?></td>
-                        <td><?php echo $fetch['odate']?></td>
-                        <td><?php echo $fetch['pbudget']?></td>
-                        <td><a class = "btn btn-success btn-sm" href = "edit_room.php?room_id=<?php echo $fetch['room_id']?>">
-                          <i class="fa fa-edit">Update</i> </a> 
-                        </td>
-                     </tr>
-                     <?php
-                        }
-                        ?>	
+                    <?php 
+                        if(!empty($requests)){
+                            $count = 1;
+                            foreach($requests as $request){
+
+                                echo <<<EOT
+                                            <tr>
+                                            <td>
+                                                {$count}
+                                            </td>
+                                            <td>
+                                                {$request['request_id']}
+                                            </td>
+                                            <td>
+                                                {$request['requester']}
+                                            </td>
+                                            <td>
+                                                {$request['amount']}
+                                            </td>
+                                            <td>
+                                                {$request['datetime']}
+                                            </td>
+                                            <td>
+                                            <button class="btn btn-primary" onclick ="confirmAction('http://localhost/seralance/public/admin/processrequest/{$request['request_id']}');">Process</button>  
+                                            </td>
+                                            
+                                            </tr>
+                                        EOT;
+                                    $count++ ;
+                                }
+                            }
+                    ?>
+	
+	
                   </tbody>
                </table>
             </div>
@@ -69,53 +87,50 @@ require_once "../guest/connection.php";
       </div>
    </div>
 </div>
- <script type = "text/javascript">
-   function confirmationDelete(anchor){
-   	var conf = confirm("Are you sure you want to delete this record?");
-   	if(conf){
-   		window.location = anchor.attr("href");
-   	}
-   } 
-</script>
+
    
 
                 </div>
               </div>
-            
- 
-           
-        
-        
+            </div>
+
+
+          </div>
+
+        </div>
+        <!---Container Fluid-->
+      </div>
 
       <!-- Footer -->
-     <?php
-require_once "../includes/admin-footer.php";
-     ?>
+      <script src="http://localhost/seralance/app/vendor/jquery/jquery.min.js"></script>  
+<script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.js" ></script>
+<script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.min.js" ></script>
+<script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="http://localhost/seralance/app/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="http://localhost/seralance/public/assets/js/administrator/serelance-admin.js "></script>
+<script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.js" ></script>
+
+<script type = "text/javascript">
+    function confirmAction(anchor){
+      var conf = confirm("Are you sure you want to perform this record?");
+      if(conf){
+        window.location = anchor;
+      }
+    } 
+    $(document).ready(function(){
+      $("#table").DataTable();
+    });
+</script>  
 
     </div>
   </div>
-  <!-- Scrollto to top -->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
- 
-<script src="../assets/vendor/jquery/jquery.min.js"></script>  
-<script src="../assets/vendor/datatables/jquery.dataTables.js" ></script>
-<script src="../assets/vendor/datatables/jquery.dataTables.min.js" ></script>
-<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="../assets/js/administrator/serelance-admin.js "></script>
-<script src="../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="../assets/vendor/datatables/dataTables.bootstrap4.js" ></script>
 
-  <script type = "text/javascript">
-   $(document).ready(function(){
-   	$("#table").DataTable();
-   });
-</script> 
-  
+
 
 </body>
+
+
 
 </html>
 

@@ -61,6 +61,18 @@
             $this->view('administrator/push_notification');
         }
 
+        public function transactionhistory(){
+            $this->view('administrator/transaction_history');
+        }
+
+        public function fundtransferrequests(){
+            $this->view('administrator/fund_transfer_request');
+        }
+
+        public function transferredfunds(){
+            $this->view('administrator/transferred_funds');
+        }
+        
         public function opentickets(){
             $this->view('administrator/open_tickets');
         }
@@ -198,6 +210,26 @@
         public function getAllCompletedProjects(){
             $project = $this->model('Project');
             return $project->retrieveAllCompletedProjects();
+        }
+
+        public function getAllTransactions(){
+            $transaction = $this->model('Transaction');
+            return $transaction->retrieveAllTransactions();
+        }
+
+        public function getAllOpenRequests(){
+            $transaction = $this->model('TransferRequest');
+            return $transaction->retrieveAllOpenRequests();
+        }
+
+        public function getAllClosedRequests(){
+            $transaction = $this->model('TransferRequest');
+            return $transaction->retrieveAllClosedRequests();
+        }
+
+        public function getRevenue(){
+            $transaction = $this->model('Transaction');
+            return $transaction->computeRevenue();
         }
 
         public function getAllOpenTickets(){
@@ -360,7 +392,7 @@
                     $terminationFee = $projectDetails['price'] * 0.04;
                     $serviceSeeker = $this->model('ServiceSeeker');
                     $serviceSeeker->updateWallet($projectDetails['announced_by'],$terminationFee,'decrease');
-                    $transaction->insertTransaction("ٌRefund", 'Termination fee of project ID: '.$projectDetails['project_id'], $terminationFee, $projectDetails['announced_by']);
+                    $transaction->insertTransaction("Refund", 'Termination fee of project ID: '.$projectDetails['project_id'], $terminationFee, $projectDetails['announced_by']);
                     $transaction->insertTransaction("Fee", 'Termination fee of project ID: '.$projectDetails['project_id'], $terminationFee,'admin');
                 }
 
@@ -400,6 +432,34 @@
             }
             else{
                 return $reply;
+            }
+        }
+
+        public function processrequest($requestId){
+            $request = $this->model('TransferRequest');
+            $requestDetails = $request->retrieveRequestDetails($requestId);
+
+            if(!empty($requestDetails)){
+                $user = $this->model('User');
+                $usertype = $user->retrieveUserType($requestDetails['requester']);
+                $transaction = $this->model('Transaction');
+
+                if($usertype['user_type']=='serviceseeker'){
+                    $serviceSeeker = $this->model('ServiceSeeker');
+                    $serviceSeeker->updateWallet($requestDetails['requester'],$requestDetails['amount'],'decrease');
+                    $transaction->insertTransaction("Transfer", 'Transfer to bank account', $requestDetails['amount'], $requestDetails['requester']);
+                }
+
+                elseif($usertype['user_type']=='serviceprovider'){
+                    $serviceProvider = $this->model('ServiceProvider');
+                    $serviceProvider->updateWallet($requestDetails['requester'],$requestDetails['amount'],'decrease');
+                    $transaction->insertTransaction("Transfer", 'Transfer to bank account', $requestDetails['amount'], $requestDetails['requester']);
+                }                
+                
+                $request->updateRequestStatus($requestId);
+                header("Location: http://localhost/seralance/public/admin/transferredfunds");              
+                exit();
+                
             }
         }
 

@@ -85,9 +85,9 @@
         <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
           
-            <a class="collapse-item" href="transaction_history.php">Transaction history</a>
-            <a class="collapse-item" href="transfered_funds.php">Transferred funds</a>
-            <a class="collapse-item" href="fund_transfer_request.php">Fund Transfer requests</a>
+            <a class="collapse-item" href="http://localhost/seralance/public/admin/transactionhistory">Transaction history</a>
+            <a class="collapse-item" href="http://localhost/seralance/public/admin/transferredfunds">Transferred funds</a>
+            <a class="collapse-item" href="http://localhost/seralance/public/admin/fundtransferrequests">Fund Transfer requests</a>
           </div>
         </div>
       </li>

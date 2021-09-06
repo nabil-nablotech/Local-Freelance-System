@@ -1,50 +1,50 @@
-
-
 <?php
-if (isset($_POST["view"])) {
-    include("../../Database/db.php");
-    if ($_POST["view"] != '') {
-        $update_query = "UPDATE comments SET comment_status=1 WHERE comment_status=0";
-        mysqli_query($con, $update_query);
-    }
-    $query = "SELECT * FROM comments ORDER BY comment_id DESC LIMIT 5";
-    $result = mysqli_query($con, $query);
-    $output = '';
+
+require_once('../app/controllers/serviceprovider.php');
+$controller = new Controller\ServiceProvider();
+if($_SERVER["REQUEST_METHOD"] === "POST"){
+
+    if(!empty($_POST["open"])){
+        $controller->updateNotificationStatus($_POST["id"]);
+        $notifications = $controller->getAllNotifications($_POST["id"]);
  
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_array($result)) {
-            $output.=
-      ' 
-      <li style="list-style-type:none">
-    <a href="#" style="text-decoration:none;">'
-     .$row["comment_subject"].$row["comment_text"].'</br>'.
-     timeago($row["pushed_date"])
-   .'</a>
-   <hr/>
-   </li> 
-    ';
+        if (!empty($notifications)) {
+            foreach ($notifications as $notification) {
+                //timeago($notification["datetime"])
+                $url = "#";
+                if(!empty($notification['url'])){
+                    $url = $notification['url'];
+                }
+                echo <<<EOT
+                <a href="${url}" style="text-decoration:none; overflow-wrap: break-word;">
+                    <li class="ml-2"style="list-style-type:none;">
+                        {$notification["title"]} 
+                        </br> 
+                        <span style="font-weight:lighter;"> {$notification["content"]} </span>
+                        </br>    
+                        <small><em><span style="color:blue">{$notification["datetime"]}</span></em></small>
+                        <hr  style="margin-top:0px; margin-bottom:0px; margin-left:0px;!important">
+                    </li> 
+                </a>
+                EOT;
+            }
         }
-    } else {
-        $output .= '<li><a href="#" class="text-bold text-italic">No Notification Found</a></li>';
-    }
- 
-    $query_1 = "SELECT * FROM comments WHERE comment_status=0";
-    $result_1 = mysqli_query($con, $query_1);
-    $count = mysqli_num_rows($result_1);
-    $data = array(
-  'notification'   => $output,
-  'unseen_notification' => $count
- );
-}
-  echo json_encode($data);
-    if ($data['unseen_notification']===0) {
-        "<script type='text/javascript'>
-    $(document).ready(function() {
-        document.getElementById('#badge').style.background-color='white';
-    });
-    <script>";
+        else{
+            echo '<li class="text-bold text-italic ml-2">No Notification Found</li>';
+        } 
     }
 
+    if(!empty($_POST["count"])){
+        $notification = $controller->countNotifications($_POST["id"]);
+        echo $notification['number'];  
+    }
+    
+    
+}
+
+  
+    
+    
  
 /* function to hold notification puhsed date  */
 

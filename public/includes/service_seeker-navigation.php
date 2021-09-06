@@ -131,7 +131,7 @@
 							<?php echo $lang['Ap'];?>
 						</a>
 					</li>
-					<li class="nav-item "> <a class="nav-link " href="Transaction.php">transaction
+					<li class="nav-item "> <a class="nav-link " href="http://localhost/seralance/public/serviceseeker/transaction">Transaction
                   </a> </li>
 				</ul>
 				<!-- drop down -->

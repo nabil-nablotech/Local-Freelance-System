@@ -332,6 +332,19 @@
             }
         }
 
+
+        public function retrieveOngoingPrice($username){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+
+                $sql = "SELECT sum(price) as totalprice FROM project where (status='Ongoing' OR status='Submitted') and announced_by='" . $username . "'";
+                $stmt = $conn->query($sql);
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+        }
+
         public function updateStatus($projectId,$status){                
             $data = array('status'=>"'".$status."'");
             $condition = "";

@@ -224,5 +224,24 @@
             return $this->update('user',$userTb,"WHERE username='".$username."'");
 
         }
+
+        public function retrieveUserType($username){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $sql = "";
+                if($_SESSION['usertype'] ==='admin'){
+                    $sql = "SELECT user_type FROM user where username='".$username."'";
+                }
+                $stmt = $conn->query($sql);
+                if($usertype = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    return $usertype;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
     }
 ?>
