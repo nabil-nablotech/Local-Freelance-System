@@ -226,6 +226,7 @@
         }
 
         public function retrieveUserType($username){
+            $username = $this->cleanInput($username);
             require_once('../app/Core/Database.php');
             $db = new Database();
             $conn = $db->setConnection();
@@ -233,6 +234,12 @@
                 $sql = "";
                 if($_SESSION['usertype'] ==='admin'){
                     $sql = "SELECT user_type FROM user where username='".$username."'";
+                }
+                if($_SESSION['usertype'] ==='serviceseeker'){
+                    $sql = "SELECT user_type FROM user where user_type = 'serviceprovider' and username='".$username."'";
+                }
+                if($_SESSION['usertype'] ==='serviceprovider'){
+                    $sql = "SELECT user_type FROM user where user_type = 'serviceseeker' and username='".$username."'";
                 }
                 $stmt = $conn->query($sql);
                 if($usertype = $stmt->fetch(PDO::FETCH_ASSOC)){

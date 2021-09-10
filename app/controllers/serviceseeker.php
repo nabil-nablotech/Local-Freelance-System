@@ -71,6 +71,23 @@
             $this->view('service_seeker/fetchnotification');
         }
 
+        public function compose(){
+            $this->view('service_seeker/compose');
+        }
+
+        public function send(){
+            $this->view('service_seeker/send');
+        }
+
+        public function chathistory(){
+            $this->view('service_seeker/chathistory');
+        }
+
+        public function messages(){
+            $this->view('service_seeker/getmessages');
+        }
+
+        
         public function paymentsuccess(){
             $serviceSeeker = $this->model('ServiceSeeker');
             $serviceSeeker->updateWallet($_SESSION['username'],$_GET['TotalAmount'],'increase');
@@ -357,6 +374,32 @@
             return $payment->generatePaymentUrl($projectId,$price);
         }
 
+        public function getChatHistory($username){
+            $message = $this->model('Message');
+            $chats = $message->retrieveChatHistory($username); 
+            if($chats==true){
+                foreach($chats as $chat){
+                    $key = array_search($chat, $chats);
+                    $serviceProvider = $this->model('ServiceProvider'); 
+                    if($chat['sender']==$username){
+                        $chats[$key] = array_merge($chats[$key], array('recipientprofile'=>$serviceProvider->retrieveUserDetails($chat['receiver'])['profilephoto'])) ; 
+                    }
+                    elseif($chat['receiver']==$username){
+                        $chats[$key] = array_merge($chats[$key], array('recipientprofile'=>$serviceProvider->retrieveUserDetails($chat['sender'])['profilephoto'])) ; 
+                    }
+                } 
+                return $chats;
+            }
+            
+            return $chats; 
+        }
+
+        public function getMessages($username,$recipient){
+            $message = $this->model('Message');
+            return $message->retrieveMessages($username,$recipient); 
+            
+        }
+
         public function validateUpdateProfile($input,$files){
             $serviceSeeker = $this->model('ServiceSeeker');
             $serviceSeeker->updateProfile($input, $files);
@@ -440,6 +483,21 @@
             exit();           
             
         }
+
+        public function checkUser($username){
+            $user= $this->model('User');
+            if($user->retrieveUserType($username)!=false){
+                $serviceProvider = $this->model('ServiceProvider');
+                return $serviceProvider->retrieveUserDetails($username);
+            }
+            return false;
+        }
+
+        public function sendMessage($send,$reciever,$message){
+            $msg= $this->model('Message');
+            $msg->insertMessage($send,$reciever,$message);
+        }
+
         
 
     }

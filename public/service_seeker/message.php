@@ -2,10 +2,7 @@
 <head>
    <link rel="stylesheet" href="chat.css">
    <style>
- a div:hover{
 
-   background-color: #e6ede8;
- }
 
  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
@@ -21,6 +18,13 @@
  overflow-y: auto;
  padding:16px;
 }
+
+#chat_history a{
+	display: block;
+	color: black;
+	text-decoration:none;
+}
+
 .wrapper{
   background: #fff;
   max-width: 100%;
@@ -58,12 +62,17 @@
   position: relative;
   min-height: 330px;
   max-height: 330px;
-  overflow-y: auto;
-  padding: 10px 10px 10px 10px;
+  padding: 10px 15px 15px 20px;
+  overflow: hidden;
   background: #f7f7f7;
   box-shadow: inset 0 32px 32px -32px rgb(0 0 0 / 5%),
               inset 0 -32px 32px -32px rgb(0 0 0 / 5%);
 }
+
+.chat-box .active{
+  overflow: auto;
+}
+
 .chat-box .text{
   position: absolute;
   top: 45%;
@@ -150,10 +159,7 @@
   .chat-area header{
     padding: 15px 20px;
   }
-  .chat-box{
-    min-height: 400px;
-    padding: 10px 15px 15px 20px;
-  }
+
   .chat-box .chat p{
     font-size: 15px;
   }
@@ -212,6 +218,33 @@
     width: 45px;
   }
 
+  .chat-history-container img{
+	width: 40px;
+	height: 40px;
+  }
+
+  .username-history{
+	font-weight: bold;
+  }
+
+  .message-history{
+	font-size: 12px;
+  }
+
+  .time-history{
+	font-size: 12px;
+	text-align: right;
+  }
+
+  .highlighted{
+	  color: white !important;
+	  background-color: rgb(39, 154, 226,0.6);
+  }
+
+  .message_time{
+	  display: block;
+  }
+
 </style>
 </head>
 <body>
@@ -233,26 +266,9 @@ require "includes/service_seeker-navigation.php";
                      <div class="col-sm-5 ">
                         <!--  -->
                         <div class="card px-0" style="background-color: #edf7f7;">
-                           <div id="chat_history" style="overflow-y: auto;">
-							   <!--  -->
-<a href="#" onclick="displayChat()" style="color: black;text-decoration:none">
-<div>
+						   <div id="chat_history" style="overflow-y: auto;">			
 
-<img src="../Image/profile.jpg" alt="" style="width: 
-4vw; height:4vw;
-">
-
-<span class="ml-4">mulugeta adamu</span>
-  <span class=" ml-5">7:30</span>
-  <div class="mx-auto">
-   <p class="ml-5"> some message content </p>
-  </div>
-</div>
-</a>
-<hr>
-							   <!--  -->
-
-							   <!--  -->
+  							<!-- List of chats will appear here  -->
 
                            </div>
                        
@@ -265,8 +281,8 @@ require "includes/service_seeker-navigation.php";
 						</div>
 						<!-- send message modals -->
 
-<div class="modal fade " id="sendmessagemodal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="sendmessagemodal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" >
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Compose message</h5>
@@ -279,13 +295,14 @@ require "includes/service_seeker-navigation.php";
 <form method="post">
 
   <div class="input-group mb-3">
-  <input name="recipient"type="text" class="form-control" placeholder="Enter username" 
-  aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <input name="recipient" type="text" class="form-control" placeholder="Enter username" 
+  aria-label="Recipient's username" aria-describedby="basic-addon2" required>
   <div class="input-group-append">
-    <button name="compose_btn"class="btn btn-sm mx-auto  btn-primary" type="submit">
+    <button onclick="compose();" class="btn btn-sm mx-auto  btn-primary" type="button">
 	 Compose</a>
   </div>
 </div>
+<p class="errormessage" id="composeerror"></p>
 </form>
 
 	<!--  -->
@@ -299,47 +316,99 @@ require "includes/service_seeker-navigation.php";
 						<!--  -->
                      </div>
                      <div class="col-sm-7">
-                        <div class="wrapper ">
+                        <div class="wrapper">
                            <section id="chatarea"class="chat-area">
                               <header>
-                                 <img src="../Image/profile.jpg" alt="">
+                                 <img  alt="" id="recipient_photo">
                                  <div class="details">
-                                    <span>mulugeta adamu</span>
+                                    <span id="recipient_username"></span>
                                  </div>
                               </header>
-                              <div class="chat-box ">
+                              <div class="chat-box">
 
                               <!--  -->
 
-<div class="chat-box active">
-          <div class="chat incoming">
+								<!-- <div class="chat-box active">
 
-                    <div class="details">
-                        
-                                    <p>hello nabil am dani izkakskka 
-                                       <span ><small><i>August 25  <span>4:00 am</span></i> </small></span></p>
-                                </div>
-                                </div>
-                                <div class="chat outgoing">
+											<div class="chat incoming">
+												<div class="details">                        
+													<p>
+														hello nzkakskka 
+														<span class="message_time"><small><i>August 25 4:00 am</i> </small></span>
+													</p>
+												</div>
+											</div>
 
-                                <div class="details">
-                                     
-                                    <p>hello dani  am nabil <br>
-                                                                         
-                                    <span ><small><i>August 25  <span>4:00 am</span></i>
-                                  </small></span>
-</p>
-                                </div>
-                                </div></div>
+											<div class="chat outgoing">
+												<div class="details">                                     
+													<p>hello dani  am nabil                                                                        
+														<span class="message_time"><small><i>August 25 4:00 am</i></small></span>
+													</p>
+												</div>
+											</div>
+
+											<div class="chat incoming">
+												<div class="details">                        
+													<p>
+														hello nzkakskka 
+														<span class="message_time"><small><i>August 25 4:00 am</i> </small></span>
+													</p>
+												</div>
+											</div>
+
+											<div class="chat outgoing">
+												<div class="details">                                     
+													<p>hello dani  am nabil                                                                        
+														<span class="message_time"><small><i>August 25 4:00 am</i></small></span>
+													</p>
+												</div>
+											</div>
+
+											<div class="chat incoming">
+												<div class="details">                        
+													<p>
+														hello nzkakskka 
+														<span class="message_time"><small><i>August 25 4:00 am</i> </small></span>
+													</p>
+												</div>
+											</div>
+
+											<div class="chat outgoing">
+												<div class="details">                                     
+													<p>hello dani  am nabil                                                                        
+														<span class="message_time"><small><i>August 25 4:00 am</i></small></span>
+													</p>
+												</div>
+											</div>
+
+											<div class="chat incoming">
+												<div class="details">                        
+													<p>
+														hello nzkakskka 
+														<span class="message_time"><small><i>August 25 4:00 am</i> </small></span>
+													</p>
+												</div>
+											</div>
+
+											<div class="chat outgoing">
+												<div class="details">                                     
+													<p>hello dani  am nabil                                                                        
+														<span class="message_time"><small><i>August 25 4:00 am</i></small></span>
+													</p>
+												</div>
+											</div>
+								</div>
+ -->
                               </div>
-                              <form action="#" class="typing-area " style="background-color:#a4c5ed
-;">
+                              <form style="background-color:#a4c5ed;">
      <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="enter message" 
-  aria-label="Recipient's username" aria-describedby="basic-addon2">
+	<input name="recipient_message" type="text" onchange="getMessages();" hidden>
+  <input name="message" oninput="checkEmpty(this);" type="text" class="form-control" placeholder="Enter message" 
+  aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
   <div class="input-group-append">
-    <a href="#" class="btn btn-sm mx-auto  btn-primary" type="button">
-		send</a>
+    <button id="send_btn" class="btn btn-sm mx-auto btn-primary" onclick="send();"type="button" disabled>
+		Send
+	</button>
   </div>
 </div>
 </form>
@@ -360,12 +429,108 @@ require "includes/service_seeker-navigation.php";
 </div>
 </div>
 
-<!-- <script>
-    let displayChat = () => {
-        let ele = document.getElementById('chatarea');
-        ele.innerHTML += 'Hello, I am Arun';
-    }
-</script> -->
+<script>
+    
+	function getChatHistory(){
+		
+		$.ajax({
+					type: "POST",
+					url: "http://localhost/seralance/public/serviceseeker/chathistory",		
+					data: {
+						username: '<?php echo $_SESSION['username'];?>'
+					},
+					success: function(data) {
+						$('#chat_history').html(data);					
+					}
+				});
+	}
+	
+	$(document).ready(function(){
+		getChatHistory();
+	});
+
+	setInterval(getChatHistory,2000);
+
+	function getMessages(){
+
+		let recipient = document.querySelector("input[name=recipient_message]").getAttribute("value");
+		$.ajax({
+					type: "POST",
+					url: "http://localhost/seralance/public/serviceseeker/messages",		
+					data: {
+						username: '<?php echo $_SESSION['username'];?>',
+						recipient: recipient
+					},
+					success: function(data) {
+						$('#chat_history').html(data);					
+					}
+				});
+
+	}
+
+	function displayChat(event){
+
+		document.getElementById("recipient_photo").setAttribute('src',event.childNodes[1].childNodes[1].getAttribute('src'));
+		document.getElementById("recipient_username").innerHTML = event.childNodes[1].childNodes[3].childNodes[1].innerHTML;
+		document.querySelector("input[name=message]").disabled = false;
+		document.querySelector("input[name=recipient_message]").setAttribute("value",event.childNodes[1].childNodes[3].childNodes[1].innerHTML);
+
+	}
+
+	function compose(){
+		
+			$.ajax({
+						type: "POST",
+						url: "http://localhost/seralance/public/serviceseeker/compose",		
+						data: {
+							recipient: $("input[name=recipient]").val()
+						},
+						dataType: "json",
+						success: function(data) {
+							if(data.valid==false){
+								$("#composeerror").html(data.error);
+							}	
+							else{
+								
+								
+								$("input[name=recipient_message]").val(data.username);
+								$("input[name=message]").removeAttr("disabled");
+								$("#recipient_photo").attr("src","http://localhost/seralance/"+data.profilephoto);
+								$("#recipient_username").html(data.username);
+								$("input[name=recipient]").val("");
+								$("#composeerror").html("");
+								$("#sendmessagemodal").css("display","none");
+								$(".modal-backdrop").css("display","none");
+							}					
+						}
+					});
+	}
+
+	function checkEmpty(event){
+		if(event.value==""){
+			document.getElementById('send_btn').disabled = true;
+		}
+		else{
+			document.getElementById('send_btn').disabled = false;
+		}
+	}
+	function send(){
+		console.log($("input[name=recipient_message]").val());
+		$.ajax({
+					type: "POST",
+					url: "http://localhost/seralance/public/serviceseeker/send",		
+					data: {
+						recipient: $("input[name=recipient_message]").val(),
+						message: $("input[name=message]").val()
+					},
+					success: function(data) {
+
+							$("input[name=message]").val(data);			
+						}
+				});
+}
+
+</script>
 <!--  -->
 </div>
 </div>
