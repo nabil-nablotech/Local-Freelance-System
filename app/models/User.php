@@ -180,10 +180,10 @@
                     $stmt = $conn->query("SELECT username,password,user_type,status FROM user where username='".$cleanUsername."'");
                     if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                         if(password_verify($cleanPassword,$row['password']) ){
-                            if($row['status']!=='Suspended'){
+                            if($row['status']!=='Suspended' && $row['status']!=='unverified'){
                                 return array('valid'=>1 ,'data'=>['username'=>$row['username'],'usertype'=>$row['user_type']]);
                             }
-                            $error = array_merge($error,array('login' => 'Your account is currently suspended. Please contact the support center for further details.'));
+                            $error = array_merge($error,array('login' => 'Your account is currently suspended or unverified. Please contact the support center for further details.'));
                         }
                         else{
                             $error = array_merge($error,array('login' => 'Incorrect username or password.'));
@@ -225,6 +225,27 @@
 
         }
 
+        public function verifyUser($verificationId){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $sql = "select * from verification where verification_id='".$verificationId."'";
+                
+                $stmt = $conn->query($sql);
+                if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    $data = array('status'=>"'verified'");
+                    $condition = "WHERE username='".$row['username']."'";
+                    $this->update("user",$data,$condition);
+                    $usertype = $this->retrieveUserType($row['username']);
+                    return array('username'=>$row['username'],'usertype'=>$usertype['user_type']);
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
         public function retrieveUserType($username){
             $username = $this->cleanInput($username);
             require_once('../app/Core/Database.php');
@@ -232,14 +253,17 @@
             $conn = $db->setConnection();
             if($conn !== null){
                 $sql = "";
-                if($_SESSION['usertype'] ==='admin'){
+
+                if(!empty($_SESSION['usertype'])){
+                    if($_SESSION['usertype'] ==='serviceseeker'){
+                        $sql = "SELECT user_type FROM user where user_type = 'serviceprovider' and username='".$username."'";
+                    }
+                    if($_SESSION['usertype'] ==='serviceprovider'){
+                        $sql = "SELECT user_type FROM user where user_type = 'serviceseeker' and username='".$username."'";
+                    }
+                }                
+                else{
                     $sql = "SELECT user_type FROM user where username='".$username."'";
-                }
-                if($_SESSION['usertype'] ==='serviceseeker'){
-                    $sql = "SELECT user_type FROM user where user_type = 'serviceprovider' and username='".$username."'";
-                }
-                if($_SESSION['usertype'] ==='serviceprovider'){
-                    $sql = "SELECT user_type FROM user where user_type = 'serviceseeker' and username='".$username."'";
                 }
                 $stmt = $conn->query($sql);
                 if($usertype = $stmt->fetch(PDO::FETCH_ASSOC)){

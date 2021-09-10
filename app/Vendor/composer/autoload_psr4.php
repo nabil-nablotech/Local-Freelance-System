@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'YenePay\\' => array($vendorDir . '/yenepay/php-sdk/src'),
+    'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
 );

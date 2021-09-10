@@ -226,7 +226,17 @@ CREATE TABLE message(
     opened_by_receiver BOOLEAN NOT NULL
 );
 
+CREATE TABLE verification(
+	verification_id VARCHAR(255) PRIMARY KEY,
+    username VARCHAR(60) NOT NULL
+);
+
+
 ---  Setting  foreign keys for the tables-----
+
+ALTER TABLE verification
+ADD CONSTRAINT FK_VerificationUser_username
+FOREIGN KEY (username) REFERENCES user(username);
 
 ALTER TABLE admin
 ADD CONSTRAINT FK_AdminUser_username

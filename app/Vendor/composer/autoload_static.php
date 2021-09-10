@@ -11,12 +11,20 @@ class ComposerStaticInit09d24ff1f7df3f5a3afdef21a5edce0b
         array (
             'YenePay\\' => 8,
         ),
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'YenePay\\' => 
         array (
             0 => __DIR__ . '/..' . '/yenepay/php-sdk/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
     );
 

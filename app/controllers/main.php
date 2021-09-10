@@ -33,9 +33,10 @@
             $serviceProvider = $this->model('ServiceProvider');
             $reply = $serviceProvider->createAccount($input, $files);
             if($reply['valid']==true){
-                $_SESSION['username'] = $reply['username'];
-                $_SESSION['usertype'] = $reply['usertype'];
-                header("Location: http://localhost/seralance/public/");                
+                /*$ _SESSION['username'] = $reply['username'];
+                $_SESSION['usertype'] = $reply['usertype']; */
+                echo "<script>alert('A verification email has been sent to the email address.');</script>"; 
+                echo "<script>location.href='http://localhost/seralance/public/';</script>";                
                 exit();
             }
             else{
@@ -43,13 +44,24 @@
             }
         }
 
+        public function verify($verificationId){
+            $user = $this->model('User');
+            $reply = $user->verifyUser($verificationId);
+            $_SESSION['username'] = $reply['username'];
+            $_SESSION['usertype'] = $reply['usertype'];
+            header("Location: http://localhost/seralance/public/");
+            exit(); 
+
+        }
+
         public function validateSsSignup($input,$files){
             $serviceSeeker = $this->model('ServiceSeeker');
             $reply = $serviceSeeker->createAccount($input, $files);
             if($reply['valid']==true){
-                $_SESSION['username'] = $reply['username'];
-                $_SESSION['usertype'] = $reply['usertype'];
-                header("Location: http://localhost/seralance/public/");                
+                /* $_SESSION['username'] = $reply['username'];
+                $_SESSION['usertype'] = $reply['usertype']; */
+                echo "<script>alert('A verification email has been sent to the email address.');</script>";
+                echo "<script>location.href='http://localhost/seralance/public/';</script>";                         
                 exit();
             }
             else{

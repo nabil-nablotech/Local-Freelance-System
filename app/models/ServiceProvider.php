@@ -1,4 +1,6 @@
 <?php
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
 
     class ServiceProvider extends User{
         
@@ -638,6 +640,66 @@
 
                 foreach($portfolioTb as $portfolio){
                     $this->insert('portfolio',$portfolio);
+                }
+
+                $verifcationId = uniqid();
+
+                $verificationTb = array(
+                    'verification_id' => "'".$verifcationId."'",
+                    'username' => "'".$this->getUsername()."'",                    
+                );
+                $this->insert('verification',$verificationTb);
+
+                require '../app/vendor/autoload.php';
+                $mail = new PHPMailer(true);
+                try{
+                    $mail->isSMTP();// set mailer to use smtp
+                    $mail->Host = 'smtp.gmail.com'; //specify the smtp server
+                    $mail->SMTPAuth = true; // enable smtp authenticatiion
+                    $mail->Username = "seralance2021@gmail.com"; // SMTP username
+                    $mail->Password = "hello@there123HT"; // SMTP pasword
+                    $mail->SMTPSecure = "tls"; // Enable TLS encryption
+                    $mail->Port = 587; // TCP port to connect to
+
+                    // recipient
+                    $mail->setFrom("seralance2021@gmail.com","Seralance");
+                    $mail->addAddress($this->getEmail(),$this->getFirstName()." ".$this->getLastName());
+                    
+                    $fullname = $this->getFirstName()." ".$this->getLastName();
+                    //content
+                    $mail->isHTML(true); // set email format to html
+                    $mail->Subject = "Email address verification";
+                    $msg =<<<EOT
+                        <html>
+                            <body>
+                                <div style="text-align: center;">
+                                    <img src="http://localhost/seralance/public/assets/images/seralance-logo.png" alt="Seralance">
+                                </div>
+                                <h1 style="text-align: center;">THANKS FOR SIGNING UP</h1>
+                                <h1 style="text-align: center;">{$fullname}</h1>
+                                <p style="text-align: center;">
+                                    Please verify your email address to use the system.
+                                </p>
+                                <p style="text-align: center;">
+                                    Thank you!
+                                </p>
+                                <p style="text-align: center;">
+                                    <a href="http://localhost/seralance/public/main/verify/{$verifcationId}" style="text-decoration: none; border:0px solid black; color: white; background-color: rgba(25, 25, 214, 0.801); font-size: 16px; height: 40px; padding: 10px;">
+                        
+                                            Verify Email Now
+                        
+                                    </a>
+                                </p>
+                            </body>
+                        </html>
+                    EOT;
+
+                    $mail->Body =$msg;
+
+                    $mail->send();
+                }
+                catch(Exception $e){
+                    echo "Could not send verification email";
                 }
                 return array('valid'=>1,'username'=>$this->getUsername(),'usertype'=>'serviceprovider');
             } 
