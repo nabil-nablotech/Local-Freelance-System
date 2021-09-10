@@ -48,6 +48,22 @@
             $this->view('service_provider/fetchnotification');
         }
 
+        public function compose(){
+            $this->view('service_provider/compose');
+        }
+
+        public function send(){
+            $this->view('service_provider/send');
+        }
+
+        public function chathistory(){
+            $this->view('service_provider/chathistory');
+        }
+
+        public function messages(){
+            $this->view('service_provider/getmessages');
+        }
+
         public function profile(){
             $this->view('service_provider/updateprofile');
         }
@@ -66,6 +82,10 @@
 
         public function newdispute(){
             $this->view('service_provider/adddispute');
+        }
+
+        public function message(){
+            $this->view('service_provider/message');
         }
 
         public function viewticket($ticketId){
@@ -209,6 +229,26 @@
             return $notification->retrieveAllNotifications($username);
         }
 
+        public function getChatHistory($username){
+            $message = $this->model('Message');
+            $chats = $message->retrieveChatHistory($username); 
+            if($chats==true){
+                foreach($chats as $chat){
+                    $key = array_search($chat, $chats);
+                    $serviceSeeker = $this->model('ServiceSeeker'); 
+                    if($chat['sender']==$username){
+                        $chats[$key] = array_merge($chats[$key], array('recipientprofile'=>$serviceSeeker->retrieveUserDetails($chat['receiver'])['profilephoto'])) ; 
+                    }
+                    elseif($chat['receiver']==$username){
+                        $chats[$key] = array_merge($chats[$key], array('recipientprofile'=>$serviceSeeker->retrieveUserDetails($chat['sender'])['profilephoto'])) ; 
+                    }
+                } 
+                return $chats;
+            }
+            
+            return $chats; 
+        }
+
         public function updateNotificationStatus($username){
             $notification = $this->model('Notification');
             return $notification->openNotifications($username);
@@ -267,6 +307,11 @@
         public function getAllCompletedProjects($username){
             $project = $this->model('Project');
             return $project->retrieveAllCompletedProjects($username);
+        }
+
+        public function getMessages($username,$recipient){
+            $message = $this->model('Message');
+            return $message->retrieveMessages($username,$recipient);             
         }
 
         public function validateUpdateProfile($input,$files){
@@ -356,6 +401,20 @@
             header("Location: http://localhost/seralance/public/serviceprovider/transaction");              
             exit();           
             
+        }
+
+        public function checkUser($username){
+            $user= $this->model('User');
+            if($user->retrieveUserType($username)!=false){
+                $serviceSeeker = $this->model('ServiceSeeker');
+                return $serviceSeeker->retrieveUserDetails($username);
+            }
+            return false;
+        }
+
+        public function sendMessage($send,$reciever,$message){
+            $msg= $this->model('Message');
+            $msg->insertMessage($send,$reciever,$message);
         }
 
 

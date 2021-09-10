@@ -137,7 +137,7 @@
                  <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/announcedprojects">Announced Projects</a> </div>
 					</li>
 					<li class="nav-item mr-4 ">
-						<a class="nav-link" href="message.php"> <i class="fa  fa-envelope" aria-hidden="true"></i> </a> <span>Message</span> </li>
+						<a class="nav-link" href="<?php echo $base;?>public/serviceprovider/message"> <i class="fa  fa-envelope" aria-hidden="true"></i> </a> <span>Message</span> </li>
 						<li class="nav-item dropdown mr-4 " style="list-style-type: none;">
 							<a class="nav-link   dropdown-toggle" href="#" id="notification" 
 							role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 

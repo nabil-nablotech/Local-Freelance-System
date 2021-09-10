@@ -1,7 +1,7 @@
 <?php
 
-require_once('../app/controllers/serviceseeker.php');
-$controller = new Controller\ServiceSeeker();
+require_once('../app/controllers/serviceprovider.php');
+$controller = new Controller\ServiceProvider();
 if($_SERVER["REQUEST_METHOD"] === "POST"){
 
     if(!empty($_POST["username"])){
@@ -38,7 +38,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             echo '';
         } 
     }
-
     
     
 }

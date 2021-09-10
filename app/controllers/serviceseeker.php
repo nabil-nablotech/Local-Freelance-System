@@ -396,8 +396,7 @@
 
         public function getMessages($username,$recipient){
             $message = $this->model('Message');
-            return $message->retrieveMessages($username,$recipient); 
-            
+            return $message->retrieveMessages($username,$recipient);             
         }
 
         public function validateUpdateProfile($input,$files){

@@ -328,81 +328,14 @@ require "includes/service_seeker-navigation.php";
 
                               <!--  -->
 
-								<!-- <div class="chat-box active">
+								<div class="chat-box active">
 
-											<div class="chat incoming">
-												<div class="details">                        
-													<p>
-														hello nzkakskka 
-														<span class="message_time"><small><i>August 25 4:00 am</i> </small></span>
-													</p>
-												</div>
-											</div>
-
-											<div class="chat outgoing">
-												<div class="details">                                     
-													<p>hello dani  am nabil                                                                        
-														<span class="message_time"><small><i>August 25 4:00 am</i></small></span>
-													</p>
-												</div>
-											</div>
-
-											<div class="chat incoming">
-												<div class="details">                        
-													<p>
-														hello nzkakskka 
-														<span class="message_time"><small><i>August 25 4:00 am</i> </small></span>
-													</p>
-												</div>
-											</div>
-
-											<div class="chat outgoing">
-												<div class="details">                                     
-													<p>hello dani  am nabil                                                                        
-														<span class="message_time"><small><i>August 25 4:00 am</i></small></span>
-													</p>
-												</div>
-											</div>
-
-											<div class="chat incoming">
-												<div class="details">                        
-													<p>
-														hello nzkakskka 
-														<span class="message_time"><small><i>August 25 4:00 am</i> </small></span>
-													</p>
-												</div>
-											</div>
-
-											<div class="chat outgoing">
-												<div class="details">                                     
-													<p>hello dani  am nabil                                                                        
-														<span class="message_time"><small><i>August 25 4:00 am</i></small></span>
-													</p>
-												</div>
-											</div>
-
-											<div class="chat incoming">
-												<div class="details">                        
-													<p>
-														hello nzkakskka 
-														<span class="message_time"><small><i>August 25 4:00 am</i> </small></span>
-													</p>
-												</div>
-											</div>
-
-											<div class="chat outgoing">
-												<div class="details">                                     
-													<p>hello dani  am nabil                                                                        
-														<span class="message_time"><small><i>August 25 4:00 am</i></small></span>
-													</p>
-												</div>
-											</div>
 								</div>
- -->
+ 
                               </div>
                               <form style="background-color:#a4c5ed;">
      <div class="input-group mb-3">
-	<input name="recipient_message" type="text" onchange="getMessages();" hidden>
+	<input name="recipient_message" type="text" oninput="getMessages();" hidden>
   <input name="message" oninput="checkEmpty(this);" type="text" class="form-control" placeholder="Enter message" 
   aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
   <div class="input-group-append">
@@ -449,24 +382,29 @@ require "includes/service_seeker-navigation.php";
 		getChatHistory();
 	});
 
-	setInterval(getChatHistory,2000);
+	setInterval(getChatHistory,500);
 
 	function getMessages(){
-
-		let recipient = document.querySelector("input[name=recipient_message]").getAttribute("value");
+		
 		$.ajax({
 					type: "POST",
 					url: "http://localhost/seralance/public/serviceseeker/messages",		
 					data: {
 						username: '<?php echo $_SESSION['username'];?>',
-						recipient: recipient
+						recipient: document.querySelector("input[name=recipient_message]").value
 					},
 					success: function(data) {
-						$('#chat_history').html(data);					
+						$('.chat-box .active').html(data);
 					}
 				});
 
 	}
+
+	setInterval(function(){
+		if(document.querySelector("input[name=recipient_message]").value!=""){
+			getMessages();
+		}
+	},500)
 
 	function displayChat(event){
 
@@ -507,7 +445,7 @@ require "includes/service_seeker-navigation.php";
 	}
 
 	function checkEmpty(event){
-		if(event.value==""){
+		if($.trim(event.value)==""){
 			document.getElementById('send_btn').disabled = true;
 		}
 		else{
@@ -515,7 +453,6 @@ require "includes/service_seeker-navigation.php";
 		}
 	}
 	function send(){
-		console.log($("input[name=recipient_message]").val());
 		$.ajax({
 					type: "POST",
 					url: "http://localhost/seralance/public/serviceseeker/send",		
@@ -523,9 +460,14 @@ require "includes/service_seeker-navigation.php";
 						recipient: $("input[name=recipient_message]").val(),
 						message: $("input[name=message]").val()
 					},
-					success: function(data) {
+					success: function() {
+							$("input[name=message]").val("");
+							document.getElementById('send_btn').disabled = true;
+							setTimeout(function(){
+							document.querySelector('.chat-box .active').scrollTo(0, document.querySelector('.chat-box .active').scrollHeight);
+							},1000);
 
-							$("input[name=message]").val(data);			
+
 						}
 				});
 }

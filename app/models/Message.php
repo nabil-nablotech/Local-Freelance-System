@@ -111,7 +111,7 @@
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $sql = "SELECT * FROM message WHERE (sender='".$username."' or receiver = '".$username."') and (sender='".$recipient."' or receiver = '".$recipient."')  ORDER BY datetime DESC";
+                $sql = "SELECT * FROM message WHERE (sender='".$username."' or receiver = '".$username."') and (sender='".$recipient."' or receiver = '".$recipient."')  ORDER BY datetime ASC";
                 $stmt = $conn->query($sql);
                 if($messages = $stmt->fetchAll(PDO::FETCH_ASSOC)){                    
                     return $messages;
