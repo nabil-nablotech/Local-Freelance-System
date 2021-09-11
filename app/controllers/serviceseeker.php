@@ -39,6 +39,10 @@
             $this->view('service_seeker/adddispute');
         }
 
+        public function changepassword(){
+            $this->view('service_seeker/changepassword');
+        }
+
         public function message(){
             $this->view('service_seeker/message');
         }
@@ -404,6 +408,20 @@
             $serviceSeeker->updateProfile($input, $files);
             header("Location: http://localhost/seralance/public/serviceseeker/profile");                
             exit();
+        }
+
+        public function validatePasswordChange($input){
+            $user = $this->model('User');
+            $reply = $user->updatePassword($input);
+            if($reply['valid']==true){
+                echo "<script>alert('Your password has been changed sucessfully.');</script>"; 
+                echo "<script>location.href='http://localhost/seralance/public/';</script>";                
+                exit();
+                
+            }
+            else{
+                return $reply;
+            }
         }
 
         public function validateProjectAnnouncement($input,$files){

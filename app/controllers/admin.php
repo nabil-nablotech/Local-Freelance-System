@@ -72,6 +72,10 @@
         public function transferredfunds(){
             $this->view('administrator/transferred_funds');
         }
+
+        public function changepassword(){
+            $this->view('administrator/changepassword');
+        }
         
         public function opentickets(){
             $this->view('administrator/open_tickets');
@@ -362,9 +366,23 @@
             exit();
         }
 
+        public function validatePasswordChange($input){
+            $user = $this->model('User');
+            $reply = $user->updatePassword($input);
+            if($reply['valid']==true){
+                echo "<script>alert('Your password has been changed sucessfully.');</script>"; 
+                echo "<script>location.href='http://localhost/seralance/public/';</script>";                
+                exit();
+                
+            }
+            else{
+                return $reply;
+            }
+        }
+
         public function validateTicketReply($input){
-            $project = $this->model('Ticket');
-            $reply = $project->reviewTicket($input);
+            $ticket = $this->model('Ticket');
+            $reply = $ticket->reviewTicket($input);
 
             if($reply['valid']==true){
 

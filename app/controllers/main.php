@@ -6,6 +6,10 @@
             $this->view('guest/index');
         }
 
+        public function forgotpassword(){
+            $this->view('guest/forgotpassword');
+        }
+
         public function validateLogin($input){
             $user = $this->model('User');
             $reply = $user->login($input);
@@ -13,6 +17,19 @@
                 $_SESSION['username'] = $reply['username'];
                 $_SESSION['usertype'] = $reply['usertype'];
                 header("Location: http://localhost/seralance/public/");                
+                exit();
+            }
+            else{
+                return $reply;
+            }
+        }
+
+        public function validateForgotPassword($input){
+            $user = $this->model('User');
+            $reply = $user->sendPassword($input);
+            if($reply['valid']==true){
+                echo "<script>alert('Your account details has been sent to your email(Check your inbox or spam folder).');</script>"; 
+                echo "<script>location.href='http://localhost/seralance/public/';</script>";                
                 exit();
             }
             else{

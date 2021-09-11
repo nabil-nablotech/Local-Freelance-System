@@ -20,7 +20,12 @@
 <link rel="stylesheet" href="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.css">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
  <script src="https://code.highcharts.com/highcharts.js"></script>
-
+<style>
+    .errormessage {
+			color: red;
+			font-size: 10px;
+     	}
+</style>
 
 </head>
 
@@ -162,7 +167,7 @@
       <li class="nav-item">
         <a class="nav-link" href="http://localhost/seralance/public/admin/profile">
         <i class="fa fa-user-circle" aria-hidden="true"></i>
-          <span>profile</span>
+          <span>Profile</span>
         </a>
       </li>
 
@@ -193,23 +198,14 @@
                 ></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="profile.php">
+                <a class="dropdown-item" href="http://localhost/seralance/public/admin/profile">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
-                </a>
-                <a class="dropdown-item" href="setting.php">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="activity_logs.php">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
+                </a>                
                 <div class="dropdown-divider"></div>
-                 <a class="dropdown-item" href="javascript:void(0);"
-                 data-toggle="modal" data-target="#changepasswordmodal">
+                 <a class="dropdown-item" href="http://localhost/seralance/public/admin/changepassword">
                   <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
-                  change password
+                  Change password
                 </a>
                 <a class="dropdown-item" href="javascript:void(0);"
                  data-toggle="modal" data-target="#logoutModal">
@@ -244,42 +240,7 @@
             </div>
           </div>
           <!--  -->
-<!-- password change modal -->
 
-   <div class="modal fade" id="changepasswordmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-         <div class="modal-content">
-            <div class="modal-header text-center">
-               <h5 class="modal-title" id="exampleModalLabel ">Change password</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true" style="color: red;">&times;</span>
-               </button>
-            </div>
-            <div class="modal-body">
-               <div class="col-sm-6 mx-auto">
-                  <div class="form-group">
-                     <input type="password" class="form-control" placeholder="old password">
-                  </div>
-                  <div class="form-group">
-                     <input type="password" class="form-control" placeholder="new password">
-                  </div>
-                  <div class="form-group">
-                     <input type="password" class="form-control" placeholder="confirm new password">
-                  </div>
-               </div>
-               <div class="form-group text-center">
-                  <button class="btn btn-primary btn-sm">
-                     <i class="fa fa-check-circle"></i>save</button>
-               </div>
-            </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-         </div>
-      </div>
-   </div>
-
-<!--  -->
         <!-- navigation ends -->
 
 

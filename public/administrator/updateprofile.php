@@ -40,7 +40,7 @@
 									<input type="text" name="username" class="form-control form-control-sm" id="colFormLabelSm" value="<?php echo $adminDetail['username'];?>" disabled> </div>
 							</div>
                             <div class="form-group row">
-								<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Username</label>
+								<label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Role</label>
 								<div class="col-sm-7">
 									<input type="text" name="role" class="form-control form-control-sm" id="colFormLabelSm" value="<?php echo $adminDetail['role'];?>" disabled> </div>
 							</div>

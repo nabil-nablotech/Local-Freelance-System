@@ -5,12 +5,12 @@
 	</head>
 	<body>
 	<?php
-    require "includes/service_seeker-navigation.php";
+    require "includes/admin-navigation.php";
 
     $oldPasswordErr = $newPasswordErr = $confirmPasswordErr  = "";
   
     if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['change_btn'])){     
-      $feedback = $serviceSeekerController->validatePasswordChange($_POST);
+      $feedback = $adminController->validatePasswordChange($_POST);
       if($feedback['valid'] == false){
         
         // Setting error values
@@ -78,6 +78,7 @@
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-	<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	</body>
 </html>

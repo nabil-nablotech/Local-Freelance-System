@@ -1,4 +1,6 @@
 <?php
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
 
     class User extends Model{
         
@@ -274,5 +276,191 @@
                 }
             }
         }
+
+        public function validatePasswordChange($input){
+            
+            // $userData holds the data to be inserted to Service provider table
+            $userData = array();
+            $error=array();
+
+
+            if(empty($input['oldpassword'])){
+                $error = array_merge($error,array('oldpassword' => 'This field is required.'));
+            }
+            else{
+                $cleanData = $this->cleanInput($input['oldpassword']);
+                require_once('../app/Core/Database.php');
+                $db = new Database();
+                $conn = $db->setConnection();
+                if($conn !== null){
+                    $stmt = $conn->query("SELECT username,password FROM user where username='".$_SESSION['username']."'");
+                    if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                        if(!password_verify($cleanData,$row['password']) ){
+                            $error = array_merge($error,array('oldpassword' => 'Incorrect password.'));
+                        }
+                    } 
+                }                      
+            }
+
+            if(empty($input['newpassword'])){
+                $error = array_merge($error,array('newpassword' => 'This field is required.'));
+            }
+            else{
+                $cleanData = $this->cleanInput($input['newpassword']);                
+                $uppercase = preg_match('@[A-Z]@', $cleanData);
+                $lowercase = preg_match('@[a-z]@', $cleanData);
+                $number    = preg_match('@[0-9]@', $cleanData);
+                $specialChars = preg_match('@[^\w]@', $cleanData);
+
+                if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($cleanData) < 8) {
+                    $error = array_merge($error,array('newpassword' => 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.'));
+                  }
+                else{
+                    $userData = array_merge($userData,array('newpassword' => password_hash($cleanData,PASSWORD_DEFAULT)));
+                }                      
+            }
+
+            if(empty($input['confirmpassword'])){
+                $error = array_merge($error,array('confirmpassword' => 'This field is required.'));
+            }
+            else{
+                $cleanData = $this->cleanInput($input['confirmpassword']);
+
+                if ($cleanData!=$this->cleanInput($input['newpassword'])) {
+                    $error = array_merge($error,array('confirmpassword' => 'Password does not match with the new password'));
+                }                     
+            }
+
+            if(empty($error)){
+                return array('valid'=>1 ,'data'=>$userData);
+            }
+            else{
+                return array('valid'=>0,'error'=>$error);
+            }
+
+            
+        }
+
+
+        public function updatePassword($data){
+            if(empty($_SESSION['username'])){
+                $this->setEmail($data['email']);
+                $this->setPassword(password_hash($data['newpassword'],PASSWORD_DEFAULT));
+
+                $userTb = array('password' => "'".$this->getPassword()."'");
+                $this->update('user',$userTb,"WHERE email ='". $this->getEmail() . "'");
+            }
+            else{
+                $response = $this->validatePasswordChange($data);            
+            
+                if($response['valid']==true){
+                    $this->setUsername($_SESSION['username']);
+                    $this->setPassword($response['data']['newpassword']);
+
+                    $userTb = array('password' => "'".$this->getPassword()."'");
+                    $this->update('user',$userTb,"WHERE username ='". $this->getUsername() . "'");
+                    return array('valid'=>1);
+                } 
+                else{
+                    return $response;
+                } 
+            }
+            
+              
+        }
+
+        public function validateForgotPassword($input){
+            
+            // $userData holds the data to be inserted to Service provider table
+            $userData = array();
+            $error=array();
+
+
+            if(empty($input['email'])){
+                $error = array_merge($error,array('email' => 'This field is required.'));
+            }
+            else{
+                $cleanData = $this->cleanInput($input['email']);
+                require_once('../app/Core/Database.php');
+                $db = new Database();
+                $conn = $db->setConnection();
+                if($conn !== null){
+                    $stmt = $conn->query("SELECT username,email FROM user where email='".$cleanData."'");
+                    if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                        $username = $row['username'];
+                        $newPassword = uniqid();
+                        $this->updatePassword(array('email'=>$row['email'],'newpassword'=>$newPassword));
+                        require '../app/vendor/autoload.php';
+                        $mail = new PHPMailer(true);
+                        try{
+                            $mail->isSMTP();// set mailer to use smtp
+                            $mail->Host = 'smtp.gmail.com'; //specify the smtp server
+                            $mail->SMTPAuth = true; // enable smtp authenticatiion
+                            $mail->Username = "seralance2021@gmail.com"; // SMTP username
+                            $mail->Password = "hello@there123HT"; // SMTP pasword
+                            $mail->SMTPSecure = "tls"; // Enable TLS encryption
+                            $mail->Port = 587; // TCP port to connect to
+
+                            // recipient
+                            $mail->setFrom("seralance2021@gmail.com","Seralance");
+                            $mail->addAddress($row['email'],$row['email']);
+                            
+                            //content
+                            $mail->isHTML(true); // set email format to html
+                            $mail->Subject = "Forgotten password";
+                            $msg =<<<EOT
+                                <html>
+                                    <body>
+                                        <div style="text-align: center;">
+                                            <img src="http://localhost/seralance/public/assets/images/seralance-logo.png" alt="Seralance">
+                                        </div>
+                                        
+                                        <p style="text-align: center;">
+                                            Your username is {$username}.
+                                        </p>
+                                        <p style="text-align: center;">
+                                            Your newly generated password is {$newPassword}.
+                                        </p>
+                                    </body>
+                                </html>
+                            EOT;
+
+                            $mail->Body =$msg;
+
+                            $mail->send();
+                        }
+                        catch(Exception $e){
+                            $error = array_merge($error,array('email' => 'Sorry for the inconvenience! We could not send a new password. Please try again later.'));
+                        }                        
+                    }
+                    else{
+                        $error = array_merge($error,array('email' => 'Email does not exist.'));
+                    } 
+                }                      
+            }
+            
+            if(empty($error)){
+                return array('valid'=>1 ,'data'=>$userData);
+            }
+            else{
+                return array('valid'=>0,'error'=>$error);
+            }
+
+            
+        }
+
+
+        public function sendPassword($data){
+            $response = $this->validateForgotPassword($data);            
+            
+            if($response['valid']==true){                
+                return array('valid'=>1);
+            } 
+            else{
+                return $response;
+            } 
+              
+        }
+
     }
 ?>

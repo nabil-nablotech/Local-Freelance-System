@@ -1,7 +1,7 @@
 <!--  navigation bar -->
 <?php
    require "includes/config.php";
-   require "includes/main-navigation.php"
+   require "includes/main-navigation.php";
    ?>
 	<a href="" id="top"></a>
 	<!--  -->

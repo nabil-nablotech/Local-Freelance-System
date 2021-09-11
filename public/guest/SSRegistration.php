@@ -140,7 +140,7 @@
             <div class="multisteps-form__progress">
               <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">Personal details</button>
               <button class="multisteps-form__progress-btn" type="button" title="Address">Address details</button>
-              <button class="multisteps-form__progress-btn" type="button" title="Message">Bank Details        </button>
+              <button class="multisteps-form__progress-btn" type="button" title="Message">Bank Details </button>
             </div>
           </div>
         </div>

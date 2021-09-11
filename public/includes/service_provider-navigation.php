@@ -94,6 +94,11 @@
 			 height: 40px;
 			 border-radius: 50%;
 		 }
+
+		.errormessage {
+			color: red;
+			font-size: 10px;
+     	}
 		</style>
 	</head>
 
@@ -156,7 +161,7 @@
 					<form class="form-inline my-2   my-lg-0 mr-5 ">
 						<li class="nav-item dropdown" style="list-style-type: none;">
 							<a class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="http://localhost/seralance/<?php echo $providerDetail['profilephoto'];?>" alt="profile-img" class="nav-profile"> </a> <span><?php echo $providerDetail['username'];?></span>
-							<ul class="dropdown-menu  dropleft " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="profile">My profile</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/dispute">Dispute</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/ticket"> Ticket</a> <a class="dropdown-item" href="faq.php">FAQ</a> <a class="dropdown-item" href="policy.php">Policy</a> <a class="dropdown-item" href="changepassword.php">Password</a> <a class="dropdown-item" href="<?php echo $base;?>/public/serviceprovider/logout">Logout</a> </ul>
+							<ul class="dropdown-menu  dropleft " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="profile">My profile</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/dispute">Dispute</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/ticket"> Ticket</a> <a class="dropdown-item" href="faq.php">FAQ</a> <a class="dropdown-item" href="policy.php">Policy</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/changepassword">Password</a> <a class="dropdown-item" href="<?php echo $base;?>/public/serviceprovider/logout">Logout</a> </ul>
 						</li>
 					</form>
 				</ul>

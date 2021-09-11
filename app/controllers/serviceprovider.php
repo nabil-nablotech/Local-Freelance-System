@@ -84,6 +84,10 @@
             $this->view('service_provider/adddispute');
         }
 
+        public function changepassword(){
+            $this->view('service_provider/changepassword');
+        }
+
         public function message(){
             $this->view('service_provider/message');
         }
@@ -319,6 +323,20 @@
             $serviceProvider->updateProfile($input, $files);
             header("Location: http://localhost/seralance/public/serviceprovider/profile");                
             exit();
+        }
+
+        public function validatePasswordChange($input){
+            $user = $this->model('User');
+            $reply = $user->updatePassword($input);
+            if($reply['valid']==true){
+                echo "<script>alert('Your password has been changed sucessfully.');</script>"; 
+                echo "<script>location.href='http://localhost/seralance/public/';</script>";                
+                exit();
+                
+            }
+            else{
+                return $reply;
+            }
         }
 
         public function validateNewTicket($input,$files){
