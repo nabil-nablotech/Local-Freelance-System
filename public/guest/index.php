@@ -1,116 +1,449 @@
 <!--  navigation bar -->
+
+
+<!--  navigation bar -->
 <?php
-   require "includes/config.php";
-   require "includes/main-navigation.php";
+   require "includes/main-navigation.php"
    ?>
-	<a href="" id="top"></a>
+   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+   <script> 
+document.title="Home-Seralance";
+</script>
+<style>
+/*  */
+
+/*  */
+#introtext{
+	
+  float: left;
+    color: #903;
+    font-size: 105px;
+    line-height: 100px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-left: 36px;
+    font-family: Georgia;
+    color:yellow
+}
+
+
+.social:hover {
+    font-size: 18px;
+    color: #f80808
+}
+.social a:hover {
+    opacity: 1
+}
+
+.neo-button {
+    width: 40px;
+    height: 40px;
+    outline: 0 !important;
+    cursor: pointer;
+    color: #fff;
+    font-size: 15px;
+    border: none;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #d6d6d6, #ffffff);
+    box-shadow: 20px 20px 60px #cacaca, -20px -20px 60px #ffffff
+}
+
+.neo-button:active {
+    border-radius: 50%;
+    background: linear-gradient(145deg, #d6d6d6, #ffffff);
+    box-shadow: inset 20px 20px 60px #cacaca, inset -20px -20px 60px #ffffff
+}
+
+
+/*  */
+	.fre-background {
+    position: relative;
+    height: 622px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+	width: 100%;
+}
+.fre-bg-content {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+	right:0;
+    -webkit-transform: translateY(-60%);
+    -ms-transform: translateY(-60%);
+    transform: translateY(-60%);
+    text-align: center;
+}
+.fre-bg-content h1 {
+    margin: 0;
+    font-size: calc(100% + 1vw + 1vh);
+    font-weight: 800;
+    color: whitesmoke;
+    text-align: center;
+    line-height: 1.5em;
+	    margin-top: 30px;
+}
+
+.btn-success {
+    color: whitesmoke;
+    background-color: #28a745;
+    border-color: #28a745;
+    font-size:larger;
+	font-weight:bolder;
+}
+
+@media (max-width: 767px)
+{
+.bg-content h1 
+{
+    font-size:  calc(100% + 1vw + 1vh);
+    margin-bottom: 20px;
+	
+}
+#ss{
+	margin-top: 14px;
+}
+}
+@media (max-width: 991px)
+{
+.fre-bg-content h1 {
+    font-size: 30px;
+}
+}
+@media (max-width: 1199px)
+{
+.fre-bg-content h1 {
+    font-size:  calc(100% + 1vw + 1vh);
+}
+
+}
+@media (max-width: 767px)
+{
+.fre-how-work {
+    padding-top: 32 px;
+}
+
+}
+
+@media (max-width: 991px)
+{
+.fre-how-work {
+    padding-top: 40px;
+}
+}
+@media (max-width: 1199px)
+{
+.fre-how-work {
+    padding-bottom: 48px;
+}
+}
+.fre-how-work {
+    background: #FFF;
+    padding-top: 56px;
+    padding-bottom: 96px;
+    color: #2c3e50;
+    text-align: center;
+}
+.fre-what-offer {
+    background: #FFF;
+    padding-top: 5px;
+    padding-bottom: 16px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+@media (max-width: 1199px)
+{
+.fre-how-work h2 {
+    font-size: 30px;
+}}
+
+.fre-how-work h2 {
+    margin: 0;
+    font-size: 38px;
+    font-weight: 300;
+    color: #2c3e50;
+    line-height: 1.5em;
+}
+ 
+		body{background-color: rgb(242, 245, 247);}
+		
+	</style>
+
+
+
+<a href="" id="top"></a>
 	<!--  -->
-	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-		<ol class="carousel-indicators">
-			<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-		</ol>
-		<div class="carousel-inner">
-			<div class="carousel-item active"> <img class="d-block w-100" src="../assets/images/unsplash2.jpg" alt="First slide"> </div>
-			<div class="carousel-item"> <img class="d-block w-100" src="../assets/images/unsplash 1.jpg" alt="Second slide"> </div>
-			<div class="carousel-item"> <img class="d-block w-100" src="../assets/images/unsplash4.jpg" alt="Third slide"> </div>
-		</div>
-		<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true" style="color: blue;"></span> <span class="sr-only">Previous</span> </a>
-		<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
+<body style="overflow-x: hidden;">
+
+<div class="spinner-wrapper">
+<div class="spinner">	
+</div> 
+</div>
+<div class="container-fluid" style="padding:0px; margin:auto">
+	<div class="row">
+    <div class="col-sm-12" style="    padding-right: 0;
+    padding-left: 0">
+<div class="fre-background home-block-banner " id="background_banner"
+ style="background-image: url('../assets/images/backgroundfinal.jpg');">
+	<div class="fre-bg-content">
+		<div class="col-sm-8 mx-auto">
+	<h1  id="bg-content"  style="font-size: calc(100% + 1vw + 1vh);">
+
+                <span id="introtext">
+				T</span>his
+				 Website is Designed To Customers Who Find perfect freelancers for 
+				 their projects or Look for freelance jobs online?</h1>
 	</div>
-	<!--  -->
-	<!--  part 2 -->
-	<div style="background-color:aliceblue;">
-		<div class="container fluid">
-			<div class="row mt-2">
-				<div class="col-sm-6">
-					<div class="card shadow-sm mb-4">
-						<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-							<h6 class="m-0 font-weight-bold text-primary mx-auto"><bold>are you a service seeker?</bold></h6> </div>
-						<div class="card-body">
-							<p> Simply post a job you need completed and receive competitive bids from freelancers within minutes. Whatever your needs, there will be a freelancer to get it done: from web design, mobile app development, virtual assistants, and graphic design . It is the simplest way to get work done online. </p> <a href="registration\SSRegistration.php" class="btn btn-success btn-md ml-5">Get Started</a> </div>
-					</div>
-				</div>
-				<div class="col-sm-6">
-					<div class="card shadow-sm mb-4">
-						<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-							<h6 class="m-0 font-weight-bold text-primary mx-auto">are you a service provider?</h6> </div>
-						<div class="card-body">
-							<p>If you are an expert in any kind of computer related or online work, then do not hesitate to join our platform. It is easy to use and payment is secured. It is a great platform to those people who are skillful.</p>
-							<p> <a href="registration\SPRegistration.php" class="btn btn-success btn-md ml-5">Get Started</a> </div>
-					</div>
+	<div class="col-sm-8 mx-auto mt-5">
+	<div class="contaniner">
+		<div class="row justify-content-md-center">
+			<div class="col-sm-4 mb-3 ">
+					<a class="btn  btn-success  " href="signup/serviceprovider">Join As A service Provider</a>
+			</div>
+			<div class="col-sm-4 ">
+					<a class="btn  btn-success  " href="signup/serviceseeker">Join As A service Seeker</a>
+			</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--  -->
+
+<div class="fre-how-work" style="background-color: rgb(242, 245, 247);" >
+	<div class="container">
+		<h2 id="how" class="mb-5" style="font-weight: bolder; font-size:xx-larger">How Seralance  works?</h2>
+		<div class="row">
+			<div class="col-lg-3 col-sm-6">
+				<div class="fre-work-block">
+					<span>
+						<img class="img-fluid" src="https://freelanceengine.enginethemes.com/wp-content/themes/freelanceengine/img/1.png" id="img_work_1" alt="">
+					</span>
+					<p id="desc_work_1">Post projects to tell us what you need done</p>
 				</div>
 			</div>
-			<!--  -->
-			<!--How it works-->
-			<div class="container text-center" style="padding:4%;" id="how">
-				<div class="container text-center" style="padding:4%;">
-					<h1 class="card header2" style="background:#007BFF ;">How it works</h1>
-					<div class="row card" style="padding:30px 60px 30px 60px;margin:30px; ">
-						<div class="col-lg-12">
-							<div class="row">
-								<div class="col-sm-6">
-									<h3>Post Projects For Free</h3>
-									<p>It's always free to post your project. You’ll automatically begin to receive bids from our freelancers. Also, you can browse through the talent available on our site, and contact them by the contact information. </p>
-								</div>
-								<div class="col-sm-6"> <img src="../assets/images/project.jpg" width="200px" height="150px"> </div>
-							</div>
-						</div>
-					</div>
-					<div class="row card" style="padding:30px 60px 30px 60px;margin:30px;">
-						<div class="row">
-							<div class="col-lg-6">
-								<h3>Deposit Money Safely</h3>
-								<p>We have a complete security to your valuable money. You have the rights to pay the deposited money after the project completed. We have a good refund policy to make sure of satisfaction of the project completed. </p>
-							</div>
-							<div class="col-sm-6"> <img src="../assets/images/deposit.png" width="200px" height="150px"> </div>
-						</div>
-					</div>
-					<div class="row card" style="padding:30px 60px 30px 60px;margin:30px;">
-						<div class="row">
-							<div class="col-lg-6">
-								<h3>Feel Free To Talk</h3>
-								<p>It is easier to talk with the freelancers here. So before you hire any freelancer feel free to talk with them. Tell them what you need and get the project done in the shortest possible time.</p>
-							</div>
-							<div class="col-lg-6"> <img src="../assets/images/message.png" width="200px" height="150px"> </div>
-						</div>
-					</div>
-					<div class="row card" style="padding:30px 60px 30px 60px;margin:30px;">
-						<div class="row">
-							<div class="col-lg-6">
-								<h3>Build  Profile</h3>
-								<p>If you have a lot of works to be done or run a small business that needs some freelancers in a daily basis, this is the perfect place for you. Build your employer profile today and start hiring.</p>
-							</div>
-							<div class="col-lg-6"> <img src="../assets/images/profile.jpg" width="200px" height="150px"> </div>
-						</div>
-					</div>
-					<!--End How it works-->
-					<h1 class="card header2" style="background:#007BFF; " id="offer">what do we offer?</h1>
+			<div class="col-lg-3 col-sm-6">
+				<div class="fre-work-block">
+					<span>
+						<img class="img-fluid" src="https://freelanceengine.enginethemes.com/wp-content/themes/freelanceengine/img/2.png" id="img_work_2" alt="">
+					</span>
+					<p id="desc_work_2">Browse profiles, reviews, then hire your most favorite and start project</p>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<div class="fre-work-block">
+					<span>
+						<img class="img-fluid" src="https://freelanceengine.enginethemes.com/wp-content/themes/freelanceengine/img/3.png" id="img_work_3" alt="">
+					</span>
+					<p id="desc_work_3">Use Seralance platform to chat and share files</p>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<div class="fre-work-block">
+					<span>
+						<img class="img-fluid" src="https://freelanceengine.enginethemes.com/wp-content/themes/freelanceengine/img/4.png" id="img_work_4" alt="">
+					</span>
+					<p id="desc_work_4">With our protection, money is only paid for work you authorize</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	
+<!--  -->
+<div class="fre-what-offer" id="offer" style="background-color: rgb(242, 245, 247);">
+	<div class="container">
+		<div class="col-sm-12 ">
+		<h2  class="mb-5" style="font-weight: bolder; font-size:xx-larger">
+		What Do we Offer?</h2>
 					<!--  what do we offor -->
 					<div class="row card" style="padding:30px 60px 30px 60px;margin:30px;">
 						<div class="row">
-							<div class="col-lg-6">
-								<p>We have a complete security to your valuable money. You have the rights to pay the deposited money after the project completed. We have a good refund policy to make sure of satisfaction of the project completed. </p>
+							<div class="col-lg-12">
+								<h5 >
+									We are a company that links service providers and service seekers online in order for the service seekers' jobs to be finished and for the service providers to be paid for the project they successfully completed.
+						 
+</h5>
 							</div>
-							<div class="col-sm-6"> <img src="../assets/images/offer.jpg" width="200px" height="150px"> </div>
 						</div>
 					</div>
-					<!-- about us -->
-					<h1 class="card header2" style="background:#007BFF; " id="about">about us</h1>
-					<div class="row card" style="padding:30px 60px 30px 60px;margin:30px;">
-						<div class="row">
-							<div class="col-lg-6">
-								<p>We have a complete security to your valuable money. You have the rights to pay the deposited money after the project completed. We have a good refund policy to make sure of satisfaction of the project completed. </p>
-							</div>
-							<div class="col-sm-6"> <img src="../assets/images/seralance-logo.png"> </div>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
+	</div>
+</div>
+
+
+<!--  -->
+
+<div class="fre-what-offer" id="about" style="background-color: rgb(242, 245, 247);">
+	<div class="container">
+		<div class="col-sm-12 ">
+		<h2  class="mb-5" style="font-weight: bolder; font-size:xx-larger">
+		Meet Our Team</h2>
+					<!--  what do we offor -->
+			
+
+							<!--  -->
+<div class="container-fluid d-flex justify-content-center">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card p-3 py-4 mt-5 mb-5">
+                <div class="text-center"> <img src="../../app/upload/team/nabil.JPG" width="100" class="rounded-circle">
+                    <h3 class="mt-2">NABIL MOHAMMED</h3>
+					 <span class="mt-1 clearfix">Web developer</span> 
+					 <small class="mt-4">Backend developer at Seralance</small>
+                    <div class="social mt-2"> 
+					
+		<a class="btn btn-primary"
+	 style="background-color: #0a66c2;" href="#!" role="button"
+  ><i class="fab fa-linkedin-in"></i
+></a>
+		<a class="btn btn-primary" style="background-color: #1da1f2
+;" href="#!" role="button"
+  ><i class="fab fa-twitter"></i
+></a>
+		<a class="btn btn-primary" style="background-color: #c32aa3
+;" href="#!" role="button"
+  ><i class="fab fa-instagram"></i
+></a>
+
+				</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 py-4 mt-5">
+                <div class="text-center"> <img src="../../app/upload/team/Muler.jpg" width="70" class="rounded-circle">
+                    <h3 class="mt-2">Mulugeta Adamu</h3> <span class="mt-1 clearfix">
+						Web Developer</span> <small class="mt-4">FrontEnd developer at Seralance</small>
+                    <div class="social-buttons mt-2"> 
+						<a class="btn btn-primary"
+	 style="background-color: #0a66c2;" href="#!" role="button"
+  ><i class="fab fa-linkedin-in"></i
+></a>
+		<a class="btn btn-primary" style="background-color: #1da1f2
+;" href="#!" role="button"
+  ><i class="fab fa-twitter"></i
+></a>
+		<a class="btn btn-primary" style="background-color: #c32aa3
+;" href="#!" role="button"
+  ><i class="fab fa-instagram"></i
+></a>
+					
+						 </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 py-4 mt-5">
+                <div class="text-center"> <img src="../../app/upload/team/degu.PNG" width="60" class="rounded-circle">
+                    <h3 class="mt-2">Yohans Degu</h3> <span class="mt-1 clearfix">System Analysit
+
+					</span> <small class="mt-4"> System Analyst At seralance</small>
+                    <div class="social-buttons mt-2">
+						<a class="btn btn-primary"
+	 style="background-color: #0a66c2;" href="#!" role="button"
+  ><i class="fab fa-linkedin-in"></i
+></a>
+		<a class="btn btn-primary" style="background-color: #1da1f2
+;" href="#!" role="button"
+  ><i class="fab fa-twitter"></i
+></a>
+		<a class="btn btn-primary" style="background-color: #c32aa3
+;" href="#!" role="button"
+  ><i class="fab fa-instagram"></i
+></a>
+				</div>
+                </div>
+            </div>
+        </div>
+  <div class="col-md-4">
+            <div class="card p-3 py-4 mt-2 mb-5">
+                <div class="text-center"> <img src="../../app/upload/team/dani.PNG" width="80" class="rounded-circle">
+                    <h3 class="mt-2">Daniel Lakew</h3> <span class="mt-1 clearfix">System ANalyst 
+
+					</span> <small class="mt-4">I am System analyst at seralance</small>
+                    <div class="social-buttons mt-2"> 
+	<a class="btn btn-primary"
+	 style="background-color: #0a66c2;" href="#!" role="button"
+  ><i class="fab fa-linkedin-in"></i
+></a>
+		<a class="btn btn-primary" style="background-color: #1da1f2
+;" href="#!" role="button"
+  ><i class="fab fa-twitter"></i
+></a>
+		<a class="btn btn-primary" style="background-color: #c32aa3
+;" href="#!" role="button"
+  ><i class="fab fa-instagram"></i
+></a>
+					</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 py-4 mt-2">
+                <div class="text-center"> <img src="../../app/upload/team/yigo.PNG" width="100" class="rounded-circle">
+                    <h3 class="mt-2">Yigermal bizuneh</h3> <span class="mt-1 clearfix">
+						Network Adminstrator</span> <small class="mt-4">I am Network Adminstrator at seralance</small>
+                    <div class="social-buttons mt-2"> 
+					<a class="btn btn-primary"
+	 style="background-color: #0a66c2;" href="#!" role="button"
+  ><i class="fab fa-linkedin-in"></i
+></a>
+		<a class="btn btn-primary" style="background-color: #1da1f2
+;" href="#!" role="button"
+  ><i class="fab fa-twitter"></i
+></a>
+		<a class="btn btn-primary" style="background-color: #c32aa3
+;" href="#!" role="button"
+  ><i class="fab fa-instagram"></i
+></a>
+					 </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 py-4 mt-2">
+                <div class="text-center"> <img src="../../app/upload/team/hunei.PNG" width="80" class="rounded-circle">
+                    <h3 class="mt-2">Yohanes Hunegnaw</h3> <span class="mt-1 clearfix">
+						Database Adminstrator</span> <small class="mt-4">I am Databse Admin at seralance</small>
+                    <div class="social-buttons mt-2">
+							<a class="btn btn-primary"
+	 style="background-color: #0a66c2;" href="#!" role="button"
+  ><i class="fab fa-linkedin-in"></i
+></a>
+		<a class="btn btn-primary" style="background-color: #1da1f2
+;" href="#!" role="button"
+  ><i class="fab fa-twitter"></i
+></a>
+		<a class="btn btn-primary" style="background-color: #c32aa3
+;" href="#!" role="button"
+  ><i class="fab fa-instagram"></i
+></a>
+				</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+   
+						</div>
+					</div>
+		</div>
+	</div>
+</div>
+	</div>
+
+	</div>
+</div>
+
+
+	<p id="contact"></p>
 		<!--  -->
-		<p id="contact"></p>
 		<?php require "includes/main-footer.php"; ?>
 			<!--Footer-->
 			<button onclick="GoTopFunction()" id="GoTopBtn" title="Go to top" data-toggle="tooltip" data-placement="top" title="Tooltip on top" scroll to top><i class="fa  fa-arrow-up" aria-hidden="true"></i></button>
@@ -157,4 +490,3 @@ hidePreloader();
 	</body>
 
 	</html>
-	<!--  -->

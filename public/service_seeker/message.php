@@ -246,6 +246,11 @@
   }
 
 </style>
+
+
+<script>
+		document.title = "Service seeker-message";
+		</script>
 </head>
 <body>
 <?php

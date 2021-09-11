@@ -54,7 +54,12 @@
   }
 ?>	
 	    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	
+	
+	<script>
+		document.title = "Service seeker-Announce projects";
+		</script>
 	<style>
 	.col-form-label-sm {
 		padding-top: calc(.25rem + 1px);
@@ -64,9 +69,11 @@
 		color: black;
 		font-weight: bolder;
 	}
+	body{background-color: #f0f5f7;}
 	</style>
-	<div class="container" style="margin-top: 100px;">
-		<div class="col-sm-12">
+	<div class="container-fluid" style="margin-top: 100px;">
+	  <div class="row">
+		<div class="col-sm-12 mx-auto">
 			<div class="card shadow-sm mb-4">
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary mx-auto">New Project</h6> 
@@ -152,7 +159,9 @@
 			</div>
 		</div>
 	</div>
+					</div>
 
+					<?php  require "includes/service_seeker-footer.php"  ?>
 	</body>
 	<script>
 			$(document).ready(function() {

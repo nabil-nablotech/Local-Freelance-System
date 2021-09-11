@@ -282,6 +282,20 @@
                 );
                 $condition = "WHERE project_id = '". $response['data']['projectid'] ."'"; 
                 $this->update('dispute',$disputeTb,$condition);
+
+                $disputeDetails = $this->retrieveDisputeDetails($data['disputeid']);
+                require_once('../app/Models/User.php');
+                $user = new User();
+                $usertype = $user->retrieveUserType($disputeDetails['raised_by']);
+                require_once('../app/Models/Notification.php');
+                $notification = new Notification();
+                $notification->autoNotify(
+                                            "Dispute reviewed",
+                                            "Dispute ".$disputeDetails['dispute_id']. " has been resolved.",
+                                            $disputeDetails['raised_by'],
+                                            "http://localhost/seralance/public/".$usertype['user_type']."/dispute"
+                                        );
+
                 return array('valid'=>1,'action'=>$response['data']['action'],'projectid'=>$response['data']['projectid']);
             } 
             else{

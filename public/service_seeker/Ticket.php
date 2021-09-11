@@ -3,8 +3,9 @@ require "includes/service_seeker-navigation.php";
 $tickets = $serviceSeekerController->getAllTickets($_SESSION['username']);
 ?>
 	<script>
-	document.title = "Service seeker-Transaction history";
+	document.title = "Service seeker-Ticket";
 	</script>
+		<style> 	body{background-color: #f0f5f7;  }</style>
 	</head>
 	<div class="container " style="margin-top: 100px;">
 		<div class="row">

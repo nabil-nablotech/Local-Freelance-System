@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php include "config.php" ?>
+
 	<html>
 
 	<head>
@@ -12,6 +12,20 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../assets/css/guest/landing.css"> </head>
 		<style>
+				.navbar-collapse {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: center;
+}
+			.bg-light {
+    background-color: rgb(86, 130, 232)!important;
+}
+		
+
 			#profiledisplay{
 				border-radius: 50%;
 			}
@@ -20,11 +34,15 @@
 				color: red;
 				font-size: 10px;
 			}
+			li a{
+				color: whitesmoke;
+			}
+			li a:hover{
+				color: greenyellow;
+			}
 		</style>
 	<body style="overflow-x: hidden;">
-	<div class="spinner-wrapper">
-<div class="spinner"></div>
-</div>
+	
 	<?php  
 		require_once('../app/controllers/main.php');
 		$mainController = new Controller\Main();
@@ -44,76 +62,76 @@
 		}
 	?>
 		<!--  navigation bar -->
-		<nav class="navbar navbar-expand-lg fixed-top " style="background-color: whitesmoke!important;">
-			<a class="navbar-brand" href="#"> <img ID="myImg" class="img-fluid " alt="logo" src="../assets/images/seralance-logo.png"> </a>
-			<button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-color:blue"> <span class="dark-blue-text"><i
-            class="fas fa-bars fa-1x"></i></span> </button>
+	
+		<nav class="navbar navbar-expand-md  bg-light fixed-top " role="navigation">
+			<a class="navbar-brand  " href="http://localhost/seralance/public/main/home"> 
+				<img ID="myImg" class="img-fluid d-none d-sm-block "
+				 alt="logo" src="../assets/images/seralance-logo.png "> </a>
+			<button class="navbar-toggler toggler-example"
+			 type="button" data-toggle="collapse" data-target=
+			 "#navbarSupportedContent" aria-controls="navbarSupportedContent"
+			  aria-expanded="false" aria-label="Toggle navigation" 
+			  style="border-color: black;border-width:3px;"> 
+			  <span class="text-white"><i
+            class="fas fa-bars fa-2x"></i></span> </button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item">
-						<a class="nav-link" href="#how">
-							<?php echo $lang['howitworks'] ?>
+				<ul class="navbar-nav mr-auto ">
+					<li class="nav-item col-sm-text-center">
+						<a class="nav-link" href="http://localhost/seralance/public/main/home#how
+">
+							How it works?
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#offer">
-							<?php echo $lang['whatwoweoffer'] ?>
+						<a class="nav-link" href="http://localhost/seralance/public/main/home#offer
+">
+							what do we offer?
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#about">
-							<?php echo $lang['aboutus'] ?>
+						<a class="nav-link" href="http://localhost/seralance/public/main/home#about">
+							About Us
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#contact">
-							<?php echo $lang['contactus'] ?>
+						<a class="nav-link" href="http://localhost/seralance/public/main/home#contact">
+						Contact us
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="FAQ.php">
-							<?php echo $lang['FAQ'] ?>
+						<a class="nav-link" href="http://localhost/seralance/public/main/FAQ
+">
+                       FAQ
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="policy.php">
-							<?php echo $lang['policy'] ?>
+						<a class="nav-link"  
+						 href="http://localhost/seralance/public/seralancepolicy.docx" download>
+					<i class="fa fa-download"></i> Policy 
 						</a>
 					</li>
 				</ul>
-				<form class="form-inline my-2 my-lg-0 ">
+				<ul class=" navbar-nav  ">
 					<li class="nav-item" style="list-style-type: none;">
 						<a class="nav-link" href="" id="login_prompt_btn" data-toggle="modal" data-target="#loginModal">
-							<?php echo $lang['signin'] ?>
+							Login
 						</a>
 					</li>
-					<li class="nav-item dropdown" style="list-style-type: none;">
+					<li class="nav-item dropdown mr-5" style="list-style-type: none;margin-right:100px">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<?php echo $lang['join'] ?>
+							join
 						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<div class="dropdown-menu mx-auto" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="signup/serviceprovider">
-								<?php echo $lang['provider'] ?>
+							Service provider
 							</a>
 							<a class="dropdown-item" href="signup/serviceseeker">
-								<?php echo $lang['seeker'] ?>
+								Service Seeker
 							</a>
 						</div>
 					</li>
-					<li class="nav-item dropdown" style="list-style-type: none;">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<?php echo $lang['language'] ?>
-						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="index.php?lang=am">
-								<?php echo $lang['lang_am'] ?>
-							</a>
-							<a class="dropdown-item" href="index.php?lang=en">
-								<?php echo $lang['lang_en'] ?>
-							</a>
-						</div>
-					</li>
-				</form>
+					
+	</ul>
 			</div>
 		</nav>
 		<!-- login modal -->

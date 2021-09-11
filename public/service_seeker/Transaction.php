@@ -3,7 +3,7 @@ require "includes/service_seeker-navigation.php";
 $transactions = $serviceSeekerController->getAllTransactions($_SESSION['username']);
 ?>
   <script>
-    document.title="Admin-list of bids";
+    document.title="Service Seeker-list of transactions";
 </script>
 <style>
 	.credit{
@@ -149,7 +149,7 @@ $transactions = $serviceSeekerController->getAllTransactions($_SESSION['username
   </div>
 
 
-
+	<?php  require "includes/service_seeker-footer.php"  ?>
 </body>
 
 

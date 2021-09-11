@@ -4,16 +4,17 @@
 ?>
 
 	<head>
+	
 		<style>
-		body{
+	body{
 			overflow-x: hidden;
-		}
-		.text-center a:hover{
-			background-color: blue;
+			background-color: #f0f5f7
+			
 		}
 		.profile-item :hover {
 			background-color: #f7fafa;
 		}
+		.justify-content-start a:hover{background-color:blue}
 		
 		.fre-profile-list {
 			margin: 0;
@@ -68,8 +69,8 @@
 		}
 		
 		.profile-list-subtitle {
-			margin: 6px 0 0;
-			padding-left: 80px;
+			margin: 0 0 0;
+			padding-left: 0px;
 			font-size: 16px;
 			color: #415161;
 			line-height: 1.3em;
@@ -136,17 +137,18 @@
 		}
 		</style>
 		<script>
-		document.title = "Service seeker-Home";
+		document.title = "Service seeker-Browse providers";
 		</script>
 		<link rel="stylesheet" href="../assets/css/service_seeker/browsestyle.css"> </head>
-	<div class="row" style="margin-top: 100px;">
+		<div class="row" style="margin-top: 100px;" style="background-color:#f5f8fa;
+" >
 		<div class="col-md-12 col-sm-12">
 			<!-- Single Candidate List -->
 			<div class="card-body px-0">
 				<!--  -->
 				<!-- Title Header Start -->
 				<section class="inner-header-title" style="background-image:url(../assets/images/back3.jpg);text-align:center;">
-					<h1 style="font-size: xx-large;">Advance Search</h1> </div>
+					<h1 style="font-size: xx-large;">Browse Service  provider </h1> </div>
 			</section>
 			<!--  -->
 			<section class="advance-search">
@@ -235,6 +237,7 @@
 							</div>
 						</div>
 						<!--Browse Candidates -->
+						<!--Browse Candidates -->
 						<div class="col-sm-8">
 							<div class="row">
 								<div class="col-md-12">
@@ -242,7 +245,7 @@
 									<div class="card shadow-sm mb-4">
 										<div class="card-body">
 											<!-- contents goes here -->
-											<div class="table table-responsive mt-5">
+											<div class="table table-responsive mt-5 ">
 												
 											<table id="table" class="table table-bordered table-striped">
 													<tbody>
@@ -253,50 +256,62 @@
 															<ul class="container">
 															<?php
 
-															if(empty($serviceProviders)){
-																echo "<h2>No service providers found</h2>";
-															}
-															else{
-															 foreach($serviceProviders as $serviceProvider){
-																 $myskill = "";
-																 foreach($serviceProvider['skill'] as $skill){
-																	$myskill .= $skill['skill_name']." | ";
-																 }
+                                                            if (empty($serviceProviders)) {
+                                                                echo "<h2>No service providers found</h2>";
+                                                            } else {
+                                                                foreach ($serviceProviders as $serviceProvider) {
+                                                                    $myskill = "";
+                                                                    foreach ($serviceProvider['skill'] as $skill) {
+                                                                        $myskill .= $skill['skill_name']."| ";
+                                                                    }
+                                                                    echo <<<EOT
+																																												<div class="col-sm-12">
+																																												<li class="profile-item mb-3">
+																																												<div class="profile-list-wrap">
+																																													<a class="profile-list-avatar pl-3 pt-2 pb-2">
+																																														<img alt='' src="http://localhost/seralance/{$serviceProvider['profile_photo']}" 
+																																														class='avatar avatar-96 photo avatar-default' height='auto' width='20%' /> 
+																																													</a>
+																																													<h2 class="profile-list-title">
+																																													<a>{$serviceProvider['firstname']} {$serviceProvider['lastname']}</a>
+																																													</h2>
+																																													
+																																													<div class="profile-list-info">
+																																														<div class="profile-list-detail"> 
+																																														<span class="profile-list-subtitle">
+																																														{$myskill}</span>
+																																														<span><strong>Education:</strong>{$serviceProvider['education']}</span>
+																																														<span> <strong>Experience:</strong>
+																																														{$serviceProvider['experience']}
+																																														</span>
+																																														<span>
+																																															<i class="fa fa-star text-warning" data-score="4"></i>
+																																															{$serviceProvider['rate']['score']}
+																																														</span> 
 
-																$score = number_format($serviceProvider['rate']['score'],2);
+																																															<span>{$serviceProvider['rate']['score']} reviews</span> 
+																																															
+																																														</div>
+																																														<div>
+																																														<p>{$serviceProvider['summary']}</p>
 
-																echo <<<EOT
-																		<li class="profile-item mb-3">
-																		<div class="profile-list-wrap">
-																			<a class="profile-list-avatar">
-																				<img alt='' src="http://localhost/seralance/{$serviceProvider['profile_photo']}" 
-																				class='avatar avatar-96 photo avatar-default' height='96' width='96' /> 
-																			</a>
-																			<h2 class="profile-list-title">
-																			<a>{$serviceProvider['firstname']} {$serviceProvider['lastname']}</a>
-																			</h2>
-																			<div class="text-center"> <a href="http://localhost/seralance/public/serviceseeker/hire/{$serviceProvider['username']}" class="d-inline float-right btn-sm  btn btn-primary mr-5">Hire</a>  <a href="http://localhost/seralance/public/serviceseeker/viewproviderprofile/{$serviceProvider['username']}" class="d-inline float-right btn-sm  btn btn-primary mr-5">View profile</a> </div>
-																			<p class="profile-list-subtitle">{$myskill}</p>
-																			<div class="profile-list-info">
-																				<div class="profile-list-detail"> 
-																					<span>
-																					<i class="fa fa-star text-warning" data-score="4"></i>
-																 						{$score}
-																					</span> 
-																					<a href="" class="mr-4">{$serviceProvider['rate']['totalreviews']} reviews</a> 
-																					<span>XXX projects worked</span>
-																				</div>
-																				<div>
-																				<p>{$serviceProvider['summary']}</p>
-																				</div>
-																			</div>
-																		</div>
-																	</li>
-																EOT; 
-																
-															 }
-															}
-																?>
+																																														<div class="d-flex justify-content-start mb-2"> <a href=
+																																													"http://localhost/seralance/public/serviceseeker/hire/{$serviceProvider['username']}" 
+																																													class=" btn-sm  btn btn-primary mr-2">Hire</a>  <a href=
+																																													"http://localhost/seralance/public/serviceseeker/viewproviderprofile/{$serviceProvider['username']}" 
+																																													class=" btn-sm  btn btn-primary mr-5">View profile</a> 
+																																													</div>
+																																													
+																																														</div>
+																																														
+																																													</div>
+																																												</div>
+																																											</li>
+																																											</div>
+																EOT;
+                                                                }
+                                                            }
+                                                                ?>
 															</ul>
 														</div>
 														<!--  -->
@@ -310,6 +325,8 @@
 								</div>
 							</div>
 						</div>
+						
+						<!--  -->
 					</div>
 				</div>
 		</div>

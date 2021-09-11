@@ -36,8 +36,12 @@ require "includes/service_seeker-navigation.php";
     height: 90%;
     padding: 20px;
 }
-
+body{background-color: #f0f5f7
+;} 
 </style>
+<script>
+		document.title = "Service provider-profile  details";
+</script>
 <div class="container-fluid" style="margin-top: 100px;">
 		<div class="row">
 			<div class="col-sm-8 mx-auto">
@@ -45,12 +49,12 @@ require "includes/service_seeker-navigation.php";
 				<div class="card shadow-sm mb-4">
 					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 						<h6 class="m-0 font-weight-bold text-primary mx-auto">Service provider details</h6> </div>
-					<div class="card-body"> 
+					<div class="card-body"  > 
          <div class="container-fluid">
    <div class="row">
-    <div class="col-sm-10">
+    <div class="col-sm-8 mx-auto">
 
-                     <div class="table  ">
+                     <div class="table table-responsive  ">
                     <table id="table" class="table "  style="border:none">
 
                     <tbody>

@@ -7,6 +7,8 @@
 		<script>
 		document.title = "Service seeker-Home";
 		</script>
+			<style> body{background-color: #f0f5f7
+;} </style>
 	</head>
 	<!--  -->
 	<div class="container-fluid " style="margin-top: 100px;">
@@ -14,13 +16,15 @@
 			<!-- profile photo -->
 			<div class="col-xl-4 col-md-4 mb-4">
 				<div class="card h-100">
-					<div class="card-body text-center"> <img src="http://localhost/seralance/<?php echo $seekerDetail['profilephoto'];?>" class="img-avater " style="border:1px solid black; max-width:200px;">
+					<div class="card-body text-center" style="background-color:#abbddb"> <img src="http://localhost/seralance/<?php echo $seekerDetail['profilephoto'];?>" class="img-avater " style="border:1px solid black; max-width:200px;">
 						<p> Welcome <?php echo ucfirst($seekerDetail['firstname'])." ".ucfirst($seekerDetail['lastname']);?></p>
 					</div>
 				</div>
 			</div>
 			<div class="col-xl-8 col-md-4">
 				<div class="row mx-auto">
+					
+			
 					<div class="col-xl-3  col-md-4 mb-4 text-center">
 						<div class="card h-100">
 							<div class="card-body bg-danger  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 200</span>
@@ -31,37 +35,53 @@
 					<div class="col-xl-3  col-md-4 mb-4 text-center">
 						<div class="card h-100">
 							<div class="card-body bg-success  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 200</span>
-								<p> posted Projects</p>
+								<p> Announced Projects</p>
 							</div>
 						</div>
 					</div>
 					<div class="col-xl-3  col-md-4 mb-4 text-center">
 						<div class="card h-100">
 							<div class="card-body bg-warning  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 20</span>
-								<p> pending projects</p>
+								<p> Ongoing projects</p>
 							</div>
 						</div>
 					</div>
 					<div class="col-xl-3  col-md-4 mb-4 text-center">
 						<div class="card h-100">
 							<div class="card-body bg-info  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 200</span>
-								<p>Total Biddings</p>
+								<p>Completed Projects</p>
 							</div>
 						</div>
 					</div>
+
+					<div class="col-xl-3  col-md-4 mb-4 text-center">
+						<div class="card h-100">
+							<div class="card-body bg-info  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 200</span>
+								<p> Offered Projects</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-3  col-md-4 mb-4 text-center">
+						<div class="card h-100">
+							<div class="card-body bg-success  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 200</span>
+								<p> Wallet Balance</p>
+							</div>
+						</div>
+					</div>
+
+						
+
+					
+
+				</div>
+
+
 				</div>
 			</div>
 		</div>
 		<!--  -->
-		<div class="row">
-			<!-- Area Chart -->
-			<div class="col-xl-12 col-lg-8 mx-auto">
-				<p class="text-center text-primary">Recent Activity</p>
-				<div class="card mb-4 ">
-					<div class="card-body"> </div>
-				</div>
-			</div>
-		</div>
+	
 	</div>
 	<!-- Modal Logout -->
 	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout" aria-hidden="true">

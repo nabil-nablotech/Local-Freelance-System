@@ -99,10 +99,12 @@
             unset($_SESSION['ticketid']);
         }
 
-        public function review($projectId){
+        public function review($projectId,$disputeId){
             $_SESSION['projectid'] = $projectId;
+            $_SESSION['disputeid'] = $disputeId;
             $this->view('administrator/reviewdispute');
             unset($_SESSION['projectid']);
+            unset($_SESSION['disputeid']);
         }
 
         public function viewadmin($username){
@@ -475,6 +477,15 @@
                 }                
                 
                 $request->updateRequestStatus($requestId);
+
+                
+                $notification = $this->model('Notification');
+                $notification->autoNotify(
+                                            "Money transferred",
+                                            $requestDetails['amount']. " ETB has been transferred to your bank account.",
+                                            $requestDetails['requester'],
+                                            "http://localhost/seralance/public/".$usertype['user_type']."/transaction"
+                                        );
                 header("Location: http://localhost/seralance/public/admin/transferredfunds");              
                 exit();
                 

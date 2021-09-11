@@ -1,10 +1,46 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
+  		<meta name="viewport" content="width=device-width, initial-scale=1 ">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
     <link rel="stylesheet"  href="../../assets/css/guest/signup.css">
+    <script> 
+
+
+document.title="seralance- service Seeker registration";
+</script>
     <style>
+
+
+    .col-form-label-sm {
+    padding-top: calc(.25rem + 1px);
+    padding-bottom: calc(.25rem + 1px);
+    font-size: .875rem;
+    line-height: 1.5;
+    font-weight: 900;
+    ;
+}
+
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 2px solid #ced4da;
+    border-color: blueviolet;
+    border-radius: .93rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
       #profiledisplay{
         border-radius: 50%;
       }
@@ -15,112 +51,111 @@
       }
     </style>
 </head>
-<body>
+<body style="background-color:#dff7d0"> 
 
-<?php  
+<?php
   require_once('../app/controllers/main.php');
   $mainController = new Controller\Main();
   $firstName = $lastName = $email = $username = $mobileNumber = $city = $address = $accountNumber = "";
   
-  $firstNameErr = $lastNameErr = $emailErr = $usernameErr = $passwordErr = $mobileNumberErr = $nationalityErr = $genderErr = $profilePhotoErr 
-  = $countryErr = $cityErr = $addressErr  
+  $firstNameErr = $lastNameErr = $emailErr = $usernameErr = $passwordErr = $mobileNumberErr = $nationalityErr = $genderErr = $profilePhotoErr
+  = $countryErr = $cityErr = $addressErr
   = $bankNameErr = $accountNumberErr = "";
 
-  if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['signup_btn'])){     
-    $feedback = $mainController->validateSsSignup($_POST,$_FILES);
-    if($feedback['valid'] == false){
+  if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['signup_btn'])) {
+      $feedback = $mainController->validateSsSignup($_POST, $_FILES);
+      if ($feedback['valid'] == false) {
       
       // setting inserted data
-      if(!empty($feedback['data']['firstname'])){
-        $firstName = $feedback['data']['firstname'];
-      }
+          if (!empty($feedback['data']['firstname'])) {
+              $firstName = $feedback['data']['firstname'];
+          }
       
-      if(!empty($feedback['data']['lastname'])){
-        $lastName = $feedback['data']['lastname'];
-      }
+          if (!empty($feedback['data']['lastname'])) {
+              $lastName = $feedback['data']['lastname'];
+          }
 
-      if(!empty($feedback['data']['email'])){
-        $email = $feedback['data']['email'];
-      }
+          if (!empty($feedback['data']['email'])) {
+              $email = $feedback['data']['email'];
+          }
 
-      if(!empty($feedback['data']['username'])){
-        $username = $feedback['data']['username'];
-      }
+          if (!empty($feedback['data']['username'])) {
+              $username = $feedback['data']['username'];
+          }
 
-      if(!empty($feedback['data']['mobilenumber'])){
-        $mobileNumber = $feedback['data']['mobilenumber'];
-      }
+          if (!empty($feedback['data']['mobilenumber'])) {
+              $mobileNumber = $feedback['data']['mobilenumber'];
+          }
 
-      if(!empty($feedback['data']['city'])){
-        $city = $feedback['data']['city'];
-      }
+          if (!empty($feedback['data']['city'])) {
+              $city = $feedback['data']['city'];
+          }
 
-      if(!empty($feedback['data']['address'])){
-        $address = $feedback['data']['address'];
-      }
+          if (!empty($feedback['data']['address'])) {
+              $address = $feedback['data']['address'];
+          }
 
-      if(!empty($feedback['data']['accountnumber'])){
-        $accountNumber = $feedback['data']['accountnumber'];
-      }
+          if (!empty($feedback['data']['accountnumber'])) {
+              $accountNumber = $feedback['data']['accountnumber'];
+          }
 
-      // Setting error values
-      if(!empty($feedback['error']['firstname'])){
-        $firstNameErr = $feedback['error']['firstname'];
-      }
+          // Setting error values
+          if (!empty($feedback['error']['firstname'])) {
+              $firstNameErr = $feedback['error']['firstname'];
+          }
       
-      if(!empty($feedback['error']['lastname'])){
-        $lastNameErr = $feedback['error']['lastname'];
-      }
+          if (!empty($feedback['error']['lastname'])) {
+              $lastNameErr = $feedback['error']['lastname'];
+          }
 
-      if(!empty($feedback['error']['email'])){
-        $emailErr = $feedback['error']['email'];
-      }
+          if (!empty($feedback['error']['email'])) {
+              $emailErr = $feedback['error']['email'];
+          }
 
-      if(!empty($feedback['error']['username'])){
-        $usernameErr = $feedback['error']['username'];
-      }
+          if (!empty($feedback['error']['username'])) {
+              $usernameErr = $feedback['error']['username'];
+          }
 
-      if(!empty($feedback['error']['password'])){
-        $passwordErr = $feedback['error']['password'];
-      }
+          if (!empty($feedback['error']['password'])) {
+              $passwordErr = $feedback['error']['password'];
+          }
 
-      if(!empty($feedback['error']['mobilenumber'])){
-        $mobileNumberErr = $feedback['error']['mobilenumber'];
-      }
+          if (!empty($feedback['error']['mobilenumber'])) {
+              $mobileNumberErr = $feedback['error']['mobilenumber'];
+          }
 
-      if(!empty($feedback['error']['nationality'])){
-        $nationalityErr = $feedback['error']['nationality'];
-      }
+          if (!empty($feedback['error']['nationality'])) {
+              $nationalityErr = $feedback['error']['nationality'];
+          }
 
-      if(!empty($feedback['error']['gender'])){
-        $genderErr = $feedback['error']['gender'];
-      }
+          if (!empty($feedback['error']['gender'])) {
+              $genderErr = $feedback['error']['gender'];
+          }
 
-      if(!empty($feedback['error']['profilephoto'])){
-        $profilePhotoErr = $feedback['error']['profilephoto'];
-      }
+          if (!empty($feedback['error']['profilephoto'])) {
+              $profilePhotoErr = $feedback['error']['profilephoto'];
+          }
 
-      if(!empty($feedback['error']['country'])){
-        $countryErr = $feedback['error']['country'];
-      }
+          if (!empty($feedback['error']['country'])) {
+              $countryErr = $feedback['error']['country'];
+          }
 
-      if(!empty($feedback['error']['city'])){
-        $cityErr = $feedback['error']['city'];
-      }
+          if (!empty($feedback['error']['city'])) {
+              $cityErr = $feedback['error']['city'];
+          }
 
-      if(!empty($feedback['error']['address'])){
-        $addressErr = $feedback['error']['address'];
-      }
+          if (!empty($feedback['error']['address'])) {
+              $addressErr = $feedback['error']['address'];
+          }
 
-      if(!empty($feedback['error']['bankname'])){
-        $bankNameErr = $feedback['error']['bankname'];
-      }
+          if (!empty($feedback['error']['bankname'])) {
+              $bankNameErr = $feedback['error']['bankname'];
+          }
 
-      if(!empty($feedback['error']['accountnumber'])){
-        $accountNumberErr = $feedback['error']['accountnumber'];
+          if (!empty($feedback['error']['accountnumber'])) {
+              $accountNumberErr = $feedback['error']['accountnumber'];
+          }
       }
-
-    }
   }
 ?>
 
@@ -130,29 +165,27 @@
 
 <div class="content">
   <div class="content__inner">
-  <!--   <div class="container">
-      <h2 class="content__title">Click on steps or 'Prev' and 'Next' buttons</h2>
-    </div> -->
     <div class="container overflow-hidden">
       <div class="multisteps-form">
         <div class="row">
-          <div class="col-12 col-lg-8 ml-auto mr-auto mb-4">
+          <div class="col-sm-12 col-lg-8 mx-auto mb-4">
             <div class="multisteps-form__progress">
-              <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">Personal details</button>
+              <button class="multisteps-form__progress-btn js-active" 
+              type="button" title="User Info">Personal details</button>
               <button class="multisteps-form__progress-btn" type="button" title="Address">Address details</button>
-              <button class="multisteps-form__progress-btn" type="button" title="Message">Bank Details </button>
+              <button class="multisteps-form__progress-btn" type="button" title="Message">Bank Details        </button>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-12 col-lg-8 m-auto">
+          <div class="col-sm-12 col-lg-8 mx-auto">
             <form class="multisteps-form__form" method="POST" enctype="multipart/form-data">
               <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
                 <h3 class="multisteps-form__title">Personal details</h3>
                 <div class="multisteps-form__content">
               <!--  -->
               <div class="row">
-    <div class ="col-md-9">
+    <div class ="col-md-9 col-sm-12">
     <div class="form-group row">
     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">First Name</label>
     <div class="col-sm-7">
@@ -204,12 +237,12 @@
   <div class="form-group row">
     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Nationality</label>
     <div class="col-sm-7">
-      <select name="nationality" style="width: 100%;">
+      <select name="nationality" class="form-control">
         <option value="">Please select</option>
         <?php
-          foreach($mainController->getAllCountries() as $country){
-            echo '<option value="'.$country.'">'.$country.'</option>';
-          } 
+          foreach ($mainController->getAllCountries() as $country) {
+              echo '<option value="'.$country.'">'.$country.'</option>';
+          }
         ?>
       </select>
       <p class="errormessage"> <?php echo $nationalityErr;?> </p> 
@@ -233,24 +266,34 @@
     <!--  -->
   </div>
     </div>
-    <div class="col-sm-3">
-  <!--  -->
-  <div class="form-group" style="margin-left: -100px;">
+    <!-- photo begins -->
+
+    <div class="col-md-3 col-sm-12  mx-auto">
+  <div class="form-group ">
                             <label class="control-label">Photo Preview</label>
-                            <div class="input-group">
-                            <img src="../../assets/images/profile.jpg" id="profiledisplay" class="img-rounded" alt="No photo to view" width="200" height="200">
+                            <div class="input-group ">
+                            <img src="../../assets/images/profile.jpg" 
+                            id="profiledisplay" class="img-fluid  center-block d-block mx-auto"
+                             alt="No photo to view" max-width=100% height="auto">
                             </div>
                         </div>
 
-                            <div class="form-group" style="margin-left: -100px;">
+                            <div class="form-group">
                                 <label class="control-label">
-                                    <span style="font-weight: normal;"><em>Allowed Image Formats (JPEG,PNG,GIF,JPG) (Passport size)</em></span></label>
+                                    <span style="font-weight: normal;">
+                                    <em>Allowed Image Formats (JPEG,PNG,GIF,JPG) (Passport size)
+
+                                    </em></span></label>
                                 <div class="input-group">
-                                  <input class="input-large" id="profilephoto" onchange="displayPhoto(this);" type="file" name="profilephoto"/>
+                                  <input class="input-large" id="profilephoto"
+                                   onchange="displayPhoto(this);" type="file" name="profilephoto"/>
                                 </div>
                                 <p class="errormessage"> <?php echo $profilePhotoErr;?> </p>
-                            </div>  <!--  -->
+                            </div> 
     </div>
+
+<!--  photo ends -->
+
   </div>
 
               <!--  -->
@@ -264,28 +307,38 @@
                 <h3 class="multisteps-form__title">Your Address</h3>
                 <div class="multisteps-form__content">
                 <div class="form-row mt-4">
-                    <div class="col">
-                    <select name="country" style="width: 100%;">
+                      <label for="colFormLabelSm" 
+                      class="col-sm-2 col-form-label col-form-label-sm">Country </label>
+                 
+                      <div class="col-sm-7">
+                    <select class="form-control" name="country">
                       <option value="">Country</option>
                       <?php
-                        foreach($mainController->getAllCountries() as $country){
-                          echo '<option value="'.$country.'">'.$country.'</option>';
-                        } 
+                        foreach ($mainController->getAllCountries() as $country) {
+                            echo '<option value="'.$country.'">'.$country.'</option>';
+                        }
                       ?>
                     </select>
                     <p class="errormessage"> <?php echo $countryErr;?> </p>  
                     </div>
-                  </div>
+                   </div>
+                  
 
                   <div class="form-row mt-4">
-                    <div class="col">
+                        <label for="colFormLabelSm" 
+                        class="col-sm-2 col-form-label col-form-label-sm">City</label>
+
+                    <div class="col-sm-7">
                       <input class="multisteps-form__input form-control" type="text" placeholder="City" name="city" value = "<?php echo $city;?>">
                       <p class="errormessage"> <?php echo $cityErr;?> </p>
                     </div>
                   </div>
 
                   <div class="form-row mt-4">
-                    <div class="col">
+                        <label for="colFormLabelSm" 
+                        class="col-sm-2 col-form-label col-form-label-sm">kebele/woreda </label>
+
+                    <div class="col-sm-7">
                       <input class="multisteps-form__input form-control" type="text" placeholder="Address" name="address" value = "<?php echo $address;?>">
                       <p class="errormessage"> <?php echo $addressErr;?> </p>
                     </div>
@@ -298,15 +351,16 @@
               </div>
               
 
-
               <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
                 <h3 class="multisteps-form__title">Bank Details</h3>
                 <div class="multisteps-form__content mb-5">
 
                 <div class="form-group row mt-5" >
-    <label for="mob">Bank Name</label>
-    <div class="col-sm-7" style="margin-left: 60px;">
-    <select class="form-control" name="bankname" style="margin-left: 50px;">
+
+  <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Bank Name </label>
+
+    <div class="col-sm-7">
+    <select class="form-control " name="bankname">
         <option value="">Please select</option>
         <option value="CBE">CBE</option>
         <option value="Abyssinia">Abyssinia</option>
@@ -322,7 +376,7 @@
 
     <div class="form-group row">
     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Bank Account </label>
-    <div class="col-sm-7" style="margin-left: 85px;">
+    <div class="col-sm-7">
     <input type="text" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Account number" name="accountnumber" value = "<?php echo $accountNumber;?>"> 
       <p class="errormessage"> <?php echo $accountNumberErr;?> </p>
     </div>

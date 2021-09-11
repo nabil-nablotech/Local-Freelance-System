@@ -5,7 +5,11 @@
         public function home(){
             $this->view('guest/index');
         }
-
+        public function FAQ()
+        {
+            $this->view('guest/FAQ');
+        }
+    
         public function forgotpassword(){
             $this->view('guest/forgotpassword');
         }
@@ -101,5 +105,5 @@
             return $serviceProvider->retrieveAllSkills();
         }
     }
-    
+
 ?>

@@ -276,6 +276,21 @@
                 );
                 $condition = "WHERE ticket_id = '". $this->getTicketId() ."'"; 
                 $this->update('ticket',$ticketTb,$condition);
+
+                
+                $ticketDetails = $this->retrieveTicketDetails($this->getTicketId());
+                require_once('../app/Models/User.php');
+                $user = new User();
+                $usertype = $user->retrieveUserType($ticketDetails['opened_by']);
+                require_once('../app/Models/Notification.php');
+                $notification = new Notification();
+                $notification->autoNotify(
+                                            "Ticket reviewed",
+                                            "Ticket ".$this->getTicketId(). " has been resolved.",
+                                            $ticketDetails['opened_by'],
+                                            "http://localhost/seralance/public/".$usertype['user_type']."/ticket"
+                                        );
+                
                 return array('valid'=>1);
             } 
             else{

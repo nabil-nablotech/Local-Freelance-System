@@ -351,6 +351,18 @@
             if($_SESSION['usertype']=='serviceseeker'){
                 $condition= "WHERE project_id ='". $projectId ."' and project_id IN (select project_id from project where announced_by = '".$_SESSION['username']."')" ;
                 
+                if($status == "Ongoing"){
+                    $projectDetails = $this->retrieveProjectDetails($projectId);
+                    require_once('../app/Models/Notification.php');
+                    $notification = new Notification();
+                    $notification->autoNotify(
+                                                "Start project",
+                                                "Please start working on project ".$projectId. ".",
+                                                $projectDetails['assigned_to'],
+                                                "http://localhost/seralance/public/serviceprovider/ongoingprojects"
+                                            );
+                }
+                
             } 
             elseif($_SESSION['usertype']=='admin'){
                 $condition= "WHERE project_id ='". $projectId ."'" ;
@@ -376,9 +388,42 @@
                 $condition= "WHERE project_id ='". $projectId ."'" ;
                 
             } 
+            
             $this->updateStatus($projectId,$status);
 
             if($this->update('project',$data,$condition)){
+                
+                $projectDetails = $this->retrieveProjectDetails($projectId);
+                require_once('../app/Models/Notification.php');
+                $notification = new Notification();
+
+                if($status=='Completed'){
+                    $notification->autoNotify(
+                        "Project completed",
+                        "Project ".$projectId. " has been completed.",
+                        $projectDetails['assigned_to'],
+                        "http://localhost/seralance/public/serviceprovider/completedprojects"
+                    );
+                }
+
+                elseif($status=='Terminated'){
+
+                    $notification->autoNotify(
+                        "Project terminated",
+                        "Project ".$projectId. " has been terminated.",
+                        $projectDetails['assigned_to'],
+                        "http://localhost/seralance/public/serviceprovider/terminatedprojects"
+                    );
+
+                    $notification->autoNotify(
+                        "Project terminated",
+                        "Project ".$projectId. " has been terminated.",
+                        $projectDetails['announced_by'],
+                        "http://localhost/seralance/public/serviceseeker/terminatedprojects"
+                    );
+                }
+                
+                
                 return 1;
             }             
             
@@ -400,6 +445,15 @@
             $data = array('status'=>'\'Cancelled\'');             
             $condition= "WHERE project_id ='". $projectId ."' and project_id IN (select project_id from project where assigned_to = '".$_SESSION['username']."')" ;
             if($this->update('project',$data,$condition)){
+                $projectDetails = $this->retrieveProjectDetails($projectId);
+                require_once('../app/Models/Notification.php');
+                $notification = new Notification();
+                $notification->autoNotify(
+                                            "Project offer rejected",
+                                            "Offered project ".$projectId. " has been rejected.",
+                                            $projectDetails['announced_by'],
+                                            "http://localhost/seralance/public/serviceseeker/offeredprojects"
+                                        );
                 return 1;
             }             
             
@@ -559,6 +613,18 @@
                     $this->insert('project_skill',$skill);
                 }
 
+                //To send notification to service provider if project type is offer instead of announcement
+                if(!empty($response['data']['assignto'])){
+                    require_once('../app/Models/Notification.php');
+                    $notification = new Notification();
+                    $notification->autoNotify(
+                                                "New project offer",
+                                                "A project has been offered by ".$_SESSION['username'].".",
+                                                $this->cleanInput($response['data']['assignto']),
+                                                "http://localhost/seralance/public/serviceprovider/offeredprojects"
+                                            );
+                }
+
                 return array('valid'=>1);
             } 
             else{
@@ -609,6 +675,16 @@
 
                 $condition = "WHERE project_id = '".$this->getProjectId()."'";              
                 if($this->update('project',$projectTb,$condition)){
+
+                    $projectDetails = $this->retrieveProjectDetails($this->getProjectId());
+                    require_once('../app/Models/Notification.php');
+                    $notification = new Notification();
+                    $notification->autoNotify(
+                                                "Project offer accepted",
+                                                "Offered project ".$this->getProjectId(). " has been accepted.",
+                                                $projectDetails['announced_by'],
+                                                "http://localhost/seralance/public/serviceseeker/offeredprojects"
+                                            );
                     return array('valid'=>1);
                 }                
             } 
@@ -663,6 +739,16 @@
                 
                 $condition = "WHERE project_id = '".$this->getProjectId()."'";              
                 if($this->update('project',$projectTb,$condition)){
+
+                    $projectDetails = $this->retrieveProjectDetails($this->getProjectId());
+                    require_once('../app/Models/Notification.php');
+                    $notification = new Notification();
+                    $notification->autoNotify(
+                            "Project submitted",
+                            "Project ".$this->getProjectId(). " has been submitted.",
+                            $projectDetails['announced_by'],
+                            "http://localhost/seralance/public/serviceseeker/ongoingprojects"
+                        );
                     return array('valid'=>1);
                 }                
             } 

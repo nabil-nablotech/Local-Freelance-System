@@ -8,10 +8,18 @@
 	<!doctype html>
 	<html>
 
-	<head> </head>
+	<head> 
+	<style> 	body{background-color: #f0f5f7;  }</style>
+
+	<script>
+	document.title = "Service seeker-update profile";
+	</script>
+	</head>
 
 	<body>
-		<div class="container  " style="margin-top: 100px;">
+		<div class="container-fluid  " style="margin-top: 100px;">
+		<div class="row">
+			<div class="col-sm-10 mx-auto">
 			<div class="card shadow-sm mb-4">
 			<form method="POST" enctype="multipart/form-data">
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -122,11 +130,11 @@
 				<div class="container mt-3">
 					<div class="card text-center">
 						<div class="row mt-3">
-							<div class="col-sm-7 mx-auto">
+							<div class="col-sm-6 mx-auto">
 								<div class="form-group row ">
 									<label for="mob">Bank Name</label>
 									<div class="col-sm-7">
-									<select class="form-control" name="bankname" style="margin-left: 50px;">
+									<select class="form-control" name="bankname">
 										<option value="">Please select</option>
 										<option value="CBE">CBE</option>
 										<option value="Abyssinia">Abyssinia</option>
@@ -138,13 +146,19 @@
 									</select>
 									</div>
 								</div>
-								<div class="form-group row">
-									<label for="colFormLabelSm " class=" col-form-label col-form-label-sm">Account Number</label>
-									<div class="col-sm-7">
-										<input type="text" class="form-control form-control-sm ml-5" id="colFormLabelSm" value="<?php echo $seekerDetail['accountnumber'];?>"> </div>
-								</div>
 							</div>
 						</div>
+						<div class="col-sm-6 mx-auto">
+								<div class="form-group row">
+									<label for="colFormLabelSm " class=" col-form-label col-form-label-sm">
+										Account Number</label>
+									<div class="col-sm-">
+										<input type="text" class="form-control form-control-sm "
+										 id="colFormLabelSm" value="<?php echo $seekerDetail['accountnumber'];?>">
+										 </div>
+								</div>
+							</div>
+						
 					</div>
 				</div>
 				<div class="form-group text-center">
@@ -156,8 +170,7 @@
 		</div>
 		</div>
 		</div>
-		</div>
-		</div>
+		
 		<?php
 			require "includes/service_seeker-footer.php";
 		?>

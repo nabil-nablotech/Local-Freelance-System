@@ -50,6 +50,7 @@
 						<label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm"> Decision </label>
 						<div class="col-sm-8">
                             <input type="text" name="projectid" value="<?php echo $_SESSION['projectid']?>" hidden>
+                            <input type="text" name="disputeid" value="<?php echo $_SESSION['disputeid']?>" hidden>
 							<textarea name="decision" id="" cols="50" rows="10" class="form-control" required></textarea>
                             <p class="errormessage"> <?php echo $decisionErr;?> </p>
                             

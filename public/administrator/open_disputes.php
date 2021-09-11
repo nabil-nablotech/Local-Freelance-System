@@ -59,7 +59,7 @@ $disputes = $adminController->getAllOpenDisputes();
                                                 </td>
                                                 <!--  -->
                                                    <td><a class="btn btn-info" href="http://localhost/seralance/public/admin/viewdispute/{$dispute['dispute_id']}">View</a> </td>
-                                                   <td><a class="btn btn-success" href="http://localhost/seralance/public/admin/review/{$dispute['project_id']}">Review</a> </td>
+                                                   <td><a class="btn btn-success" href="http://localhost/seralance/public/admin/review/{$dispute['project_id']}/{$dispute['dispute_id']}">Review</a> </td>
                                                 <!--  -->
                                                 </tr>
                                              EOT;

@@ -120,6 +120,16 @@
             $this->update('bid', array('status'=>"'Rejected'"),$condition);
             $condition= "WHERE bid_id =". $bidId ."  AND status = 'open'" ;
             $this->update('bid', array('status'=>"'Approved'"),$condition);
+
+            $bidDetails = $this->retrieveBidDetails($bidId);
+            require_once('../app/Models/Notification.php');
+            $notification = new Notification();
+            $notification->autoNotify(
+                                        "Bid approved",
+                                        "Bid on project ".$projectId. " has been approved.",
+                                        $bidDetails['made_by'],
+                                        "http://localhost/seralance/public/serviceprovider/announcedprojects"
+                                    );
             
         }
 

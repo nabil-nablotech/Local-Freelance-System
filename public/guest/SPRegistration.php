@@ -1,6 +1,9 @@
+
 <!DOCTYPE html>
 <html>
 <head>
+    		<meta name="viewport" content="width=device-width, initial-scale=1 ">
+
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
     <link rel="stylesheet"  href="../../assets/css/guest/signup.css">
@@ -9,7 +12,62 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link href="http://localhost/seralance/app/vendor/tagger-master/tagger.css" rel="stylesheet">
     <script src="http://localhost/seralance/app/vendor/tagger-master/tagger.js"></script>
+<script> 
+
+
+document.title="seralance- service provider registration";
+</script>
     <style>
+/*  */
+
+.tagger > ul {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 4px 0;
+    justify-content: space-between;
+    box-sizing: border-box;
+    height: auto;
+     border: solid #a15ce5 2px;
+
+
+}
+
+/*  */
+
+.select2-container--default.select2-container .select2-selection--multiple {
+    border: solid #a15ce5 2px;
+    outline: 0;
+    border-radius: 0.9rem;
+}
+.select2-container{width: 100% !important;
+}
+
+    .col-form-label-sm {
+    padding-top: calc(.25rem + 1px);
+    padding-bottom: calc(.25rem + 1px);
+    font-size: .875rem;
+    line-height: 1.5;
+    font-weight: 900;
+    ;
+}
+
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 2px solid #ced4da;
+    border-color: blueviolet;
+    border-radius: .93rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
       #profiledisplay{
         border-radius: 50%;
       }
@@ -21,141 +79,140 @@
     </style>
 </head>
 
-<body>
+<body style="background-color:#dff7d0">
   
-<?php  
+<?php
   require_once('../app/controllers/main.php');
   $mainController = new Controller\Main();
   $firstName = $lastName = $email = $username = $mobileNumber = $city = $address = $accountNumber = $summary = "";
   
-  $firstNameErr = $lastNameErr = $emailErr = $usernameErr = $passwordErr = $mobileNumberErr = $nationalityErr = $genderErr = $profilePhotoErr 
-  = $countryErr = $cityErr = $addressErr = $educationErr = $languageErr = $skillErr = $experienceErr = $portfolioErr 
+  $firstNameErr = $lastNameErr = $emailErr = $usernameErr = $passwordErr = $mobileNumberErr = $nationalityErr = $genderErr = $profilePhotoErr
+  = $countryErr = $cityErr = $addressErr = $educationErr = $languageErr = $skillErr = $experienceErr = $portfolioErr
   = $bankNameErr = $accountNumberErr = $summaryErr = "";
 
-  if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['signup_btn'])){     
-    $feedback = $mainController->validateSpSignup($_POST,$_FILES);
-    if($feedback['valid'] == false){
+  if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['signup_btn'])) {
+      $feedback = $mainController->validateSpSignup($_POST, $_FILES);
+      if ($feedback['valid'] == false) {
       
       // setting inserted data
-      if(!empty($feedback['data']['firstname'])){
-        $firstName = $feedback['data']['firstname'];
-      }
+          if (!empty($feedback['data']['firstname'])) {
+              $firstName = $feedback['data']['firstname'];
+          }
       
-      if(!empty($feedback['data']['lastname'])){
-        $lastName = $feedback['data']['lastname'];
-      }
+          if (!empty($feedback['data']['lastname'])) {
+              $lastName = $feedback['data']['lastname'];
+          }
 
-      if(!empty($feedback['data']['email'])){
-        $email = $feedback['data']['email'];
-      }
+          if (!empty($feedback['data']['email'])) {
+              $email = $feedback['data']['email'];
+          }
 
-      if(!empty($feedback['data']['username'])){
-        $username = $feedback['data']['username'];
-      }
+          if (!empty($feedback['data']['username'])) {
+              $username = $feedback['data']['username'];
+          }
 
-      if(!empty($feedback['data']['mobilenumber'])){
-        $mobileNumber = $feedback['data']['mobilenumber'];
-      }
+          if (!empty($feedback['data']['mobilenumber'])) {
+              $mobileNumber = $feedback['data']['mobilenumber'];
+          }
 
-      if(!empty($feedback['data']['city'])){
-        $city = $feedback['data']['city'];
-      }
+          if (!empty($feedback['data']['city'])) {
+              $city = $feedback['data']['city'];
+          }
 
-      if(!empty($feedback['data']['address'])){
-        $address = $feedback['data']['address'];
-      }
+          if (!empty($feedback['data']['address'])) {
+              $address = $feedback['data']['address'];
+          }
 
-      if(!empty($feedback['data']['accountnumber'])){
-        $accountNumber = $feedback['data']['accountnumber'];
-      }
+          if (!empty($feedback['data']['accountnumber'])) {
+              $accountNumber = $feedback['data']['accountnumber'];
+          }
 
-      if(!empty($feedback['data']['summary'])){
-        $summary = $feedback['data']['summary'];
-      }
+          if (!empty($feedback['data']['summary'])) {
+              $summary = $feedback['data']['summary'];
+          }
 
 
-      // Setting error values
-      if(!empty($feedback['error']['firstname'])){
-        $firstNameErr = $feedback['error']['firstname'];
-      }
+          // Setting error values
+          if (!empty($feedback['error']['firstname'])) {
+              $firstNameErr = $feedback['error']['firstname'];
+          }
       
-      if(!empty($feedback['error']['lastname'])){
-        $lastNameErr = $feedback['error']['lastname'];
-      }
+          if (!empty($feedback['error']['lastname'])) {
+              $lastNameErr = $feedback['error']['lastname'];
+          }
 
-      if(!empty($feedback['error']['email'])){
-        $emailErr = $feedback['error']['email'];
-      }
+          if (!empty($feedback['error']['email'])) {
+              $emailErr = $feedback['error']['email'];
+          }
 
-      if(!empty($feedback['error']['username'])){
-        $usernameErr = $feedback['error']['username'];
-      }
+          if (!empty($feedback['error']['username'])) {
+              $usernameErr = $feedback['error']['username'];
+          }
 
-      if(!empty($feedback['error']['password'])){
-        $passwordErr = $feedback['error']['password'];
-      }
+          if (!empty($feedback['error']['password'])) {
+              $passwordErr = $feedback['error']['password'];
+          }
 
-      if(!empty($feedback['error']['mobilenumber'])){
-        $mobileNumberErr = $feedback['error']['mobilenumber'];
-      }
+          if (!empty($feedback['error']['mobilenumber'])) {
+              $mobileNumberErr = $feedback['error']['mobilenumber'];
+          }
 
-      if(!empty($feedback['error']['nationality'])){
-        $nationalityErr = $feedback['error']['nationality'];
-      }
+          if (!empty($feedback['error']['nationality'])) {
+              $nationalityErr = $feedback['error']['nationality'];
+          }
 
-      if(!empty($feedback['error']['gender'])){
-        $genderErr = $feedback['error']['gender'];
-      }
+          if (!empty($feedback['error']['gender'])) {
+              $genderErr = $feedback['error']['gender'];
+          }
 
-      if(!empty($feedback['error']['profilephoto'])){
-        $profilePhotoErr = $feedback['error']['profilephoto'];
-      }
+          if (!empty($feedback['error']['profilephoto'])) {
+              $profilePhotoErr = $feedback['error']['profilephoto'];
+          }
 
-      if(!empty($feedback['error']['country'])){
-        $countryErr = $feedback['error']['country'];
-      }
+          if (!empty($feedback['error']['country'])) {
+              $countryErr = $feedback['error']['country'];
+          }
 
-      if(!empty($feedback['error']['city'])){
-        $cityErr = $feedback['error']['city'];
-      }
+          if (!empty($feedback['error']['city'])) {
+              $cityErr = $feedback['error']['city'];
+          }
 
-      if(!empty($feedback['error']['address'])){
-        $addressErr = $feedback['error']['address'];
-      }
+          if (!empty($feedback['error']['address'])) {
+              $addressErr = $feedback['error']['address'];
+          }
 
-      if(!empty($feedback['error']['education'])){
-        $educationErr = $feedback['error']['education'];
-      }
+          if (!empty($feedback['error']['education'])) {
+              $educationErr = $feedback['error']['education'];
+          }
 
-      if(!empty($feedback['error']['language'])){
-        $languageErr = $feedback['error']['language'];
-      }
+          if (!empty($feedback['error']['language'])) {
+              $languageErr = $feedback['error']['language'];
+          }
 
-      if(!empty($feedback['error']['skill'])){
-        $skillErr = $feedback['error']['skill'];
-      }
+          if (!empty($feedback['error']['skill'])) {
+              $skillErr = $feedback['error']['skill'];
+          }
 
-      if(!empty($feedback['error']['experience'])){
-        $experienceErr = $feedback['error']['experience'];
-      }
+          if (!empty($feedback['error']['experience'])) {
+              $experienceErr = $feedback['error']['experience'];
+          }
 
-      if(!empty($feedback['error']['portfolio'])){
-        $portfolioErr = $feedback['error']['portfolio'];
-      }
+          if (!empty($feedback['error']['portfolio'])) {
+              $portfolioErr = $feedback['error']['portfolio'];
+          }
 
-      if(!empty($feedback['error']['bankname'])){
-        $bankNameErr = $feedback['error']['bankname'];
-      }
+          if (!empty($feedback['error']['bankname'])) {
+              $bankNameErr = $feedback['error']['bankname'];
+          }
 
-      if(!empty($feedback['error']['accountnumber'])){
-        $accountNumberErr = $feedback['error']['accountnumber'];
-      }
+          if (!empty($feedback['error']['accountnumber'])) {
+              $accountNumberErr = $feedback['error']['accountnumber'];
+          }
 
-      if(!empty($feedback['error']['summary'])){
-        $summaryErr = $feedback['error']['summary'];
+          if (!empty($feedback['error']['summary'])) {
+              $summaryErr = $feedback['error']['summary'];
+          }
       }
-
-    }
   }
 ?>
 <header class="header">
@@ -164,9 +221,6 @@
 
 <div class="content">
   <div class="content__inner">
-  <!--   <div class="container">
-      <h2 class="content__title">Click on steps or 'Prev' and 'Next' buttons</h2>
-    </div> -->
     <div class="container overflow-hidden">
       <div class="multisteps-form">
         <div class="row">
@@ -180,14 +234,14 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-12 col-lg-8 m-auto">
+          <div class="col-sm-12 col-lg-8 mx-auto">
             <form class="multisteps-form__form" method="POST" enctype="multipart/form-data">
               <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
                 <h3 class="multisteps-form__title">Personal details</h3>
                 <div class="multisteps-form__content">
               <!--  -->
               <div class="row">
-    <div class ="col-md-9">
+    <div class ="col-md-9 mx-auto">
     <div class="form-group row">
     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">First Name</label>
     <div class="col-sm-7">
@@ -238,13 +292,14 @@
 
   <div class="form-group row">
     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Nationality</label>
+     
     <div class="col-sm-7">
-      <select name="nationality" style="width: 100%;">
+      <select name="nationality" class="form-control">
         <option value="">Please select</option>
         <?php
-          foreach($mainController->getAllCountries() as $country){
-            echo '<option value="'.$country.'">'.$country.'</option>';
-          } 
+          foreach ($mainController->getAllCountries() as $country) {
+              echo '<option value="'.$country.'">'.$country.'</option>';
+          }
         ?>
       </select>
       <p class="errormessage"> <?php echo $nationalityErr;?> </p>     
@@ -268,16 +323,17 @@
     <!--  -->
   </div>
     </div>
-    <div class="col-sm-3">
-  <!--  -->
-  <div class="form-group" style="margin-left: -100px;">
+    <div class="col-sm-12 col-md-3 mx-auto">
+  <div class="form-group">
                             <label class="control-label">Photo Preview</label>
                             <div class="input-group">
-                                <img src="../../assets/images/profile.jpg" id="profiledisplay" class="img-rounded" alt="No photo to view" width="200" height="200">
+                                <img src="../../assets/images/profile.jpg" 
+                                id="profiledisplay" class="img-fluid  center-block d-block mx-auto"
+                             alt="No photo to view" max-width=100% height="auto">
                             </div>
                         </div>
 
-                            <div class="form-group" style="margin-left: -100px;">
+                            <div class="form-group">
                                 <label class="control-label">
                                     <span style="font-weight: normal;"><em>Allowed Image Formats (JPEG,PNG,GIF,JPG) (Passport size)</em></span></label>
                                 <div class="input-group">
@@ -299,26 +355,35 @@
                 <h3 class="multisteps-form__title">Your Address</h3>
                 <div class="multisteps-form__content">
                   <div class="form-row mt-4">
-                    <div class="col">
-                    <select name="country" style="width: 100%;">
+                     <label for="colFormLabelSm" 
+                      class="col-sm-2 col-form-label col-form-label-sm">Country </label>
+                 
+                    <div class="col-md-7">
+                    <select name="country" class="form-control">
                       <option value="">Country</option>
                       <?php
-                        foreach($mainController->getAllCountries() as $country){
-                          echo '<option value="'.$country.'">'.$country.'</option>';
-                        } 
+                        foreach ($mainController->getAllCountries() as $country) {
+                            echo '<option value="'.$country.'">'.$country.'</option>';
+                        }
                       ?>
                     </select>
                     <p class="errormessage"> <?php echo $countryErr;?> </p>  
                     </div>
                   </div>
                   <div class="form-row mt-4">
-                    <div class="col">
+                     <label for="colFormLabelSm" 
+                      class="col-sm-2 col-form-label col-form-label-sm">City</label>
+                 
+                    <div class="col-md-7">
                       <input class="multisteps-form__input form-control" type="text" placeholder="City" name="city" value = "<?php echo $city;?>">
                       <p class="errormessage"> <?php echo $cityErr;?> </p>
                     </div>
                   </div>
                   <div class="form-row mt-4">
-                    <div class="col">
+                     <label for="colFormLabelSm" 
+                      class="col-sm-2 col-form-label col-form-label-sm">Kebele/woreda </label>
+                 
+                    <div class="col-md-7">
                       <input class="multisteps-form__input form-control" type="text" placeholder="Address" name="address" value = "<?php echo $address;?>">
                       <p class="errormessage"> <?php echo $addressErr;?> </p>
                     </div>
@@ -337,8 +402,9 @@
                 <div class="multisteps-form__content">
                     <!--  -->
     <div class="form-group row">
-    <label for="mob">Educational Level</label>
-    <div class="col-sm-7">
+      <label for="colFormLabelSm" 
+                      class="col-sm-2 col-form-label col-form-label-sm">Educational Level </label>
+    <div class="col-md-7">
      <select class="form-control" id="sel1" name="education">
         <option value="">Please select</option>
         <option value="Primary school">Primary school</option>
@@ -353,13 +419,14 @@
     </div>
     <!--  -->
     <div class="form-group row" >
-    <label for="mob">Langauge</label>
-    <div class="col-sm-7" style="margin-left: 60px;">
+    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Languuages </label>
+                 
+    <div class="col-md-7  col-sm-12 ">
     <select class="form-control language-multiple" name="language[]" multiple="multiple">
       <?php
-          foreach($mainController->getAllLanguages() as $language){
-            echo '<option value="'.$language['language_id'].'">'.$language['language_name'].'</option>';
-          } 
+          foreach ($mainController->getAllLanguages() as $language) {
+              echo '<option value="'.$language['language_id'].'">'.$language['language_name'].'</option>';
+          }
       ?>
     </select>
     <p class="errormessage"> <?php echo $languageErr;?> </p> 
@@ -367,44 +434,44 @@
     </div>
     <!--  -->
     <div class="form-group row" >
-    <label for="mob">Skill</label>
-    <div class="col-sm-7" style="margin-left: 120px;">
+      <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Skills</label>
+    <div class="col-md-7 col-sm-12  ">
     <select class="form-control skill-multiple" name="skill[]" multiple="multiple">
       <?php $skills = $mainController->getAllSkills(); ?>
       <optgroup label="Graphics and Design">
         <?php
-              foreach($skills as $skill){
-                if($skill['skill_category'] === 'Graphics and Design'){
-                  echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
-                }                
-              } 
+              foreach ($skills as $skill) {
+                  if ($skill['skill_category'] === 'Graphics and Design') {
+                      echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
+                  }
+              }
         ?>
       </optgroup>
       <optgroup label="Writing and Translation">
         <?php
-              foreach($skills as $skill){
-                if($skill['skill_category'] === 'Writing and Translation'){
-                  echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
-                }                
-              } 
+              foreach ($skills as $skill) {
+                  if ($skill['skill_category'] === 'Writing and Translation') {
+                      echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
+                  }
+              }
         ?>
       </optgroup> 
       <optgroup label="Video and Animation">
         <?php
-              foreach($skills as $skill){
-                if($skill['skill_category'] === 'Video and Animation'){
-                  echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
-                }                
-              } 
+              foreach ($skills as $skill) {
+                  if ($skill['skill_category'] === 'Video and Animation') {
+                      echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
+                  }
+              }
         ?>
       </optgroup> 
       <optgroup label="Programming and Tech">
         <?php
-              foreach($skills as $skill){
-                if($skill['skill_category'] === 'Programming and Tech'){
-                  echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
-                }                
-              } 
+              foreach ($skills as $skill) {
+                  if ($skill['skill_category'] === 'Programming and Tech') {
+                      echo '<option value="'.$skill['skill_id'].'">'.$skill['skill_name'].'</option>';
+                  }
+              }
         ?>
       </optgroup>       
     </select>
@@ -434,8 +501,10 @@
   </div>
 
   <div class="form-group row">
-    <label for="address">Portfolio</label>
-    <div class="col-sm-7 ml-5" style="margin-left: 240px;">
+   
+  <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Portifolio </label>
+
+    <div class="col-sm-7 ">
       <input class="form-control" name="portfolio" type="text">
     </div>
     <p class="errormessage"> <?php echo $portfolioErr;?> </p>
@@ -452,12 +521,12 @@
          
               <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
                 <h3 class="multisteps-form__title">Bank Details</h3>
-                <div class="multisteps-form__content mb-5">
+                <div class="multisteps-form__content ">
 
-                <div class="form-group row mt-5" >
+                <div class="form-group row mt-3 mx-auto" >
     <label for="mob">Bank Name</label>
-    <div class="col-sm-7" style="margin-left: 60px;">
-     <select class="form-control" name="bankname" style="margin-left: 50px;">
+    <div class="col-sm-7">
+     <select class="form-control" name="bankname">
         <option value="">Please select</option>
         <option value="CBE">CBE</option>
         <option value="Abyssinia">Abyssinia</option>
@@ -473,17 +542,18 @@
 
     <div class="form-group row">
     <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Bank Account </label>
-    <div class="col-sm-7" style="margin-left: 85px;">
+    <div class="col-sm-7">
       <input type="text" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Account number" name="accountnumber" value = "<?php echo $accountNumber;?>"> 
       <p class="errormessage"> <?php echo $accountNumberErr;?> </p>
     </div>
   </div>
 
   <div class="form-group row">
-    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm" style="margin-top: 30px;">Summary </label>
-
-      <div class="form-row mt-4" style="margin-left: 95px;">
-        <textarea class="multisteps-form__textarea form-control" rows="5" cols="45" placeholder="Summary" name="summary"> <?php echo $summary;?> </textarea>
+    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm ">Summary </label>
+      <div class="col-sm-12 col-md-7">
+        <textarea class="multisteps-form__textarea form-control"
+         rows="5" cols="45" placeholder="Summary" name="summary">
+          <?php echo $summary;?> </textarea>
         <p class="errormessage"> <?php echo $summaryErr;?> </p>
       </div>
   </div>
@@ -525,6 +595,7 @@
     tagger(document.querySelector('[name="portfolio"]'),{wrap: true ,allow_spaces: false, tag_limit: 10, link: function(name){return false}});
 
 </script>
+
 </body>
 
 

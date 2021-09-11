@@ -287,5 +287,27 @@
             }      
         }
 
+        public function autoNotify($title,$content,$recipient,$url){
+
+                $this->setTitle($title);
+                $this->setContent($content);
+                $this->setRecipient($recipient);
+                $this->setUrl($url);
+                $this->setStatus('closed');              
+
+                    
+                $notificationTb = array(
+                    'title' => "'".$this->getTitle()."'",
+                    'content' => "'".$this->getContent()."'",
+                    'datetime' => "UTC_TIMESTAMP",
+                    'recipient' => "'".$this->getRecipient()."'",
+                    'url' => "'".$this->getUrl()."'",
+                    'status' => "'".$this->getStatus()."'"
+                );
+
+                $this->insert('notification',$notificationTb);
+                return array('valid'=>1);     
+        }
+
     }
 ?>

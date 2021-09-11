@@ -263,6 +263,10 @@
                     if($_SESSION['usertype'] ==='serviceprovider'){
                         $sql = "SELECT user_type FROM user where user_type = 'serviceseeker' and username='".$username."'";
                     }
+
+                    if($_SESSION['usertype'] ==='admin'){
+                    $sql = "SELECT user_type FROM user where username='".$username."'";
+                    }
                 }                
                 else{
                     $sql = "SELECT user_type FROM user where username='".$username."'";
