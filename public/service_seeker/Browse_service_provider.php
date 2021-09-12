@@ -1,6 +1,13 @@
 <?php
    require "includes/service_seeker-navigation.php";
-   $serviceProviders = $serviceSeekerController->getServiceProviders();
+
+   if($_SERVER["REQUEST_METHOD"] === "POST"){
+		$serviceProviders = $serviceSeekerController->getServiceProviders($_POST);
+   }
+   else{
+	$serviceProviders = $serviceSeekerController->getServiceProviders();
+   }
+   
 ?>
 
 	<head>
@@ -155,6 +162,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-4 col-sm-12">
+							
 							<div class="full-sidebar-wrap">
 								<div class="show-hide-sidebar hidden-xs hidden-sm">
 									<!-- Search Job -->
@@ -164,77 +172,98 @@
 											<!-- 										<span><button class="btn btn-danger">clear results</button> </span>  
  -->
 											<hr>
-											<div class="ur-detail-wrap-header">
+											
 												<h6>
-                                 <bold>Search By Category</bold>
-                              </h6> </div>
-											<div class="ur-detail-wrap-body">
-												<div class="input-group">
-													<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-													<div class="input-group-append"> <span class="input-group-text"><i class="fa fa-search"></i></span> </div>
-												</div>
-												<ul class="advance-list">
-													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="aw">
+                                 <bold>Search specific service provider</bold>
+                              </h6> 
+							  		<form method="POST">		
+									<div class="input-group mt-3 mb-3">
+										<input name="serviceprovider" type="text" class="form-control" aria-label="Search service provider" placeholder="Enter service provider's username">
+										<div class="input-group-append"> <button class="btn btn-primary" type="submit" name="search_btn"><i class="fa fa-search"></i></button> </div>
+									</div>
+									</form>
+									<form method="POST">
+									<div class="ur-detail-wrap-header">
+									<h6>
+										<bold>Filter by skill category</bold>
+									</h6> </div>
+									<div class="ur-detail-wrap-body">
+										<ul class="advance-list">
+											<li> <span class="custom-checkbox">
+                                    <input type="checkbox" name="category[]" value="1" id="aw">
                                     <label for="aw"></label>
                                     </span> Graphics and Design </li>
 													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="dd">
+                                    <input type="checkbox" name="category[]" value="2" id="dd">
                                     <label for="dd"></label>
                                     </span> Writing and Translation</li>
 													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="er">
+                                    <input type="checkbox" name="category[]" value="3" id="er">
                                     <label for="er"></label>
                                     </span> Video and Animation </li>
 													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="tr">
+                                    <input type="checkbox" name="category[]" value="4" id="tr">
                                     <label for="tr"></label>
                                     </span> Programming and Tech </li>
 												</ul>
 											</div>
-										</div>
-									</div>
-									<!-- filter by rating -->
-									<div class="sidebar-widgets mt-3">
-										<div class="ur-detail-wrap">
-											<div class="ur-detail-wrap-header">
+
+											<div class="ur-detail-wrap-header mt-3">
+									<h6>
+										<bold>Filter by experience</bold>
+									</h6> </div>
+									<div class="ur-detail-wrap-body">
+										<ul class="advance-list">
+											<li> <span class="custom-checkbox">
+                                    <input type="checkbox" name="experience[]" value="1" id="aw">
+                                    <label for="aw"></label>
+                                    </span> Advanced </li>
+													<li> <span class="custom-checkbox">
+                                    <input type="checkbox" name="experience[]" value="2" id="dd">
+                                    <label for="dd"></label>
+                                    </span> Medium </li>
+													<li> <span class="custom-checkbox">
+                                    <input type="checkbox" name="experience[]" value="3" id="er">
+                                    <label for="er"></label>
+                                    </span> Beginner </li>
+												</ul>
+											</div>
+										
+											<div class="ur-detail-wrap-header mt-3">
 												<h6>Filter By Rating</h6> </div>
 											<div class="ur-detail-wrap-body">
 												<ul class="advance-list">
 													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="uy">
+                                    <input name="rate[]" value="1" type="checkbox" id="uy">
                                     <label for="uy"></label>
                                     </span> <i class="fa fa-star"></i> </li>
 													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="io">
+                                    <input name="rate[]" value="2" type="checkbox" id="io">
                                     <label for="io"></label>
                                     </span> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </li>
 													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="lo">
+                                    <input name="rate[]" value="3" type="checkbox" id="lo">
                                     <label for="lo"></label>
                                     </span> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </li>
 													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="kj">
+                                    <input name="rate[]" value="4" type="checkbox" id="kj">
                                     <label for="kj"></label>
                                     </span> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </li>
 													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="kj">
+                                    <input name="rate[]" value="5" type="checkbox" id="kj">
                                     <label for="kj"></label>
-                                    </span> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa  fa-star">
-
-									 </i> <i class="fa fa-star"></i> </li>
-													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="kj">
-                                    <label for="kj"></label>
-                                    </span> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </li>
+                                    </span> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa  fa-star"> </i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </li>
+													
 												</ul>
 											</div>
-											<button class="btn btn-primary btn-block">filter results</button>
+											<button class="btn btn-primary btn-block" type="submit" name="filter_btn">Filter results</button>
+									</form>
 										</div>
 									</div>
 									<!-- /rating -->
 								</div>
 							</div>
+						
 						</div>
 						<!--Browse Candidates -->
 						<!--Browse Candidates -->
@@ -263,51 +292,52 @@
                                                                     $myskill = "";
                                                                     foreach ($serviceProvider['skill'] as $skill) {
                                                                         $myskill .= $skill['skill_name']."| ";
-                                                                    }
+																	}
+																	$rating = number_format($serviceProvider['rate']['score'],2);
                                                                     echo <<<EOT
-																																												<div class="col-sm-12">
-																																												<li class="profile-item mb-3">
-																																												<div class="profile-list-wrap">
-																																													<a class="profile-list-avatar pl-3 pt-2 pb-2">
-																																														<img alt='' src="http://localhost/seralance/{$serviceProvider['profile_photo']}" 
-																																														class='avatar avatar-96 photo avatar-default' height='auto' width='20%' /> 
-																																													</a>
-																																													<h2 class="profile-list-title">
-																																													<a>{$serviceProvider['firstname']} {$serviceProvider['lastname']}</a>
-																																													</h2>
-																																													
-																																													<div class="profile-list-info">
-																																														<div class="profile-list-detail"> 
-																																														<span class="profile-list-subtitle">
-																																														{$myskill}</span>
-																																														<span><strong>Education:</strong>{$serviceProvider['education']}</span>
-																																														<span> <strong>Experience:</strong>
-																																														{$serviceProvider['experience']}
-																																														</span>
-																																														<span>
-																																															<i class="fa fa-star text-warning" data-score="4"></i>
-																																															{$serviceProvider['rate']['score']}
-																																														</span> 
+																				<div class="col-sm-12">
+																				<li class="profile-item mb-3">
+																				<div class="profile-list-wrap">
+																					<a class="profile-list-avatar pl-3 pt-2 pb-2">
+																						<img alt='' src="http://localhost/seralance/{$serviceProvider['profile_photo']}" 
+																						class='avatar avatar-96 photo avatar-default' height='auto' width='20%' /> 
+																					</a>
+																					<h2 class="profile-list-title">
+																					<a>{$serviceProvider['firstname']} {$serviceProvider['lastname']}</a>
+																					</h2>
+																					
+																					<div class="profile-list-info">
+																						<div class="profile-list-detail"> 
+																						<span class="profile-list-subtitle">
+																						{$myskill}</span>
+																						<span><strong>Education: </strong>{$serviceProvider['education']}</span>
+																						<span> <strong>Experience: </strong>
+																						{$serviceProvider['experience']}
+																						</span>
+																						<span>
+																							<i class="fa fa-star text-warning" data-score="4"></i>
+																							{$rating}
+																						</span> 
 
-																																															<span>{$serviceProvider['rate']['score']} reviews</span> 
-																																															
-																																														</div>
-																																														<div>
-																																														<p>{$serviceProvider['summary']}</p>
+																							<span>{$serviceProvider['rate']['totalreviews']} reviews</span> 
+																							
+																						</div>
+																						<div>
+																						<p>{$serviceProvider['summary']}</p>
 
-																																														<div class="d-flex justify-content-start mb-2"> <a href=
-																																													"http://localhost/seralance/public/serviceseeker/hire/{$serviceProvider['username']}" 
-																																													class=" btn-sm  btn btn-primary mr-2">Hire</a>  <a href=
-																																													"http://localhost/seralance/public/serviceseeker/viewproviderprofile/{$serviceProvider['username']}" 
-																																													class=" btn-sm  btn btn-primary mr-5">View profile</a> 
-																																													</div>
-																																													
-																																														</div>
-																																														
-																																													</div>
-																																												</div>
-																																											</li>
-																																											</div>
+																						<div class="d-flex justify-content-start mb-2"> <a href=
+																					"http://localhost/seralance/public/serviceseeker/hire/{$serviceProvider['username']}" 
+																					class=" btn-sm  btn btn-primary mr-2">Hire</a>  <a href=
+																					"http://localhost/seralance/public/serviceseeker/viewproviderprofile/{$serviceProvider['username']}" 
+																					class=" btn-sm  btn btn-primary mr-5">View profile</a> 
+																					</div>
+																					
+																						</div>
+																						
+																					</div>
+																				</div>
+																			</li>
+																			</div>
 																EOT;
                                                                 }
                                                             }

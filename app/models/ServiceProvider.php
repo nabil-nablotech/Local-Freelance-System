@@ -206,14 +206,86 @@
             }
         }
 
+        public function generateFilterQuery($input){
+            if(isset($input['search_btn'])){
+                if(empty($input['serviceprovider'])){
+                    return "SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username";
+                }
+                else{
+                    $cleanData = $this->cleanInput($input['serviceprovider']);
+                    return "SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username WHERE user.username = '".$cleanData."'";
+                }
+            }
+
+            if(isset($input['filter_btn'])){
+                $category = $experience = $rate = [];
+
+
+                //category.......
+                if(empty($input['category'])){
+                    return "SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username";
+                }
+                else{
+                    $categories = $input['category'];
+                    foreach($categories as $cat){
+                        $cat = $this->cleanInput($input['category']);
+                        if($cat==1){
+                            $category = array_push($category,"Graphics and Design");
+                        }
+                        elseif(($cat==2)){
+                            $category = array_push($category,"Writing and Translation");
+                        }
+                        elseif(($cat==3)){
+                            $category = array_push($category,"Video and Animation");
+                        }
+                        elseif(($cat==4)){
+                            $category = array_push($category,"Programming and Tech");
+                        }
+                    }
+                }
+
+                //experience.......
+                if(empty($input['experience'])){
+                    return "SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username";
+                }
+                else{
+                    $experiences = $input['experience'];
+                    foreach($experiences as $exp){
+                        $exp = $this->cleanInput($input['experience']);
+                        if($exp==1){
+                            $experience = array_push($experience,"Graphics and Design");
+                        }
+                        elseif(($exp==2)){
+                            $experience = array_push($experience,"Writing and Translation");
+                        }
+                        elseif(($exp==3)){
+                            $experience = array_push($experience,"Video and Animation");
+                        }
+                        elseif(($exp==4)){
+                            $experience = array_push($experience,"Programming and Tech");
+                        }
+                    }
+                }
+            }
+        }
+
         public function retrieveServiceProviders($filter=""){
             require_once('../app/Core/Database.php');
             require_once('../app/models/Rate.php');
+            $sql = "";
+            if($filter==""){
+                $sql = "SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username";
+            }
+            else{
+                $sql =  $this->generateFilterQuery($filter);
+            }
             $db = new Database();
             $rate = new Rate();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username");
+                
+                
+                $stmt = $conn->query($sql);
                 if($providers = $stmt->fetchAll(PDO::FETCH_ASSOC)){
                     foreach($providers as $provider){
                         $key = array_search($provider, $providers);

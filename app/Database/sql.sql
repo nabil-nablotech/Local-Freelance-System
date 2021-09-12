@@ -97,7 +97,7 @@ CREATE TABLE service_provider(
  	experience VARCHAR(60) NOT NULL,
     bank_name VARCHAR(60) NOT NULL,
     account_number VARCHAR(60) NOT NULL,
-    wallet_balance FLOAT NOT NULL,
+    wallet_balance DECIMAL(13,2) NOT NULL,
     summary VARCHAR(1000) NOT NULL,
     profile_photo VARCHAR(255)
 );
@@ -146,7 +146,7 @@ CREATE TABLE service_seeker(
 	username VARCHAR(60) PRIMARY KEY,
     bank_name VARCHAR(60) NOT NULL,
     account_number VARCHAR(60) NOT NULL,
-    wallet_balance FLOAT NOT NULL,
+    wallet_balance DECIMAL(13,2) NOT NULL,
     profile_photo VARCHAR(255)
 );
 
@@ -158,7 +158,7 @@ CREATE TABLE project(
     description VARCHAR(3000) NOT NULL,
     budget_min FLOAT NOT NULL,
     budget_max FLOAT NOT NULL,
-    price FLOAT,
+    price DECIMAL(13,2),
     offer_type VARCHAR(60) NOT NULL,
     status VARCHAR(60) NOT NULL,
     start_date DATETIME,

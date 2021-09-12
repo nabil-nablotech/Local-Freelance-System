@@ -123,7 +123,7 @@
             $serviceSeeker->updateWallet($_SESSION['username'],$projectDetails['price'],'decrease');
             $transaction->insertTransaction("Settle", 'Payment for project ID: '.$projectDetails['project_id'], $projectDetails['price'],$_SESSION['username']);
 
-            $revenue = $projectDetails['price'] * 0.10;
+            $revenue = number_format($projectDetails['price'] * 0.10,2);
             $payment = $projectDetails['price'] - $revenue;
 
             $serviceProvider = $this->model('ServiceProvider');

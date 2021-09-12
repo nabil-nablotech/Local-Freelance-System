@@ -40,8 +40,8 @@ $transactions = $serviceSeekerController->getAllTransactions($_SESSION['username
 				<!--  -->
 				<p>
 					Wallet Balance : <?php echo $seekerDetail['walletbalance']?> ETB
-				</p>
-
+        </p>
+        
 				<?php
 					if(!$serviceSeekerController->checkRequestExists($_SESSION['username'])){
             $amount = $serviceSeekerController->getTransferableAmount($_SESSION['username']);

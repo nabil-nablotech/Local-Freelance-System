@@ -409,7 +409,7 @@
                 $transaction = $this->model('Transaction');
 
                 if($reply['action']==0){
-                    $terminationFee = $projectDetails['price'] * 0.04;
+                    $terminationFee = number_format($projectDetails['price'] * 0.04,2);
                     $serviceSeeker = $this->model('ServiceSeeker');
                     $serviceSeeker->updateWallet($projectDetails['announced_by'],$terminationFee,'decrease');
                     $transaction->insertTransaction("Refund", 'Termination fee of project ID: '.$projectDetails['project_id'], $terminationFee, $projectDetails['announced_by']);
@@ -422,7 +422,7 @@
                     $serviceSeeker->updateWallet($projectDetails['announced_by'],$projectDetails['price'],'decrease');
                     $transaction->insertTransaction("Termination", 'Termination and payment for project ID: '.$projectDetails['project_id'], $projectDetails['price'],$projectDetails['announced_by']);
                     
-                    $revenue = $projectDetails['price'] * 0.10;
+                    $revenue = number_format($projectDetails['price'] * 0.10,2);
                     $payment = $projectDetails['price'] - $revenue;
 
                     $serviceProvider = $this->model('ServiceProvider');
