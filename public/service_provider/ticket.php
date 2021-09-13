@@ -3,10 +3,10 @@ require "includes/service_provider-navigation.php";
 $tickets = $serviceProviderController->getAllTickets($_SESSION['username']);
 ?>
 	<script>
-	document.title = "Service seeker-Transaction history";
+	document.title = "Service provider-List of Ticket";
 	</script>
 	</head>
-	<div class="container " style="margin-top: 100px;">
+	<div class="container-fluid " style="margin-top: 100px;">
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 ">
 				<div class="card shadow-sm mb-4">

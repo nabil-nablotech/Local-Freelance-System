@@ -1,5 +1,5 @@
 
-<footer class="bg-light text-center text-lg-start" style="min-height: 80vh;">
+<footer class="bg-light text-center text-lg-start" style="margin-top:200px" >
   <!-- Copyright -->
   <div class="text-center p-3" style="background-color: #747678;
    color:whitesmoke;font-weight:bolder;" >

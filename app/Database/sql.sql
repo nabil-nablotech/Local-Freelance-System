@@ -1059,3 +1059,22 @@ INSERT INTO skill(skill_name,skill_category) VALUES ('Web Programming','Programm
 INSERT INTO skill(skill_name,skill_category) VALUES ('Desktop Applications','Programming and Tech');
 INSERT INTO skill(skill_name,skill_category) VALUES ('Chatbots','Programming and Tech');
 INSERT INTO skill(skill_name,skill_category) VALUES ('Support and IT','Programming and Tech');
+
+
+
+/*
+select DISTINCT service_provider.username from service_provider INNER JOIN provider_skill 
+ON service_provider.username =  provider_skill.username
+WHERE skill_id in (select skill_id from skill where (skill_category = 'Programming and Tech'));
+
+JUST PLUG
+SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user 
+INNER JOIN service_provider ON user.username = service_provider.username WHERE (service_provider.experience = 'Advanced'); 
+
+select tab.ratee from (select ratee,AVG(score) AS computedrate
+from rate GROUP BY ratee) as tab
+WHERE tab.computedrate<4;
+
+
+
+*/

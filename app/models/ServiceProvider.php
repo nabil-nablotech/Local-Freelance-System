@@ -222,10 +222,7 @@
 
 
                 //category.......
-                if(empty($input['category'])){
-                    return "SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username";
-                }
-                else{
+                if(!empty($input['category'])){
                     $categories = $input['category'];
                     foreach($categories as $cat){
                         $cat = $this->cleanInput($input['category']);
@@ -245,27 +242,154 @@
                 }
 
                 //experience.......
-                if(empty($input['experience'])){
-                    return "SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username";
-                }
-                else{
+                if(!empty($input['experience'])){
                     $experiences = $input['experience'];
                     foreach($experiences as $exp){
                         $exp = $this->cleanInput($input['experience']);
                         if($exp==1){
-                            $experience = array_push($experience,"Graphics and Design");
+                            $experience = array_push($experience,"Advanced");
                         }
                         elseif(($exp==2)){
-                            $experience = array_push($experience,"Writing and Translation");
+                            $experience = array_push($experience,"Medium");
                         }
                         elseif(($exp==3)){
-                            $experience = array_push($experience,"Video and Animation");
-                        }
-                        elseif(($exp==4)){
-                            $experience = array_push($experience,"Programming and Tech");
+                            $experience = array_push($experience,"Beginner");
                         }
                     }
                 }
+
+                //rate.......
+                if(!empty($input['rate'])){
+                    $rates = $input['rate'];
+                    foreach($rates as $ra){
+                        $ra = $this->cleanInput($input['rate']);
+                        if($ra==1){
+                            $rate = array_push($rate,1);
+                        }
+                        elseif(($ra==2)){
+                            $rate = array_push($rate,2);
+                        }
+                        elseif(($ra==3)){
+                            $rate = array_push($rate,3);
+                        }
+                        elseif(($ra==4)){
+                            $rate = array_push($rate,4);
+                        }
+                        elseif(($ra==5)){
+                            $rate = array_push($rate,5);
+                        }
+                    }
+                }
+
+                if($category ==[] && $experience ==[] && $rate ==[]){
+                    return "SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username ";
+                }
+
+                $categoryCondition = "";
+                $categoryOptions = "";
+
+                if($category!=[]){
+                    
+                    for($i=0;$i<count($category);$i++){
+                        if(count($category)==1){
+                            $categoryOptions = "skill_category = '".$category[$i]."'";
+                            break; 
+                        }
+
+                        if($i==0){
+                            $categoryOptions = "skill_category = '".$category[$i]."'";
+                        }
+                        else{
+                            $categoryOptions .= " OR skill_category = '".$category[$i]."'";
+                        }
+                    }
+
+                    if($categoryOptions != ""){
+                        $categoryCondition = <<<EOT
+                                                select DISTINCT service_provider.username from service_provider INNER JOIN provider_skill 
+                                                ON service_provider.username =  provider_skill.username
+                                                WHERE skill_id in (select skill_id from skill where ({$categoryOptions}))
+                                            EOT;
+                    }
+
+                }
+
+                $categoryCondition = "";
+                $categoryOptions = "";
+
+                if($category!=[]){
+                    
+                    for($i=0;$i<count($category);$i++){
+                        if(count($category)==1){
+                            $categoryOptions = "skill_category = '".$category[$i]."'";
+                            break; 
+                        }
+
+                        if($i==0){
+                            $categoryOptions = "skill_category = '".$category[$i]."'";
+                        }
+                        else{
+                            $categoryOptions .= " OR skill_category = '".$category[$i]."'";
+                        }
+                    }
+
+                    if($categoryOptions != ""){
+                        $categoryCondition = <<<EOT
+                                                select DISTINCT service_provider.username from service_provider INNER JOIN provider_skill 
+                                                ON service_provider.username =  provider_skill.username
+                                                WHERE skill_id in (select skill_id from skill where ({$categoryOptions}))
+                                            EOT;
+                    }
+
+                }
+
+                
+                $experienceOptions = "";
+                if($experience!=[]){
+                    
+                    for($i=0;$i<count($experience);$i++){
+                        if(count($experience)==1){
+                            $experienceOptions = "service_provider.experience = '".$experience[$i]."'";
+                            break; 
+                        }
+
+                        if($i==0){
+                            $experienceOptions = "service_provider.experience = '".$experience[$i]."'";
+                        }
+                        else{
+                            $experienceOptions .= " OR service_provider.experience = '".$experience[$i]."'";
+                        }
+                    }
+
+                }
+
+
+                $rateCondition = "";
+
+                if($rate!=[]){
+                    
+                    if(count($rate)==1){
+                        $rateCondition = <<<EOT
+                                                select tab.ratee from (select ratee,AVG(score) AS computedrate
+                                                from rate GROUP BY ratee) as tab
+                                                WHERE tab.computedrate>={$rate[0]}.00 and tab.computedrate<={$rate[0]}.99
+                                            EOT;
+                    }
+                    else{
+                        $min = min($rate);
+                        $max = max($rate);
+                        $rateCondition = <<<EOT
+                                                select tab.ratee from (select ratee,AVG(score) AS computedrate
+                                                from rate GROUP BY ratee) as tab
+                                                WHERE tab.computedrate>={$min}.00 and tab.computedrate<={$max}.99
+                                            EOT;
+                    }
+
+                    
+
+                }
+
+                
             }
         }
 

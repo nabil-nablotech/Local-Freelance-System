@@ -1,234 +1,100 @@
 <?php
+
    require "includes/service_provider-navigation.php";
    $projects = $serviceProviderController->getProjects();
    ?>
-
-<head>
-		<style>
-		body{
-			overflow-x: hidden;
-		}
-		
-		.profile-list-info a:hover{
-			background-color: blue;
-		}
-		
-		.fre-profile-list {
-			margin: 0;
-			padding: 0;
-		}
-		
-      .profile-item :hover {
-			background-color: #f7fafa;
-		}
-
-		.profile-list-wrap {
-			position: relative;
-			padding-bottom: 26px;
-			border-bottom: 1px solid #ededed;
-		}
-		
-		.profile-list-avatar {
-			display: inline-block;
-			width: 60px;
-			height: 60px;
-			position: absolute;
-			left: 0;
-		}
-		
-		.profile-list-avatar img {
-			width: 100%;
-			height: auto;
-			border-radius: 50%;
-		}
+		<script>
+		document.title = "Service provider-Find project";
+		</script>
+<!-- 	     <link rel="stylesheet" href="../assets/css/findproject.css"> 
+ -->
+	</head>
 			
-	
-		
-		img {
-			border: 0;
-		}
-		
-		a,
-		a:focus,
-		a:hover {
-			color: #00b0ff;
-			text-decoration: none!important;
-			outline: none;
-		}
-		
-		.profile-list-title {
+	<style> 
+.profile-list-title {
 			margin: -4px 0 0;
 			font-size: 18px;
 			font-weight: 700;
 			line-height: 1.5em;
+			color:blue !important;;
 		}
-		
-		.profile-list-title a {
-			color: #415161;
+		.profile-item :hover {
+			background-color: #f7fafa;
 		}
-		
-		.profile-list-subtitle {
-			margin: 6px 0 0;
-			font-size: 12px;
-			color: #415161;
-			line-height: 1.3em;
-		}
-		
 
-	
+		.profile-list-info a:hover{background-color:blue}
 		
-		.profile-list-info span {
-			display: inline-block;
-			font-size: 16px;
-			font-weight: 400;
-			color: #415161;
-		
-			line-height: 16px;
-			margin-top: 6px;
-			margin-bottom: 6px;
-		}
-		
-	
-		
-		
-		
-		.profile-list-info span {
-			display: inline-block;
-			font-size: 16px;
-			font-weight: 400;
-			color: #415161;
-			margin-right: 30px;
-			line-height: 16px;
-			margin-top: 6px;
-			margin-bottom: 6px;
-		}
-		
-		.profile-list-info span>b {
-			font-weight: 600;
-		}
-		
-		.profile-list-info span:last-child {
-			font-weight: 600;
-			margin-right: 0;
-			border: none;
-		}
-		
-		.profile-list-desc {
-			margin: 14px 0 0;
-		}
-		
-		.profile-list-desc p {
-			margin: 0;
-			font-size: 16px;
-			color: #415161;
-			line-height: 1.8em;
-			-o-text-overflow: ellipsis;
-			text-overflow: ellipsis;
-			overflow: hidden;
-			white-space: nowrap;
-		}
-		</style>
-		<script>
-		document.title = "Service seeker-Home";
-		</script>
-		<link rel="stylesheet" href="../assets/css/service_seeker/browsestyle.css"> </head>
-	<div class="row" style="margin-top: 100px;">
-		<div class="col-md-12 col-sm-12">
-			<!-- Single Candidate List -->
-			<div class="card-body px-0">
-				<!--  -->
+	ul li{
+		list-style-type: none;
+	}
+	body{
+		background-color: #f5f8fa;
+	}
+
+</style>
 				<!-- Title Header Start -->
-				<section class="inner-header-title" style="background-image:url(../assets/images/back3.jpg);text-align:center;">
-					<h1 style="font-size: xx-large;">Advance Search</h1> </div>
-			</section>
-			<!--  -->
-			<section class="advance-search">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-4 col-sm-12">
-							<div class="full-sidebar-wrap">
-								<div class="show-hide-sidebar hidden-xs hidden-sm">
-									<!-- Search Job -->
-									<div class="sidebar-widgets">
-										<div class="ur-detail-wrap">
-											<h1>Search Filters</h1>
-											<!-- 										<span><button class="btn btn-danger">clear results</button> </span>  
- -->
-											<hr>
-											<div class="ur-detail-wrap-header">
-												<h6>
-                                 <bold>Search By Category</bold>
-                              </h6> </div>
-											<div class="ur-detail-wrap-body">
-												<div class="input-group">
-													<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-													<div class="input-group-append"> <span class="input-group-text"><i class="fa fa-search"></i></span> </div>
-												</div>
-												<ul class="advance-list">
-													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="aw">
-                                    <label for="aw"></label>
-                                    </span> Graphics and Design </li>
-													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="dd">
-                                    <label for="dd"></label>
-                                    </span> Writing and Translation</li>
-													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="er">
-                                    <label for="er"></label>
-                                    </span> Video and Animation </li>
-													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="tr">
-                                    <label for="tr"></label>
-                                    </span> Programming and Tech </li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									<!-- filter by rating -->
-									<div class="sidebar-widgets mt-3">
-										<div class="ur-detail-wrap">
-											<div class="ur-detail-wrap-header">
-												<h6>Filter By Rating</h6> </div>
-											<div class="ur-detail-wrap-body">
-												<ul class="advance-list">
-													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="uy">
-                                    <label for="uy"></label>
-                                    </span> <i class="fa fa-star"></i> </li>
-													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="io">
-                                    <label for="io"></label>
-                                    </span> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </li>
-													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="lo">
-                                    <label for="lo"></label>
-                                    </span> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </li>
-													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="kj">
-                                    <label for="kj"></label>
-                                    </span> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </li>
-													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="kj">
-                                    <label for="kj"></label>
-                                    </span> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa  fa-star">
 
-									 </i> <i class="fa fa-star"></i> </li>
-													<li> <span class="custom-checkbox">
-                                    <input type="checkbox" id="kj">
-                                    <label for="kj"></label>
-                                    </span> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </li>
-												</ul>
-											</div>
-											<button class="btn btn-primary btn-block">filter results</button>
-										</div>
+				<div class="container-fluid " style="background-color: #f5f8fa;" >
+					<div class="row">
+				<div class="col-sm-12 mt-5 " >
+					<div class="col-sm-10 mx-auto " style="margin-top: 50px!important;">
+					<div class="card mb-4"  style="background-color: #e4ecf2;">
+						<div class="card-body">
+					<h1 class="text-center" style="  font-size: calc(100% + 1vw + 1vh);
+">Available  Projects</h1>
+					</div>
+					</div>
+					</div>
+					 <!--  -->
+					<div class="col-sm-10 mx-auto"> 
+	<div class="card shadow-sm mb-4">
+	<div class="card-body">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-4 ">
+		<label style="font-weight: bolder;" class="mx-auto">  Search Project </label>
+
+						<!--  -->	
+						<div class="input-group  mb-3">
+										<input name="project" type="text" class="form-control" required aria-label="Search project" placeholder="Enter project title">
+										<div class="input-group-append"> <button class="btn btn-primary" type="submit" name="search_btn"><i class="fa fa-search"></i></button> </div>
 									</div>
-									<!-- /rating -->
-								</div>
-							</div>
-						</div>
-						<!--Browse Candidates -->
-						<div class="col-sm-8">
+		</div>
+
+		<div class="col-sm-4 mx-auto ">
+					<!--  -->	
+		<label style="font-weight: bolder;" class="mx-auto">  Filter By Category </label>
+
+        <div class="form-group mx-auto">
+            <select class="form-control" name="category">
+                <option value="">Select Category</option>
+                <option value="graphics">Graphics and Design</option>
+                <option value="writing">Writing and Translation</option>
+				<option value="video">Video and Animation</option>
+				<option value="programming">Programing and Tech</option>
+            </select>
+        </div>
+    
+		</div>
+		<div class="col-sm-4 mx-auto">
+			<!--  -->	<label style="font-weight: bolder;"> Filter By Price Range </label>
+	<div class="form-group row  mx-auto" id="price_filter">
+					
+					
+						<div class="col-sm-6 mb-3">
+							<input type="number" class="form-control" min=100 oninput="validity.valid||(value='')" class="form-control" name="minprice" required value = "<?php echo $minBudget;?>"> </div>
+						<div class="col-sm-6 ">
+							<input type="number" class="form-control" min=1000 oninput="validity.valid||(value='')" class="form-control" name="maxprice" required value = "<?php echo $maxBudget;?>"> </div>
+					</div>
+
+			<!--  -->
+		</div>
+	</div>
+</div>
+</div>
+	</div>
+
+						<!--  -->
 							<div class="row">
 								<div class="col-md-12">
 									<!-- Single Candidate List -->
@@ -242,76 +108,75 @@
 														<!--  -->
 														<!--  -->
 														<!--  -->
-														<div class="card mt-0" style="border: none;">
-															<ul class="container">
+			<div class="card mt-0" style="border: none;list-style-type:none;">
+							<ul class="container-fluid">
 															<?php
-                                             if(empty($projects)){
-                                                echo "<h2>No projects found</h2>";
-                                             }
-                                             else{
-															 foreach($projects as $project){
-                                                $myskill = "";
-                                                if(empty($project['skill'])){
-                                                   $myskill = "Not mentioned";
-                                                }
-                                                else{
-                                                   foreach($project['skill'] as $skill){
-                                                      $myskill .= $skill['skill_name']." | ";
-                                                   }
-                                                }
-                                                echo <<<EOT
+
+                                             if (empty($projects)) {
+                                                 echo "<h2>No projects found</h2>";
+                                             } else {
+                                                 foreach ($projects as $project) {
+                                                     $myskill = "";
+                                                     if (empty($project['skill'])) {
+                                                         $myskill = "Not mentioned";
+                                                     } else {
+                                                         foreach ($project['skill'] as $skill) {
+                                                             $myskill .= $skill['skill_name']." | ";
+                                                         }
+                                                     }
+                                                     echo <<<EOT
                                                 <li class="profile-item mb-3">
                                                 <div class="profile-list-wrap pl-4 pt-3">
                                                 <h2 class="profile-list-title">
                                                 {$project['title']}
                                                 </h2>
 
-                                                <p class="profile-list-subtitle mb-3 "><strong>Category: </strong> {$project['category']}  <strong class="ml-4">Required skills: </strong> {$myskill} </p>
+                                                <p class="profile-list-subtitle mb-3 "><strong>Category: </strong> {$project['category']} <strong class='ml-2'> Budget : </strong>{$project['budget_min']}-{$project['budget_max']} birr  <strong class='ml-2'>5 Bids  </strong> <strong class="ml-4">Required skills: </strong> {$myskill} </p>
                                                 
 
                                                 <div>
                                                 <p>{$project['description']}</p>
                                                 </div>
 
-                                                <div class="profile-list-info">
-                                                <div > <a href="http://localhost/seralance/public/serviceprovider/viewproject/{$project['project_id']}" class="d-inline btn-sm  btn btn-primary mr-5">View details</a> <a href="http://localhost/seralance/public/serviceprovider/bid/{$project['project_id']}" class="d-inline  btn-sm  btn btn-primary mr-5">Bid</a> </div>
+                                                <div class="profile-list-info form-group row mx-auto">
+                                                <div  class='mb-2'> <a href="http://localhost/seralance/public/serviceprovider/viewproject/{$project['project_id']}"  class=" btn-sm  btn btn-primary mr-5">View details</a> <a href="http://localhost/seralance/public/serviceprovider/bid/{$project['project_id']}" class=" btn-sm  btn btn-primary ">Bid</a> </div>
                                                 </div>
-                                                <div class="mt-3 mb-4">
-                                                   <p class="profile-list-subtitle  float-left "> <strong>Posted by:</strong> {$project['announced_by']} </p>
-                                                   <p class="profile-list-subtitle float-right mr-4 "> <strong>{$project['announced_date']}</strong> </p>
-                                                </div>
-                                                
+
+                                                <div class=" d-flex justify-content-between mb-1 " <strong>Posted by:</strong> {$project['announced_by']}  <strong class='mr-2'>Date:{$project['announced_date']}</strong> </div>                    
                                                 </div>
                                                 </li>
                                                 EOT;
-																
-                                              }
+                                                 }
                                              }
-																?>
+                                                     ?>
 															</ul>
 														</div>
-														<!--  -->
-														<!--  -->
 													</tbody>
 												</table>
+<div >
+
+<!--  -->
+
+
+<!--  -->
+</div>
 											</div>
-											<!--  -->
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+			</section>
 		</div>
 	</div>
-	</section>
+	</div>
 
-		<script >
-		$(document).ready(function() {
-			$("#table").DataTable();
-		});
-		</script>
+
+	<?php
+		require "includes/service_seeker-footer.php";
+   ?>
+
 		</body>
 
 		</html>

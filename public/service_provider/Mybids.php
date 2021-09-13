@@ -3,12 +3,12 @@ require "includes/service_provider-navigation.php";
 $bids = $serviceProviderController->getAllBids($_SESSION['username']);
 ?>
   <script>
-    document.title="Admin-list of bids";
+    document.title="Service Provvider-list of bids";
 </script>
 
 
  <!-- Container Fluid-->
- <div class="container-fluid" id="container-wrapper">
+ <div class="container-fluid" id="container-wrapper"  style="margin-top:100px;">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">My bids </h1>
             <ol class="breadcrumb">

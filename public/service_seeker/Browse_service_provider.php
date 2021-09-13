@@ -158,7 +158,7 @@
 					<h1 style="font-size: xx-large;">Browse Service  provider </h1> </div>
 			</section>
 			<!--  -->
-			<section class="advance-search">
+			<section class="advance-search" >
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-4 col-sm-12">
@@ -178,7 +178,7 @@
                               </h6> 
 							  		<form method="POST">		
 									<div class="input-group mt-3 mb-3">
-										<input name="serviceprovider" type="text" class="form-control" aria-label="Search service provider" placeholder="Enter service provider's username">
+										<input name="serviceprovider" type="text" class="form-control" required aria-label="Search service provider" placeholder="Enter service provider's username">
 										<div class="input-group-append"> <button class="btn btn-primary" type="submit" name="search_btn"><i class="fa fa-search"></i></button> </div>
 									</div>
 									</form>
@@ -308,6 +308,7 @@
 																					
 																					<div class="profile-list-info">
 																						<div class="profile-list-detail"> 
+																						<span><strong><i class="fas fa-map-marker-alt"></i> </strong>{$serviceProvider['country']} , {$serviceProvider['city']} , {$serviceProvider['address']} </span>
 																						<span class="profile-list-subtitle">
 																						{$myskill}</span>
 																						<span><strong>Education: </strong>{$serviceProvider['education']}</span>
@@ -323,7 +324,7 @@
 																							
 																						</div>
 																						<div>
-																						<p>{$serviceProvider['summary']}</p>
+																						<p class="mt-2">{$serviceProvider['summary']}</p>
 
 																						<div class="d-flex justify-content-start mb-2"> <a href=
 																					"http://localhost/seralance/public/serviceseeker/hire/{$serviceProvider['username']}" 

@@ -3,7 +3,7 @@ require "includes/service_provider-navigation.php";
 $transactions = $serviceProviderController->getAllTransactions($_SESSION['username']);
 ?>
   <script>
-    document.title="Admin-list of bids";
+    document.title="Service Provider-list of transactions";
 </script>
 <style>
 	.credit{
@@ -13,11 +13,13 @@ $transactions = $serviceProviderController->getAllTransactions($_SESSION['userna
 	.debit{
 		background-color: rgba(250, 71, 71,0.2) !important;
 	}
+
+ 
 </style>
 
 
  <!-- Container Fluid-->
- <div class="container-fluid" id="container-wrapper">
+ <div class="container-fluid" id="container-wrapper" style="margin-top:100px;">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Transactions </h1>
             <ol class="breadcrumb">
@@ -30,7 +32,7 @@ $transactions = $serviceProviderController->getAllTransactions($_SESSION['userna
           </div>
           <div class="row">
             <!-- Alerts Basic -->
-            <div class="col-lg-12">
+            <div class="col-lg-12 mx-auto">
               <div class="card shadow-sm mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary mx-auto">Transactions</h6>
@@ -39,7 +41,7 @@ $transactions = $serviceProviderController->getAllTransactions($_SESSION['userna
 <!--  -->
 				<!--  -->
 				<p>
-					Wallet Balance : <?php echo $providerDetail['walletbalance']?> ETB
+				Wallet Balance : <?php echo $providerDetail['walletbalance']?> ETB
 				</p>
 
 				<?php

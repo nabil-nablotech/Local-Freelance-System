@@ -32,6 +32,24 @@
 		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 		<style>
+
+.navbar-collapse {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+.navbar-light .navbar-toggler {
+    color: whitesmoke;
+    border-color:  #f8f9fa;
+    font-weight: bolder;
+
+}
 		ul .dropdown-menu-center a li:hover{
 
 		background-color: #f0f5f4!important;
@@ -91,7 +109,7 @@
 
 		.nav-profile{
 			 width: 40px;
-			 height: 40px;
+			 height: 25px;
 			 border-radius: 50%;
 		 }
 
@@ -99,11 +117,18 @@
 			color: red;
 			font-size: 10px;
      	}
+
+		 .navbar-light .navbar-nav .nav-link {
+			color: whitesmoke!important;
+			text-decoration: none;
+			background-color: transparent;
+		}
 		</style>
 	</head>
 
-	<body>
-		<nav class="navbar navbar-expand-sm bg-dark navbar-light fixed-top" style="background-color:whitesmoke!important;">
+	<body style="background-color: #f5f8fa">
+		<nav class="navbar navbar-expand-sm  navbar-light fixed-top"  style="background-color:#034efc
+           !important;">
 			<a class="navbar-brand" href="#"><img src="<?php echo $base;?>public/assets/images/seralance-logo.png"></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"> <span class="navbar-toggler-icon " style="color: black!important;"></span> </button>
 			<div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
@@ -131,7 +156,7 @@
 					<li class="nav-item dropdown mr-4 " style="list-style-type: none;">
 						<a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" 
             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-            <i class="fa  fa-x fa-tasks" aria-hidden="true">  </i> </a> <span>My project</span>
+            <i class="fa  fa-x fa-tasks" aria-hidden="true" style="color:whitesmoke;font-weight:bolder" >  </i> </a> <span style="color:whitesmoke;font-weight:bolder" >My project</span>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown"
              style="background-color:#CCE5FF"> <a class="dropdown-item" 
              href="<?php echo $base;?>public/serviceprovider/completedprojects">Completed projects</a> 
@@ -142,7 +167,7 @@
                  <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/announcedprojects">Announced Projects</a> </div>
 					</li>
 					<li class="nav-item mr-4 ">
-						<a class="nav-link" href="<?php echo $base;?>public/serviceprovider/message"> <i class="fa  fa-envelope" aria-hidden="true"></i> </a> <span>Message</span> </li>
+						<a class="nav-link" href="<?php echo $base;?>public/serviceprovider/message"> <i class="fa  fa-envelope" aria-hidden="true"></i> </a> <span style="color:whitesmoke;font-weight:bolder" >Message</span> </li>
 						<li class="nav-item dropdown mr-4 " style="list-style-type: none;">
 							<a class="nav-link   dropdown-toggle" href="#" id="notification" 
 							role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
@@ -150,7 +175,7 @@
 							<span id="badge" class="badge badge-danger   badge-counter count" style="top:0px; 
 							right:50px; position:absolute;border-radius:100%"></i>
 										</span> </a> 
-										<span>Notification</span>
+										<span style="color:whitesmoke;font-weight:bolder" >Notification</span>
 								
 							<ul class="dropdown-menu   dropdown-menu-center text-primary "
 							id="notify" style="overflow-y:auto;height: 450px;width:380px;">
@@ -158,12 +183,12 @@
 	
 					</li>
 					<!--  -->
-					<form class="form-inline my-2   my-lg-0 mr-5 ">
-						<li class="nav-item dropdown" style="list-style-type: none;">
-							<a class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="http://localhost/seralance/<?php echo $providerDetail['profilephoto'];?>" alt="profile-img" class="nav-profile"> </a> <span><?php echo $providerDetail['username'];?></span>
-							<ul class="dropdown-menu  dropleft " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="profile">My profile</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/dispute">Dispute</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/ticket"> Ticket</a> <a class="dropdown-item" href="faq.php">FAQ</a> <a class="dropdown-item" href="policy.php">Policy</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/changepassword">Password</a> <a class="dropdown-item" href="<?php echo $base;?>/public/serviceprovider/logout">Logout</a> </ul>
+				
+						<li class="nav-item dropdown mr-3" style="list-style-type: none;">
+							<a class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="http://localhost/seralance/<?php echo $providerDetail['profilephoto'];?>" alt="profile-img" class="nav-profile"> </a> <span style="color:whitesmoke;font-weight:bolder" ><?php echo $providerDetail['username'];?></span>
+							<ul class="dropdown-menu  " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="profile">My profile</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/dispute">Dispute</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/ticket"> Ticket</a>  <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/changepassword">Password</a> <a class="dropdown-item" href="<?php echo $base;?>/public/serviceprovider/logout">Logout</a> </ul>
 						</li>
-					</form>
+				
 				</ul>
 			</div>
 		</nav>

@@ -20,16 +20,16 @@
 	<head>
 
 		<script>
-		document.title = "Service seeker-Announced projects";
+		document.title = "Service seeker-Offered projects";
 		</script>
 	</head>
-	<div class="container " style="margin-top: 100px;">
+	<div class="container-fluid " style="margin-top: 100px;">
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 ">
 				<div class="card shadow-sm mb-4">
 					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 						<h6 class="m-0 font-weight-bold text-primary mx-auto">Offered Project</h6> </div>
-					<div class="card-body mx-auto">
+					<div class="card-body ">
 						<!-- claim fund -->
 						<!--  -->
 						<div class="table table-responsive mt-5">

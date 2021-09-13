@@ -6,9 +6,9 @@ $disputes = $serviceProviderController->getAllDisputes($_SESSION['username']);
 	document.title = "Service seeker-Transaction history";
 	</script>
 	</head>
-	<div class="container " style="margin-top: 100px;">
+	<div class="container-fluid " style="margin-top: 100px;">
 		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12 ">
+			<div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
 				<div class="card shadow-sm mb-4">
 					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 						<h6 class="m-0 font-weight-bold text-primary mx-auto">List of Disputes</h6> </div>
