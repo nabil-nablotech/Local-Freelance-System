@@ -1,8 +1,15 @@
 <?php
 
    require "includes/service_provider-navigation.php";
-   $projects = $serviceProviderController->getProjects();
-   ?>
+   if($_SERVER["REQUEST_METHOD"] === "POST"){
+		$projects = $serviceProviderController->getProjects($_POST);
+   }
+   else{
+		$projects = $serviceProviderController->getProjects();
+   }
+
+   
+?>
 		<script>
 		document.title = "Service provider-Find project";
 		</script>
@@ -50,15 +57,15 @@
 	<div class="card shadow-sm mb-4">
 	<div class="card-body">
 <div class="container-fluid">
+	<form method="POST">
 	<div class="row">
 		<div class="col-sm-4 ">
-		<label style="font-weight: bolder;" class="mx-auto">  Search Project </label>
+		<label style="font-weight: bolder;" class="mx-auto"> Search Project </label>
 
 						<!--  -->	
 						<div class="input-group  mb-3">
-										<input name="project" type="text" class="form-control" required aria-label="Search project" placeholder="Enter project title">
-										<div class="input-group-append"> <button class="btn btn-primary" type="submit" name="search_btn"><i class="fa fa-search"></i></button> </div>
-									</div>
+										<input name="title" type="text" class="form-control" aria-label="Search project" placeholder="Enter project title">
+						</div>
 		</div>
 
 		<div class="col-sm-4 mx-auto ">
@@ -68,28 +75,32 @@
         <div class="form-group mx-auto">
             <select class="form-control" name="category">
                 <option value="">Select Category</option>
-                <option value="graphics">Graphics and Design</option>
-                <option value="writing">Writing and Translation</option>
-				<option value="video">Video and Animation</option>
-				<option value="programming">Programing and Tech</option>
+                <option value="Graphics and Design">Graphics and Design</option>
+                <option value="Writing and Translation">Writing and Translation</option>
+				<option value="Video and Animation">Video and Animation</option>
+				<option value="Programming and Tech">Programing and Tech</option>
             </select>
         </div>
     
 		</div>
 		<div class="col-sm-4 mx-auto">
-			<!--  -->	<label style="font-weight: bolder;"> Filter By Price Range </label>
+			<!--  -->	<label class="ml-3" style="font-weight: bolder;"> Filter By Budget Range </label>
 	<div class="form-group row  mx-auto" id="price_filter">
 					
 					
 						<div class="col-sm-6 mb-3">
-							<input type="number" class="form-control" min=100 oninput="validity.valid||(value='')" class="form-control" name="minprice" required value = "<?php echo $minBudget;?>"> </div>
+							<input type="number" class="form-control" min="0"  class="form-control" name="minbudget" placeholder="Minimum"> </div>
 						<div class="col-sm-6 ">
-							<input type="number" class="form-control" min=1000 oninput="validity.valid||(value='')" class="form-control" name="maxprice" required value = "<?php echo $maxBudget;?>"> </div>
+							<input type="number" class="form-control" min="0"  class="form-control" name="maxbudget" placeholder="Maximum"> </div>
 					</div>
 
 			<!--  -->
 		</div>
 	</div>
+	<div class="row">
+		<button type="submit" name="filter_btn" class="btn btn-primary ml-3">Filter results</button>
+	</div>
+	</form>
 </div>
 </div>
 	</div>
@@ -126,12 +137,12 @@
                                                      }
                                                      echo <<<EOT
                                                 <li class="profile-item mb-3">
-                                                <div class="profile-list-wrap pl-4 pt-3">
+                                                <div class="profile-list-wrap pl-4 pt-3" style="border:1px solid blue; border-radius:15px;">
                                                 <h2 class="profile-list-title">
                                                 {$project['title']}
                                                 </h2>
 
-                                                <p class="profile-list-subtitle mb-3 "><strong>Category: </strong> {$project['category']} <strong class='ml-2'> Budget : </strong>{$project['budget_min']}-{$project['budget_max']} birr  <strong class='ml-2'>5 Bids  </strong> <strong class="ml-4">Required skills: </strong> {$myskill} </p>
+                                                <p class="profile-list-subtitle mb-3 "><strong>Category: </strong> {$project['category']} <strong class='ml-2'> Budget : </strong>{$project['budget_min']}-{$project['budget_max']} birr  <strong class="ml-4">Required skills: </strong> {$myskill} </p>
                                                 
 
                                                 <div>

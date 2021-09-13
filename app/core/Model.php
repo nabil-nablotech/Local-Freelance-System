@@ -5,10 +5,16 @@
     class Model{
 
         protected function cleanInput($data){
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;                    
+            if(is_string($data)){
+                $data = trim($data);
+                $data = stripslashes($data);
+                $data = htmlspecialchars($data);
+                return $data;
+            }
+            else{
+                return $data;
+            }
+                                
         }
 
         protected function insert($table,$data){

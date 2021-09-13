@@ -167,13 +167,70 @@
             }
         }
 
+        public function generateFilterQuery($input){
 
+            if(isset($input['filter_btn'])){
+                
+                
+                if(empty($input['title']) && empty($input['category']) && empty($input['minbudget']) && empty($input['maxbudget'])){
+                    return "SELECT * FROM project WHERE offer_type='Announcement' and status='Pending' and assigned_to IS NULL AND project_id NOT IN (select project_id FROM bid WHERE made_by = '".$_SESSION['username']."' )";
+                }
+
+                
+
+                $query="SELECT * FROM project WHERE offer_type='Announcement' and status='Pending' and assigned_to IS NULL AND project_id NOT IN (select project_id FROM bid WHERE made_by = '".$_SESSION['username']."' )";
+                $condition="";
+
+                if(!empty($input['title'])){
+                    $cleanData = $this->cleanInput($input['title']);
+                    $cleanData = strtolower($cleanData);
+                    $condition = " AND LOWER(title) LIKE '%".$cleanData."%'";
+                }
+
+                if(!empty($input['category'])){
+                    $cleanData = $this->cleanInput($input['category']);      
+
+                    if($cleanData=='Graphics and Design' || $cleanData=='Writing and Translation' || $cleanData=='Video and Animation' || $cleanData=='Programming and Tech'){
+                      $condition .= " AND category = '".$cleanData."'";                        
+                    }
+                }
+
+                if(!empty($input['minbudget'])){
+                    $cleanData = $this->cleanInput($input['minbudget']);
+                    $condition .= " AND budget_min >= ".$cleanData;                    
+                }
+
+                if(!empty($input['maxbudget'])){
+                    $cleanData = $this->cleanInput($input['maxbudget']);
+                    $condition .= " AND budget_min <= ".$cleanData;                    
+                }
+
+                /* echo "<h1>Hi there I am testing the application</h1>";
+                echo "<h1>Hi there I am testing the application</h1>";
+                echo "<h1>Hi there I am testing the application</h1>";
+                echo "<h1>Hi there I am testing the application</h1>";
+                echo "<p>".$query." ".$condition."</p>";
+                exit();  */
+
+                return $query . $condition;
+                
+            }
+        }
+        
         public function retrieveProjects($filter=""){
             require_once('../app/Core/Database.php');
+            $sql = "";
+            if($filter==""){
+                $sql = "SELECT * FROM project WHERE offer_type='Announcement' and status='Pending' and assigned_to IS NULL AND project_id NOT IN (select project_id FROM bid WHERE made_by = '".$_SESSION['username']."' )";
+            }
+            else{
+                $sql =  $this->generateFilterQuery($filter);
+            }
+
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("SELECT * FROM project WHERE offer_type='Announcement' and status='Pending' and assigned_to IS NULL AND project_id NOT IN (select project_id FROM bid WHERE made_by = '".$_SESSION['username']."' )");
+                $stmt = $conn->query($sql);
                 if($projects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
                     foreach($projects as $project){
                         $key = array_search($project, $projects);

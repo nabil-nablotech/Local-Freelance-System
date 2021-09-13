@@ -220,23 +220,23 @@
             if(isset($input['filter_btn'])){
                 $category = $experience = $rate = [];
 
-
+                
                 //category.......
                 if(!empty($input['category'])){
                     $categories = $input['category'];
                     foreach($categories as $cat){
-                        $cat = $this->cleanInput($input['category']);
+                        $cat = $this->cleanInput($cat);
                         if($cat==1){
-                            $category = array_push($category,"Graphics and Design");
+                            $category = array_merge($category,array("Graphics and Design"));
                         }
                         elseif(($cat==2)){
-                            $category = array_push($category,"Writing and Translation");
+                            $category = array_merge($category,array("Writing and Translation"));
                         }
                         elseif(($cat==3)){
-                            $category = array_push($category,"Video and Animation");
+                            $category = array_merge($category,array("Video and Animation"));
                         }
                         elseif(($cat==4)){
-                            $category = array_push($category,"Programming and Tech");
+                            $category = array_merge($category,array("Programming and Tech"));
                         }
                     }
                 }
@@ -245,15 +245,15 @@
                 if(!empty($input['experience'])){
                     $experiences = $input['experience'];
                     foreach($experiences as $exp){
-                        $exp = $this->cleanInput($input['experience']);
+                        $exp = $this->cleanInput($exp);
                         if($exp==1){
-                            $experience = array_push($experience,"Advanced");
+                            $experience = array_merge($experience,array("Advanced"));
                         }
                         elseif(($exp==2)){
-                            $experience = array_push($experience,"Medium");
+                            $experience = array_merge($experience,array("Medium"));
                         }
                         elseif(($exp==3)){
-                            $experience = array_push($experience,"Beginner");
+                            $experience = array_merge($experience,array("Beginner"));
                         }
                     }
                 }
@@ -262,25 +262,25 @@
                 if(!empty($input['rate'])){
                     $rates = $input['rate'];
                     foreach($rates as $ra){
-                        $ra = $this->cleanInput($input['rate']);
+                        $ra = $this->cleanInput($ra);
                         if($ra==1){
-                            $rate = array_push($rate,1);
+                            $rate = array_merge($rate,array(1));
                         }
                         elseif(($ra==2)){
-                            $rate = array_push($rate,2);
+                            $rate = array_merge($rate,array(2));
                         }
                         elseif(($ra==3)){
-                            $rate = array_push($rate,3);
+                            $rate = array_merge($rate,array(3));
                         }
                         elseif(($ra==4)){
-                            $rate = array_push($rate,4);
+                            $rate = array_merge($rate,array(4));
                         }
                         elseif(($ra==5)){
-                            $rate = array_push($rate,5);
+                            $rate = array_merge($rate,array(5));
                         }
                     }
                 }
-
+                
                 if($category ==[] && $experience ==[] && $rate ==[]){
                     return "SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username ";
                 }
@@ -306,38 +306,9 @@
 
                     if($categoryOptions != ""){
                         $categoryCondition = <<<EOT
-                                                select DISTINCT service_provider.username from service_provider INNER JOIN provider_skill 
+                                                (select DISTINCT service_provider.username from service_provider INNER JOIN provider_skill 
                                                 ON service_provider.username =  provider_skill.username
-                                                WHERE skill_id in (select skill_id from skill where ({$categoryOptions}))
-                                            EOT;
-                    }
-
-                }
-
-                $categoryCondition = "";
-                $categoryOptions = "";
-
-                if($category!=[]){
-                    
-                    for($i=0;$i<count($category);$i++){
-                        if(count($category)==1){
-                            $categoryOptions = "skill_category = '".$category[$i]."'";
-                            break; 
-                        }
-
-                        if($i==0){
-                            $categoryOptions = "skill_category = '".$category[$i]."'";
-                        }
-                        else{
-                            $categoryOptions .= " OR skill_category = '".$category[$i]."'";
-                        }
-                    }
-
-                    if($categoryOptions != ""){
-                        $categoryCondition = <<<EOT
-                                                select DISTINCT service_provider.username from service_provider INNER JOIN provider_skill 
-                                                ON service_provider.username =  provider_skill.username
-                                                WHERE skill_id in (select skill_id from skill where ({$categoryOptions}))
+                                                WHERE skill_id in (select skill_id from skill where ({$categoryOptions})))
                                             EOT;
                     }
 
@@ -349,12 +320,15 @@
                     
                     for($i=0;$i<count($experience);$i++){
                         if(count($experience)==1){
-                            $experienceOptions = "service_provider.experience = '".$experience[$i]."'";
+                            $experienceOptions = "(service_provider.experience = '".$experience[$i]."')";
                             break; 
                         }
 
                         if($i==0){
-                            $experienceOptions = "service_provider.experience = '".$experience[$i]."'";
+                            $experienceOptions = "(service_provider.experience = '".$experience[$i]."'";
+                        }
+                        elseif($i == (count($experience)-1)){
+                            $experienceOptions .= " OR service_provider.experience = '".$experience[$i]."')";
                         }
                         else{
                             $experienceOptions .= " OR service_provider.experience = '".$experience[$i]."'";
@@ -370,25 +344,55 @@
                     
                     if(count($rate)==1){
                         $rateCondition = <<<EOT
-                                                select tab.ratee from (select ratee,AVG(score) AS computedrate
+                                                (select tab.ratee from (select ratee,AVG(score) AS computedrate
                                                 from rate GROUP BY ratee) as tab
-                                                WHERE tab.computedrate>={$rate[0]}.00 and tab.computedrate<={$rate[0]}.99
+                                                WHERE tab.computedrate>={$rate[0]}.00 and tab.computedrate<={$rate[0]}.99)
                                             EOT;
                     }
                     else{
                         $min = min($rate);
                         $max = max($rate);
                         $rateCondition = <<<EOT
-                                                select tab.ratee from (select ratee,AVG(score) AS computedrate
+                                                (select tab.ratee from (select ratee,AVG(score) AS computedrate
                                                 from rate GROUP BY ratee) as tab
-                                                WHERE tab.computedrate>={$min}.00 and tab.computedrate<={$max}.99
+                                                WHERE tab.computedrate>={$min}.00 and tab.computedrate<={$max}.99)
                                             EOT;
                     }
-
-                    
-
                 }
 
+                    $query="SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username ";
+                    $condition="";
+
+                    if($categoryCondition != ""){
+                        $condition = " WHERE user.username in ".$categoryCondition;
+                    }
+
+                    if($experienceOptions != ""){
+                        if($condition==""){
+                            $condition = " WHERE ".$experienceOptions;
+                        }
+                        else{
+                            $condition .= " AND ".$experienceOptions;
+                        }
+                    }
+
+                    if($rateCondition != ""){
+                        if($condition==""){
+                            $condition = " WHERE user.username in ".$rateCondition;
+                        }
+                        else{
+                            $condition .= " AND user.username in ".$rateCondition;
+                        }
+                    }
+
+                   /*  echo "<h1>Hi there I am testing the application</h1>";
+                echo "<h1>Hi there I am testing the application</h1>";
+                echo "<h1>Hi there I am testing the application</h1>";
+                echo "<h1>Hi there I am testing the application</h1>";
+                echo "<p>".$query." ".$condition."</p>";
+                exit(); */
+
+                return $query . $condition;
                 
             }
         }
@@ -406,8 +410,7 @@
             $db = new Database();
             $rate = new Rate();
             $conn = $db->setConnection();
-            if($conn !== null){
-                
+            if($conn !== null){                
                 
                 $stmt = $conn->query($sql);
                 if($providers = $stmt->fetchAll(PDO::FETCH_ASSOC)){
