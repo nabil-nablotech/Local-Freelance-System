@@ -164,7 +164,7 @@
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,role,user_management, project_management, notification_management, transcation, dispute_management, ticket_management FROM user INNER JOIN admin ON user.username = admin.username INNER JOIN permission ON user.username = permission.username");
+                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,role,user_management, project_management, notification_management, transcation, dispute_management, ticket_management FROM user INNER JOIN admin ON user.username = admin.username INNER JOIN permission ON user.username = permission.username ORDER BY join_date DESC");
                 if($admins = $stmt->fetchAll(PDO::FETCH_ASSOC)){
                     foreach($admins as $admin){
                         $key = array_search($admin, $admins);

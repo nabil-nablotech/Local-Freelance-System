@@ -259,7 +259,7 @@
                                 <div class="form-group row">
 									<label for="colFormLabelSm " class=" col-form-label col-form-label-sm">Summary</label>
                                         <div class="col-sm-7">
-                                            <textarea class="multisteps-form__textarea form-control" rows="5" cols="45" placeholder="Summary" name="summary"> <?php echo $providerDetail['summary'];?> </textarea>
+                                            <textarea class="multisteps-form__textarea form-control ml-5" rows="5" cols="45" placeholder="Summary" name="summary"> <?php echo $providerDetail['summary'];?> </textarea>
                                         </div>
 								</div>
 							</div>

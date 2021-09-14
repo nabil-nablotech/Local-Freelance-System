@@ -419,7 +419,7 @@
             require_once('../app/models/Rate.php');
             $sql = "";
             if($filter==""){
-                $sql = "SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username";
+                $sql = "SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,education,experience,bank_name,account_number,wallet_balance,summary,profile_photo FROM user INNER JOIN service_provider ON user.username = service_provider.username ORDER BY join_date DESC";
             }
             else{
                 $sql =  $this->generateFilterQuery($filter);

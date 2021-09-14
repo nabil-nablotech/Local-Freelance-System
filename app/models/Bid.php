@@ -103,6 +103,22 @@
             }
         }
 
+        public function totalBids($projectId){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            if($conn !== null){
+                $sql = "SELECT count(*) as total_bids FROM bid WHERE project_id='".$projectId."'";
+                $stmt = $conn->query($sql);
+                if($totalBids = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    return $totalBids;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
         public function deleteBid($bidId){
                 
             $condition = "";              

@@ -100,7 +100,7 @@
             if($conn !== null){
                 $sql = "";
                 if($_SESSION['usertype']==='serviceseeker' || $_SESSION['usertype']==='serviceprovider'){
-                    $sql = "SELECT * FROM dispute where raised_by='".$username."'";
+                    $sql = "SELECT * FROM dispute where raised_by='".$username."' ORDER BY dispute_date DESC";
                 }
                 $stmt = $conn->query($sql);
                 if($disputes = $stmt->fetchAll(PDO::FETCH_ASSOC)){
@@ -119,7 +119,7 @@
             if($conn !== null){
                 $sql = "";
                 if($_SESSION['usertype']==='admin'){
-                    $sql = "SELECT * FROM dispute where status='open'";
+                    $sql = "SELECT * FROM dispute where status='open' ORDER BY dispute_date DESC";
                 }
                 $stmt = $conn->query($sql);
                 if($disputes = $stmt->fetchAll(PDO::FETCH_ASSOC)){
@@ -138,7 +138,7 @@
             if($conn !== null){
                 $sql = "";
                 if($_SESSION['usertype']==='admin'){
-                    $sql = "SELECT * FROM dispute where status='closed'";
+                    $sql = "SELECT * FROM dispute where status='closed' ORDER BY dispute_date DESC";
                 }
                 $stmt = $conn->query($sql);
                 if($disputes = $stmt->fetchAll(PDO::FETCH_ASSOC)){

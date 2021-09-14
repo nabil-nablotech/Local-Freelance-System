@@ -173,12 +173,12 @@
                 
                 
                 if(empty($input['title']) && empty($input['category']) && empty($input['minbudget']) && empty($input['maxbudget'])){
-                    return "SELECT * FROM project WHERE offer_type='Announcement' and status='Pending' and assigned_to IS NULL AND project_id NOT IN (select project_id FROM bid WHERE made_by = '".$_SESSION['username']."' )";
+                    return "SELECT * FROM project WHERE offer_type='Announcement' and status='Pending' and assigned_to IS NULL AND project_id NOT IN (select project_id FROM bid WHERE made_by = '".$_SESSION['username']."' ) ORDER BY announced_date DESC";
                 }
 
                 
 
-                $query="SELECT * FROM project WHERE offer_type='Announcement' and status='Pending' and assigned_to IS NULL AND project_id NOT IN (select project_id FROM bid WHERE made_by = '".$_SESSION['username']."' )";
+                $query="SELECT * FROM project WHERE offer_type='Announcement' and status='Pending' and assigned_to IS NULL AND project_id NOT IN (select project_id FROM bid WHERE made_by = '".$_SESSION['username']."' ) ORDER BY announced_date DESC";
                 $condition="";
 
                 if(!empty($input['title'])){
@@ -221,7 +221,7 @@
             require_once('../app/Core/Database.php');
             $sql = "";
             if($filter==""){
-                $sql = "SELECT * FROM project WHERE offer_type='Announcement' and status='Pending' and assigned_to IS NULL AND project_id NOT IN (select project_id FROM bid WHERE made_by = '".$_SESSION['username']."' )";
+                $sql = "SELECT * FROM project WHERE offer_type='Announcement' and status='Pending' and assigned_to IS NULL AND project_id NOT IN (select project_id FROM bid WHERE made_by = '".$_SESSION['username']."' ) ORDER BY announced_date DESC";
             }
             else{
                 $sql =  $this->generateFilterQuery($filter);
@@ -232,9 +232,12 @@
             if($conn !== null){
                 $stmt = $conn->query($sql);
                 if($projects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    require_once('../app/models/Bid.php');
+                    $bid = new Bid();
                     foreach($projects as $project){
                         $key = array_search($project, $projects);
                         $projects[$key] = array_merge($projects[$key], array('skill'=>$this->retrieveSkills($project['project_id']))) ; 
+                        $projects[$key] = array_merge($projects[$key], array('totalbids'=>$bid->totalBids($project['project_id'])['total_bids'])) ; 
                     }
                     return $projects;
                 }
@@ -345,11 +348,11 @@
                 $sql = "";
                 
                 if($_SESSION['usertype']==='serviceseeker'){
-                    $sql = "SELECT * FROM project where (status='Pending' OR status='Pending Deposit') AND offer_type ='Announcement' and announced_by='" . $username . "'";
+                    $sql = "SELECT * FROM project where (status='Pending' OR status='Pending Deposit') AND offer_type ='Announcement' and announced_by='" . $username . "' ORDER BY announced_date DESC";
                 }
 
                 elseif($_SESSION['usertype']==='serviceprovider'){
-                    $sql = "SELECT * FROM project where (status='Cancelled' OR status='Pending Deposit') AND offer_type ='Announcement' and assigned_to='" . $username . "'";
+                    $sql = "SELECT * FROM project where (status='Cancelled' OR status='Pending Deposit') AND offer_type ='Announcement' and assigned_to='" . $username . "' ORDER BY announced_date DESC";
                 }
 
                 elseif($_SESSION['usertype']==='admin'){
@@ -374,11 +377,11 @@
                 $sql = "";
                 
                 if($_SESSION['usertype']==='serviceseeker'){
-                    $sql = "SELECT * FROM project where offer_type ='Offer' AND (status='Pending' OR status='Pending Deposit' OR status='Cancelled') and announced_by='" . $username . "'";
+                    $sql = "SELECT * FROM project where offer_type ='Offer' AND (status='Pending' OR status='Pending Deposit' OR status='Cancelled') and announced_by='" . $username . "' ORDER BY announced_date DESC";
                 }
                 
                 elseif($_SESSION['usertype']==='serviceprovider'){
-                    $sql = "SELECT * FROM project where (status='Pending' OR status='Pending Deposit' OR status='Cancelled') AND offer_type ='Offer' and assigned_to='" . $username . "'";
+                    $sql = "SELECT * FROM project where (status='Pending' OR status='Pending Deposit' OR status='Cancelled') AND offer_type ='Offer' and assigned_to='" . $username . "' ORDER BY announced_date DESC";
                 }
 
                 elseif($_SESSION['usertype']==='admin'){
@@ -403,15 +406,15 @@
                 $sql = "";
                 
                 if($_SESSION['usertype']==='serviceseeker'){
-                    $sql = "SELECT * FROM project where (status='Ongoing' OR status='Submitted') and announced_by='" . $username . "'";
+                    $sql = "SELECT * FROM project where (status='Ongoing' OR status='Submitted') and announced_by='" . $username . "' ORDER BY start_date DESC";
                 }
                 
                 elseif($_SESSION['usertype']==='serviceprovider'){
-                    $sql = "SELECT * FROM project where (status='Ongoing' OR status='Submitted') and assigned_to='" . $username . "'";
+                    $sql = "SELECT * FROM project where (status='Ongoing' OR status='Submitted') and assigned_to='" . $username . "' ORDER BY start_date DESC";
                 }
 
                 elseif($_SESSION['usertype']==='admin'){
-                    $sql = "SELECT * FROM project where (status='Ongoing' OR status='Submitted')";
+                    $sql = "SELECT * FROM project where (status='Ongoing' OR status='Submitted') ORDER BY start_date DESC";
                 }                
 
                 $stmt = $conn->query($sql);
@@ -432,15 +435,15 @@
                 $sql = "";
                 
                 if($_SESSION['usertype']==='serviceseeker'){
-                    $sql = "SELECT * FROM project where status='Terminated' and announced_by='" . $username . "'";
+                    $sql = "SELECT * FROM project where status='Terminated' and announced_by='" . $username . "' ORDER BY end_date DESC";
                 }
                 
                 elseif($_SESSION['usertype']==='serviceprovider'){
-                    $sql = "SELECT * FROM project where status='Terminated' and assigned_to='" . $username . "'";
+                    $sql = "SELECT * FROM project where status='Terminated' and assigned_to='" . $username . "' ORDER BY end_date DESC";
                 }
 
                 elseif($_SESSION['usertype']==='admin'){
-                    $sql = "SELECT * FROM project where status='Terminated'";
+                    $sql = "SELECT * FROM project where status='Terminated' ORDER BY end_date DESC";
                 }                
 
                 $stmt = $conn->query($sql);
@@ -461,15 +464,15 @@
                 $sql = "";
                 
                 if($_SESSION['usertype']==='serviceseeker'){
-                    $sql = "SELECT * FROM project where status='Completed' and announced_by='" . $username . "'";
+                    $sql = "SELECT * FROM project where status='Completed' and announced_by='" . $username . "' ORDER BY end_date DESC";
                 }
                 
                 elseif($_SESSION['usertype']==='serviceprovider'){
-                    $sql = "SELECT * FROM project where status='Completed' and assigned_to='" . $username . "'";
+                    $sql = "SELECT * FROM project where status='Completed' and assigned_to='" . $username . "' ORDER BY end_date DESC";
                 }
 
                 elseif($_SESSION['usertype']==='admin'){
-                    $sql = "SELECT * FROM project where status='Completed'";
+                    $sql = "SELECT * FROM project where status='Completed' ORDER BY end_date DESC";
                 }                
 
                 $stmt = $conn->query($sql);

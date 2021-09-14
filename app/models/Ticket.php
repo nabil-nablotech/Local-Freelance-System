@@ -110,7 +110,7 @@
             if($conn !== null){
                 $sql = "";
                 if($_SESSION['usertype']==='serviceseeker' || $_SESSION['usertype']==='serviceprovider'){
-                    $sql = "SELECT * FROM ticket where opened_by='".$username."'";
+                    $sql = "SELECT * FROM ticket where opened_by='".$username."' ORDER BY opened_date DESC";
                 }
                 $stmt = $conn->query($sql);
                 if($tickets = $stmt->fetchAll(PDO::FETCH_ASSOC)){
@@ -129,7 +129,7 @@
             if($conn !== null){
                 $sql = "";
                 if($_SESSION['usertype']==='admin'){
-                    $sql = "SELECT * FROM ticket where status='open'";
+                    $sql = "SELECT * FROM ticket where status='open' ORDER BY opened_date DESC";
                 }
                 $stmt = $conn->query($sql);
                 if($tickets = $stmt->fetchAll(PDO::FETCH_ASSOC)){
@@ -148,7 +148,7 @@
             if($conn !== null){
                 $sql = "";
                 if($_SESSION['usertype']==='admin'){
-                    $sql = "SELECT * FROM ticket where status='closed'";
+                    $sql = "SELECT * FROM ticket where status='closed' ORDER BY closed_date DESC";
                 }
                 $stmt = $conn->query($sql);
                 if($tickets = $stmt->fetchAll(PDO::FETCH_ASSOC)){

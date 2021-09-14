@@ -107,7 +107,7 @@
                 $sql = "";
                 
                 if($_SESSION['usertype'] ==='serviceseeker' || $_SESSION['usertype'] ==='serviceprovider'){
-                    $sql = "SELECT count(*) as number FROM notification  where recipient = '".$id."' and status = 'closed' ORDER BY datetime DESC";
+                    $sql = "SELECT count(*) as number FROM notification  where recipient = '".$id."' and status = 'closed'";
                 }                
 
 

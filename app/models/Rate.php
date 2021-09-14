@@ -90,7 +90,7 @@
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("select * from rate where ratee='".$username."'");
+                $stmt = $conn->query("select * from rate where ratee='".$username."' ORDER BY date DESC");
                 if($rate = $stmt->fetchAll(PDO::FETCH_ASSOC)){
                     return $rate;
                 }

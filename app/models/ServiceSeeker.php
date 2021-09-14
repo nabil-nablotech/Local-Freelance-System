@@ -117,7 +117,7 @@
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,bank_name,account_number,wallet_balance,profile_photo FROM user INNER JOIN service_seeker ON user.username = service_seeker.username");
+                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,bank_name,account_number,wallet_balance,profile_photo FROM user INNER JOIN service_seeker ON user.username = service_seeker.username ORDER BY join_date DESC");
                 if($seekers = $stmt->fetchAll(PDO::FETCH_ASSOC)){
                     return $seekers;
                 }

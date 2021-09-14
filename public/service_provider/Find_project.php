@@ -142,7 +142,7 @@
                                                 {$project['title']}
                                                 </h2>
 
-                                                <p class="profile-list-subtitle mb-3 "><strong>Category: </strong> {$project['category']} <strong class='ml-2'> Budget : </strong>{$project['budget_min']}-{$project['budget_max']} birr  <strong class="ml-4">Required skills: </strong> {$myskill} </p>
+                                                <p class="profile-list-subtitle mb-3 "><strong>Category: </strong> {$project['category']} &nbsp;&nbsp;  <strong> {$project['totalbids']}Bids</strong> <strong class='ml-2'> Budget : </strong>{$project['budget_min']}-{$project['budget_max']} birr  <strong class="ml-4">Required skills: </strong> {$myskill} </p>
                                                 
 
                                                 <div>
