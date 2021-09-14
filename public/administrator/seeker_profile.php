@@ -166,7 +166,7 @@ require "includes/admin-navigation.php";
            <td>
 
   <div class="list-group">
- <img class="img-fluid" src="http://localhost/seralance/<?php echo $_SESSION['serviceSeekerDetails']['profilephoto']?>" style="width:100%; height:100%;">
+ <img class="img-fluid" src="<?php echo $_SESSION['baseurl'];?><?php echo $_SESSION['serviceSeekerDetails']['profilephoto']?>" style="width:100%; height:100%;">
 
 </div>
 
@@ -189,6 +189,7 @@ require "includes/admin-navigation.php";
         </div>
 </div>
 </div>
-<script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>public/assets/js/administrator/serelance-admin.js "></script>
 </body>
 <!--  -->

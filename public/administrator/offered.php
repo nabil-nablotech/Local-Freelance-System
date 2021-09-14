@@ -59,7 +59,7 @@
                                                     </td>
                                                     <!--  -->
                                                     <td>
-                                                      <a href="http://localhost/seralance/public/admin/viewproject/{$project['project_id']}" class="btn btn-sm btn-primary mr-5">View details</a> 
+                                                      <a href="{$_SESSION['baseurl']}public/admin/viewproject/{$project['project_id']}" class="btn btn-sm btn-primary mr-5">View details</a> 
                                                     </td>
 
                                                     <!--  -->
@@ -79,14 +79,14 @@
 				</div>
 			</div>
 		</div>
-      <script src="http://localhost/seralance/app/vendor/jquery/jquery.min.js"></script>  
-<script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.js" ></script>
-<script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.min.js" ></script>
-<script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="http://localhost/seralance/app/vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="http://localhost/seralance/public/assets/js/administrator/seralance-admin.js "></script>
-<script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.js" ></script>
+      <script src="<?php echo $_SESSION['baseurl'];?>app/vendor/jquery/jquery.min.js"></script>  
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/jquery.dataTables.js" ></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/jquery.dataTables.min.js" ></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>public/assets/js/administrator/serelance-admin.js "></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/dataTables.bootstrap4.js" ></script>
 		<script type="text/javascript">
 		function confirmAction(anchor) {
 			var conf = confirm("Are you sure you want to do this action?");

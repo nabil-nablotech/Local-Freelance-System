@@ -109,7 +109,7 @@ require "includes/service_provider-navigation.php";
                                                 <td>
                                                     <?php 
                                                         if($_SESSION['projectDetails']['file']!=="---"){
-                                                        echo '<a href="http://localhost/seralance/'.$_SESSION['projectDetails']['file'].'">Download</a>' ;
+                                                        echo '<a href="'.$_SESSION['baseurl'].$_SESSION['projectDetails']['file'].'">Download</a>' ;
                                                         }
                                                         else{
                                                             echo $_SESSION['projectDetails']['file'];
@@ -157,7 +157,7 @@ require "includes/service_provider-navigation.php";
                                                 <td>
                                                 <?php 
                                                     if($_SESSION['projectDetails']['delivered_file']!=='---'){
-                                                    echo '<a href="http://localhost/seralance/'.$_SESSION['projectDetails']['delivered_file'].'">Download</a>' ;
+                                                    echo '<a href="'.$_SESSION['baseurl'].$_SESSION['projectDetails']['delivered_file'].'">Download</a>' ;
                                                     }
                                                     else{
                                                         echo $_SESSION['projectDetails']['delivered_file'];

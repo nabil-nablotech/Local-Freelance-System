@@ -28,7 +28,7 @@
                <h6 class="m-0 font-weight-bold text-primary">List of Admin Users</h6>
             </div>
             <div class="card-body">
-            <a class="btn btn-success" href="http://localhost/seralance/public/admin/newadmin"> <i class="fa fa-plus-circle"></i> New Admin User</a>
+            <a class="btn btn-success" href="<?php echo $_SESSION['baseurl'];?>public/admin/newadmin"> <i class="fa fa-plus-circle"></i> New Admin User</a>
                <!-- data to be fetched from the database  -->
                <div class="table table-responsive mt-5">
 							<table id="table" class="table table-bordered table-striped">
@@ -62,9 +62,9 @@
 																	{$admin['role']}
 																</td>
 																<!--  -->
-																<td><a class="btn btn-primary" href="http://localhost/seralance/public/admin/viewadmin/{$admin['username']}">
+																<td><a class="btn btn-primary" href="{$_SESSION['baseurl']}public/admin/viewadmin/{$admin['username']}">
 																	View details</a> </td>
-																<td><button class="btn btn-primary" onclick ="confirmAction('http://localhost/seralance/public/serviceseeker/deleteproject/announcedprojects');" >
+																<td><button class="btn btn-primary" onclick ="confirmAction('{$_SESSION['baseurl']}public/serviceseeker/deleteproject/announcedprojects');" >
 																	Modify permission</button> </td>
 																<!--  -->
 																</tr>
@@ -190,14 +190,14 @@
 <i class="fas fa-angle-up"></i>
 </a>
 
-<script src="http://localhost/seralance/app/vendor/jquery/jquery.min.js"></script>  
-<script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.js" ></script>
-<script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.min.js" ></script>
-<script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="http://localhost/seralance/app/vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="http://localhost/seralance/public/assets/js/administrator/serelance-admin.js "></script>
-<script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.js" ></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/jquery/jquery.min.js"></script>  
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/jquery.dataTables.js" ></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/jquery.dataTables.min.js" ></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>public/assets/js/administrator/serelance-admin.js "></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/dataTables.bootstrap4.js" ></script>
 
 <script type = "text/javascript">
    $(document).ready(function(){

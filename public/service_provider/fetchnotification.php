@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                 //timeago($notification["datetime"])
                 $url = "#";
                 if(!empty($notification['url'])){
-                    $url = $notification['url'];
+                    $url = $_SESSION['baseurl']."public/".$notification['url'];
                 }
                 echo <<<EOT
                 <a href="${url}" style="text-decoration:none; overflow-wrap: break-word;">

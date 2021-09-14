@@ -109,7 +109,7 @@ require "includes/admin-navigation.php";
                                                 <td>
                                                     <?php 
                                                         if($_SESSION['projectDetails']['file']!=="---"){
-                                                        echo '<a href="http://localhost/seralance/'.$_SESSION['projectDetails']['file'].'">Download</a>' ;
+                                                        echo '<a href="'.$_SESSION['baseurl'].$_SESSION['projectDetails']['file'].'">Download</a>' ;
                                                         }
                                                         else{
                                                             echo $_SESSION['projectDetails']['file'];
@@ -157,7 +157,7 @@ require "includes/admin-navigation.php";
                                                 <td>
                                                 <?php 
                                                     if($_SESSION['projectDetails']['delivered_file']!=='---'){
-                                                    echo '<a href="http://localhost/seralance/'.$_SESSION['projectDetails']['delivered_file'].'">Download</a>' ;
+                                                    echo '<a href="'.$_SESSION['baseurl'].$_SESSION['projectDetails']['delivered_file'].'">Download</a>' ;
                                                     }
                                                     else{
                                                         echo $_SESSION['projectDetails']['delivered_file'];
@@ -189,4 +189,5 @@ require "includes/admin-navigation.php";
 		</div>
         <!--  -->
 	</div>
-    <script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo $_SESSION['baseurl'];?>app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo $_SESSION['baseurl'];?>public/assets/js/administrator/serelance-admin.js "></script>

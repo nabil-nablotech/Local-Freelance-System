@@ -85,7 +85,7 @@
 						<div class="col-sm-3 ">
 							<div class="form-group text-center mr-5">
 								<label class="control-label">Photo Preview</label>
-								<div class="input-group"> <img src="http://localhost/seralance/<?php echo $seekerDetail['profilephoto'];?>"  id="profiledisplay" class="img-rounded" alt="No photo to view" width="200" height="200"> </div>
+								<div class="input-group"> <img src="<?php echo $_SESSION['baseurl'];?><?php echo $seekerDetail['profilephoto'];?>"  id="profiledisplay" class="img-rounded" alt="No photo to view" width="200" height="200"> </div>
 								<input class="input-large" id="profilephoto" onchange="displayPhoto(this);" type="file" name="profilephoto" hidden>
 								<button class="btn btn-success" type ="button"onclick="uploadPhoto();">upload photo</button>
 							</div>

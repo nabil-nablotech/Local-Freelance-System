@@ -128,7 +128,7 @@
                                         "Bid approved",
                                         "Bid on project ".$projectId. " has been approved.",
                                         $bidDetails['made_by'],
-                                        "http://localhost/seralance/public/serviceprovider/announcedprojects"
+                                        "serviceprovider/announcedprojects"
                                     );
             
         }

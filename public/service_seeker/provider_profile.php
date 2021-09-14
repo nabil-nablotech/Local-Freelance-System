@@ -165,7 +165,7 @@ body{background-color: #f0f5f7
            <td>
 
   <div class="list-group">
- <img class="img-fluid" src="http://localhost/seralance/<?php echo $_SESSION['serviceProviderDetails']['profile_photo']?>" style="width:100%; height:100%;">
+ <img class="img-fluid" src="<?php echo $_SESSION['baseurl'];?><?php echo $_SESSION['serviceProviderDetails']['profile_photo']?>" style="width:100%; height:100%;">
 
 </div>
 
@@ -186,7 +186,7 @@ body{background-color: #f0f5f7
                         
                     <div class="comment">
                         <div class="left-section">                                        
-                            <img class="img-fluid" src="http://localhost/seralance/public/assets/images/profile.jpg" style="width:80px; height:80px; border:1px solid black;">
+                            <img class="img-fluid" src="{$_SESSION['baseurl']}public/assets/images/profile.jpg" style="width:80px; height:80px; border:1px solid black;">
                             <p class="ml-4">{$rating['rater']}</p>
                         </div>
                         <div class="right-section">

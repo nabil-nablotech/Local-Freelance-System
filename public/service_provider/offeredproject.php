@@ -58,7 +58,7 @@
                                                 if($project['status']!=='Cancelled' && $project['status']!=='Pending Deposit'){
 
                                                     $acceptBtn = '<button class="btn btn-success" data-project="'.$project['project_id'].'" data-minbudget="'.$project['budget_min'].'" data-maxbudget="'.$project['budget_max'].'" data-toggle="modal" data-target="#acceptModal" onclick ="setAcceptModal(this);">Accept</button>';
-                                                    $rejectBtn = '<button class="btn btn-danger" onclick ="confirmAction(\'http://localhost/seralance/public/serviceprovider/rejectproject/'.$project['project_id'].'\');" > Reject</button>'; 
+                                                    $rejectBtn = '<button class="btn btn-danger" onclick ="confirmAction(\''.$_SESSION['baseurl'].'public/serviceprovider/rejectproject/'.$project['project_id'].'\');" > Reject</button>'; 
                                                     
                                                 }
                                                 echo <<<EOT
@@ -82,7 +82,7 @@
                                                     {$project['status']}
                                                     </td>
                                                     <!--  -->
-                                                    <td><a href="http://localhost/seralance/public/serviceprovider/viewproject/{$project['project_id']}" class="d-inline btn-sm  btn btn-primary mr-5">View details</a> </td>
+                                                    <td><a href="{$_SESSION['baseurl']}public/serviceprovider/viewproject/{$project['project_id']}" class="d-inline btn-sm  btn btn-primary mr-5">View details</a> </td>
                                                     <td>
                                                         {$acceptBtn}
                                                     </td>

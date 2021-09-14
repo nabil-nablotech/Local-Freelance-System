@@ -68,7 +68,7 @@ $requests = $adminController->getAllOpenRequests();
                                                 {$request['datetime']}
                                             </td>
                                             <td>
-                                            <button class="btn btn-primary" onclick ="confirmAction('http://localhost/seralance/public/admin/processrequest/{$request['request_id']}');">Process</button>  
+                                            <button class="btn btn-primary" onclick ="confirmAction('{$_SESSION['baseurl']}public/admin/processrequest/{$request['request_id']}');">Process</button>  
                                             </td>
                                             
                                             </tr>
@@ -107,7 +107,7 @@ $requests = $adminController->getAllOpenRequests();
 <script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.min.js" ></script>
 <script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="http://localhost/seralance/app/vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="http://localhost/seralance/public/assets/js/administrator/serelance-admin.js "></script>
+<script src="<?php echo $_SESSION['baseurl'];?>public/assets/js/administrator/serelance-admin.js "></script>
 <script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.js" ></script>
 

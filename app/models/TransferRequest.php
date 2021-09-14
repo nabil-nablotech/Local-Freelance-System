@@ -164,5 +164,20 @@
             $this->update('transfer_request',$data,"WHERE request_id = '".$requestId."'");
         }
 
+        public function retrieveStatistics(){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            $statistics = [];
+            if($conn !== null){
+                $sql = "SELECT count(*) as total_pending_fund_requests FROM transfer_request where status = 'open'";      
+                $stmt = $conn->query($sql);
+                $statistics = array_merge($statistics,$stmt->fetch(PDO::FETCH_ASSOC));
+
+                return $statistics;
+                
+            }
+        }
+
     }
 ?>

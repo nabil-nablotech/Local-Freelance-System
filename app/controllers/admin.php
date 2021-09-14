@@ -8,8 +8,9 @@
         }
 
         public function logout(){
-            session_destroy();
-            header("Location: http://localhost/seralance/public/");                
+            unset($_SESSION['username']);
+            unset($_SESSION['usertype']);
+            header("Location: ".$_SESSION['baseurl']."public/");                
             exit();
         }
 
@@ -112,7 +113,7 @@
             $_SESSION['adminDetails'] = $admin->retrieveUserDetails($username);
             if($_SESSION['adminDetails']==false){
                 unset($_SESSION['adminDetails']);
-                header("Location: http://localhost/seralance/public/admin/home");                
+                header("Location: ".$_SESSION['baseurl']."public/admin/home");                
                 exit();
             }
 
@@ -125,7 +126,7 @@
             $_SESSION['ticketDetails'] = $ticket->retrieveTicketDetails($ticketId);
             if($_SESSION['ticketDetails']==false){
                 unset($_SESSION['ticketDetails']);
-                header("Location: http://localhost/seralance/public/admin/home");                
+                header("Location: ".$_SESSION['baseurl']."public/admin/home");                
                 exit();
             }
             if(empty($_SESSION['ticketDetails']['closed_date'])){
@@ -145,7 +146,7 @@
             $_SESSION['disputeDetails'] = $dispute->retrieveDisputeDetails($disputeId);
             if($_SESSION['disputeDetails']==false){
                 unset($_SESSION['disputeDetails']);
-                header("Location: http://localhost/seralance/public/serviceprovider/dispute");                
+                header("Location: ".$_SESSION['baseurl']."public/serviceprovider/dispute");                
                 exit();
             }
             if(empty($_SESSION['disputeDetails']['review_date'])){
@@ -166,6 +167,25 @@
         public function getUserDetails($username){
             $admin = $this->model('Admin');
             return $admin->retrieveUserDetails($username);
+        }
+
+        public function getStatistics(){
+            $project = $this->model('Project');
+            $serviceProvider = $this->model('ServiceProvider');
+            $serviceSeeker = $this->model('ServiceSeeker');
+            $transaction = $this->model('Transaction');
+            $request = $this->model('TransferRequest');
+            $dispute = $this->model('Dispute');
+            $ticket = $this->model('Ticket');
+            $statistics =[];
+            $statistics = array_merge($statistics,$project->retrieveStatistics());
+            $statistics = array_merge($statistics,$serviceProvider->retrieveStatistics());
+            $statistics = array_merge($statistics,$serviceSeeker->retrieveStatistics());
+            $statistics = array_merge($statistics,$transaction->retrieveStatistics());
+            $statistics = array_merge($statistics,$request->retrieveStatistics());
+            $statistics = array_merge($statistics,$dispute->retrieveStatistics());
+            $statistics = array_merge($statistics,$ticket->retrieveStatistics());
+            return $statistics;
         }
 
         public function getAdmins(){
@@ -269,7 +289,7 @@
             $_SESSION['serviceProviderDetails'] = $serviceProvider->retrieveServiceProviderDetails($username);
             if($_SESSION['serviceProviderDetails']==false){
                 unset($_SESSION['serviceProviderDetails']);
-                header("Location: http://localhost/seralance/public/admin/serviceproviders");                
+                header("Location: ".$_SESSION['baseurl']."public/admin/serviceproviders");                
                 exit();
             }
             $this->view('administrator/provider_profile');
@@ -281,7 +301,7 @@
             $_SESSION['bidDetails'] = $bid->retrieveBidDetails($bidId);
             if($_SESSION['bidDetails']==false){
                 unset($_SESSION['bidDetails']);
-                header("Location: http://localhost/seralance/public/admin/");                
+                header("Location: ".$_SESSION['baseurl']."public/admin/");                
                 exit();
             }
 
@@ -295,7 +315,7 @@
             $_SESSION['projectDetails'] = $project->retrieveProjectDetails($projectId);
             if($_SESSION['projectDetails']==false){
                 unset($_SESSION['projectDetails']);
-                header("Location: http://localhost/seralance/public/admin/");                
+                header("Location: ".$_SESSION['baseurl']."public/admin/");                
                 exit();
             }
 
@@ -329,7 +349,7 @@
             $_SESSION['serviceSeekerDetails'] = $serviceSeeker->retrieveUserDetails($username);
             if($_SESSION['serviceSeekerDetails']==false){
                 unset($_SESSION['serviceSeekerDetails']);
-                header("Location: http://localhost/seralance/public/admin/serviceseekers");                
+                header("Location: ".$_SESSION['baseurl']."public/admin/serviceseekers");                
                 exit();
             }
             $this->view('administrator/seeker_profile');
@@ -340,10 +360,10 @@
             $user = $this->model('User');
             $user->suspend($username);
             if($usertype == 'serviceprovider'){
-                header("Location: http://localhost/seralance/public/admin/serviceproviders");  
+                header("Location: ".$_SESSION['baseurl']."public/admin/serviceproviders");  
             }
             if($usertype == 'serviceseeker'){
-                header("Location: http://localhost/seralance/public/admin/serviceseekers");  
+                header("Location: ".$_SESSION['baseurl']."public/admin/serviceseekers");  
             }       
                           
             exit();
@@ -353,10 +373,10 @@
             $user = $this->model('User');
             $user->activate($username);
             if($usertype == 'serviceprovider'){
-                header("Location: http://localhost/seralance/public/admin/serviceproviders");  
+                header("Location: ".$_SESSION['baseurl']."public/admin/serviceproviders");  
             }
             if($usertype == 'serviceseeker'){
-                header("Location: http://localhost/seralance/public/admin/serviceseekers");  
+                header("Location: ".$_SESSION['baseurl']."public/admin/serviceseekers");  
             }                          
             exit();
         }
@@ -364,7 +384,7 @@
         public function validateUpdateProfile($input){
             $admin = $this->model('Admin');
             $admin->updateProfile($input);
-            header("Location: http://localhost/seralance/public/admin/profile");                
+            header("Location: ".$_SESSION['baseurl']."public/admin/profile");                
             exit();
         }
 
@@ -373,7 +393,7 @@
             $reply = $user->updatePassword($input);
             if($reply['valid']==true){
                 echo "<script>alert('Your password has been changed sucessfully.');</script>"; 
-                echo "<script>location.href='http://localhost/seralance/public/';</script>";                
+                echo "<script>location.href='".$_SESSION['baseurl']."public/';</script>";                
                 exit();
                 
             }
@@ -388,7 +408,7 @@
 
             if($reply['valid']==true){
 
-                header("Location: http://localhost/seralance/public/admin/closedtickets");              
+                header("Location: ".$_SESSION['baseurl']."public/admin/closedtickets");              
                 exit();
                 
             }
@@ -433,7 +453,7 @@
                 }
                 
 
-                header("Location: http://localhost/seralance/public/admin/closeddisputes");              
+                header("Location: ".$_SESSION['baseurl']."public/admin/closeddisputes");              
                 exit();
                 
             }
@@ -447,7 +467,7 @@
             $reply = $notification->pushNotification($input);
 
             if($reply['valid']==true){  
-                header("Location: http://localhost/seralance/public/admin/notification");              
+                header("Location: ".$_SESSION['baseurl']."public/admin/notification");              
                 exit();
             }
             else{
@@ -484,9 +504,9 @@
                                             "Money transferred",
                                             $requestDetails['amount']. " ETB has been transferred to your bank account.",
                                             $requestDetails['requester'],
-                                            "http://localhost/seralance/public/".$usertype['user_type']."/transaction"
+                                            $usertype['user_type']."/transaction"
                                         );
-                header("Location: http://localhost/seralance/public/admin/transferredfunds");              
+                header("Location: ".$_SESSION['baseurl']."public/admin/transferredfunds");              
                 exit();
                 
             }

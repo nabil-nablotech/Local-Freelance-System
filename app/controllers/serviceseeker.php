@@ -105,7 +105,7 @@
             $project = $this->model('Project');
             $project->updateStatus($_GET['MerchantOrderId'],"Ongoing");
 
-            header("Location: http://localhost/seralance/public/serviceseeker/ongoingprojects");                
+            header("Location: ".$_SESSION['baseurl']."public/serviceseeker/ongoingprojects");                
             exit();
 
             
@@ -132,7 +132,7 @@
 
             $transaction->insertTransaction("Revenue", 'Revenue for project ID: '.$projectDetails['project_id'], $revenue,'admin');
 
-            header("Location: http://localhost/seralance/public/serviceseeker/completedprojects");                
+            header("Location: ".$_SESSION['baseurl']."public/serviceseeker/completedprojects");                
             exit();
 
             
@@ -152,7 +152,7 @@
             $_SESSION['serviceProviderDetails'] = $serviceProvider->retrieveServiceProviderDetails($username);
             if($_SESSION['serviceProviderDetails']==false){
                 unset($_SESSION['serviceProviderDetails']);
-                header("Location: http://localhost/seralance/public/serviceseeker/browse");                
+                header("Location: ".$_SESSION['baseurl']."public/serviceseeker/browse");                
                 exit();
             }
             $this->view('service_seeker/provider_profile');
@@ -170,7 +170,7 @@
             $_SESSION['bidDetails'] = $bid->retrieveBidDetails($bidId);
             if($_SESSION['bidDetails']==false){
                 unset($_SESSION['bidDetails']);
-                header("Location: http://localhost/seralance/public/serviceseeker/");                
+                header("Location: ".$_SESSION['baseurl']."public/serviceseeker/");                
                 exit();
             }
 
@@ -185,7 +185,7 @@
             $details = $bid->retrieveBidDetails($bidId);
             $project = $this->model('Project'); 
             $project->approveBid($details['project_id'],$details['price'],$details['made_by']);
-            header("Location: http://localhost/seralance/public/serviceseeker/announcedprojects");                
+            header("Location: ".$_SESSION['baseurl']."public/serviceseeker/announcedprojects");                
             exit();
         }
 
@@ -194,7 +194,7 @@
             $_SESSION['projectDetails'] = $project->retrieveProjectDetails($projectId);
             if($_SESSION['projectDetails']==false){
                 unset($_SESSION['projectDetails']);
-                header("Location: http://localhost/seralance/public/serviceseeker/");                
+                header("Location: ".$_SESSION['baseurl']."public/serviceseeker/");                
                 exit();
             }
 
@@ -227,7 +227,7 @@
             $_SESSION['ticketDetails'] = $ticket->retrieveTicketDetails($ticketId);
             if($_SESSION['ticketDetails']==false){
                 unset($_SESSION['ticketDetails']);
-                header("Location: http://localhost/seralance/public/serviceseeker/ticket");                
+                header("Location: ".$_SESSION['baseurl']."public/serviceseeker/ticket");                
                 exit();
             }
             if(empty($_SESSION['ticketDetails']['closed_date'])){
@@ -246,7 +246,7 @@
             $_SESSION['disputeDetails'] = $dispute->retrieveDisputeDetails($disputeId);
             if($_SESSION['disputeDetails']==false){
                 unset($_SESSION['disputeDetails']);
-                header("Location: http://localhost/seralance/public/serviceseeker/dispute");                
+                header("Location: ".$_SESSION['baseurl']."public/serviceseeker/dispute");                
                 exit();
             }
             if(empty($_SESSION['disputeDetails']['review_date'])){
@@ -264,23 +264,24 @@
             $project = $this->model('project');
             $sucess = $project->deleteProject($projectId);
             if($sucess==false){
-                header("Location: http://localhost/seralance/public/serviceseeker/{$offertype}");                
+                header("Location: ".$_SESSION['baseurl']."public/serviceseeker/{$offertype}");                
                 exit();
             }
 
-            header("Location: http://localhost/seralance/public/serviceseeker/{$offertype}");                
+            header("Location: ".$_SESSION['baseurl']."public/serviceseeker/{$offertype}");                
             exit();
         }
 
         public function hire($username){
             $_SESSION['assignto'] = $username;
-            header("Location: http://localhost/seralance/public/serviceseeker/announce");                 
+            header("Location: ".$_SESSION['baseurl']."public/serviceseeker/announce");                 
             exit();
         }
 
         public function logout(){
-            session_destroy();
-            header("Location: http://localhost/seralance/public/");                
+            unset($_SESSION['username']);
+            unset($_SESSION['usertype']);
+            header("Location: ".$_SESSION['baseurl']."public/");                
             exit();
         }
 
@@ -326,6 +327,11 @@
         public function countNotifications($username){
             $notification = $this->model('Notification');
             return $notification->countClosedNotifications($username);
+        }
+
+        public function getStatistics($username){
+            $project = $this->model('Project');
+            return $project->retrieveStatistics($username);
         }
         
         public function getAllDisputes($username){
@@ -406,7 +412,7 @@
         public function validateUpdateProfile($input,$files){
             $serviceSeeker = $this->model('ServiceSeeker');
             $serviceSeeker->updateProfile($input, $files);
-            header("Location: http://localhost/seralance/public/serviceseeker/profile");                
+            header("Location: ".$_SESSION['baseurl']."public/serviceseeker/profile");                
             exit();
         }
 
@@ -415,7 +421,7 @@
             $reply = $user->updatePassword($input);
             if($reply['valid']==true){
                 echo "<script>alert('Your password has been changed sucessfully.');</script>"; 
-                echo "<script>location.href='http://localhost/seralance/public/';</script>";                
+                echo "<script>location.href='".$_SESSION['baseurl']."public/';</script>";                
                 exit();
                 
             }
@@ -434,11 +440,11 @@
                 }  
 
                 if($input['offertype']==='Announcement'){
-                    header("Location: http://localhost/seralance/public/serviceseeker/announcedprojects");              
+                    header("Location: ".$_SESSION['baseurl']."public/serviceseeker/announcedprojects");              
                     exit();
                 }
                 if($input['offertype']==='Offer'){
-                    header("Location: http://localhost/seralance/public/serviceseeker/offeredprojects");              
+                    header("Location: ".$_SESSION['baseurl']."public/serviceseeker/offeredprojects");              
                     exit();
                 }
                 
@@ -453,7 +459,7 @@
             $reply = $ticket->createTicket($input, $files);
 
             if($reply['valid']==true){  
-                header("Location: http://localhost/seralance/public/serviceseeker/ticket");              
+                header("Location: ".$_SESSION['baseurl']."public/serviceseeker/ticket");              
                 exit();
             }
             else{
@@ -466,7 +472,7 @@
             $reply = $dispute->createDispute($input, $files);
 
             if($reply['valid']==true){  
-                header("Location: http://localhost/seralance/public/serviceseeker/dispute");              
+                header("Location: ".$_SESSION['baseurl']."public/serviceseeker/dispute");              
                 exit();
             }
             else{
@@ -479,7 +485,7 @@
             $reply = $rate->rateProvider($input);
 
             if($reply['valid']==true){  
-                header("Location: http://localhost/seralance/public/serviceseeker/completedprojects");              
+                header("Location: ".$_SESSION['baseurl']."public/serviceseeker/completedprojects");              
                 exit();
             }
             else{
@@ -496,7 +502,7 @@
             $request= $this->model('TransferRequest');
             $amount = $this->getTransferableAmount($_SESSION['username']);
             $request->sendRequest($_SESSION['username'],$amount);
-            header("Location: http://localhost/seralance/public/serviceseeker/transaction");              
+            header("Location: ".$_SESSION['baseurl']."public/serviceseeker/transaction");              
             exit();           
             
         }

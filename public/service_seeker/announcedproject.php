@@ -64,10 +64,10 @@
 																	{$project['status']}
 																</td>
 																<!--  -->
-																<td><a class="btn btn-primary" href="http://localhost/seralance/public/serviceseeker/viewproject/{$project['project_id']}">
+																<td><a class="btn btn-primary" href="{$_SESSION['baseurl']}public/serviceseeker/viewproject/{$project['project_id']}">
 																	View details</a> </td>
 																<td>$secondColBtn </td>
-																<td><button class="btn btn-danger" onclick ="confirmAction('http://localhost/seralance/public/serviceseeker/deleteproject/announcedprojects/{$project['project_id']}');" >
+																<td><button class="btn btn-danger" onclick ="confirmAction('{$_SESSION['baseurl']}public/serviceseeker/deleteproject/announcedprojects/{$project['project_id']}');" >
 																	Delete</button> </td>
 																<!--  -->
 																</tr>

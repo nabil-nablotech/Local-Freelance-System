@@ -52,7 +52,7 @@ require "includes/admin-navigation.php";
 								<label for="colFormLabelSm" class="col-sm-4 
 						col-form-label col-form-label-sm">File</label>
 								<div class="col-sm-8">
-									<a href="<?php echo $base.$_SESSION['ticketDetails']['file'];?>">Download</a>
+									<a href="<?php echo $_SESSION['baseurl'].$_SESSION['ticketDetails']['file'];?>">Download</a>
 								</div>
 						</div>
 
@@ -85,7 +85,8 @@ require "includes/admin-navigation.php";
 			</div>
 		</div>
 	</div>
-    <script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="<?php echo $_SESSION['baseurl'];?>public/assets/js/administrator/serelance-admin.js "></script>
 
 		</body>
 

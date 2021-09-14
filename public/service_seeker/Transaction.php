@@ -47,7 +47,7 @@ $transactions = $serviceSeekerController->getAllTransactions($_SESSION['username
             $amount = $serviceSeekerController->getTransferableAmount($_SESSION['username']);
             if($amount>0){
               echo "<p>Transferable amount: ".$amount . " ETB</p>";
-						  echo '<p><a href="http://localhost/seralance/public/serviceseeker/requesttransfer" class="btn btn-primary">Request transfer</a></p>';
+						  echo '<p><a href="'.$_SESSION['baseurl'].'public/serviceseeker/requesttransfer" class="btn btn-primary">Request transfer</a></p>';
             }
 						
 					}

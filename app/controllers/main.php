@@ -20,7 +20,7 @@
             if($reply['valid']==true){
                 $_SESSION['username'] = $reply['username'];
                 $_SESSION['usertype'] = $reply['usertype'];
-                header("Location: http://localhost/seralance/public/");                
+                header("Location: ".$_SESSION['baseurl']."public/");                
                 exit();
             }
             else{
@@ -33,7 +33,7 @@
             $reply = $user->sendPassword($input);
             if($reply['valid']==true){
                 echo "<script>alert('Your account details has been sent to your email(Check your inbox or spam folder).');</script>"; 
-                echo "<script>location.href='http://localhost/seralance/public/';</script>";                
+                echo "<script>location.href='".$_SESSION['baseurl']."public/';</script>";                
                 exit();
             }
             else{
@@ -57,7 +57,7 @@
                 /*$ _SESSION['username'] = $reply['username'];
                 $_SESSION['usertype'] = $reply['usertype']; */
                 echo "<script>alert('A verification email has been sent to the email address.');</script>"; 
-                echo "<script>location.href='http://localhost/seralance/public/';</script>";                
+                echo "<script>location.href='".$_SESSION['baseurl']."public/';</script>";                
                 exit();
             }
             else{
@@ -70,7 +70,7 @@
             $reply = $user->verifyUser($verificationId);
             $_SESSION['username'] = $reply['username'];
             $_SESSION['usertype'] = $reply['usertype'];
-            header("Location: http://localhost/seralance/public/");
+            header("Location: ".$_SESSION['baseurl']."public/");
             exit(); 
 
         }
@@ -82,7 +82,7 @@
                 /* $_SESSION['username'] = $reply['username'];
                 $_SESSION['usertype'] = $reply['usertype']; */
                 echo "<script>alert('A verification email has been sent to the email address.');</script>";
-                echo "<script>location.href='http://localhost/seralance/public/';</script>";                         
+                echo "<script>location.href='".$_SESSION['baseurl']."public/';</script>";                         
                 exit();
             }
             else{

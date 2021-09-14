@@ -37,7 +37,7 @@
 										<th>Username</th>
 										<th>Full name</th>
 										<th>Date joined</th>
-										<th></th>
+										<th>Status</th>
 										<th></th>
 										<th></th>
 									</tr>
@@ -49,10 +49,10 @@
 		                  	  foreach($serviceSeekers as $serviceSeeker){
                               $thirdRow = "";
                               if($serviceSeeker['status']=='Suspended'){
-                                  $thirdRow = '<button class="btn btn-success" onclick ="confirmAction(\'http://localhost/seralance/public/admin/activate/serviceseeker/'.$serviceSeeker['username'].'\');" >Activate</button>';
+                                  $thirdRow = '<button class="btn btn-success" onclick ="confirmAction(\''.$_SESSION['baseurl'].'public/admin/activate/serviceseeker/'.$serviceSeeker['username'].'\');" >Activate</button>';
                               }
                               else{
-                                  $thirdRow = '<button class="btn btn-danger" onclick ="confirmAction(\'http://localhost/seralance/public/admin/suspend/serviceseeker/'.$serviceSeeker['username'].'\');" >Suspend</button>';
+                                  $thirdRow = '<button class="btn btn-danger" onclick ="confirmAction(\''.$_SESSION['baseurl'].'public/admin/suspend/serviceseeker/'.$serviceSeeker['username'].'\');" >Suspend</button>';
                               }
                               echo <<<EOT
                                   <tr>
@@ -68,11 +68,12 @@
                                       <td>
                                           {$serviceSeeker['join_date']}
                                       </td>
+                                      <td>
+                                      {$serviceSeeker['status']}
+                                      </td>
                                   <!--  -->
-                                      <td><a class="btn btn-sm btn-primary" href="http://localhost/seralance/public/admin/viewserviceseeker/{$serviceSeeker['username']}">
+                                      <td><a class="btn btn-sm btn-primary" href="{$_SESSION['baseurl']}public/admin/viewserviceseeker/{$serviceSeeker['username']}">
                                       View details</a </td>
-                                      <td><a class="btn btn-primary" href="http://localhost/seralance/public/admin/transctions/{$serviceSeeker['username']}">
-                                      Transactions</a> </td>
                                       <td>{$thirdRow}</td>
                                   <!--  -->
                                   </tr>
@@ -198,14 +199,14 @@
 <i class="fas fa-angle-up"></i>
 </a>
 
-<script src="http://localhost/seralance/app/vendor/jquery/jquery.min.js"></script>  
-<script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.js" ></script>
-<script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.min.js" ></script>
-<script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="http://localhost/seralance/app/vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="http://localhost/seralance/public/assets/js/administrator/serelance-admin.js "></script>
-<script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.js" ></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/jquery/jquery.min.js"></script>  
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/jquery.dataTables.js" ></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/jquery.dataTables.min.js" ></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>public/assets/js/administrator/serelance-admin.js "></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/dataTables.bootstrap4.js" ></script>
 
 <script type = "text/javascript">
     function confirmAction(anchor) {

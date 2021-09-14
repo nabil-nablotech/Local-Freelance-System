@@ -216,7 +216,7 @@
                 
             }
         }
-        
+
         public function retrieveProjects($filter=""){
             require_once('../app/Core/Database.php');
             $sql = "";
@@ -241,6 +241,99 @@
                 else{
                     return false;
                 }
+            }
+        }
+        
+        public function retrieveStatistics($username=""){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            $statistics = [];
+            if($conn !== null){
+                $sql = "";
+                
+                //Announced projects
+                if($_SESSION['usertype']==='serviceseeker'){
+                    $sql = "SELECT count(*) as announced_projects FROM project where (status='Pending' OR status='Pending Deposit') AND offer_type ='Announcement' and announced_by='" . $username . "'";
+                }
+
+                elseif($_SESSION['usertype']==='serviceprovider'){
+                    $sql = "SELECT count(*) as announced_projects FROM project where (status='Cancelled' OR status='Pending Deposit') AND offer_type ='Announcement' and assigned_to='" . $username . "'";
+                }
+
+                elseif($_SESSION['usertype']==='admin'){
+                    $sql = "SELECT count(*) as announced_projects FROM project where (status='Cancelled' OR status='Pending Deposit') AND offer_type ='Announcement'  ORDER BY announced_date DESC";
+                }
+
+                $stmt = $conn->query($sql);
+                $statistics = array_merge($statistics,$stmt->fetch(PDO::FETCH_ASSOC));
+
+                // Offered projects
+                if($_SESSION['usertype']==='serviceseeker'){
+                    $sql = "SELECT count(*) as offered_projects FROM project where offer_type ='Offer' AND (status='Pending' OR status='Pending Deposit' OR status='Cancelled') and announced_by='" . $username . "'";
+                }
+                
+                elseif($_SESSION['usertype']==='serviceprovider'){
+                    $sql = "SELECT count(*) as offered_projects FROM project where (status='Pending' OR status='Pending Deposit' OR status='Cancelled') AND offer_type ='Offer' and assigned_to='" . $username . "'";
+                }
+
+                elseif($_SESSION['usertype']==='admin'){
+                    $sql = "SELECT count(*) as offered_projects FROM project where (status='Pending' OR status='Pending Deposit' OR status='Cancelled') AND offer_type ='Offer' ORDER BY announced_date DESC";
+                }                
+
+                $stmt = $conn->query($sql);
+                $statistics = array_merge($statistics,$stmt->fetch(PDO::FETCH_ASSOC));
+
+                //Ongoing projects
+                if($_SESSION['usertype']==='serviceseeker'){
+                    $sql = "SELECT count(*) as ongoing_projects FROM project where (status='Ongoing' OR status='Submitted') and announced_by='" . $username . "'";
+                }
+                
+                elseif($_SESSION['usertype']==='serviceprovider'){
+                    $sql = "SELECT count(*) as ongoing_projects FROM project where (status='Ongoing' OR status='Submitted') and assigned_to='" . $username . "'";
+                }
+
+                elseif($_SESSION['usertype']==='admin'){
+                    $sql = "SELECT count(*) as ongoing_projects FROM project where (status='Ongoing' OR status='Submitted')";
+                }                
+
+                $stmt = $conn->query($sql);
+                $statistics = array_merge($statistics,$stmt->fetch(PDO::FETCH_ASSOC));
+
+                //Terminated projects
+                if($_SESSION['usertype']==='serviceseeker'){
+                    $sql = "SELECT count(*) as terminated_projects FROM project where status='Terminated' and announced_by='" . $username . "'";
+                }
+                
+                elseif($_SESSION['usertype']==='serviceprovider'){
+                    $sql = "SELECT count(*) as terminated_projects FROM project where status='Terminated' and assigned_to='" . $username . "'";
+                }
+
+                elseif($_SESSION['usertype']==='admin'){
+                    $sql = "SELECT count(*) as terminated_projects FROM project where status='Terminated'";
+                }                
+
+                $stmt = $conn->query($sql);
+                $statistics = array_merge($statistics,$stmt->fetch(PDO::FETCH_ASSOC));
+
+                //Completed projects
+                if($_SESSION['usertype']==='serviceseeker'){
+                    $sql = "SELECT count(*) as completed_projects FROM project where status='Completed' and announced_by='" . $username . "'";
+                }
+                
+                elseif($_SESSION['usertype']==='serviceprovider'){
+                    $sql = "SELECT count(*) as completed_projects FROM project where status='Completed' and assigned_to='" . $username . "'";
+                }
+
+                elseif($_SESSION['usertype']==='admin'){
+                    $sql = "SELECT count(*) as completed_projects FROM project where status='Completed'";
+                }                
+
+                $stmt = $conn->query($sql);
+                $statistics = array_merge($statistics,$stmt->fetch(PDO::FETCH_ASSOC));
+
+                return $statistics;
+                
             }
         }
 
@@ -322,8 +415,8 @@
                 }                
 
                 $stmt = $conn->query($sql);
-                if($offeredProjects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
-                    return $offeredProjects;
+                if($ongoingProjects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $ongoingProjects;
                 }
                 else{
                     return false;
@@ -351,8 +444,8 @@
                 }                
 
                 $stmt = $conn->query($sql);
-                if($offeredProjects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
-                    return $offeredProjects;
+                if($terminatedProjects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $terminatedProjects;
                 }
                 else{
                     return false;
@@ -380,8 +473,8 @@
                 }                
 
                 $stmt = $conn->query($sql);
-                if($offeredProjects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
-                    return $offeredProjects;
+                if($completedProjects = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                    return $completedProjects;
                 }
                 else{
                     return false;
@@ -416,7 +509,7 @@
                                                 "Start project",
                                                 "Please start working on project ".$projectId. ".",
                                                 $projectDetails['assigned_to'],
-                                                "http://localhost/seralance/public/serviceprovider/ongoingprojects"
+                                                "serviceprovider/ongoingprojects"
                                             );
                 }
                 
@@ -459,7 +552,7 @@
                         "Project completed",
                         "Project ".$projectId. " has been completed.",
                         $projectDetails['assigned_to'],
-                        "http://localhost/seralance/public/serviceprovider/completedprojects"
+                        "serviceprovider/completedprojects"
                     );
                 }
 
@@ -469,14 +562,14 @@
                         "Project terminated",
                         "Project ".$projectId. " has been terminated.",
                         $projectDetails['assigned_to'],
-                        "http://localhost/seralance/public/serviceprovider/terminatedprojects"
+                        "serviceprovider/terminatedprojects"
                     );
 
                     $notification->autoNotify(
                         "Project terminated",
                         "Project ".$projectId. " has been terminated.",
                         $projectDetails['announced_by'],
-                        "http://localhost/seralance/public/serviceseeker/terminatedprojects"
+                        "serviceseeker/terminatedprojects"
                     );
                 }
                 
@@ -509,7 +602,7 @@
                                             "Project offer rejected",
                                             "Offered project ".$projectId. " has been rejected.",
                                             $projectDetails['announced_by'],
-                                            "http://localhost/seralance/public/serviceseeker/offeredprojects"
+                                            "serviceseeker/offeredprojects"
                                         );
                 return 1;
             }             
@@ -678,7 +771,7 @@
                                                 "New project offer",
                                                 "A project has been offered by ".$_SESSION['username'].".",
                                                 $this->cleanInput($response['data']['assignto']),
-                                                "http://localhost/seralance/public/serviceprovider/offeredprojects"
+                                                "serviceprovider/offeredprojects"
                                             );
                 }
 
@@ -740,7 +833,7 @@
                                                 "Project offer accepted",
                                                 "Offered project ".$this->getProjectId(). " has been accepted.",
                                                 $projectDetails['announced_by'],
-                                                "http://localhost/seralance/public/serviceseeker/offeredprojects"
+                                                "serviceseeker/offeredprojects"
                                             );
                     return array('valid'=>1);
                 }                
@@ -804,7 +897,7 @@
                             "Project submitted",
                             "Project ".$this->getProjectId(). " has been submitted.",
                             $projectDetails['announced_by'],
-                            "http://localhost/seralance/public/serviceseeker/ongoingprojects"
+                            "serviceseeker/ongoingprojects"
                         );
                     return array('valid'=>1);
                 }                

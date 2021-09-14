@@ -64,7 +64,7 @@
 													{$project['status']}
 													</td>
 													<!--  -->
-													<td><a href="http://localhost/seralance/public/serviceprovider/viewproject/{$project['project_id']}" class="d-inline btn-sm  btn btn-primary mr-5">View details</a> </td>
+													<td><a href="{$_SESSION['baseurl']}public/serviceprovider/viewproject/{$project['project_id']}" class="d-inline btn-sm  btn btn-primary mr-5">View details</a> </td>
 
 													<!--  -->
 													</tr>

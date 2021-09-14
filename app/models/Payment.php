@@ -69,10 +69,10 @@
             $checkoutOptions = new CheckoutOptions($sellerCode, $useSandbox);
 
             // These properties are optional
-            $successUrl = "http://localhost/seralance/public/serviceseeker/paymentsuccess";
-            $cancelUrl = "http://localhost/seralance/public/serviceseeker/".$_SESSION['projectlist'];
-            $failureUrl = "http://localhost/seralance/public/serviceseeker/".$_SESSION['projectlist'];
-            //$ipnUrl = "http://localhost/seralance/public/serviceseeker/ipn";
+            $successUrl = $_SESSION['baseurl']."public/serviceseeker/paymentsuccess";
+            $cancelUrl = $_SESSION['baseurl']."public/serviceseeker/".$_SESSION['projectlist'];
+            $failureUrl = $_SESSION['baseurl']."public/serviceseeker/".$_SESSION['projectlist'];
+            //$ipnUrl = "$_SESSION['baseurl']."public/serviceseeker/ipn";
 
             $checkoutOptions -> setSuccessUrl($successUrl);
             $checkoutOptions -> setCancelUrl($cancelUrl);

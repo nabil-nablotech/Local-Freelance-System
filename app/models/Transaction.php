@@ -101,6 +101,26 @@
             }
         }
 
+        public function retrieveStatistics(){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            $statistics = [];
+            if($conn !== null){
+                $sql = "SELECT sum(amount) as total_revenue FROM transaction where type='Revenue' OR type='Fee' OR type='Return' ";         
+                $stmt = $conn->query($sql);
+                $statistics = array_merge($statistics,$stmt->fetch(PDO::FETCH_ASSOC));
+
+                
+                $sql = "SELECT sum(amount) as total_transferred_funds FROM transaction where type='Transfer'";         
+                $stmt = $conn->query($sql);
+                $statistics = array_merge($statistics,$stmt->fetch(PDO::FETCH_ASSOC));
+
+                return $statistics;
+                
+            }
+        }
+
     }
 
     

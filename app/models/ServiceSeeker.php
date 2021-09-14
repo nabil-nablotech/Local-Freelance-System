@@ -96,6 +96,22 @@
             }
         }
 
+        public function retrieveStatistics(){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            $statistics = [];
+            if($conn !== null){
+                $sql = "SELECT count(*) as total_service_seekers FROM user INNER JOIN service_seeker ON user.username = service_seeker.username";
+                          
+                $stmt = $conn->query($sql);
+                $statistics = array_merge($statistics,$stmt->fetch(PDO::FETCH_ASSOC));
+
+                return $statistics;
+                
+            }
+        }
+
         public function retrieveServiceSeekers($filter=""){
             require_once('../app/Core/Database.php');
             $db = new Database();
@@ -384,7 +400,7 @@
                         <html>
                             <body>
                                 <div style="text-align: center;">
-                                    <img src="http://localhost/seralance/public/assets/images/seralance-logo.png" alt="Seralance">
+                                    <img src="{$_SESSION['baseurl']}public/assets/images/seralance-logo.png" alt="Seralance">
                                 </div>
                                 <h1 style="text-align: center;">THANKS FOR SIGNING UP</h1>
                                 <h1 style="text-align: center;">{$fullname}</h1>
@@ -395,7 +411,7 @@
                                     Thank you!
                                 </p>
                                 <p style="text-align: center;">
-                                    <a href="http://localhost/seralance/public/main/verify/{$verifcationId}" style="text-decoration: none; border:0px solid black; color: white; background-color: rgba(25, 25, 214, 0.801); font-size: 16px; height: 40px; padding: 10px;">
+                                    <a href="{$_SESSION['baseurl']}public/main/verify/{$verifcationId}" style="text-decoration: none; border:0px solid black; color: white; background-color: rgba(25, 25, 214, 0.801); font-size: 16px; height: 40px; padding: 10px;">
                         
                                             Verify Email Now
                         

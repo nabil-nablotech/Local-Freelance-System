@@ -1,6 +1,6 @@
 <?php
    include "includes/service_seeker-navigation.php";
-   
+   $value = $serviceSeekerController->getStatistics($_SESSION['username']);
    ?>
 
 	<head>
@@ -16,68 +16,62 @@
 			<!-- profile photo -->
 			<div class="col-xl-4 col-md-4 mb-4">
 				<div class="card h-100">
-					<div class="card-body text-center" style="background-color:#abbddb"> <img src="http://localhost/seralance/<?php echo $seekerDetail['profilephoto'];?>" class="img-avater " style="border:1px solid black; max-width:200px;">
+					<div class="card-body text-center" style="background-color:#abbddb"> <img src="<?php echo $_SESSION['baseurl'];?><?php echo $seekerDetail['profilephoto'];?>" class="img-avater " style="border:1px solid black; max-width:200px;">
 						<p> Welcome <?php echo ucfirst($seekerDetail['firstname'])." ".ucfirst($seekerDetail['lastname']);?></p>
 					</div>
 				</div>
 			</div>
 			<div class="col-xl-8 col-md-4">
 				<div class="row mx-auto">
-					
-			
 					<div class="col-xl-3  col-md-4 mb-4 text-center">
 						<div class="card h-100">
-							<div class="card-body bg-danger  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 200</span>
+							<div class="card-body bg-danger  text-white"> <span style="font-size: xx-large;font-weight:bolder"> <?php echo $value['terminated_projects'];?></span>
 								<p> Terminated projects</p>
 							</div>
 						</div>
 					</div>
 					<div class="col-xl-3  col-md-4 mb-4 text-center">
 						<div class="card h-100">
-							<div class="card-body bg-success  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 200</span>
-								<p> Announced Projects</p>
+							<div class="card-body bg-success  text-white"> <span style="font-size: xx-large;font-weight:bolder"><?php echo $value['completed_projects'];?></span>
+								<p> Completed Projects</p>
 							</div>
 						</div>
 					</div>
 					<div class="col-xl-3  col-md-4 mb-4 text-center">
 						<div class="card h-100">
-							<div class="card-body bg-warning  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 20</span>
+							<div class="card-body bg-warning  text-white"> <span style="font-size: xx-large;font-weight:bolder"> <?php echo $value['ongoing_projects'];?></span>
 								<p> Ongoing projects</p>
 							</div>
 						</div>
 					</div>
 					<div class="col-xl-3  col-md-4 mb-4 text-center">
 						<div class="card h-100">
-							<div class="card-body bg-info  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 200</span>
-								<p>Completed Projects</p>
+							<div class="card-body bg-info  text-white"> <span style="font-size: xx-large;font-weight:bolder"> <?php echo $value['offered_projects'];?></span>
+								<p>Offered projects</p>
 							</div>
 						</div>
 					</div>
+
 
 					<div class="col-xl-3  col-md-4 mb-4 text-center">
 						<div class="card h-100">
-							<div class="card-body bg-info  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 200</span>
-								<p> Offered Projects</p>
+							<div class="card-body bg-info  text-white"> <span style="font-size: xx-large;font-weight:bolder"> <?php echo $value['announced_projects'];?></span>
+								<p>Announced projects</p>
 							</div>
 						</div>
 					</div>
+
+
 
 					<div class="col-xl-3  col-md-4 mb-4 text-center">
 						<div class="card h-100">
-							<div class="card-body bg-success  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 200</span>
-								<p> Wallet Balance</p>
+							<div class="card-body bg-success  text-white"> <span style="font-size: xx-large;font-weight:bolder"> <?php echo $seekerDetail['walletbalance'];?></span>
+								<p>Wallet Balance</p>
 							</div>
 						</div>
 					</div>
-
-						
-
-					
-
 				</div>
-
-
-				</div>
+			</div>
 			</div>
 		</div>
 		<!--  -->

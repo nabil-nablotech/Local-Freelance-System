@@ -1,11 +1,26 @@
 <!DOCTYPE html>
+	<?php  
+		require_once('../app/controllers/main.php');
+		$mainController = new Controller\Main();
+		
+		$loginErr = "";
+
+		if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['login_btn'])){     
+			$feedback = $mainController->validateLogin($_POST);
+			if($feedback['valid'] == false){
+			
+				// Setting error values
+				if(!empty($feedback['error']['login'])){
+					$loginErr = $feedback['error']['login'];
+				}
+
+			}
+		}
+	?>
 
 	<html>
 
 	<head>
-		<title>
-			<?php echo $lang['title'] ?>
-		</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1 ">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -43,28 +58,11 @@
 		</style>
 	<body style="overflow-x: hidden;">
 	
-	<?php  
-		require_once('../app/controllers/main.php');
-		$mainController = new Controller\Main();
-		
-		$loginErr = "";
-
-		if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['login_btn'])){     
-			$feedback = $mainController->validateLogin($_POST);
-			if($feedback['valid'] == false){
-			
-				// Setting error values
-				if(!empty($feedback['error']['login'])){
-					$loginErr = $feedback['error']['login'];
-				}
-
-			}
-		}
-	?>
+	
 		<!--  navigation bar -->
 	
 		<nav class="navbar navbar-expand-md  bg-light fixed-top " role="navigation">
-			<a class="navbar-brand  " href="http://localhost/seralance/public/main/home"> 
+			<a class="navbar-brand  " href="<?php echo $_SESSION['baseurl'];?>public/main/home"> 
 				<img ID="myImg" class="img-fluid d-none d-sm-block "
 				 alt="logo" src="../assets/images/seralance-logo.png "> </a>
 			<button class="navbar-toggler toggler-example"
@@ -77,36 +75,36 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto ">
 					<li class="nav-item col-sm-text-center">
-						<a class="nav-link" href="http://localhost/seralance/public/main/home#how
+						<a class="nav-link" href="<?php echo $_SESSION['baseurl'];?>public/main/home#how
 ">
 							How it works?
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="http://localhost/seralance/public/main/home#offer
+						<a class="nav-link" href="<?php echo $_SESSION['baseurl'];?>public/main/home#offer
 ">
 							what do we offer?
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="http://localhost/seralance/public/main/home#about">
+						<a class="nav-link" href="<?php echo $_SESSION['baseurl'];?>public/main/home#about">
 							About Us
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="http://localhost/seralance/public/main/home#contact">
+						<a class="nav-link" href="<?php echo $_SESSION['baseurl'];?>public/main/home#contact">
 						Contact us
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="http://localhost/seralance/public/main/FAQ
+						<a class="nav-link" href="<?php echo $_SESSION['baseurl'];?>public/main/FAQ
 ">
                        FAQ
 						</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link"  
-						 href="http://localhost/seralance/public/seralancepolicy.docx" download>
+						 href="<?php echo $_SESSION['baseurl'];?>public/seralancepolicy.docx" download>
 					<i class="fa fa-download"></i> Policy 
 						</a>
 					</li>
@@ -153,7 +151,7 @@
 								<input class="form-control" type="text" name="username" placeholder="Username"> </div>
 							<div class="form-group">
 								<input class="form-control" type="password" name="password" placeholder="Password" required> </div>
-							<div class="link forget-pass text-left"> <a href="http://localhost/seralance/public/main/forgotpassword">Forgot username or password?</a></div>
+							<div class="link forget-pass text-left"> <a href="<?php echo $_SESSION['baseurl'];?>public/main/forgotpassword">Forgot username or password?</a></div>
 							<div class="form-group">
 								<input class="btn btn-primary btn-block " type="submit" name="login_btn" style="background-color: #6665ee;"> </div>
 							<div class="link login-link text-center">Not yet a member?

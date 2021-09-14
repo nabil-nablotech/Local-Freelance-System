@@ -22,7 +22,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                 echo <<<EOT
                     <a href="#" onclick="displayChat(this);">
                         <div class="chat-history-container row">
-                            <img class="col-2" src="http://localhost/seralance/{$profilePhoto}" alt="" >
+                            <img class="col-2" src="{$_SESSION['baseurl']}{$profilePhoto}" alt="" >
                             <div class="col-6">
                                 <span class="username-history">{$contactName}</span>
                                 <p class="message-history">{$msg}</p>	

@@ -202,10 +202,10 @@ document.title="Home-Seralance";
 	<div class="contaniner">
 		<div class="row justify-content-md-center">
 			<div class="col-sm-4 mb-3 ">
-					<a class="btn  btn-success  " href="signup/serviceprovider">Join As A service Provider</a>
+					<a class="btn  btn-success" href="signup/serviceprovider">Join As A service Provider</a>
 			</div>
 			<div class="col-sm-4 ">
-					<a class="btn  btn-success  " href="signup/serviceseeker">Join As A service Seeker</a>
+					<a class="btn  btn-success" href="signup/serviceseeker">Join As A service Seeker</a>
 			</div>
 </div>
 </div>

@@ -116,14 +116,14 @@ require_once "includes/admin-footer.php";
     <i class="fas fa-angle-up"></i>
   </a>
   
-  <script src="http://localhost/seralance/app/vendor/jquery/jquery.min.js"></script>  
-  <script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.js" ></script>
-  <script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.min.js" ></script>
-  <script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="http://localhost/seralance/app/vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="http://localhost/seralance/public/assets/js/administrator/serelance-admin.js "></script>
-  <script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-  <script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.js" ></script>
+  <script src="<?php echo $_SESSION['baseurl'];?>app/vendor/jquery/jquery.min.js"></script>  
+  <script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/jquery.dataTables.js" ></script>
+  <script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/jquery.dataTables.min.js" ></script>
+  <script src="<?php echo $_SESSION['baseurl'];?>app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?php echo $_SESSION['baseurl'];?>app/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="<?php echo $_SESSION['baseurl'];?>public/assets/js/administrator/serelance-admin.js "></script>
+  <script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/dataTables.bootstrap4.js" ></script>
 
   <script type = "text/javascript">
    $(document).ready(function(){

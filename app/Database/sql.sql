@@ -39,9 +39,7 @@ CREATE TABLE permission(
     notification_management BOOLEAN NOT NULL,
     transcation BOOLEAN NOT NULL,
     dispute_management BOOLEAN NOT NULL,
-    ticket_management BOOLEAN NOT NULL,
-    policy_drafting BOOLEAN NOT NULL,
-    faq_drafting BOOLEAN
+    ticket_management BOOLEAN NOT NULL
 );
 
 CREATE TABLE dispute(
@@ -85,7 +83,7 @@ CREATE TABLE transfer_request(
 	request_id INT AUTO_INCREMENT PRIMARY KEY,
     requester VARCHAR(60) NOT NULL,
     datetime DATETIME NOT NULL,
-    amount FLOAT NOT NULL,
+    amount DECIMAL(13,2) NOT NULL,
     status VARCHAR(60) NOT NULL,
     processed_date DATETIME,
     processed_by VARCHAR(60)
@@ -195,24 +193,12 @@ CREATE TABLE bid(
     project_id INT NOT NULL
 );
 
-CREATE TABLE faq(
-	faq_id INT AUTO_INCREMENT PRIMARY KEY,
-    question VARCHAR(255) NOT NULL,
-    answer VARCHAR(255) NOT NULL,
-    category VARCHAR(60) NOT NULL
-);
-
-CREATE TABLE policy(
-	policy_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(60) NOT NULL,
-    file VARCHAR(255) NOT NULL
-);
 
 CREATE TABLE transaction(
 	transaction_id INT AUTO_INCREMENT PRIMARY KEY,
     type VARCHAR(60) NOT NULL,
     detail VARCHAR(240) NOT NULL,
-    amount FLOAT NOT NULL,
+    amount DECIMAL(13,2) NOT NULL,
     date DATETIME NOT NULL,
     username VARCHAR(60) NOT NULL
 );

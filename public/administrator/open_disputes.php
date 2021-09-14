@@ -58,8 +58,8 @@ $disputes = $adminController->getAllOpenDisputes();
                                                    {$dispute['status']}
                                                 </td>
                                                 <!--  -->
-                                                   <td><a class="btn btn-info" href="http://localhost/seralance/public/admin/viewdispute/{$dispute['dispute_id']}">View</a> </td>
-                                                   <td><a class="btn btn-success" href="http://localhost/seralance/public/admin/review/{$dispute['project_id']}/{$dispute['dispute_id']}">Review</a> </td>
+                                                   <td><a class="btn btn-info" href="{$_SESSION['baseurl']}public/admin/viewdispute/{$dispute['dispute_id']}">View</a> </td>
+                                                   <td><a class="btn btn-success" href="{$_SESSION['baseurl']}public/admin/review/{$dispute['project_id']}/{$dispute['dispute_id']}">Review</a> </td>
                                                 <!--  -->
                                                 </tr>
                                              EOT;
@@ -77,14 +77,14 @@ $disputes = $adminController->getAllOpenDisputes();
 			</div>
 		</div>
 	</div>
-   <script src="http://localhost/seralance/app/vendor/jquery/jquery.min.js"></script>  
-<script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.js" ></script>
-<script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.min.js" ></script>
-<script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="http://localhost/seralance/app/vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="http://localhost/seralance/public/assets/js/administrator/seralance-admin.js "></script>
-<script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.js" ></script>
+   <script src="<?php echo $_SESSION['baseurl'];?>app/vendor/jquery/jquery.min.js"></script>  
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/jquery.dataTables.js" ></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/jquery.dataTables.min.js" ></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>public/assets/js/administrator/serelance-admin.js "></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/dataTables.bootstrap4.js" ></script>
 	<script type="text/javascript">
 	function confirmationDelete(anchor) {
 		var conf = confirm("Are you sure you want to delete this record?");

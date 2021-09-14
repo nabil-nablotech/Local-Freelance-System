@@ -56,7 +56,7 @@ $tickets = $adminController->getAllClosedTickets();
                                                    {$ticket['status']}
                                                 </td>
                                                 <!--  -->
-                                                   <td><a class="btn btn-info" href="http://localhost/seralance/public/admin/viewticket/{$ticket['ticket_id']}">View</a> </td>
+                                                   <td><a class="btn btn-info" href="{$_SESSION['baseurl']}public/admin/viewticket/{$ticket['ticket_id']}">View</a> </td>
                                                 <!--  -->
                                                 </tr>
                                              EOT;
@@ -74,14 +74,14 @@ $tickets = $adminController->getAllClosedTickets();
 			</div>
 		</div>
 	</div>
-   <script src="http://localhost/seralance/app/vendor/jquery/jquery.min.js"></script>  
-<script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.js" ></script>
-<script src="http://localhost/seralance/app/vendor/datatables/jquery.dataTables.min.js" ></script>
-<script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="http://localhost/seralance/app/vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="http://localhost/seralance/public/assets/js/administrator/seralance-admin.js "></script>
-<script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="http://localhost/seralance/app/vendor/datatables/dataTables.bootstrap4.js" ></script>
+   <script src="<?php echo $_SESSION['baseurl'];?>app/vendor/jquery/jquery.min.js"></script>  
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/jquery.dataTables.js" ></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/jquery.dataTables.min.js" ></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>public/assets/js/administrator/serelance-admin.js "></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="<?php echo $_SESSION['baseurl'];?>app/vendor/datatables/dataTables.bootstrap4.js" ></script>
 	<script type="text/javascript">
 	function confirmationDelete(anchor) {
 		var conf = confirm("Are you sure you want to delete this record?");

@@ -1,5 +1,6 @@
 <?php
    require "includes/service_provider-navigation.php";
+   $value = $serviceProviderController->getStatistics($_SESSION['username']);
    
  ?>
 
@@ -23,7 +24,7 @@ min-height: 60vh;}
 			<!-- profile photo -->
 			<div class="col-xl-4 col-md-4 mb-4">
 				<div class="card h-100" style="background-color:#abbddb">
-					<div class="card-body text-center"> <img src="http://localhost/seralance/<?php echo $providerDetail['profilephoto'];?>" class="img-avater " style="border:1px solid black; max-width:200px;">
+					<div class="card-body text-center"> <img src="<?php echo $_SESSION['baseurl'];?><?php echo $providerDetail['profilephoto'];?>" class="img-avater " style="border:1px solid black; max-width:200px;">
 					<p> Welcome <?php echo ucfirst($providerDetail['firstname'])." ".ucfirst($providerDetail['lastname']);?></p>
 					</div>
 				</div>
@@ -32,29 +33,29 @@ min-height: 60vh;}
 				<div class="row mx-auto">
 					<div class="col-xl-3  col-md-4 mb-4 text-center">
 						<div class="card h-100">
-							<div class="card-body bg-danger  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 200</span>
+							<div class="card-body bg-danger  text-white"> <span style="font-size: xx-large;font-weight:bolder"> <?php echo $value['terminated_projects'];?></span>
 								<p> Terminated projects</p>
 							</div>
 						</div>
 					</div>
 					<div class="col-xl-3  col-md-4 mb-4 text-center">
 						<div class="card h-100">
-							<div class="card-body bg-success  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 200</span>
-								<p> completed Projects</p>
+							<div class="card-body bg-success  text-white"> <span style="font-size: xx-large;font-weight:bolder"><?php echo $value['completed_projects'];?></span>
+								<p> Completed Projects</p>
 							</div>
 						</div>
 					</div>
 					<div class="col-xl-3  col-md-4 mb-4 text-center">
 						<div class="card h-100">
-							<div class="card-body bg-warning  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 20</span>
+							<div class="card-body bg-warning  text-white"> <span style="font-size: xx-large;font-weight:bolder"> <?php echo $value['ongoing_projects'];?></span>
 								<p> Ongoing projects</p>
 							</div>
 						</div>
 					</div>
 					<div class="col-xl-3  col-md-4 mb-4 text-center">
 						<div class="card h-100">
-							<div class="card-body bg-info  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 200</span>
-								<p>offered projects</p>
+							<div class="card-body bg-info  text-white"> <span style="font-size: xx-large;font-weight:bolder"> <?php echo $value['offered_projects'];?></span>
+								<p>Offered projects</p>
 							</div>
 						</div>
 					</div>
@@ -62,7 +63,7 @@ min-height: 60vh;}
 
 					<div class="col-xl-3  col-md-4 mb-4 text-center">
 						<div class="card h-100">
-							<div class="card-body bg-info  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 200</span>
+							<div class="card-body bg-info  text-white"> <span style="font-size: xx-large;font-weight:bolder"> <?php echo $value['announced_projects'];?></span>
 								<p>Announced projects</p>
 							</div>
 						</div>
@@ -72,7 +73,7 @@ min-height: 60vh;}
 
 					<div class="col-xl-3  col-md-4 mb-4 text-center">
 						<div class="card h-100">
-							<div class="card-body bg-success  text-white"> <span style="font-size: xx-large;font-weight:bolder"> 200</span>
+							<div class="card-body bg-success  text-white"> <span style="font-size: xx-large;font-weight:bolder"> <?php echo $providerDetail['walletbalance'];?></span>
 								<p>Wallet Balance</p>
 							</div>
 						</div>

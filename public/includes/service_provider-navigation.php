@@ -1,9 +1,8 @@
 <?php
-   require_once "includes/config.php";
+   
    require_once('../app/controllers/serviceprovider.php');
    $serviceProviderController = new Controller\ServiceProvider();
    $providerDetail = $serviceProviderController->getUserDetails($_SESSION['username']);
-   $base = "http://localhost/seralance/";
    ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -129,26 +128,26 @@
 	<body style="background-color: #f5f8fa">
 		<nav class="navbar navbar-expand-sm  navbar-light fixed-top"  style="background-color:#034efc
            !important;">
-			<a class="navbar-brand" href="#"><img src="<?php echo $base;?>public/assets/images/seralance-logo.png"></a>
+			<a class="navbar-brand" href="#"><img src="<?php echo $_SESSION['baseurl'];?>public/assets/images/seralance-logo.png"></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"> <span class="navbar-toggler-icon " style="color: black!important;"></span> </button>
 			<div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
 				<ul class="navbar-nav ">
 					<li class="nav-item">
-						<a class="nav-link" href="<?php echo $base;?>public/serviceprovider/home">
-							<?php  echo $lang['home'];?>
+						<a class="nav-link" href="<?php echo $_SESSION['baseurl'];?>public/serviceprovider/home">
+							Home
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<?php echo $base;?>public/serviceprovider/findproject">
+						<a class="nav-link" href="<?php echo $_SESSION['baseurl'];?>public/serviceprovider/findproject">
 						Find  project
 						</a>
 					</li>
 					<li class="nav-item ">
-						<a class="nav-link" href="<?php echo $base;?>public/serviceprovider/mybids">
+						<a class="nav-link" href="<?php echo $_SESSION['baseurl'];?>public/serviceprovider/mybids">
 					My Bids
 						</a>
 					</li>
-					<li class="nav-item   "> <a class="nav-link " href="<?php echo $base;?>public/serviceprovider/transaction">Transaction
+					<li class="nav-item   "> <a class="nav-link " href="<?php echo $_SESSION['baseurl'];?>public/serviceprovider/transaction">Transaction
                   </a> </li>
 				</ul>
 				<!-- drop down -->
@@ -159,15 +158,15 @@
             <i class="fa  fa-x fa-tasks" aria-hidden="true" style="color:whitesmoke;font-weight:bolder" >  </i> </a> <span style="color:whitesmoke;font-weight:bolder" >My project</span>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown"
              style="background-color:#CCE5FF"> <a class="dropdown-item" 
-             href="<?php echo $base;?>public/serviceprovider/completedprojects">Completed projects</a> 
-             <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/ongoingprojects">
+             href="<?php echo $_SESSION['baseurl'];?>public/serviceprovider/completedprojects">Completed projects</a> 
+             <a class="dropdown-item" href="<?php echo $_SESSION['baseurl'];?>public/serviceprovider/ongoingprojects">
                Ongoing projects</a> <a class="dropdown-item" 
-               href="<?php echo $base;?>public/serviceprovider/terminatedprojects">Terminated Projects</a>
-                <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/offeredprojects">Offered Projects</a>
-                 <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/announcedprojects">Announced Projects</a> </div>
+               href="<?php echo $_SESSION['baseurl'];?>public/serviceprovider/terminatedprojects">Terminated Projects</a>
+                <a class="dropdown-item" href="<?php echo $_SESSION['baseurl'];?>public/serviceprovider/offeredprojects">Offered Projects</a>
+                 <a class="dropdown-item" href="<?php echo $_SESSION['baseurl'];?>public/serviceprovider/announcedprojects">Announced Projects</a> </div>
 					</li>
 					<li class="nav-item mr-4 ">
-						<a class="nav-link" href="<?php echo $base;?>public/serviceprovider/message"> <i class="fa  fa-envelope" aria-hidden="true"></i> </a> <span style="color:whitesmoke;font-weight:bolder" >Message</span> </li>
+						<a class="nav-link" href="<?php echo $_SESSION['baseurl'];?>public/serviceprovider/message"> <i class="fa  fa-envelope" aria-hidden="true"></i> </a> <span style="color:whitesmoke;font-weight:bolder" >Message</span> </li>
 						<li class="nav-item dropdown mr-4 " style="list-style-type: none;">
 							<a class="nav-link   dropdown-toggle" href="#" id="notification" 
 							role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
@@ -185,8 +184,8 @@
 					<!--  -->
 				
 						<li class="nav-item dropdown mr-3" style="list-style-type: none;">
-							<a class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="http://localhost/seralance/<?php echo $providerDetail['profilephoto'];?>" alt="profile-img" class="nav-profile"> </a> <span style="color:whitesmoke;font-weight:bolder" ><?php echo $providerDetail['username'];?></span>
-							<ul class="dropdown-menu  " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="profile">My profile</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/dispute">Dispute</a> <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/ticket"> Ticket</a>  <a class="dropdown-item" href="<?php echo $base;?>public/serviceprovider/changepassword">Password</a> <a class="dropdown-item" href="<?php echo $base;?>/public/serviceprovider/logout">Logout</a> </ul>
+							<a class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="<?php echo $_SESSION['baseurl'];?><?php echo $providerDetail['profilephoto'];?>" alt="profile-img" class="nav-profile"> </a> <span style="color:whitesmoke;font-weight:bolder" ><?php echo $providerDetail['username'];?></span>
+							<ul class="dropdown-menu  " aria-labelledby="navbarDropdown" style="background-color:#CCE5FF;"> <a class="dropdown-item" href="profile">My profile</a> <a class="dropdown-item" href="<?php echo $_SESSION['baseurl'];?>public/serviceprovider/dispute">Dispute</a> <a class="dropdown-item" href="<?php echo $_SESSION['baseurl'];?>public/serviceprovider/ticket"> Ticket</a>  <a class="dropdown-item" href="<?php echo $_SESSION['baseurl'];?>public/serviceprovider/changepassword">Password</a> <a class="dropdown-item" href="<?php echo $_SESSION['baseurl'];?>public/serviceprovider/logout">Logout</a> </ul>
 						</li>
 				
 				</ul>
@@ -198,7 +197,7 @@
 function updateCount(){
    $.ajax({
 		   type: "POST",
-		   url: "http://localhost/seralance/public/serviceprovider/fetchnotification",		
+		   url: "<?php echo $_SESSION['baseurl'];?>public/serviceprovider/fetchnotification",		
 		   data: {
 			   id: "<?php echo $_SESSION['username'];?>",
 			   count: true
@@ -220,7 +219,7 @@ setInterval(updateCount,5000);
 $('#notification').click(function(){
    $.ajax({
 		   type: "POST",
-		   url: "http://localhost/seralance/public/serviceprovider/fetchnotification",		
+		   url: "<?php echo $_SESSION['baseurl'];?>public/serviceprovider/fetchnotification",		
 		   data: {
 			   id: "<?php echo $_SESSION['username'];?>",
 			   open: true

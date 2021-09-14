@@ -393,7 +393,6 @@
                     if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                         $username = $row['username'];
                         $newPassword = uniqid();
-                        $this->updatePassword(array('email'=>$row['email'],'newpassword'=>$newPassword));
                         require '../app/vendor/autoload.php';
                         $mail = new PHPMailer(true);
                         try{
@@ -416,7 +415,7 @@
                                 <html>
                                     <body>
                                         <div style="text-align: center;">
-                                            <img src="http://localhost/seralance/public/assets/images/seralance-logo.png" alt="Seralance">
+                                            <img src="{$_SESSION['baseurl']}public/assets/images/seralance-logo.png" alt="Seralance">
                                         </div>
                                         
                                         <p style="text-align: center;">
@@ -432,6 +431,8 @@
                             $mail->Body =$msg;
 
                             $mail->send();
+                            $this->updatePassword(array('email'=>$row['email'],'newpassword'=>$newPassword));
+
                         }
                         catch(Exception $e){
                             $error = array_merge($error,array('email' => 'Sorry for the inconvenience! We could not send a new password. Please try again later.'));

@@ -52,7 +52,7 @@ $bids = $serviceSeekerController->getAllBids($_SESSION['projectid']);
                             foreach($bids as $bid){
                               $approveBtn = "";
                               if($bid['status'] == 'open'){
-                                 $approveBtn = '<button class="btn btn-success" onclick ="confirmAction(\'http://localhost/seralance/public/serviceseeker/approvebid/'.$bid['bid_id'].'/'.$bid['project_id'].'\');" > Approve</button>'; 
+                                 $approveBtn = '<button class="btn btn-success" onclick ="confirmAction(\''.$_SESSION['baseurl'].'public/serviceseeker/approvebid/'.$bid['bid_id'].'/'.$bid['project_id'].'\');" > Approve</button>'; 
                               }
                                 echo <<<EOT
                                             <tr>
@@ -78,7 +78,7 @@ $bids = $serviceSeekerController->getAllBids($_SESSION['projectid']);
                                                 {$bid['made_by']}
                                             </td>
                                             <!--  -->
-                                                <td><a class="btn btn-info" href="http://localhost/seralance/public/serviceseeker/viewbiddescription/{$bid['bid_id']}">Bid description</a> </td>
+                                                <td><a class="btn btn-info" href="{$_SESSION['baseurl']}public/serviceseeker/viewbiddescription/{$bid['bid_id']}">Bid description</a> </td>
                                                 <td>$approveBtn</td>
                                             <!--  -->
                                             </tr>

@@ -52,7 +52,7 @@ $bids = $serviceProviderController->getAllBids($_SESSION['username']);
                             foreach($bids as $bid){
                               $deleteBtn = "";
                               if($bid['status'] == 'open'){
-                                 $deleteBtn = '<button class="btn btn-danger" onclick ="confirmAction(\'http://localhost/seralance/public/serviceprovider/deletebid/'.$bid['bid_id'].'\');" > Delete</button>'; 
+                                 $deleteBtn = '<button class="btn btn-danger" onclick ="confirmAction(\''.$_SESSION['baseurl'].'public/serviceprovider/deletebid/'.$bid['bid_id'].'\');" > Delete</button>'; 
                               }
                                 echo <<<EOT
                                             <tr>

@@ -18,13 +18,13 @@
             if(!empty($url)){
                 
                 if(($url[0]!=='serviceprovider' && $url[0]!=='serviceseeker' && $url[0]!=='admin' && $url[0]!=='main') || (!empty($_SESSION['usertype']) && $_SESSION['usertype'] !== $url[0]) || (empty($_SESSION['usertype']) && $url[0] !== 'main') ){
-                    header("Location: http://localhost/seralance/public/".$this->controller."/home");                
+                    header("Location: ".$_SESSION['baseurl']."public/".$this->controller."/home");                
                     exit();
                 }
                 unset($url[0]);
             }
             else{
-                header("Location: http://localhost/seralance/public/".$this->controller."/home");                
+                header("Location: ".$_SESSION['baseurl']."public/".$this->controller."/home");                
                 exit();
             }
 
@@ -52,12 +52,12 @@
                     call_user_func_array([$this->controller,$this->method],$this->params);
                 }
                 else{
-                    header("Location: http://localhost/seralance/public/".$tmpController."/home");                
+                    header("Location: ".$_SESSION['baseurl']."public/".$tmpController."/home");                
                     exit();
                 }
             }
             else{
-                header("Location: http://localhost/seralance/public/".$tmpController."/home");                
+                header("Location: ".$_SESSION['baseurl']."public/".$tmpController."/home");                
                 exit();
             }
 

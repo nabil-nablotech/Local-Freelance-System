@@ -46,7 +46,7 @@
 												$appoveBtn = "";
 
 												if($project['status'] === 'Submitted'){
-													$appoveBtn = '<button class="btn btn-success" onclick ="confirmAction(\'http://localhost/seralance/public/serviceseeker/approveproject/'.$project['project_id'].'\');" >Approve</button>'; 
+													$appoveBtn = '<button class="btn btn-success" onclick ="confirmAction(\''.$_SESSION['baseurl'].'public/serviceseeker/approveproject/'.$project['project_id'].'\');" >Approve</button>'; 
 												}
 
 												echo <<<EOT
@@ -70,7 +70,7 @@
 													{$project['status']}
 													</td>
 													<!--  -->
-													<td><a href="http://localhost/seralance/public/serviceseeker/viewproject/{$project['project_id']}" class="d-inline btn-sm  btn btn-primary mr-5">View details</a> </td>
+													<td><a href="{$_SESSION['baseurl']}public/serviceseeker/viewproject/{$project['project_id']}" class="d-inline btn-sm  btn btn-primary mr-5">View details</a> </td>
 													<td>
 														{$appoveBtn}
 													</td>

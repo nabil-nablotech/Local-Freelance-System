@@ -1,25 +1,6 @@
 <?php
 require "includes/admin-navigation.php";
-/* 
-   $sql = "SELECT SUM(numberofview) as count FROM demo_viewer 
-			GROUP BY YEAR(created_at) ORDER BY created_at";
-    $viewer = mysqli_query($mysqli, $sql);
-    $viewer = mysqli_fetch_all($viewer, MYSQLI_ASSOC);
-    $viewer = json_encode(array_column($viewer, 'count'), JSON_NUMERIC_CHECK);
-
-
-    /--* Getting demo_click table data 
-    $sql = "SELECT SUM(numberofclick) as count FROM demo_click 
-			GROUP BY YEAR(created_at) ORDER BY created_at";
-    $click = mysqli_query($mysqli, $sql);
-    $click = mysqli_fetch_all($click, MYSQLI_ASSOC);
-    $click = json_encode(array_column($click, 'count'), JSON_NUMERIC_CHECK);
- $sql = "SELECT SUM(numberofclick) as count FROM demo_click 
-			GROUP BY YEAR(created_at) ORDER BY created_at";
-    $project = mysqli_query($mysqli, $sql);
-    $project = mysqli_fetch_all($project, MYSQLI_ASSOC);
-    $project = json_encode(array_column($project, 'count'), JSON_NUMERIC_CHECK); */
-
+$value = $adminController->getStatistics();
 ?>
 
 
@@ -74,7 +55,7 @@ display: none !important;
                       <div class="text-xs font-weight-bold text-uppercase mb-1 text-dark" >
                         Total Registered Service Providers</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
-                        <span class="text-center text-info  " style="font-size:x-large;"> 200</span>
+                        <span class="text-center text-info  " style="font-size:x-large;"> <?php echo $value['total_service_providers'];?></span>
 
                       </div>
                     
@@ -94,7 +75,7 @@ display: none !important;
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1">Total Registered Service Seekers</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
-                       <span class="text-info">300</span> 
+                       <span class="text-info"><?php echo $value['total_service_seekers'];?></span> 
                       </div>
                      
                     </div>
@@ -105,54 +86,59 @@ display: none !important;
                 </div>
               </div>
             </div>
-            <!-- total visitors-->
-                        <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Total visitors</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
-                       <span class="text-info">300</span> 
-                      </div>
-                     
-                    </div>
-                    <div class="col-auto">
-                      <i class="fa fa-3x fa-eye mb-3 text-primary"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- total new disputes -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Total  Disputes</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
-                       <span class="text-info">300</span> 
-                      </div>
-                     
-                    </div>
-                    <div class="col-auto">
-                      <i class="fa fa-3x fa-legal mb-3 text-danger"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--  -->
+           
+            
 <!-- total project announced -->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card h-100">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">total Announced Projects</div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Total Announced Projects</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
-                       <span class="text-info">300</span> 
+                       <span class="text-info"><?php echo $value['announced_projects'];?></span> 
+                      </div>
+                     
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-3x fa-tasks mb-3 text-primary"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--  -->
+
+            <!-- total project offered -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Total Offered Projects</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
+                       <span class="text-info"><?php echo $value['offered_projects'];?></span> 
+                      </div>
+                     
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-3x fa-tasks mb-3 text-primary"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--  -->
+
+            <!-- total project ongoing -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Total Ongoing Projects</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
+                       <span class="text-info"><?php echo $value['ongoing_projects'];?></span> 
                       </div>
                      
                     </div>
@@ -173,7 +159,7 @@ display: none !important;
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1">Total Completed Projects</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
-                       <span class="text-info">300</span> 
+                       <span class="text-info"><?php echo $value['completed_projects'];?></span> 
                       </div>
                      
                     </div>
@@ -187,29 +173,7 @@ display: none !important;
             <!--  -->
 
 
-              <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Total Transactions</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
-                       <span class="text-info">300</span> 
-                      </div>
-                     
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-tasks fa-3x  mb-3 text-primary">
-                        
-                      </i>
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
+              
             <!--  total terminated projects-->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card h-100">
@@ -218,7 +182,7 @@ display: none !important;
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1">Total terminated projects</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
-                       <span class="text-info">300</span> 
+                       <span class="text-info"><?php echo $value['terminated_projects'];?></span> 
                       </div>
                      
                     </div>
@@ -230,88 +194,168 @@ display: none !important;
               </div>
             </div>
             <!--  -->
-            <!-- Area Chart -->
-           <div class="col-xl-12 col-lg-12">
-              <div class="card mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                      aria-haspopup="true" aria-expanded="false">
-                    </a>
+
+            <!-- Total revenue generated-->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Total revenue generated</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
+                       <span class="text-info"><?php echo $value['total_revenue'];?></span> 
+                      </div>
+                     
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-dollar-sign fa-3x  mb-3 text-success">
+                        
+                      </i>
+                      
+                    </div>
                   </div>
                 </div>
-       <!--  -->
+              </div>
+            </div>
+            <!--  -->
 
-
-
-
-
-<script type="text/javascript">
-
-
-$(function () { 
-
-
-    var data_click = <?php echo $click; ?>;
-    var data_viewer = <?php echo $viewer; ?>;
-    var project=<?php echo $project?>
-
-
-    $('#container').highcharts({
-        chart: {
-            type: 'column'
-        },
-        title:  {
-            text: 'Montly registered customers & posted project report '
-        },
-       
-        xAxis: {
-            categories: ['September','October','November', 'December','January','February','March','April','May','june','July','August']
-        },
-        yAxis:
-         {
-            title: {
-                text: 'Totals number of registered customers'
-            }
-        },
-
-
-        series: [{
-            name: 'Service Provider',
-            data: data_click,
-        
-        }, 
-        {
-            name: 'Servie Seeker',
-            data: data_viewer
-        },
-        {
-            name: 'project',
-            data: project
-        } ]
-        
-    });
-});
-
-
-</script>
-
-
-
-
-    
-                    <div id="container">
-
+            <!-- Total transferred funds-->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Total transferred funds</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
+                       <span class="text-info"><?php echo $value['total_transferred_funds'];?></span> 
+                      </div>
+                     
+                    </div>
+                    <div class="col-auto">
+                    <i class="fas fa-exchange-alt fa-3x  mb-3 text-success">
+                        
+                      </i>
+                      
+                    </div>
+                  </div>
                 </div>
-        
+              </div>
+            </div>
+            <!--  -->
+
+            <!-- Pending fund transfer requests-->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Pending fund transfer requests</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
+                       <span class="text-info"><?php echo $value['total_pending_fund_requests'];?></span> 
+                      </div>
+                     
+                    </div>
+                    <div class="col-auto">
+                    <i class="fas fa-exchange-alt fa-3x  mb-3 text-primary">
+                        
+                      </i>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--  -->
+
+            <!-- total open disputes -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Open  Disputes</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
+                       <span class="text-info"><?php echo $value['total_open_disputes'];?></span> 
+                      </div>
+                     
+                    </div>
+                    <div class="col-auto">
+                      <i class="fa fa-3x fa-legal mb-3 text-danger"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--  -->
+
+            <!-- total closed disputes -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Closed  Disputes</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
+                       <span class="text-info"><?php echo $value['total_closed_disputes'];?></span> 
+                      </div>
+                     
+                    </div>
+                    <div class="col-auto">
+                      <i class="fa fa-3x fa-legal mb-3 text-success"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--  -->
+
+            <!-- total open tickets -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Open tickets</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
+                       <span class="text-info"><?php echo $value['total_open_tickets'];?></span> 
+                      </div>
+                     
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-3x fa-hands-helping mb-3 text-danger"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--  -->
+
+            <!-- total closed tickets -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Closed ticets</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
+                       <span class="text-info"><?php echo $value['total_closed_tickets'];?></span> 
+                      </div>
+                     
+                    </div>
+                    <div class="col-auto">
+                    <i class="fas fa-3x fa-hands-helping mb-3 text-success"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--  -->
+
+
+
+
+</div>
   
-
-
-
-
-       <!--  -->
-                 
           
               </div>
             </div> 
@@ -333,10 +377,9 @@ $(function () {
   <a class="scroll-to-top rounded" href="#page-top" >
     <i class="fas fa-angle-up"></i>
   </a>
-  <script src="http://localhost/seralance/app/vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="http://localhost/seralance/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <script src="http://localhost/seralance/public/assets/js/administrator/seralance-admin.min.js"></script> 
+  <script src="<?php echo $_SESSION['baseurl'];?>app/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="<?php echo $_SESSION['baseurl'];?>app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?php echo $_SESSION['baseurl'];?>public/assets/js/administrator/serelance-admin.js "></script>
 </body>
 
 </html>

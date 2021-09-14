@@ -150,7 +150,7 @@
                                                 </div>
 
                                                 <div class="profile-list-info form-group row mx-auto">
-                                                <div  class='mb-2'> <a href="http://localhost/seralance/public/serviceprovider/viewproject/{$project['project_id']}"  class=" btn-sm  btn btn-primary mr-5">View details</a> <a href="http://localhost/seralance/public/serviceprovider/bid/{$project['project_id']}" class=" btn-sm  btn btn-primary ">Bid</a> </div>
+                                                <div  class='mb-2'> <a href="{$_SESSION['baseurl']}public/serviceprovider/viewproject/{$project['project_id']}"  class=" btn-sm  btn btn-primary mr-5">View details</a> <a href="{$_SESSION['baseurl']}public/serviceprovider/bid/{$project['project_id']}" class=" btn-sm  btn btn-primary ">Bid</a> </div>
                                                 </div>
 
                                                 <div class=" d-flex justify-content-between mb-1 " <strong>Posted by:</strong> {$project['announced_by']}  <strong class='mr-2'>Date:{$project['announced_date']}</strong> </div>                    

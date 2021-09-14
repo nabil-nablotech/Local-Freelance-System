@@ -299,7 +299,7 @@
 																				<li class="profile-item mb-3">
 																				<div class="profile-list-wrap">
 																					<a class="profile-list-avatar pl-3 pt-2 pb-2">
-																						<img alt='' src="http://localhost/seralance/{$serviceProvider['profile_photo']}" 
+																						<img alt='' src="{$_SESSION['baseurl']}{$serviceProvider['profile_photo']}" 
 																						class='avatar avatar-96 photo avatar-default' height='auto' width='20%' /> 
 																					</a>
 																					<h2 class="profile-list-title">
@@ -327,9 +327,9 @@
 																						<p class="mt-2">{$serviceProvider['summary']}</p>
 
 																						<div class="d-flex justify-content-start mb-2"> <a href=
-																					"http://localhost/seralance/public/serviceseeker/hire/{$serviceProvider['username']}" 
+																					"{$_SESSION['baseurl']}public/serviceseeker/hire/{$serviceProvider['username']}" 
 																					class=" btn-sm  btn btn-primary mr-2">Hire</a>  <a href=
-																					"http://localhost/seralance/public/serviceseeker/viewproviderprofile/{$serviceProvider['username']}" 
+																					"{$_SESSION['baseurl']}public/serviceseeker/viewproviderprofile/{$serviceProvider['username']}" 
 																					class=" btn-sm  btn btn-primary mr-5">View profile</a> 
 																					</div>
 																					

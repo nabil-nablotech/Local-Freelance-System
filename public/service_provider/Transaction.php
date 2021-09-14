@@ -48,7 +48,7 @@ $transactions = $serviceProviderController->getAllTransactions($_SESSION['userna
 					if(!$serviceProviderController->checkRequestExists($_SESSION['username'])){
 
 						if($providerDetail['walletbalance']>0){
-							echo '<p><a href="http://localhost/seralance/public/serviceprovider/requesttransfer" class="btn btn-primary">Request transfer</a></p>';
+							echo '<p><a href="'.$_SESSION['baseurl'].'public/serviceprovider/requesttransfer" class="btn btn-primary">Request transfer</a></p>';
 						}
 						
 					}

@@ -288,7 +288,7 @@
                                             "Ticket reviewed",
                                             "Ticket ".$this->getTicketId(). " has been resolved.",
                                             $ticketDetails['opened_by'],
-                                            "http://localhost/seralance/public/".$usertype['user_type']."/ticket"
+                                            $usertype['user_type']."/ticket"
                                         );
                 
                 return array('valid'=>1);
@@ -296,6 +296,26 @@
             else{
                 return $response;
             }      
+        }
+
+        public function retrieveStatistics(){
+            require_once('../app/Core/Database.php');
+            $db = new Database();
+            $conn = $db->setConnection();
+            $statistics = [];
+            if($conn !== null){
+                $sql = "SELECT count(*) as total_open_tickets FROM ticket where status='open'";       
+                $stmt = $conn->query($sql);
+                $statistics = array_merge($statistics,$stmt->fetch(PDO::FETCH_ASSOC));
+
+                
+                $sql = "SELECT count(*) as total_closed_tickets FROM ticket where status='closed'";           
+                $stmt = $conn->query($sql);
+                $statistics = array_merge($statistics,$stmt->fetch(PDO::FETCH_ASSOC));
+
+                return $statistics;
+                
+            }
         }
 
     }

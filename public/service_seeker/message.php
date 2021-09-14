@@ -373,7 +373,7 @@ require "includes/service_seeker-navigation.php";
 		
 		$.ajax({
 					type: "POST",
-					url: "http://localhost/seralance/public/serviceseeker/chathistory",		
+					url: "<?php echo $_SESSION['baseurl'];?>public/serviceseeker/chathistory",		
 					data: {
 						username: '<?php echo $_SESSION['username'];?>'
 					},
@@ -393,7 +393,7 @@ require "includes/service_seeker-navigation.php";
 		
 		$.ajax({
 					type: "POST",
-					url: "http://localhost/seralance/public/serviceseeker/messages",		
+					url: "<?php echo $_SESSION['baseurl'];?>public/serviceseeker/messages",		
 					data: {
 						username: '<?php echo $_SESSION['username'];?>',
 						recipient: document.querySelector("input[name=recipient_message]").value
@@ -424,7 +424,7 @@ require "includes/service_seeker-navigation.php";
 		
 			$.ajax({
 						type: "POST",
-						url: "http://localhost/seralance/public/serviceseeker/compose",		
+						url: "<?php echo $_SESSION['baseurl'];?>public/serviceseeker/compose",		
 						data: {
 							recipient: $("input[name=recipient]").val()
 						},
@@ -438,7 +438,7 @@ require "includes/service_seeker-navigation.php";
 								
 								$("input[name=recipient_message]").val(data.username);
 								$("input[name=message]").removeAttr("disabled");
-								$("#recipient_photo").attr("src","http://localhost/seralance/"+data.profilephoto);
+								$("#recipient_photo").attr("src","<?php echo $_SESSION['baseurl'];?>"+data.profilephoto);
 								$("#recipient_username").html(data.username);
 								$("input[name=recipient]").val("");
 								$("#composeerror").html("");
@@ -460,7 +460,7 @@ require "includes/service_seeker-navigation.php";
 	function send(){
 		$.ajax({
 					type: "POST",
-					url: "http://localhost/seralance/public/serviceseeker/send",		
+					url: "<?php echo $_SESSION['baseurl'];?>public/serviceseeker/send",		
 					data: {
 						recipient: $("input[name=recipient_message]").val(),
 						message: $("input[name=message]").val()

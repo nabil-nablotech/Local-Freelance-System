@@ -11,8 +11,8 @@
 	<head>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <link href="http://localhost/seralance/app/vendor/tagger-master/tagger.css" rel="stylesheet">
-    <script src="http://localhost/seralance/app/vendor/tagger-master/tagger.js"></script> </head>
+    <link href="<?php echo $_SESSION['baseurl'];?>app/vendor/tagger-master/tagger.css" rel="stylesheet">
+    <script src="<?php echo $_SESSION['baseurl'];?>app/vendor/tagger-master/tagger.js"></script> </head>
 
 	<body>
 		<div class="container  " style="margin-top: 100px;">
@@ -81,7 +81,7 @@
 						<div class="col-sm-3 ">
 							<div class="form-group text-center mr-5">
 								<label class="control-label">Photo Preview</label>
-								<div class="input-group"> <img src="http://localhost/seralance/<?php echo $providerDetail['profilephoto'];?>"  id="profiledisplay" class="img-rounded" alt="No photo to view" width="200" height="200"> </div>
+								<div class="input-group"> <img src="<?php echo $_SESSION['baseurl'];?><?php echo $providerDetail['profilephoto'];?>"  id="profiledisplay" class="img-rounded" alt="No photo to view" width="200" height="200"> </div>
 								<input class="input-large" id="profilephoto" onchange="displayPhoto(this);" type="file" name="profilephoto" hidden>
 								<button class="btn btn-success" type ="button"onclick="uploadPhoto();">upload photo</button>
 							</div>

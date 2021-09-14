@@ -29,7 +29,7 @@
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,role,user_management, project_management, notification_management, transcation, dispute_management, ticket_management, policy_drafting, faq_drafting FROM user INNER JOIN admin ON user.username = admin.username INNER JOIN permission ON user.username = permission.username where user.username='".$username."'");
+                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,role,user_management, project_management, notification_management, transcation, dispute_management, ticket_management FROM user INNER JOIN admin ON user.username = admin.username INNER JOIN permission ON user.username = permission.username where user.username='".$username."'");
                 if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                     $data = array( 
                         'username'=>$row['username'],
@@ -55,9 +55,7 @@
                     'notification_management'=>$row['notification_management'],
                     'transcation'=>$row['transcation'],
                     'ticket_management'=>$row['ticket_management'],
-                    'dispute_management'=>$row['dispute_management'],
-                    'policy_drafting'=>$row['policy_drafting'],
-                    'faq_drafting'=>$row['faq_drafting'] );
+                    'dispute_management'=>$row['dispute_management'] );
 
                     $data = array_merge($data,array('permission'=>$permission));
                     return $data;
@@ -166,7 +164,7 @@
             $db = new Database();
             $conn = $db->setConnection();
             if($conn !== null){
-                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,role,user_management, project_management, notification_management, transcation, dispute_management, ticket_management, policy_drafting, faq_drafting FROM user INNER JOIN admin ON user.username = admin.username INNER JOIN permission ON user.username = permission.username");
+                $stmt = $conn->query("SELECT user.username,email,firstname,lastname,gender,mobile_number,nationality,country,city,address,join_date,last_login,status,role,user_management, project_management, notification_management, transcation, dispute_management, ticket_management FROM user INNER JOIN admin ON user.username = admin.username INNER JOIN permission ON user.username = permission.username");
                 if($admins = $stmt->fetchAll(PDO::FETCH_ASSOC)){
                     foreach($admins as $admin){
                         $key = array_search($admin, $admins);
@@ -176,9 +174,7 @@
                             'notification_management'=>$admin['notification_management'],
                             'transcation'=>$admin['transcation'],
                             'ticket_management'=>$admin['ticket_management'],
-                            'dispute_management'=>$admin['dispute_management'],
-                            'policy_drafting'=>$admin['policy_drafting'],
-                            'faq_drafting'=>$admin['faq_drafting'] );
+                            'dispute_management'=>$admin['dispute_management'] );
                         $admins[$key] = array_merge($admins[$key], array('permission'=>$permission)) ; 
 
                     }

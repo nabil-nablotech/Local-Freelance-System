@@ -9,6 +9,7 @@
                 $data = trim($data);
                 $data = stripslashes($data);
                 $data = htmlspecialchars($data);
+                $data = str_replace("'","\'",$data);
                 return $data;
             }
             else{
