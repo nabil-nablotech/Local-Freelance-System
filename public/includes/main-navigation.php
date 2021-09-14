@@ -117,7 +117,7 @@
 					</li>
 					<li class="nav-item dropdown mr-5" style="list-style-type: none;margin-right:100px">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							join
+							Join
 						</a>
 						<div class="dropdown-menu mx-auto" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="signup/serviceprovider">

@@ -855,25 +855,19 @@
             if(!empty($files['deliveredfile']['name'])){         
                 $extension = explode('.',$files['deliveredfile']['name']);
                 $file_ext=strtolower(end($extension));
-                if(!in_array($file_ext,array('jpeg','gif','png','jpg','zip', 'pdf'))){
-                    $error = array_merge($error,array('deliveredfile' => 'JPG, JPEG, PNG, GIF, ZIP and PDF are only supported.'));
-                }
 
-                elseif(empty($error)){
-                    $cleanData = 'app/upload/projects/delivered/'.time().$files['deliveredfile']['name'];
-                    move_uploaded_file($files['deliveredfile']['tmp_name'],"../".$cleanData);
-                    $deliverProjectData = array_merge($deliverProjectData,array('deliveredfile' => $cleanData));
-                }
-            }
+                $cleanData = 'app/upload/projects/delivered/'.time().$files['deliveredfile']['name'];
+                move_uploaded_file($files['deliveredfile']['tmp_name'],"../".$cleanData);
+                $deliverProjectData = array_merge($deliverProjectData,array('deliveredfile' => $cleanData));
+                
+            
 
-            $deliverProjectData = array_merge($deliverProjectData,array('projectid' => $this->cleanInput($input['projectid'])));
+                $deliverProjectData = array_merge($deliverProjectData,array('projectid' => $this->cleanInput($input['projectid'])));
 
-            if(empty($error)){
+            
                 return array('valid'=>1 ,'data'=>$deliverProjectData);
-            }
-            else{
-                return array('valid'=>0,'data'=>$deliverProjectData,'error'=>$error);
-            }
+             }
+            
         }
 
         public function deliverProject($data,$files){

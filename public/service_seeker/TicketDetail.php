@@ -52,7 +52,7 @@ require "includes/service_seeker-navigation.php";
 								<label for="colFormLabelSm" class="col-sm-4 
 						col-form-label col-form-label-sm">File</label>
 								<div class="col-sm-8">
-									<a href="<?php echo $_SESSION['baseurl'].$_SESSION['ticketDetails']['file'];?>">Download</a>
+									<a href="<?php echo $_SESSION['baseurl'].$_SESSION['ticketDetails']['file'];?>" download>Download</a>
 								</div>
 						</div>
 
