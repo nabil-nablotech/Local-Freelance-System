@@ -197,7 +197,7 @@
  .chat-box .chat p{
     font-size: 15px;
   }
-  .chat-box .outogoing .details{
+  .chat-box .outgoing .details{
     max-width: 230px;
   }
   .chat-box .incoming .details{
@@ -276,7 +276,7 @@ require "includes/service_provider-navigation.php";
 						 <div class="form-group ml-4" align="left">
                               <button type="button" name="send_message" 
                                 class=" btn-sm btn btn-primary" data-toggle="modal" data-target="#sendmessagemodal">
-								<i class="fas fa-pencil-alt"></i></button>
+								<i class="fas fa-pencil-alt"></i>Compose</button>
                            </div>
 						</div>
 						<!-- send message modals -->
@@ -299,7 +299,7 @@ require "includes/service_provider-navigation.php";
   aria-label="Recipient's username" aria-describedby="basic-addon2" required>
   <div class="input-group-append">
     <button onclick="compose();" class="btn btn-sm mx-auto  btn-primary" type="button">
-	 Compose</a>
+	 Compose</button>
   </div>
 </div>
 <p class="errormessage" id="composeerror"></p>
