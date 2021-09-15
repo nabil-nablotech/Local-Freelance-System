@@ -3,7 +3,7 @@ require "includes/service_provider-navigation.php";
 $disputes = $serviceProviderController->getAllDisputes($_SESSION['username']);
 ?>
 	<script>
-	document.title = "Service seeker-Transaction history";
+	document.title = "Service seeker-Dispute";
 	</script>
 	</head>
 	<div class="container-fluid " style="margin-top: 100px;">

@@ -20,7 +20,7 @@
 	<head>
 
 		<script>
-		document.title = "Service seeker-Ongoing projects";
+		document.title = "Service provider-Ongoing projects";
 		</script>
 	</head>
 	<div class="container-fluid " style="margin-top: 100px;">
@@ -127,6 +127,7 @@
 				</div>
 			</div>
 		</div>
+		</div>
 
 		<script type="text/javascript">
         function setDeliverModal(event){
@@ -144,3 +145,10 @@
             }
         ?>
 		</script>
+
+<?php
+		require "includes/service_seeker-footer.php";
+   ?>
+
+   </body>
+</html>

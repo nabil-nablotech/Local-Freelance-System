@@ -150,7 +150,9 @@ $transactions = $serviceProviderController->getAllTransactions($_SESSION['userna
   </div>
 
 
-
+  <?php
+		require "includes/service_seeker-footer.php";
+   ?>
 </body>
 
 

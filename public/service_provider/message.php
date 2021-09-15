@@ -246,6 +246,7 @@
   }
 
 </style>
+<title>Service provider - Message</title>
 </head>
 <body>
 <?php

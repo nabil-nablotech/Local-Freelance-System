@@ -2,6 +2,9 @@
 require "includes/service_provider-navigation.php";
 
 ?>
+<script>
+		document.title = "Service provider-Dispute detail";
+		</script>
 	<div class="container">
 		<div class="row " style="margin-top: 100px;">
 			<div class="col-sm-8 mx-auto">

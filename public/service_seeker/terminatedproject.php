@@ -83,6 +83,7 @@
 				</div>
 			</div>
 		</div>
+		</div>
 
 	      
 		<script type="text/javascript">
@@ -95,3 +96,9 @@
 
 
 		</script>
+
+<?php
+		require "includes/service_seeker-footer.php";
+   ?>
+</body>
+</html>

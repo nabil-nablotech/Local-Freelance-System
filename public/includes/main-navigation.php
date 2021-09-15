@@ -37,7 +37,7 @@
     text-align: center;
 }
 			.bg-light {
-    background-color: rgb(86, 130, 232)!important;
+    background-color: #0000FF !important;
 }
 		
 

@@ -20,7 +20,7 @@
 	<head>
 
 		<script>
-		document.title = "Service seeker-Offered projects";
+		document.title = "Service provider-Offered projects";
 		</script>
 	</head>
 	<div class="container-fluid " style="margin-top: 100px;">
@@ -138,6 +138,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 
 		<script type="text/javascript">

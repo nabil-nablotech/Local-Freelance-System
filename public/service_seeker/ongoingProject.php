@@ -10,7 +10,7 @@
 <style> 	body{background-color: #f0f5f7;  }</style>
 
 		<script>
-		document.title = "Service seeker-Announced projects";
+		document.title = "Service seeker-Ongoing projects";
 		</script>
 	</head>
 	<div class="container-fluid " style="margin-top: 100px;">
@@ -92,7 +92,7 @@
 			</div>
 		</div>
 
-
+	</div>
        
 		<script type="text/javascript">
 
@@ -109,3 +109,8 @@
 
 
 		</script>
+<?php
+		require "includes/service_seeker-footer.php";
+   ?>
+</body>
+</html>

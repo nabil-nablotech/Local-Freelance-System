@@ -7,7 +7,7 @@
 	<head>
 
 		<script>
-		document.title = "Service seeker-Announced projects";
+		document.title = "Service provider-Announced projects";
 		</script>
 	</head>
 	<div class="container-fluid " style="margin-top: 100px;">
@@ -76,6 +76,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 		<script type="text/javascript">
 		function confirmAction(anchor) {

@@ -9,7 +9,7 @@
 	<head>
 
 		<script>
-		document.title = "Service seeker-Completed projects";
+		document.title = "Service provider-Completed projects";
 		</script>
 
 		
@@ -85,7 +85,7 @@
 			</div>
 		</div>
 
-	
+		</div>
        
 		<script type="text/javascript">
 
@@ -96,3 +96,10 @@
 
 
 		</script>
+
+<?php
+		require "includes/service_seeker-footer.php";
+   ?>
+
+   </body>
+</html>

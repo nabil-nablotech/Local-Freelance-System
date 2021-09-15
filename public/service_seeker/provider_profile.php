@@ -40,7 +40,7 @@ body{background-color: #f0f5f7
 ;} 
 </style>
 <script>
-		document.title = "Service provider-profile  details";
+		document.title = "Service seeker- Provider profile  details";
 </script>
 <div class="container-fluid" style="margin-top: 100px;">
 		<div class="row">

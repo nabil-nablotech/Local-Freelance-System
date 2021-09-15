@@ -89,6 +89,7 @@
 				</div>
 			</div>
 		</div>
+		</div>
 		<script type="text/javascript">
 		function confirmAction(anchor) {
 			var conf = confirm("Are you sure you want to perform this action?");

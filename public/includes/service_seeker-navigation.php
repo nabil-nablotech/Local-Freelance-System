@@ -45,7 +45,6 @@
 }
 
 
-
 			ul .dropdown-menu-center a li:hover{
 
 			background-color: #f0f5f4!important;
@@ -177,7 +176,7 @@
 										<span style="color:whitesmoke;font-weight:bolder">Notification</span>
 								
 							<ul class="dropdown-menu  mr-4 dropdown-menu-center text-primary "
-							id="notify" style="overflow-y:auto;height: 450px;width:380px; position:relative; left:50%; transform:tanslateX(-50%);">
+							id="notify" style="overflow-y:auto;height: 450px;width:380px; ">
 							</ul>
 	
 					</li>

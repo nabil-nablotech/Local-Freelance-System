@@ -3,7 +3,7 @@ require "includes/service_provider-navigation.php";
 $bids = $serviceProviderController->getAllBids($_SESSION['username']);
 ?>
   <script>
-    document.title="Service Provvider-list of bids";
+    document.title="Service Provider-list of bids";
 </script>
 
 
@@ -127,7 +127,9 @@ $bids = $serviceProviderController->getAllBids($_SESSION['username']);
     </div>
   </div>
 
-
+  <?php
+		require "includes/service_seeker-footer.php";
+   ?>
 
 </body>
 

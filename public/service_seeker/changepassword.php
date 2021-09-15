@@ -1,8 +1,12 @@
 
 <html>
 	<head>
-		<title>Change password</title>
-		<style> 	body{background-color: #f0f5f7;  }</style>
+		<title>Service seeker- Change password</title>
+		<style> 	
+			body {
+				background-color: #f0f5f7 !important;
+			}
+		</style>
 	</head>
 	<body>
 	<?php
@@ -72,6 +76,9 @@
 		</div>
 	</div>
 	</div>
+	<?php
+		require "includes/service_seeker-footer.php";
+   ?>
 
 	</body>
 </html>

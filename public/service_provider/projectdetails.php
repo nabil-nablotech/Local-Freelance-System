@@ -13,6 +13,9 @@ require "includes/service_provider-navigation.php";
 
 
 </style>
+<script>
+		document.title = "Service provider-Project detail";
+		</script>
 <div class="container-fluid" style="margin-top: 100px;">
 		<div class="row">
 			<div class="col-sm-8 mx-auto">
