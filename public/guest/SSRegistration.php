@@ -10,7 +10,7 @@
     <script> 
 
 
-document.title="seralance- service Seeker registration";
+document.title="Seralance- Service Seeker Sign up";
 </script>
     <style>
 

@@ -13,6 +13,10 @@ require "includes/admin-navigation.php";
 
 
 </style>
+
+<script>
+	document.title = "Admin-Project details";
+	</script>
 <div class="container-fluid" style="margin-top: 100px;">
 		<div class="row">
 			<div class="col-sm-8 mx-auto">

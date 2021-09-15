@@ -2,6 +2,9 @@
 require "includes/admin-navigation.php";
 
 ?>
+<script>
+	document.title = "Admin-Ticket details";
+	</script>
 	<div class="container">
 		<div class="row " style="margin-top: 100px;">
 			<div class="col-sm-8 mx-auto">

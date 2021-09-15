@@ -3,7 +3,7 @@ require "includes/admin-navigation.php";
 $requests = $adminController->getAllClosedRequests();
 ?>
   <script>
-    document.title="Admin-list of bids";
+    document.title="Admin-Transferred funds";
 </script>
 
 

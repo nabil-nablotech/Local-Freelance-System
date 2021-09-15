@@ -39,7 +39,7 @@ $feedback =  $adminController->validatePushNotification($_POST);
 <!--  -->
 
   <script>
-    document.title="Admin-Notifications";
+    document.title="Admin- New notification";
 </script>
 
 

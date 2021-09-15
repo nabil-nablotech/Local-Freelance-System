@@ -340,9 +340,9 @@ document.title="Home-Seralance";
         <div class="col-md-4">
             <div class="card p-3 py-4 mt-5">
                 <div class="text-center"> <img src="../../app/upload/team/degu.PNG" width="60" class="rounded-circle">
-                    <h3 class="mt-2">Yohans Degu</h3> <span class="mt-1 clearfix">System Analysit
+                    <h3 class="mt-2">Yohans Degu</h3> <span class="mt-1 clearfix">System Analyst
 
-					</span> <small class="mt-4"> System Analyst At seralance</small>
+					</span> <small class="mt-4"> System Analyst at Seralance</small>
                     <div class="social-buttons mt-2">
 						<a class="btn btn-primary"
 	 style="background-color: #0a66c2;" href="#!" role="button"
@@ -363,9 +363,9 @@ document.title="Home-Seralance";
   <div class="col-md-4">
             <div class="card p-3 py-4 mt-2 mb-5">
                 <div class="text-center"> <img src="../../app/upload/team/dani.PNG" width="80" class="rounded-circle">
-                    <h3 class="mt-2">Daniel Lakew</h3> <span class="mt-1 clearfix">System ANalyst 
+                    <h3 class="mt-2">Daniel Lakew</h3> <span class="mt-1 clearfix">System Analyst 
 
-					</span> <small class="mt-4">I am System analyst at seralance</small>
+					</span> <small class="mt-4">System analyst at Seralance</small>
                     <div class="social-buttons mt-2"> 
 	<a class="btn btn-primary"
 	 style="background-color: #0a66c2;" href="#!" role="button"
@@ -387,7 +387,7 @@ document.title="Home-Seralance";
             <div class="card p-3 py-4 mt-2">
                 <div class="text-center"> <img src="../../app/upload/team/yigo.PNG" width="100" class="rounded-circle">
                     <h3 class="mt-2">Yigermal bizuneh</h3> <span class="mt-1 clearfix">
-						Network Adminstrator</span> <small class="mt-4">I am Network Adminstrator at seralance</small>
+						Network Administrator</span> <small class="mt-4">Network Administrator at Seralance</small>
                     <div class="social-buttons mt-2"> 
 					<a class="btn btn-primary"
 	 style="background-color: #0a66c2;" href="#!" role="button"
@@ -409,7 +409,7 @@ document.title="Home-Seralance";
             <div class="card p-3 py-4 mt-2">
                 <div class="text-center"> <img src="../../app/upload/team/hunei.PNG" width="80" class="rounded-circle">
                     <h3 class="mt-2">Yohanes Hunegnaw</h3> <span class="mt-1 clearfix">
-						Database Adminstrator</span> <small class="mt-4">I am Databse Admin at seralance</small>
+						Database Administrator</span> <small class="mt-4">Database Administrator at Seralance</small>
                     <div class="social-buttons mt-2">
 							<a class="btn btn-primary"
 	 style="background-color: #0a66c2;" href="#!" role="button"

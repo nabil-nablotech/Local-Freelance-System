@@ -3,7 +3,7 @@ require "includes/admin-navigation.php";
 $transactions = $adminController->getAllTransactions();
 ?>
   <script>
-    document.title="Admin-list of bids";
+    document.title="Admin-Transaction history";
 </script>
 <style>
 	.credit{

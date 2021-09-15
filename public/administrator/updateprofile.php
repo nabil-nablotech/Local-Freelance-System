@@ -8,7 +8,9 @@
 	<!doctype html>
 	<html>
 
-	<head> </head>
+	<head>
+   		<title>Admin - Profile</title>
+	</head>
 
 	<body>
 		<div class="container  " style="margin-top: 100px;">

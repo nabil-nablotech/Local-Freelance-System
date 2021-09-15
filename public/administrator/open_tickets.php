@@ -3,7 +3,7 @@ require "includes/admin-navigation.php";
 $tickets = $adminController->getAllOpenTickets();
 ?>
 	<script>
-	document.title = "Service seeker-Transaction history";
+	document.title = "Admin-Open tickets";
 	</script>
 	</head>
 	<div class="container " style="margin-top: 100px;">

@@ -7,7 +7,7 @@
 	<head>
 
 		<script>
-		document.title = "Service seeker-Announced projects";
+		document.title = "Admin-Completed projects";
 		</script>
 	</head>
 	<div class="container " style="margin-top: 100px;">

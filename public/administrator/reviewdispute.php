@@ -37,6 +37,10 @@
 		font-weight: bolder;
 	}
 	</style>
+
+<script>
+	document.title = "Admin- Review dispute";
+	</script>
 	<div class="container" style="margin-top: 100px;">
 		<div class="col-sm-12">
 			<div class="card shadow-sm mb-4">

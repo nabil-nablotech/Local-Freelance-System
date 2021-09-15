@@ -26,9 +26,9 @@
 				<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
 					<!-- Content -->
 					<h6 class="text-uppercase fw-bold mb-4">
-                  <i class="fas fa-gem me-3"></i>Serelance
+                  <i class="fas fa-gem me-3"></i>Seralance
                </h6>
-					<p> we are a service compnay who connects service seeker and service providers </p>
+					<p> We are a service company that connects service seekers and service providers </p>
 				</div>
 				<!-- Grid column -->
 				<!-- Grid column -->
@@ -37,11 +37,11 @@
 					<h6 class="text-uppercase fw-bold mb-4">
                   Useful links
                </h6>
-					<p> <a href="http://localhost/seralance/public/main/FAQ
+					<p> <a href="<?php echo $_SESSION['baseurl'];?>public/main/FAQ
 " class="text-reset">FAQ</a> </p>
-					<p> <a href="guest/policy" download="" class="text-reset"><i class="fa fa-download"></i>Policy</a> </p>
-					<p> <a href="signup/serviceseeker" class="text-reset">service seeker</a> </p>
-					<p> <a href="signup/serviceprovider" class="text-reset"> service provider</a> </p>
+					<p> <a href="guest/policy" download="" class="text-reset"><i class="fa fa-download"></i> Policy</a> </p>
+					<p> <a href="signup/serviceseeker" class="text-reset">Join as service seeker</a> </p>
+					<p> <a href="signup/serviceprovider" class="text-reset">Join as service provider</a> </p>
 				</div>
 				<!-- Grid column -->
 				<!-- Grid column -->
@@ -49,9 +49,9 @@
 					<!-- Links -->
 					<h6 class="text-uppercase fw-bold mb-4">
                   Contact
-               </h6> <i class="fas fa-envelope me-3"></i> serelance@gmail.com </p>
-					<p><i class="fas fa-phone me-3"></i> + 251 234 567 88</p>
-					<p><i class="fas fa-print me-3"></i> + 251 234 567 89</p>
+               </h6> <i class="fas fa-envelope me-3"></i> seralance2021@gmail.com </p>
+					<p><i class="fas fa-phone me-3"></i> + 251 966 686 856</p>
+					<p><i class="fas fa-print me-3"></i> + 251 983 054 774</p>
 				</div>
 				<!-- Grid column -->
 				<!-- Grid column -->
@@ -100,7 +100,7 @@
 	<div class="text-center  p-4 text-white" style="background-color:#12253A"> &copy;
 		<script>
 		document.write(new Date().getFullYear())
-		</script> <a class="text-reset fw-bold" href="#">Serelance.com</a> </div>
+		</script> <a class="text-reset fw-bold" href="<?php echo $_SESSION['baseurl'];?>public/home">seralance.com</a> </div>
 	<!-- Copyright -->
 </footer>
 <!-- Footer -->

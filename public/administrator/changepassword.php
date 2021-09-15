@@ -1,7 +1,7 @@
 
 <html>
 	<head>
-		<title>Change password</title>
+		<title>Admin -Change password</title>
 	</head>
 	<body>
 	<?php

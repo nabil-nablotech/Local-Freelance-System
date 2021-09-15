@@ -356,7 +356,7 @@
                 }
 
                 elseif($_SESSION['usertype']==='admin'){
-                    $sql = "SELECT * FROM project where (status='Cancelled' OR status='Pending Deposit') AND offer_type ='Announcement'  ORDER BY announced_date DESC";
+                    $sql = "SELECT * FROM project where (status='Pending' OR status='Cancelled' OR status='Pending Deposit') AND offer_type ='Announcement'  ORDER BY announced_date DESC";
                 }
 
                 $stmt = $conn->query($sql);

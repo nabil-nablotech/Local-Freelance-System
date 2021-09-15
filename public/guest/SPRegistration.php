@@ -15,7 +15,7 @@
 <script> 
 
 
-document.title="seralance- service provider registration";
+document.title="Seralance- Service Provider Sign up";
 </script>
     <style>
 /*  */
