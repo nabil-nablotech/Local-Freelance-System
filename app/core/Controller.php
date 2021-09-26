@@ -1,5 +1,5 @@
 <?php
-
+    namespace Controller;
     class Controller{
     
         protected function model($model){
@@ -7,8 +7,8 @@
             return new $model();
         }
 
-        protected function view($view,$data=[]){
-            require_once('../app/views/'. $view .'.php');
+        protected function view($view){
+            require_once($view .'.php');
         }
     }
     

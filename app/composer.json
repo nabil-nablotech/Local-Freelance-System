@@ -1,0 +1,6 @@
+{
+    "require": {
+          "yenepay/php-sdk": "dev-master",
+        "phpmailer/phpmailer": "^6.5"
+      }
+  }

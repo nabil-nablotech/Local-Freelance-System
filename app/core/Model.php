@@ -4,20 +4,35 @@
 
     class Model{
 
-        function insert($table,$data){
+        protected function cleanInput($data){
+            if(is_string($data)){
+                $data = trim($data);
+                $data = stripslashes($data);
+                $data = htmlspecialchars($data);
+                $data = str_replace("'","\'",$data);
+                return $data;
+            }
+            else{
+                return $data;
+            }
+                                
+        }
+
+        protected function insert($table,$data){
 
             $connection = null;
             try{
                 $db = new Database();
                 $connection = $db->setConnection();
-                $sql = "INSERT INTO $table". implode(",",array_keys($data)) . "VALUES (" . implode (",",$data) . ")";
-                $connection->exec($sql);
+                $sql = "INSERT INTO $table(". implode(",",array_keys($data)) . ") VALUES (" . implode (",",$data) . ")";
+                //echo '<script>window.alert("'.$sql.'")</script>';
                 
+                $connection->exec($sql);                
             }
 
             catch(Exception $e){
                 echo $e->getMessage();
-
+                echo '<script>window.alert("failed to insert to db")</script>';
             }
 
             finally{
@@ -31,9 +46,9 @@
         }
 
 
-        function update($table,$data,$condition=""){
-
+        protected function update($table,$data,$condition=""){
             $connection = null;
+            $sucess = 0;
             try{
                 $db = new Database();
                 $connection = $db->setConnection();
@@ -52,10 +67,12 @@
                         $setStmt .= $key. " = ". $value. ","; 
                     }
                 }
-
-                $sql = "UPDATE $table SET ". $setStmt ." ".$condition;
-                $connection->exec($sql);
                 
+                $sql = "UPDATE $table SET ". $setStmt ." ".$condition;
+                //echo "<h1> $sql</h1>";
+                //exit();
+                $connection->exec($sql);
+                $sucess = 1;
             }
 
             catch(Exception $e){
@@ -67,22 +84,25 @@
 
                 if($connection!==null){
                     $connection = null;
+                    return $sucess;
                 }
             }
 
             
         }
 
-        function remove($table,$condition){
+        protected function remove($table,$condition){
 
             $connection = null;
+            $sucess = 0;
             try{
                 $db = new Database();
                 $connection = $db->setConnection();
                 
                 $sql = "DELETE FROM $table " . $condition;
+                echo "<script> window.alert('".$sql."')</script>";
                 $connection->exec($sql);
-                
+                $sucess = 1;
             }
 
             catch(Exception $e){
@@ -94,6 +114,7 @@
 
                 if($connection!==null){
                     $connection = null;
+                    return $sucess;
                 }
             }
 

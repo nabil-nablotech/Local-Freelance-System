@@ -1,0 +1,133 @@
+.candidate-list-layout,
+.newjob-list-layout {
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+  border-radius: 6px;
+  padding: 20px 25px;
+  border: 1px solid #eef4f9;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-wraps {
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+  border-radius: 6px;
+  padding: 20px 25px;
+  border: 1px solid #eef4f9;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.inner-header-title {
+  position: relative;
+  padding-top: 3em;
+  text-align: center;
+  color: whitesmoke;
+  overflow: visible;
+  position: relative;
+  border-bottom: 4px solid #11b719;
+  background-size: cover;
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section {
+  padding: 60px 0;
+  background: #fff;
+}
+
+.ur-detail-wrap-header {
+  padding: 18px 0 10px;
+  border-bottom: 1px solid #e0dfe6;
+  margin-bottom: 1.5em;
+}
+
+::selection {
+  background: #11b719;
+  color: #fff;
+}
+
+form {
+  display: inline-block;
+  width: 100%;
+}
+
+.filter-sidebar .ur-detail-wrap {
+  padding: 0 1.4em 2em;
+}
+
+.ur-detail-wrap {
+  width: 100%;
+  display: block;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2em 1.5em;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+}
+
+.ur-detail-wrap-header {
+  padding: 18px 0 10px;
+  border-bottom: 1px solid #e0dfe6;
+  margin-bottom: 1.5em;
+}
+
+ul {
+  display: block;
+  list-style-type: none;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+ul.follow-links,
+ul.advance-list {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+
+.custom-checkbox {
+  position: relative;
+}
+
+.custom-checkbox {
+  position: relative;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+ul.follow-links li,
+ul.advance-list li {
+  display: block;
+  list-style: none;
+  padding: 12px 0;
+  border-bottom: 1px dashed #dfe3e8;
+}
+
+.pull-right {
+  float: right !important;
+}
