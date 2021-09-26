@@ -2,7 +2,7 @@
 
     class App{
         
-        protected $controller = "main"; // later on i will replace this part with session
+        protected $controller = "main"; 
         
         protected $method = "home"; 
 
@@ -28,13 +28,7 @@
                 exit();
             }
 
-            /**********************************
-             * The snippet below will be used if other extra controller in which session will not be the core for routing
-            if(file_exists('../app/Controllers/'. $url[0] .'.php')){
-                $this->controller = $url[0];
-                unset($url[0]);
-            }
-            **********************************/
+
 
             require_once('../app/Controllers/'. $this->controller .'.php');
             $className = "Controller\\".$this->controller;

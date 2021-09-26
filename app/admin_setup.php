@@ -13,7 +13,7 @@ $password = "123123";
                 $conn->exec($sql);
                 $sql = "INSERT INTO admin(username, role) VALUES ('admin','master')";
                 $conn->exec($sql);
-                $sql = "INSERT INTO permission VALUES ('admin',TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE)";
+                $sql = "INSERT INTO permission VALUES ('admin',TRUE,TRUE,TRUE,TRUE,TRUE,TRUE)";
                 $conn->exec($sql);
 
 
@@ -21,7 +21,7 @@ $password = "123123";
     
             catch(Exception $e){
 
-                throw new Exception("Could not establish connection to the database");
+                throw new Exception($e);
 
             }
 

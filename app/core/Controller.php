@@ -7,7 +7,7 @@
             return new $model();
         }
 
-        protected function view($view,$data=[]){
+        protected function view($view){
             require_once($view .'.php');
         }
     }

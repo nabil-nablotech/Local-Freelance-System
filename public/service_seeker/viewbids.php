@@ -3,7 +3,7 @@ require "includes/service_seeker-navigation.php";
 $bids = $serviceSeekerController->getAllBids($_SESSION['projectid']);
 ?>
   <script>
-    document.title="Admin-list of bids";
+    document.title="Service seeker-list of bids";
 </script>
 
 

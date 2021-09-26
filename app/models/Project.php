@@ -178,7 +178,7 @@
 
                 
 
-                $query="SELECT * FROM project WHERE offer_type='Announcement' and status='Pending' and assigned_to IS NULL AND project_id NOT IN (select project_id FROM bid WHERE made_by = '".$_SESSION['username']."' ) ORDER BY announced_date DESC";
+                $query="SELECT * FROM project WHERE offer_type='Announcement' and status='Pending' and assigned_to IS NULL AND project_id NOT IN (select project_id FROM bid WHERE made_by = '".$_SESSION['username']."' ) ";
                 $condition="";
 
                 if(!empty($input['title'])){
@@ -205,6 +205,8 @@
                     $condition .= " AND budget_min <= ".$cleanData;                    
                 }
 
+                $condition .= " ORDER BY announced_date DESC";
+
                 /* echo "<h1>Hi there I am testing the application</h1>";
                 echo "<h1>Hi there I am testing the application</h1>";
                 echo "<h1>Hi there I am testing the application</h1>";
@@ -212,7 +214,7 @@
                 echo "<p>".$query." ".$condition."</p>";
                 exit();  */
 
-                return $query . $condition;
+               return $query . $condition;
                 
             }
         }

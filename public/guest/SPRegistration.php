@@ -10,8 +10,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <link href="http://localhost/seralance/app/vendor/tagger-master/tagger.css" rel="stylesheet">
-    <script src="http://localhost/seralance/app/vendor/tagger-master/tagger.js"></script>
+    <link href="<?php echo $_SESSION['baseurl']?>app/vendor/tagger-master/tagger.css" rel="stylesheet">
+    <script src="<?php echo $_SESSION['baseurl']?>app/vendor/tagger-master/tagger.js"></script>
 <script> 
 
 
