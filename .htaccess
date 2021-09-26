@@ -1,2 +1,5 @@
 Options -Indexes
+RewriteEngine On
 
+RewriteRule "(^.*app)" "-" [L]
+RewriteRule "!(^.*public)" public/
