@@ -237,7 +237,7 @@
                 $stmt = $conn->query($sql);
                 if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                     $data = array('status'=>"'verified'");
-                    $condition = "WHERE username='".$row['username']."'";
+                    $condition = "WHERE username='".$row['username']."' and status='unverified'";
                     $this->update("user",$data,$condition);
                     $usertype = $this->retrieveUserType($row['username']);
                     return array('username'=>$row['username'],'usertype'=>$usertype['user_type']);
