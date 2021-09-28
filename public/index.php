@@ -3,7 +3,7 @@
     //$_SESSION['baseurl'] = "https://hostprovider.com/";
 
     /* When in local dev env */
-    $_SESSION['baseurl'] = "http://localhost/seralance/";
+    $_SESSION['baseurl'] = "http://10.4.99.223/seralance/";
     require_once('../app/init.php');
     $app = new App;    
 ?>

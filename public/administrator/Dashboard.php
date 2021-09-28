@@ -208,8 +208,8 @@ display: none !important;
                      
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-3x  mb-3 text-success">
-                        
+                    <i class="fa fa-3x mb-3 text-success">
+                        ETB
                       </i>
                       
                     </div>

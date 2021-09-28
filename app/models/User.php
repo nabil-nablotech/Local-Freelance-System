@@ -399,13 +399,13 @@
                             $mail->isSMTP();// set mailer to use smtp
                             $mail->Host = 'smtp.gmail.com'; //specify the smtp server
                             $mail->SMTPAuth = true; // enable smtp authenticatiion
-                            $mail->Username = "seralance2021@gmail.com"; // SMTP username
+                            $mail->Username = "seralance2014@gmail.com"; // SMTP username
                             $mail->Password = "hello@there123HT"; // SMTP pasword
                             $mail->SMTPSecure = "tls"; // Enable TLS encryption
                             $mail->Port = 587; // TCP port to connect to
 
                             // recipient
-                            $mail->setFrom("seralance2021@gmail.com","Seralance");
+                            $mail->setFrom("seralance2014@gmail.com","Seralance");
                             $mail->addAddress($row['email'],$row['email']);
                             
                             //content
