@@ -84,6 +84,12 @@ require "includes/admin-navigation.php";
 											</td>
                                          </tr>
 
+                                         <td>Email</td>
+											<td>
+                                                <?php echo $_SESSION['serviceSeekerDetails']['email'];?>
+											</td>
+                                         </tr>
+
                                          <tr>
                                           <td>Nationality</td>
 											<td>
